@@ -1,0 +1,76 @@
+﻿@model IEnumerable<_3M.Comodato.Front.Models.ListaCliente>
+
+@using GridMvc.Html
+
+<div class="table table-hover">
+    @Html.Grid(Model).Columns(columns =>
+{
+    //columns.Add(foo => foo.cliente.CD_CLIENTE).Titled("CÓDIGO").Sortable(false).Filterable(false);
+    columns.Add(foo => foo.cliente.NM_CLIENTE).Titled("CLIENTE").Sortable(false).Filterable(false);
+    columns.Add(foo => foo.cliente.regiao.DS_REGIAO).Titled("REGIÃO").Sortable(false).Filterable(false);
+    columns.Add(foo => foo.PERIODO).Titled("PERÍODO").Sortable(false).Filterable(false).Css("text-center");
+    columns.Add(foo => foo.ATIVOS).Titled("ATIVOS").Sortable(false).Filterable(false).Css("text-center");
+    columns.Add(foo => foo.VISITAS).Titled("VISITAS").Sortable(false).Filterable(false).Css("text-center");
+    columns.Add(foo => foo.AGORA).Encoded(false).Sanitized(false).RenderValueAs(p => RenderCustomCSS(p.ST_TP_STATUS_VISITA_OS, p.AGORA)).Titled("AGORA").Sortable(false).Filterable(false);
+    //columns.Add(foo => foo.TECNICO).Titled("TÉCNICO").Sortable(false).Filterable(false);
+    //columns.Add(foo => foo.PESQUISA).Titled("PESQ").Sortable(false).Filterable(false);
+    //columns.Add(foo => foo.SOLICIT).Titled("SOLICIT").Sortable(false).Filterable(false);
+    //columns.Add(foo => foo.KAT).Titled("KAT").Sortable(false).Filterable(false);
+    //columns.Add(foo => foo.GM_ANO_ANTERIOR).Titled("GM ANTERIOR").Sortable(false).Filterable(false);
+    //columns.Add(foo => foo.GM_ANO_ATUAL).Titled("GM ATUAL").Sortable(false).Filterable(false);
+    //columns.Add(foo => foo.VENDAS_ANO_ANTERIOR).Titled("VENDAS ANTERIOR").Sortable(false).Filterable(false);
+    //columns.Add(foo => foo.VENDAS_ANO_ATUAL).Titled("VENDAS ATUAL").Sortable(false).Filterable(false);
+    //columns.Add(foo => foo.ICONEVENDAS).Encoded(false).Sanitized(false).RenderValueAs(p => RenderCustomMargem(p.ICONEVENDAS)).Titled("").Sortable(false).Filterable(false);
+}).Named("tableMVCCliente")
+
+</div>
+
+@helper RenderCustomCSS(Int64? Valor, string Conteudo)
+{
+    if (Valor == 1 || Valor == 2)
+    {
+        <span class="alert-success">@Conteudo</span>
+    }
+    else if (Valor == 8 || Valor == 9 || Valor == 10)
+    {
+        <span class="alert-secondary">@Conteudo</span>
+    }
+}
+
+@helper RenderCustomMargem(string ICONEVENDAS)
+{
+    if (ICONEVENDAS == "+")
+    {
+        <i class='fas fa-caret-up fa-2x bg-success fa-fw'></i>
+    }
+    else if (ICONEVENDAS == "-")
+    {
+        <i class='fas fa-caret-down fa-2x bg-danger fa-fw'></i>
+    }
+    else
+    {
+        <i class='fas fa-equals fa-2x bg-warning fa-fw'></i>
+    }
+
+
+    @*decimal MargemPercentual = Convert.ToDecimal("0" + _3M.Comodato.Utility.ControlesUtility.Parametro.ObterValorParametro(_3M.Comodato.Utility.ControlesUtility.Constantes.MargemDashVendas));
+        decimal RangeSuperior = 0;
+        decimal RangeInferior = 0;
+
+        RangeSuperior = Convert.ToDecimal(VENDAS_ANO_ANTERIOR) + ((Convert.ToDecimal(VENDAS_ANO_ANTERIOR) * MargemPercentual) / 100);
+        RangeInferior = Convert.ToDecimal(VENDAS_ANO_ANTERIOR) - ((Convert.ToDecimal(VENDAS_ANO_ANTERIOR) * MargemPercentual) / 100);
+
+        if (Convert.ToDecimal(VENDAS_ANO_ATUAL) >= RangeInferior && Convert.ToDecimal(VENDAS_ANO_ATUAL) <= RangeSuperior)
+        {
+            <i class='fas fa-equals'></i>
+        }
+        else if (Convert.ToDecimal(VENDAS_ANO_ATUAL) > RangeSuperior)
+        {
+            <i class='fas fa-caret-up'></i>
+        }
+        else
+        {
+            <i class='fas fa-caret-down'></i>
+        }*@
+
+}

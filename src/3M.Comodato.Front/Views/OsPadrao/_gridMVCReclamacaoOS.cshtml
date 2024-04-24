@@ -1,0 +1,60 @@
+﻿@model IEnumerable<_3M.Comodato.Front.Models.ReclamacaoOs>
+
+@using GridMvc.Html
+
+@{
+    var perfil = (_3M.Comodato.Entity.UsuarioPerfilEntity)Session["_CurrentUser"];
+    int PERFIL_CLIENTE = 8;
+    var SIM = "S";
+}
+
+<div class="table table-hover">
+    @Html.Grid(Model).Columns(columns =>
+{
+    columns.Add(foo => foo.rrStatusEntity.DS_STATUS_NOME).Titled("STATUS").Sortable(false).Filterable(false);
+    columns.Add(foo => foo.DS_TIPO_ATENDIMENTO).Titled("TIPO DE ATENDIMENTO").Sortable(false).Filterable(false);
+    columns.Add(foo => foo.DS_TIPO_RECLAMACAO).Titled("TIPO DE RECLAMAÇÃO").Sortable(false).Filterable(false);
+    columns.Add(foo => foo.pecaEntity.DS_PECA).Titled("PEÇA").Sortable(false).Filterable(false);
+    columns.Add(foo => foo.DS_MOTIVO).Titled("DESCRIÇÃO DO PROBLEMA").Sortable(false).Filterable(false);
+    columns.Add(foo => foo.TEMPO_ATENDIMENTO_FORMATADO).Titled("TEMPO").Sortable(false).Filterable(false);
+    columns.Add()
+                .Encoded(false)
+                .Titled("Foto")
+                .Sanitized(false)
+                .SetWidth(30)
+                .RenderValueAs(o => "<a id='foto_"+o.ID_RELATORIO_RECLAMACAO+"' href='javascript:;' onclick='VisualizarFoto(" + o.ID_RELATORIO_RECLAMACAO + ")' class='fas fa-image'> </a>");
+
+    columns.Add()
+                .Encoded(false)
+                .Sanitized(false)
+                .SetWidth(30)
+                .RenderValueAs(o => "<input type='hidden' id='"+o.ID_RELATORIO_RECLAMACAO+"' value='"+o.DS_ARQUIVO_FOTO+"'> </input>");
+
+    if (perfil.perfil.ccdPerfil != PERFIL_CLIENTE)
+    {
+        if(ViewBag.Tecnico3M == SIM && ViewBag.Visualizar == false)
+        {
+            columns.Add()
+                .Encoded(false)
+                .Sanitized(false)
+                .SetWidth(30)
+                .RenderValueAs(o => "<a href='#' onclick='ExcluirReclamacaoOS(" + o.ID_RELATORIO_RECLAMACAO + ")' class='fas fa-trash-alt fa-lg'> </a>");
+        }
+    }
+})
+</div>
+
+<div class="modal fade" id="ModalFoto" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <img src="" />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,1 @@
+Alter table TB_PONDERACAO_pz add Ativo bit not null default 1

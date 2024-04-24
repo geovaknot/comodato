@@ -1,0 +1,1 @@
+Nesta pasta serão versionadas as procedures ou scripts da aplicação.

@@ -1,0 +1,17 @@
+﻿@model IEnumerable<_3M.Comodato.Front.Models.EstoqueMovimentacao>
+@using GridMvc.Html
+<style>
+    .itemGrid-style { text-align: center; }
+</style>
+<div class="table table-hover">
+    @Html.Grid(Model).Columns(columns =>
+{
+    columns.Add(c => c.DT_MOVIMENTACAO).Titled("DATA MOVIMENTAÇÃO").Sortable(true).Filterable(false);
+    columns.Add(c => c.CD_PECA).Titled("PEÇA").Sortable(true).Filterable(false);
+    columns.Add(c => c.TpEstoqueMovi.DS_NOME_REDUZ).Titled("TIPO MOVIMENTAÇÃO").Sortable(true).Filterable(false);
+    columns.Add(c => c.TP_ENTRADA_SAIDA).Titled("MOVIMENTO").Sortable(true).Filterable(false);
+    columns.Add(c => c.QT_PECA).Titled("QTDE MOVIMENTAÇÃO").Sortable(true).Filterable(false).RenderValueAs(v => string.Format("{0:N0}", Convert.ToDouble(v.QT_PECA))).Css("itemGrid-style");
+    columns.Add(c => c.usuario.cnmNome).Titled("RESPONSÁVEL").Sortable(true).Filterable(false);
+    columns.Add(c => c.EstoqueOrigem.cdsEstoque).Titled("ORIGEM").Sortable(true).Filterable(false);
+}).WithPaging(10)
+</div>

@@ -1,0 +1,139 @@
+﻿@model _3M.Comodato.Front.Models.RecolhidosDetalhe
+
+@using GridMvc.Html
+
+@{
+    ViewBag.Title = "Retorno de Equipamento com menos de 5 anos";
+}
+
+@using MvcCheckBoxList.Model
+
+<i class="fas fa-print fa-3x fa-pull-left"></i>
+<h3>Retorno de Equipamento com menos de 5 anos</h3>
+
+<div class="well">
+    <hr />
+
+    @using (Html.BeginForm())
+    {
+        @Html.HiddenFor(model => model.filtroAtual)
+
+        <div class="form-horizontal">
+            <div class="form-row">
+                <div class="form-group">
+                    <label class="control-label">Período</label>
+                    <div id="DT_DATAS-container">
+                        <div class="input-daterange input-group">
+                            @Html.TextBoxFor(model => model.DT_DEV_INICIAL, "{0:dd/MM/yyyy}", new { @class = "form-control col-12" })
+                            <span class="input-group-addon">&nbsp;até&nbsp;</span>
+                            @Html.TextBoxFor(model => model.DT_DEV_FINAL, "{0:dd/MM/yyyy}", new { @class = "form-control col-12" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @*<div class="form-horizontal">
+                <div class="form-row">
+                    <div class="form-group col-12">
+                        <label class="control-label">Cliente</label>
+                        @Html.DropDownListFor(model => model.cliente.CD_CLIENTE, new SelectList(Model.clientes, "CD_CLIENTE", "NM_CLIENTE"), new { @class = "js-example-basic-single", @style = "width: 100%" })
+                    </div>
+
+                    <div class="form-group col-12">
+                        <label class="control-label">Ativo</label>
+                        @Html.DropDownListFor(model => model.ativo.CD_ATIVO_FIXO, new SelectList(Model.ativos, "CD_ATIVO_FIXO", "DS_ATIVO_FIXO"), new { @class = "js-example-basic-single", @style = "width: 100%" })
+                    </div>
+                </div>
+            </div>*@
+
+
+        <div class="form-row">
+            <div class="form-group col-xl-2 col-lg-2 col-md-3 col-sm-12">
+                <label class="control-label">Filtrar por</label>
+                <div class="list-group" id="list-tab" role="tablist">
+                    <a class="list-group-item list-group-item-action active" id="list-cliente-list" data-toggle="list" href="#list-cliente" role="tab" aria-controls="home">Cliente</a>
+                    <a class="list-group-item list-group-item-action" id="list-modelo-list" data-toggle="list" href="#list-modelo" role="tab" aria-controls="settings">Modelo</a>
+                </div>
+
+                <br />
+                <button class="btn btn-primary btn-sm" type="button" id="btnImprimir">Imprimir</button>
+                <label id="validaSelecionados" class="control-label text-danger" style="display: none;">Selecione pelo menos 1(um) item da lista!</label>
+            </div>
+            <div class="form-group col-xl-10 col-lg-10 col-md-9 col-sm-12">
+                <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-pane fade show active" id="list-cliente" role="tabpanel" aria-labelledby="list-cliente-list">
+
+                        <div class="form-row">
+                            <div class="form-group col-md-8">
+                                <label class="control-label">Selecione um ou mais clientes</label>
+                            </div>
+
+                            <div class="form-group col-md-4">
+                                <button class="btn btn-primary btn-sm" type="button" id="btnMarcarCliente">Marcar todos</button>
+                                <button class="btn btn-primary btn-sm" type="button" id="btnDesmarcarCliente">Seleção manual</button>
+                            </div>
+                        </div>
+                        <div class="pre-scrollable">
+                            <div class="form-group">
+                                @Html.CheckBoxListFor(model => model.ClientesSelecionados,
+                                                  model => model.AllClientes,
+                                                  x => x.CD_CLIENTE,
+                                                  x => x.NM_CLIENTE,
+                                                  model => model.clientes,
+                                                  new HtmlListInfo(HtmlTag.table, 1, new { @class = "table table-sm" }, TextLayout.Default, TemplateIsUsed.No))
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="tab-pane fade" id="list-modelo" role="tabpanel" aria-labelledby="list-modelo-list">
+
+                        <div class="form-row">
+                            <div class="form-group col-md-8">
+                                <label class="control-label">Selecione um ou mais Modelos</label>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <button class="btn btn-primary btn-sm" type="button" id="btnMarcarModelo">Marcar todos</button>
+                                <button class="btn btn-primary btn-sm" type="button" id="btnDesmarcarModelo">Seleção manual</button>
+                            </div>
+                        </div>
+                        <div class="pre-scrollable">
+                            <div class="form-group">
+                                @Html.CheckBoxListFor(model => model.ModelosSelecionados,
+                                                  model => model.AllModelos,
+                                                  x => x.CD_MODELO,
+                                                  x => x.DS_MODELO,
+                                                  model => model.modelos,
+                                                  new HtmlListInfo(HtmlTag.table, 3, new { @class = "table table-sm" }, TextLayout.Default, TemplateIsUsed.No))
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        @*<div class="form-group">
+                <button class="btn btn-primary btn-sm" type="button" id="btnImprimir">Imprimir</button>
+                <button class="btn btn-primary btn-sm" type="button" id="btnLimpar">Limpar</button>
+            </div>*@
+
+    }
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript" src="~/Scripts/Comodato/Util.js"></script>
+    <script type="text/javascript" src="~/Scripts/Comodato/Recolhidos.js"></script>
+
+    <script>
+        var URLAPI = "@_3M.Comodato.Utility.ControlesUtility.Parametro.ObterValorParametro(_3M.Comodato.Utility.ControlesUtility.Constantes.URLAPI)";
+        var URLSite = "@_3M.Comodato.Utility.ControlesUtility.Parametro.ObterValorParametro(_3M.Comodato.Utility.ControlesUtility.Constantes.URLSite)";
+        var URLCriptografarChave = "@Url.Action("CriptografarChaveJson")";
+        var token = "@Convert.ToString(((_3M.Comodato.Entity.UsuarioPerfilEntity)Session["_CurrentUser"]).token)";
+        var nidUsuario = @Convert.ToInt64(((_3M.Comodato.Entity.UsuarioPerfilEntity)Session["_CurrentUser"]).usuario.nidUsuario);
+    </script>
+}
+

@@ -1,0 +1,1 @@
+alter table TB_PEDIDO_PECA add CD_PECA_REFERENCIA varchar(15) null

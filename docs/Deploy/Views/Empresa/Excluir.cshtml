@@ -1,0 +1,144 @@
+﻿@model _3M.Comodato.Front.Models.Empresa
+
+@{
+    ViewBag.Title = "Empresa";
+}
+
+<i class="fas fa-cubes fa-3x fa-pull-left"></i>
+<h3>Empresa (Excluir)</h3>
+
+<h5>Confirma exclusão deste registro?</h5>
+<div>
+    <hr />
+
+    @*<div class="form-group">
+        <div class="col-4">
+            <label class="control-label font-weight-bold">Código</label>
+            <br />
+            @Html.DisplayFor(model => model.CD_Empresa)
+        </div>
+    </div>
+
+    <div class="form-group">
+            <div class="col-2">
+                <label class="control-label font-weight-bold">IIComp</label>
+                <br />
+                @Html.DisplayFor(model => model.IIComp)
+            </div>
+        </div>
+
+    <div class="form-group">
+        <div class="col-12">
+            <label class="control-label font-weight-bold">Nome</label>
+            <br />
+            @Html.DisplayFor(model => model.NM_Empresa)
+        </div>
+    </div>*@
+
+    <div class="form-row">
+        <div class="form-group col-3">
+            <label class="control-label font-weight-bold">Código</label>
+            <br />
+            @Html.DisplayFor(model => model.CD_Empresa)
+        </div>
+
+        <div class="form-group col-9">
+            <label class="control-label font-weight-bold">Nome</label>
+            <br />
+            @Html.DisplayFor(model => model.NM_Empresa)
+        </div>
+    </div>
+
+    @*<div class="form-group">
+            <div class="col-2">
+                <label class="control-label">IIComp</label>
+                @Html.EditorFor(model => model.IIComp, new { htmlAttributes = new { @class = "form-control col-12" } })
+                @Html.ValidationMessageFor(model => model.IIComp, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+    <div class="form-row">
+        <div class="form-group col-8">
+            <label class="control-label font-weight-bold">CNPJ</label>
+            <br />
+            @Html.DisplayFor(model => model.NR_Cnpj)
+        </div>
+
+        <div class="form-group col-4">
+            <label class="control-label font-weight-bold">Tipo</label>
+            <br />
+            @Html.DisplayFor(model => model.TipoEmpresa)
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-7">
+            <label class="control-label font-weight-bold">Endereço</label>
+            <br />
+            @Html.DisplayFor(model => model.EN_Endereco)
+        </div>
+
+        <div class="form-group col-5">
+            <label class="control-label font-weight-bold">Bairro</label>
+            <br />
+            @Html.DisplayFor(model => model.EN_Bairro)
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-2">
+            <label class="control-label font-weight-bold">CEP</label>
+            <br />
+            @Html.DisplayFor(model => model.EN_Cep)
+        </div>
+
+        <div class="form-group col-8">
+            <label class="control-label font-weight-bold">Cidade</label>
+            <br />
+            @Html.DisplayFor(model => model.EN_Cidade)
+        </div>
+
+        <div class="form-group col-2">
+            <label class="control-label font-weight-bold">Estado</label>
+            <br />
+            @Html.DisplayFor(model => model.EN_Estado)
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-6">
+            <label class="control-label font-weight-bold">Telefone 1</label>
+            <br />
+            @Html.DisplayFor(model => model.TX_Telefone)
+        </div>
+
+        <div class="form-group col-6">
+            <label class="control-label font-weight-bold">Telefone 2</label>
+            <br />
+            @Html.DisplayFor(model => model.TX_Fax)
+        </div>
+    </div>
+
+    @using (Html.BeginForm())
+    {
+        <div class="form-actions no-color">
+            <input type="submit" value="Excluir" class="btn btn-primary btn-sm" />
+            @Html.ActionLink("Voltar", "Index", new { area = "" }, new { @class = "btn btn-primary btn-sm" })
+        </div>
+    }
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript" src="~/Scripts/Comodato/Util.js"></script>
+
+    <script type="text/javascript">
+     @Model.JavaScriptToRun
+
+        function MensagemSucesso() {
+            var mensagem = '@_3M.Comodato.Utility.ControlesUtility.Constantes.MensagemExclusaoSucesso';
+
+            AlertaRedirect("Aviso", mensagem, "window.location = '../Empresa';");
+        };
+    </script>
+}

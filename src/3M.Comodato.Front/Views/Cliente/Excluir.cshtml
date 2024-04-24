@@ -1,0 +1,166 @@
+﻿@model _3M.Comodato.Front.Models.Cliente
+
+@{
+    ViewBag.Title = "Cliente";
+}
+
+<i class="fas fa-cubes fa-3x fa-pull-left"></i>
+<h3>Cliente (Inativar)</h3>
+
+<h5>Confirma inativação deste registro?</h5>
+<div>
+    <hr />
+    @Html.HiddenFor(model => model.CancelarVerificarCodigo)
+
+    <div class="form-row">
+        <div class="form-group col-3">
+            <label class="control-label font-weight-bold">Código</label>
+            <br />
+            @Html.DisplayFor(model => model.CD_CLIENTE)
+        </div>
+
+        <div class="form-group col-6">
+            <label class="control-label font-weight-bold">Grupo</label>
+            <br />
+            @Html.DisplayFor(model => model.grupo.DS_GRUPO)
+        </div>
+
+        <div class="form-group col-3">
+            <label class="control-label font-weight-bold">Desativar em</label>
+            <br />
+            @DateTime.Now.Day/@DateTime.Now.Month/@DateTime.Now.Year
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label font-weight-bold">Executivo de Vendas</label>
+        <br />
+        @Html.DisplayFor(model => model.executivo.NM_EXECUTIVO)
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-8">
+            <label class="control-label font-weight-bold">Nome</label>
+            <br />
+            @Html.DisplayFor(model => model.NM_CLIENTE)
+        </div>
+
+        <div class="form-group col-4">
+            <label class="control-label font-weight-bold">CNPJ</label>
+            <br />
+            @Html.DisplayFor(model => model.NR_CNPJ)
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-7">
+            <label class="control-label font-weight-bold">Endereço</label>
+            <br />
+            @Html.DisplayFor(model => model.EN_ENDERECO)
+        </div>
+
+        <div class="form-group col-5">
+            <label class="control-label font-weight-bold">Bairro</label>
+            <br />
+            @Html.DisplayFor(model => model.EN_BAIRRO)
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-2">
+            <label class="control-label font-weight-bold">CEP</label>
+            <br />
+            @Html.DisplayFor(model => model.EN_CEP)
+        </div>
+
+        <div class="form-group col-8">
+            <label class="control-label font-weight-bold">Cidade</label>
+            <br />
+            @Html.DisplayFor(model => model.EN_CIDADE)
+        </div>
+
+        <div class="form-group col-2">
+            <label class="control-label font-weight-bold">Estado</label>
+            <br />
+            @Html.DisplayFor(model => model.EN_ESTADO)
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-6">
+            <label class="control-label font-weight-bold">Telefone 1</label>
+            <br />
+            @Html.DisplayFor(model => model.TX_TELEFONE)
+        </div>
+
+        <div class="form-group col-6">
+            <label class="control-label font-weight-bold">Telefone 2</label>
+            <br />
+            @Html.DisplayFor(model => model.TX_FAX)
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-2">
+            <label class="control-label font-weight-bold">Filial</label>
+            <br />
+            @Html.DisplayFor(model => model.CD_FILIAL)
+        </div>
+
+        <div class="form-group col-2">
+            <label class="control-label font-weight-bold">A B C</label>
+            <br />
+            @Html.DisplayFor(model => model.CD_ABC)
+        </div>
+
+        <div class="form-group col-3">
+            <label class="control-label font-weight-bold">Região</label>
+            <br />
+            @Html.DisplayFor(model => model.regiao.DS_REGIAO)
+        </div>
+
+        <div class="form-group col-5">
+            <label class="control-label font-weight-bold">Vendedor</label>
+            <br />
+            @Html.DisplayFor(model => model.vendedor.NM_VENDEDOR)
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label font-weight-bold">Qtde. Período</label>
+        <br />
+        @Html.DisplayFor(model => model.QT_PERIODO)
+    </div>
+
+    @using (Html.BeginForm())
+    {
+        <div class="form-group">
+            <input type="submit" value="Inativar" class="btn btn-primary btn-sm" />
+            @Html.ActionLink("Voltar", "Index", new { area = "" }, new { @class = "btn btn-primary btn-sm" })
+        </div>
+    }
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript" src="~/Scripts/Comodato/Util.js"></script>
+    <script type="text/javascript" src="~/Scripts/Comodato/Cliente.js"></script>
+
+    <script>
+        var URLVerificarCodigo = "@Url.Action("VerificarCodigoJson", "Cliente")";
+        var URLEditar = "@Url.Action("Editar", "Cliente")";
+    </script>
+    
+    <script type="text/javascript">
+     @Model.JavaScriptToRun
+
+        function MensagemSucesso() {
+            var mensagem = '@_3M.Comodato.Utility.ControlesUtility.Constantes.MensagemInativacaoSucesso';
+
+            AlertaRedirect("Aviso", mensagem, "window.location = '../Cliente';");
+        };
+    </script>
+}
+
+

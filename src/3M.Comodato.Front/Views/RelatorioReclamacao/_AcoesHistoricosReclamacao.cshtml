@@ -1,0 +1,86 @@
+﻿@model _3M.Comodato.Front.Models.RRAcompanhamentoReclamacao
+<style>
+</style>
+<div class="form-row">
+
+   
+
+    <div class="form-group col-sm-12 col-md-6 col-lg-6 col-xl-6">
+        @*<label class="control-label">Histórico e observações</label>*@
+        <button type="button" class="btn btn-primary btn-sm" id="btnNovoHistorico">
+            <i class="fas fa-plus-circle"></i>
+        </button>
+
+        <div class="pre-scrollable">
+            <div id="gridmvcMensagem">
+            </div>
+        </div>
+
+    </div>
+    <div class="form-group col-sm-12 col-md-6 col-lg-6 col-xl-6">
+        <label class="control-label">Cliente:</label>
+        @Html.TextBoxFor(model => model.Cliente, new { @class = "form-control col-md-12", @readonly = "readonly" })
+        <label class="control-label">Técnico Solicitante:</label>
+        @Html.TextBoxFor(model => model.TecSolicitante, new { @class = "form-control col-md-12", @readonly = "readonly" })
+
+        <label class="control-label">Tipo de Reclamação:</label>
+        @Html.TextBoxFor(model => model.TipoReclamacaoRR, new { @class = "form-control col-md-12", @readonly = "readonly" })
+
+        <label class="control-label">TipoAtendimento:</label>
+        @Html.TextBoxFor(model => model.TipoAtendimento, new { @class = "form-control col-md-12", @readonly = "readonly" })
+
+        <div>
+            <label class="control-label">Ação permitida:</label>
+            @*@Html.DropDownListFor(model => model.acompanhamentoReclamacao.RRStatus.ST_STATUS_RR, new SelectList(Model.acompanhamentoReclamacao.RRAllStatus, "ST_STATUS_RR", "DS_TRANSICAO"), "Selecione...", new { @class = "valid form-control col-12 mb-1" })*@
+
+            @Html.DropDownListFor(model => model.acompanhamentoReclamacao.RRStatus.ST_STATUS_RR, new SelectList(Model.acompanhamentoReclamacao.RRAllStatus, "ST_STATUS_RR", "DS_TRANSICAO"), "Selecione...", Model.HabilitaCampo ? (object)new { @class = "form-control col-md-12" } : (object)new { @class = "form-control col-md-12", @readonly = "readonly" })
+
+            @*@Html.DropDownListFor(model => model.acompanhamentoReclamacao.RRStatus.ST_STATUS_RR, new SelectList(Model.acompanhamentoReclamacao.RRAllStatus, "ST_STATUS_RR", "DS_TRANSICAO"), "Selecione...", new { @class = "form-control col-md-12" })*@
+            @Html.HiddenFor(model => model.HabilitaCampo)
+
+
+            <label id="validaSTSTATUSPEDIDO" class="control-label text-danger" style="display: none;">Conteúdo obrigatório!</label>
+            <button class="btn btn-primary btn-sm" type="button" id="btnAcao">Iniciar Ação</button>
+            @Html.ActionLink("Voltar", "Index", new { area = "" }, new { @class = "btn btn-primary btn-sm" })
+
+            <button class="btn btn-primary btn-sm" type="button" id="btnImprimirRelatorio">Imprimir Relatório</button>
+            @Html.HiddenFor(model => model.HabilitaImprimir)
+
+        </div>
+    </div>
+
+
+</div>
+
+<!-- Modal -->
+@Html.HiddenFor(model => model.ID_RELATORIO_RECLAMACAO)
+@Html.HiddenFor(model => model.acompanhamentoReclamacao.rrComent.ID_RR_COMMENT)
+@Html.HiddenFor(model => model.acompanhamentoReclamacao.RRStatus.ST_STATUS_RR)
+
+
+<div class="modal fade" id="HistoricoModal" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-dark">
+                <h5 class="modal-title text-white" id="exampleModalLongTitle">Nova observação/comentário</h5>
+                @*<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>*@
+            </div>
+            <div class="modal-body">
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <label class="control-label">Observações</label>
+                        @Html.EditorFor(model => model.acompanhamentoReclamacao.rrComent.DS_COMENT, new { htmlAttributes = new { @class = "form-control col-12", @rows = 5 } })
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnSalvarHistoricoModal">Salvar</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                @*<button type="button" class="btn btn-primary">Save changes</button>*@
+            </div>
+        </div>
+    </div>
+</div>
+

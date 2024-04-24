@@ -1,0 +1,78 @@
+﻿@model _3M.Comodato.Front.Models.SatisfacaoPesquisa
+@using GridMvc.Html
+@{
+    ViewBag.Title = "Pesquisa de Satisfação";
+}
+<i class="fas fa-cubes fa-3x fa-pull-left"></i>
+<h3>
+    Consulta Resultados de Pesquisa de Satisfação
+</h3>
+
+<div class="form-horizontal">
+    <hr />
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            <label id="labelTitulo">Título da Pesquisa</label>
+            @Html.TextBoxFor(model => model.Titulo, new { @class = "form-control col-md-12", @readonly = "readonly" })
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-8">
+            <label id="labelResponsavel">Responsável pela Pesquisa</label>
+            @Html.TextBoxFor(model => model.UsuarioResponsavel, new { @class = "form-control col-md-12", @readonly = "readonly" })
+        </div>
+        <div class="form-group col-md-2">
+            <label id="labelTipoPesquisa">Tipo da Pesquisa</label>
+            @Html.TextBoxFor(model => model.TipoPesquisa, new { @class = "form-control col-md-12", @readonly = "readonly" })
+        </div>
+
+        <div class="form-group col-md-2">
+            <label id="labelStatusPesquisa">Status da Pesquisa</label>
+            @Html.TextBoxFor(model => model.StatusPesquisaDescricao, new { @class = "form-control col-md-12", @readonly = "readonly" })
+        </div>
+    </div>
+    <hr />
+    <div class="form-row">
+        <div class="form-group col-md-2">
+            <label id="labelQtdVisitas">Qtd. de Visitas</label>
+            @Html.TextBoxFor(model => model.QuantidadeVisitas, new { @class = "form-control text-center col-md-12", @readonly = "readonly" })
+        </div>
+        <div class="form-group col-md-2">
+            <label id="labelQtdRespostas">Qtd. de Respostas</label>
+            @Html.TextBoxFor(model => model.QuantidadeRespostas, new { @class = "form-control text-center col-md-12", @readonly = "readonly" })
+        </div>
+
+        <div class="form-group col-md-2">
+            <label id="labelSatisfacao">Satisfação</label>
+            @Html.TextBoxFor(model => model.IndiceSatisfacao, new { @class = "form-control text-center col-md-12", @readonly = "readonly" })
+        </div>
+        <div class="form-group col-md-4">
+            &nbsp;
+        </div>
+        <div class="form-group col-md-2">
+            <label id="label">&nbsp;</label>
+                <button class="btn btn-primary btn-sm col-md-12" type="button" id="btnImprimir" onclick="window.open('@Url.Action("Imprimir",new { idKey=Model.idKey })', '_blank');">Imprimir</button>
+            </div>
+        </div>
+    </div>
+<hr />
+
+<div class="table table-hover">
+    @Html.Grid(Model.ListaRespostas).Columns(columns =>
+    {
+        columns.Add(foo => foo.Visita.cliente.NM_CLIENTE).Titled("CLIENTE").Sortable(true).Filterable(false);
+        columns.Add(foo => foo.DataResposta).Titled("DATA RESPOSTA").Sortable(true).Filterable(false);
+        columns.Add(foo => foo.NotaPesquisa).Titled("SATISFAÇÃO").Sortable(true).Filterable(false).RenderValueAs(v => string.Format("{0:N2}", v.NotaPesquisa));
+        columns.Add(foo => foo.RespostaPesquisa1).Titled("RESPOSTA 1").Sortable(true).Filterable(false);
+        columns.Add(foo => foo.RespostaPesquisa2).Titled("RESPOSTA 2").Sortable(true).Filterable(false);
+        columns.Add(foo => foo.RespostaPesquisa3).Titled("RESPOSTA 3").Sortable(true).Filterable(false);
+        columns.Add(foo => foo.RespostaPesquisa4).Titled("RESPOSTA 4").Sortable(true).Filterable(false);
+        columns.Add(foo => foo.RespostaPesquisa5).Titled("RESPOSTA 5").Sortable(true).Filterable(false);
+
+    }).WithPaging(10)
+</div>
+
+<div class="form-group">
+    @Html.ActionLink("Voltar", "Index", new { area = "" }, new { @class = "btn btn-primary btn-sm" })
+</div>

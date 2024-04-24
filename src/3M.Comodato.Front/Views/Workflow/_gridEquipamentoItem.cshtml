@@ -1,0 +1,26 @@
+﻿@model IEnumerable<_3M.Comodato.Front.Models.WfEquipamentoItemDevolucao>
+@using _3M.Comodato.Utility
+@using GridMvc.Html
+
+<div class="table table-hover">
+    @Html.Grid(Model).Columns(columns =>
+    {
+
+        columns.Add(foo => foo.NumeroAtivo).Titled("NÚMERO DO ATIVO");
+        columns.Add(foo => foo.Envio).Titled("ENVIO");
+        columns.Add(foo => foo.Modelo).Titled("MODELO");
+        columns.Add(foo => foo.CaixaLargura).Titled("CAIXA LARGURA");
+        columns.Add(foo => foo.CaixaAltura).Titled("CAIXA ALTURA");
+        columns.Add(foo => foo.CaixaComprimento).Titled("CAIXA COMPRIMENTO");
+        columns.Add(foo => foo.Peso).Titled("PESO");
+        columns.Add(foo => foo.NotaFiscal).Titled("NOTA FISCAL");
+
+
+        columns.Add()
+            .Encoded(false)
+            .Sanitized(false)
+            .SetWidth(30)
+            .RenderValueAs(o => (o.ST_STATUS_PEDIDO != (int)ControlesUtility.Enumeradores.WorkflowPedidoDevolucao.Rascunho && o.ST_STATUS_PEDIDO != (int)ControlesUtility.Enumeradores.WorkflowPedidoDevolucao.PendenteAnexar) ? "" : $"<b><a href=\"#\" onclick=\"RemoverEquipamento({o.CodigoEquipamento.ToString()}); return false;\" class='fas fa-trash-alt fa-lg' data-toggle='tooltip' data-placement='top' title='Excluir'></a></b>");
+
+    }).Sortable(false).Filterable(false).SetLanguage("pt-BR")
+</div>

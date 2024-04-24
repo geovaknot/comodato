@@ -1,0 +1,80 @@
+﻿@model _3M.Comodato.Front.Models.UsuarioLoginTrocarSenha
+
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_LayoutPageLogin.cshtml";
+}
+
+<div class="container">
+    <div class="well">
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(model => model.cnmNome)
+            @Html.HiddenFor(model => model.cdsPerfil)
+
+            <div class="card mb-md-3 mx-auto" style="max-width: 25rem; background-color:rgba(225, 223, 223, 0.85); border-radius:5pt; margin-top:10px; ">
+
+                <div class="card-header">
+                    <div class="row" style="width:25rem; height:5pt; background-color:#bc3535; margin-top:-10pt; margin-left:-21px;"></div>
+                    <h3 style="color:#bc3535; margin-top:3pt;">Trocar Senha</h3>
+                </div>
+                <div class="card-body">
+                    @if (!string.IsNullOrEmpty(Model.cnmNome))
+                    {
+                        <div class="form-group">
+                            <label class="control-label">@Model.cnmNome</label>
+                            <label class="control-label">@Model.cdsPerfil</label>
+                        </div>
+                    }
+                    <div class="form-group">
+                        <label class="control-label">Senha atual</label>
+                        @Html.PasswordFor(model => model.cdsSenhaAtual, new { placeholder = "senha", @class = "form-control mx-auto" })
+                        @Html.ValidationMessageFor(model => model.cdsSenhaAtual, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Nova Senha</label>
+                        @Html.PasswordFor(model => model.cdsSenha, new { placeholder = "senha", @class = "form-control mx-auto" })
+                        @Html.ValidationMessageFor(model => model.cdsSenha, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Confirmar Senha</label>
+                        @Html.PasswordFor(model => model.cdsConfirmarSenha, new { placeholder = "senha", @class = "form-control mx-auto" })
+                        @Html.ValidationMessageFor(model => model.cdsConfirmarSenha, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <label class="text-danger"><small>A senha deve possuir no mínimo 12 caracteres, ao menos 1 caractere maiúsculo, minúsculo, numérico e caractere especial.</small></label>
+                    </div>
+                    @if (!string.IsNullOrEmpty(ViewBag.Mensagem))
+                    {
+                        <div class="form-group">
+                            <label class="text-danger">@ViewBag.Mensagem</label>
+                        </div>
+                    }
+                    @if (!string.IsNullOrEmpty(ViewBag.MensagemOK))
+                    {
+                        <div class="form-group">
+                            <label class="text-success">@ViewBag.MensagemOK</label>
+                        </div>
+                    }
+                    <div class="form-group">
+                        <div class="col-12">
+                            <input type="submit" value="Trocar" class="btn btn-primary btn-lg" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-12">
+                            @Html.ActionLink("Retornar para home", "Index", "Home", new { area = "" }, new { @class = "card-link" })
+                        </div>
+                    </div>
+                    @*<h5 class="card-title">Light card title</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>*@
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
+

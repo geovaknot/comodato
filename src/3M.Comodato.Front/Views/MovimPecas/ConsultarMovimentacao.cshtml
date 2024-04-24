@@ -1,0 +1,91 @@
+﻿@model _3M.Comodato.Front.Controllers.PesquisaMovimentacaoModel
+@{
+    ViewBag.Title = "Consulta de Movimentação de Peças";
+}
+
+<i class="fas fa-cubes fa-3x fa-pull-left"></i>
+<h3>Consulta de Movimentação de Peças</h3>
+
+<div class="well">
+    <div class="form-horizontal">
+        <hr />
+        <div class="row">
+            <div class="col-md-6">
+                <label class="control-label">Estoque</label>
+                <div class="form-group">
+                    @Html.DropDownListFor(model => model.CodigoEstoque, new SelectList(Model.ListaEstoque, "Value", "Text"), new { @class = "js-select-basic-single col-md-12" })
+                    <label id="validaComboEstoque" class="control-label text-danger" style="display: none;">Conteúdo obrigatório!</label>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <label class="control-label">Período</label>
+                <div class="form-group">
+                    <div id="ddtDe-container">
+                        <div class="input-group date">
+                            @Html.TextBoxFor(m => m.PeriodoDe, new { @class = "form-control col-md-12" })
+                            <div class="input-group-addon">
+                                <i class="far fa-calendar-alt fa-2x" style="background: #d9d6d6; padding: 3px 3px 3px 3px"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-md-3">
+                <label class="control-label col-md-1">Até</label>
+                <div class="form-group">
+                    <div id="ddtAte-container">
+                        <div class="input-group date">
+                            @Html.TextBoxFor(m => m.PeriodoAte, new { @class = "form-control col-md-12" })
+                            <div class="input-group-addon">
+                                <i class="far fa-calendar-alt fa-2x" style="background: #d9d6d6; padding: 3px 3px 3px 3px"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <label class="control-label">Peça</label>
+                <div class="form-group">
+                    @Html.DropDownListFor(model => model.CodigoPeca, Model.ListaPecas, new { @class = "js-select-basic-single col-md-12" })
+                </div>
+            </div>
+            <div class="col-md-6">
+                <label class="control-label">Tipo de Movimentação</label>
+                <div class="form-group">
+                    @Html.DropDownListFor(model => model.TipoMovimentacao, Model.ListaTipoMovimentacao, new { @class = "js-select-basic-single col-md-12" })
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-9"></div>
+            <div class="col-md-12">
+                <div class="form-group">
+                    @Html.ActionLink("Movimentação de Peças", "Index", null, new { @class = "btn btn-primary btn-sm" })
+                    <input type="button" id="btnConsultar" class="btn btn-primary btn-sm" value="Consultar" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12"></div>
+        </div>
+        <div class="row">
+            <div id="gridMovimentacao" class="col-md-12"></div>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        var actionConsultar = '@Url.Action("PesquisarMovimentacao", "MovimPecas")';
+    </script>
+
+    <script type="text/javascript" src="~/Scripts/Comodato/Util.js"></script>
+    <script type="text/javascript" src="~/Scripts/Comodato/ConsultarMovimentacao.js"></script>
+
+}

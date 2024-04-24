@@ -1,0 +1,114 @@
+﻿@model _3M.Comodato.Front.Models.Usuario
+
+@{
+    ViewBag.Title = "Usuário";
+}
+
+<i class="fas fa-cubes fa-3x fa-pull-left"></i>
+<h3>Usuário (Editar)</h3>
+
+<div class="well">
+
+    @using (Html.BeginForm())
+    {
+        <div class="form-horizontal">
+            <hr />
+            @Html.HiddenFor(model => model.nidUsuario)
+            @Html.HiddenFor(model => model.usuarioPerfil.nidUsuarioPerfil)
+            @Html.HiddenFor(model => model.nidPerfilExternoPadrao)
+            <input id="cdsSenhaHidden" name="cdsSenhaHidden" type="hidden" value="@Model.cdsSenha" />
+
+            <div class="form-group">
+                <div class="col-12">
+                    <label class="control-label">Nome</label>
+                    @Html.EditorFor(model => model.cnmNome, new { htmlAttributes = new { @class = "form-control col-12" } })
+                    @Html.ValidationMessageFor(model => model.cnmNome, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-12">
+                    <label class="control-label">Login</label>
+                    @Html.EditorFor(model => model.cdsLogin, new { htmlAttributes = new { @class = "form-control col-12" } })
+                    @Html.ValidationMessageFor(model => model.cdsLogin, "", new { @class = "text-danger" })
+
+                    @if (ViewBag.LoginDuplicado != null)
+                    {
+                        <label class="control-label" style="color:red">@ViewBag.LoginDuplicado</label>
+                    }
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-12">
+                    <label class="control-label">E-mail</label>
+                    @Html.EditorFor(model => model.cdsEmail, new { htmlAttributes = new { @class = "form-control col-12" } })
+                    @Html.ValidationMessageFor(model => model.cdsEmail, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-12">
+                    <label class="control-label">Perfil</label>
+                    @Html.DropDownListFor(model => model.perfil.nidPerfil, new SelectList(Model.perfis, "nidPerfil", "cdsPerfil"), null, new { @class = "valid form-control col-12" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-12">
+                    <label class="control-label" id="Empresa">Empresa</label>
+                    @Html.DropDownListFor(model => model.cd_empresa, new SelectList(Model.empresas, "CD_Empresa", "NM_Empresa"), new { @class = "js-example-basic-single valid form-control col-12" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-12">
+                    <label class="control-label">Condição (Ativo)</label>
+                    @Html.EditorFor(model => model.bidAtivo, new { htmlAttributes = new { @class = "" } })
+                </div>
+            </div>
+
+            <div id="divSenhaExterno">
+                <div class="form-group">
+                    <div class="col-6">
+                        <label class="control-label">Senha</label>
+                        @Html.EditorFor(model => model.cdsSenha, new { htmlAttributes = new { @class = "form-control col-12" } })
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-12">
+                    <input type="submit" value="Gravar" class="btn btn-primary btn-sm" />
+                    @Html.ActionLink("Voltar", "Index", new { area = "" }, new { @class = "btn btn-primary btn-sm" })
+                </div>
+            </div>
+        </div>
+    }
+
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript" src="~/Scripts/Comodato/Usuario.js"></script>
+    <script type="text/javascript" src="~/Scripts/Comodato/Util.js"></script>
+
+    <script type="text/javascript">
+        
+     @Model.JavaScriptToRun
+
+        function MensagemSucesso() {
+            var mensagem = '@_3M.Comodato.Utility.ControlesUtility.Constantes.MensagemGravacaoSucesso';
+
+            AlertaRedirect("Aviso", mensagem, "window.location = '../Usuario';");
+        };
+    </script>
+    <script>
+        var perfilCliente = @Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.Perfil.Cliente);
+        var perfilTecnicoExterno = @Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.Perfil.TecnicoEmpresaTerceira);
+        var perfilCoordenador = @Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.Perfil.LiderEmpresaTecnica);
+    </script>
+}
+
+

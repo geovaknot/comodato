@@ -1,0 +1,22 @@
+﻿@model IEnumerable<_3M.Comodato.Front.Models.DadosPagamento>
+
+@using GridMvc.Html
+
+@{
+    var perfil = (_3M.Comodato.Entity.UsuarioPerfilEntity)Session["_CurrentUser"];
+    int PERFIL_CLIENTE = 8;
+    var SIM = "S";
+}
+
+<div class="table table-hover">
+    @Html.Grid(Model).Columns(columns =>
+{
+    columns.Add(foo => foo.NRSolicitacaoSESM).Titled("Número Solicitação SESM").Sortable(false).Filterable(false);
+    columns.Add(foo => foo.DT_DATA_Solicitacao).Titled("Data da solicitação").Sortable(false).Filterable(false);
+    columns.Add(foo => foo.NR_NotaFiscal).Titled("Número da NF").Sortable(false).Filterable(false);
+    columns.Add(foo => foo.SerieNF).Titled("Série NF").Sortable(false).Filterable(false);
+    columns.Add(foo => foo.DT_DATA_Emissao).Titled("Data Emissão NF").Sortable(false).Filterable(false);
+    columns.Add(foo => foo.DSStatus).Titled("Status").Sortable(false).Filterable(false);
+
+})
+</div>

@@ -1,0 +1,9 @@
+insert into tbtpstatusvisitapadrao (st_status_visita, ds_status_visita, nidusuarioatualizacao, dtmdatahoraatualizacao) values (1, '-', 1, getdate());
+insert into tbtpstatusvisitapadrao (st_status_visita, ds_status_visita, nidusuarioatualizacao, dtmdatahoraatualizacao) values (2, 'Iniciar', 1, getdate());
+insert into tbtpstatusvisitapadrao (st_status_visita, ds_status_visita, nidusuarioatualizacao, dtmdatahoraatualizacao) values (3, 'Aberta', 1, getdate());
+insert into tbtpstatusvisitapadrao (st_status_visita, ds_status_visita, nidusuarioatualizacao, dtmdatahoraatualizacao) values (4, 'Finalizada', 1, getdate());
+insert into tbtpstatusvisitapadrao (st_status_visita, ds_status_visita, nidusuarioatualizacao, dtmdatahoraatualizacao) values (5, 'Cancelada', 1, getdate());
+
+insert into tbtpmotivovisitapadrao (cd_motivo_visita, ds_motivo_visita, nidusuarioatualizacao, dtmdatahoraatualizacao) values (1, 'Integração', 1, getdate());
+insert into tbtpmotivovisitapadrao (cd_motivo_visita, ds_motivo_visita, nidusuarioatualizacao, dtmdatahoraatualizacao) values (2, 'Reunião', 1, getdate());
+insert into tbtpmotivovisitapadrao (cd_motivo_visita, ds_motivo_visita, nidusuarioatualizacao, dtmdatahoraatualizacao) values (3, 'Treinamento', 1, getdate());

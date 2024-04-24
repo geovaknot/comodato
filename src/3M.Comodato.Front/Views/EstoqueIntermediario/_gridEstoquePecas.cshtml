@@ -1,0 +1,21 @@
+﻿@model IEnumerable<_3M.Comodato.Front.Models.EstoqueIntermediario>
+@using GridMvc.Html
+<style>
+    .itemGrid-style { text-align: center; }
+    .itemGrid-style-right {
+        text-align: right;
+    }
+</style>
+
+@Html.Grid(Model).Named("gridEstoquePecas").Columns(columns =>
+{
+    columns.Add(c => c.Peca.DS_PECA).Titled("DESCRIÇÃO PEÇA");
+    columns.Add(c => c.Peca.TX_UNIDADE).Titled("UNIDADE");
+    columns.Add(c => c.Peca.VL_PECA).Titled("VALOR").RenderValueAs(v=> string.Format("{0:C}",Convert.ToDouble(v.Peca.VL_PECA))).Css("itemGrid-style-right");
+    columns.Add(c => c.DT_ULT_MOVIM).Titled("ULTIMA <br /> UTILIZAÇÃO");
+    columns.Add(c => c.QT_PECA_ATUAL).Titled("QTDE ESTOQUE").RenderValueAs(v => string.Format("{0:N0}", Convert.ToDouble(v.QT_PECA_ATUAL))).Css("itemGrid-style");
+    columns.Add(c => c.QTD_RECEBIDA_NAO_APROVADA).Titled("QTDE APROVADA <br /> NÃO RECEBIDA").RenderValueAs(v => string.Format("{0:N0}", Convert.ToDouble(v.QTD_RECEBIDA_NAO_APROVADA))).Css("itemGrid-style");
+    columns.Add(c => c.VL_TOTAL).Titled("VALOR TOTAL").Format("{0:C}").Css("itemGrid-style-right");
+    columns.Add(c => c.cdsAtivo).Titled("STATUS");
+    columns.Add(c => c.Estoque.cdsEstoque).Titled("ESTOQUE");
+}).WithPaging(10).Filterable(false).Sortable(true)

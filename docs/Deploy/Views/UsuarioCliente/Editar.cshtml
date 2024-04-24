@@ -1,0 +1,81 @@
+﻿@model _3M.Comodato.Front.Models.UsuarioClienteDetalhe
+
+@{
+    ViewBag.Title = "Usuário X Cliente";
+}
+
+<i class="fas fa-cubes fa-3x fa-pull-left"></i>
+<h3>Cliente vinculado aos seguintes usuários</h3>
+
+<div class="well">
+
+    @using (Html.BeginForm())
+    {
+        <div class="form-horizontal">
+            <hr />
+            @Html.HiddenFor(model => model.cliente.CD_CLIENTE)
+
+            <div class="form-row">
+                <div class="form-group col-6">
+                    <label class="control-label">Cliente</label>
+                    @Html.EditorFor(model => model.cliente.NM_CLIENTE, new { htmlAttributes = new { @class = "form-control col-12", @readonly = "readonly" } })
+                </div>
+
+                <div class="form-group col-6">
+                    <label class="control-label">Endereço</label>
+                    @Html.EditorFor(model => model.cliente.EN_ENDERECO, new { htmlAttributes = new { @class = "form-control col-12", @readonly = "readonly" } })
+                </div>
+            </div>
+
+            <div class="card">
+                <h5 class="card-header">
+                    Usuários vinculados
+                </h5>
+                <div class="card-body">
+                    <div class="form-row">
+                        <div class="form-group col-11">
+                            <label class="control-label">Usuário</label>
+                            @Html.DropDownListFor(model => model.usuario.nidUsuario, new SelectList(Model.usuarios, "nidUsuario", "cnmNome"), "Selecione...", new { @class = "js-example-basic-single ", @style = "width: 100% " })
+                            <label id="validaUsuario" class="control-label text-danger" style="display: none;">Conteúdo obrigatório!</label>
+                        </div>
+
+                        <div class="form-group col-1">
+                            <br />
+                            <button class="btn btn-primary btn-sm" type="button" id="btnAdicionar">Adicionar</button>
+                            @*<input type="submit" value="Gravar" class="btn btn-primary btn-sm" />*@
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-12">
+                            <div id="gridmvc">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <br />
+        <div class="form-group">
+            @Html.ActionLink("Voltar", "Index", new { area = "" }, new { @class = "btn btn-primary btn-sm" })
+        </div>
+    }
+
+
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        var URLObterLista = "@Url.Action("ObterListaUsuarioClienteSelecionadoJson", "UsuarioCliente")";
+        var URLAPI = "@_3M.Comodato.Utility.ControlesUtility.Parametro.ObterValorParametro(_3M.Comodato.Utility.ControlesUtility.Constantes.URLAPI)";   @*"@ViewBag.URLAPI";*@
+        var nidUsuario = @Convert.ToInt64(((_3M.Comodato.Entity.UsuarioPerfilEntity)Session["_CurrentUser"]).usuario.nidUsuario);  @*@ViewBag.nidUsuario;*@
+    </script>
+
+    <script type="text/javascript" src="~/Scripts/Comodato/Util.js"></script>
+    <script type="text/javascript" src="~/Scripts/Comodato/UsuarioClienteDetalhe.js"></script>
+
+}
+

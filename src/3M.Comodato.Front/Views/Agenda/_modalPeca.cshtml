@@ -1,0 +1,69 @@
+﻿@model _3M.Comodato.Front.Models.PreenchimentoOS
+
+<!-- Modal -->
+<div class="modal fade" id="PecaModal" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-dark">
+                <h5 class="modal-title text-white" id="exampleModalLongTitle">Peça Utilizada</h5>
+                @*<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>*@
+            </div>
+            <div class="modal-body">
+                <div class="form-horizontal">
+                    @Html.HiddenFor(model => model.pecaOS.ID_PECA_OS)
+
+                    <div class="form-group">
+                        <label class="control-label">Peça</label>
+                        @Html.DropDownListFor(model => model.pecaOS.peca.CD_PECA, new SelectList(Model.pecaOS.listaPecas, "CD_PECA", "DS_PECA"), "Selecione...", new { @class = "js-example-basic-single", @style = "width: 100%" })
+                        <label id="validaid_item_pedido_Peca" class="control-label text-danger" style="display: none;">Conteúdo obrigatório!</label>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-8">
+                            <label class="control-label">Estoque utilizado</label>
+                            @Html.DropDownListFor(model => model.pecaOS.CD_TP_ESTOQUE_CLI_TEC, new SelectList(Model.pecaOS.tiposEstoqueUtilizado, "Value", "Key"), new { @class = "valid form-control col-12" })
+                        </div>
+
+                        <div class="form-group col-4">
+                            <label class="control-label">Qtde. em Estoque</label>
+                            @Html.EditorFor(model => model.pecaOS.peca.QTD_ESTOQUE, new { htmlAttributes = new { @class = "form-control col-12", @readonly = "readonly" } })
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-8">
+                            <label class="control-label">Quantidade</label>
+                            @Html.EditorFor(model => model.pecaOS.QT_PECA, new { htmlAttributes = new { @class = "form-control col-12" } })
+                            <label id="validaQTPECA_Peca" class="control-label text-danger" style="display: none;">Conteúdo obrigatório!</label>
+                            <label id="validaQTPECARange_Peca" class="control-label text-danger" style="display: none;">Somente valor positivo acima de 0(zero)!</label>
+                            <label id="validaQTPECARangeMax_Peca" class="control-label text-danger" style="display: none;">Limite de caracteres ultrapassado!</label>
+                        </div>
+
+                        <div class="form-group col-4">
+                            <label class="control-label">Unidade</label>
+                            @Html.EditorFor(model => model.pecaOS.peca.TX_UNIDADE, new { htmlAttributes = new { @class = "form-control col-12", @readonly = "readonly" } })
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-12">
+                            <label class="control-label">Observação</label>
+                            @Html.EditorFor(model => model.pecaOS.DS_OBSERVACAO, new { htmlAttributes = new { @class = "form-control col-12" } })
+                             </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                @if (ViewBag.Tecnico3M == "S")
+                {
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnSalvarPecaModal">Salvar</button>
+                }
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                @*<button type="button" class="btn btn-primary">Save changes</button>*@
+            </div>
+        </div>
+    </div>
+</div>

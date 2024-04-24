@@ -1,0 +1,63 @@
+﻿@model _3M.Comodato.Front.Models.CompletosDetalhe
+
+@using GridMvc.Html
+
+@{
+    ViewBag.Title = "Análise de Vendas - Completo";
+}
+
+<i class="fas fa-print fa-3x fa-pull-left"></i>
+<h3>Análise de Vendas - Completo</h3>
+
+<div class="well">
+    <hr />
+
+    @using (Html.BeginForm())
+    {
+        <div class="form-horizontal">
+
+            <form class="form-group">
+                <label class="control-label">Linha de Produtos</label>
+                @Html.DropDownListFor(model => model.produto.CD_LINHA_PRODUTO, new SelectList(Model.produtos, "CD_LINHA_PRODUTO", "DS_LINHA_PRODUTO"), new { @class = "valid form-control col-12", @style = "width: 100%" })
+            </form>
+
+            <form class="form-group">
+                <label class="control-label">Cliente</label>
+                @Html.DropDownListFor(model => model.cliente.CD_CLIENTE, new SelectList(Model.clientes, "CD_CLIENTE", "NM_CLIENTE"), new { @class = "js-example-basic-single", @style = "width: 100%" })
+            </form>
+
+            <form class="form-group">
+                <label class="control-label">Vendedor</label>
+                @Html.DropDownListFor(model => model.vendedor.CD_VENDEDOR, new SelectList(Model.vendedores, "CD_VENDEDOR", "NM_VENDEDOR"), new { @class = "js-example-basic-single", @style = "width: 100%" })
+            </form>
+
+            <form class="form-group">
+                <label class="control-label">Executivo</label>
+                @Html.DropDownListFor(model => model.executivo.CD_EXECUTIVO, new SelectList(Model.executivos, "CD_EXECUTIVO", "NM_EXECUTIVO"), new { @class = "js-example-basic-single", @style = "width: 100%" })
+            </form>
+
+            <div class="form-group">
+                <button class="btn btn-primary btn-sm" type="button" id="btnImprimir">Imprimir</button>
+                <button class="btn btn-primary btn-sm" type="button" id="btnLimpar">Limpar</button>
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript" src="~/Scripts/Comodato/Util.js"></script>
+    <script type="text/javascript" src="~/Scripts/Comodato/Completos.js"></script>
+
+    <script>
+        var URLObterLista = "@Url.Action("ObterListaCompletos", "Completos")";
+        @*var URLImprimir = "@Url.Action("Imprimir", "Completos")";*@
+        var URLAPI = "@_3M.Comodato.Utility.ControlesUtility.Parametro.ObterValorParametro(_3M.Comodato.Utility.ControlesUtility.Constantes.URLAPI)";
+        var URLSite = "@_3M.Comodato.Utility.ControlesUtility.Parametro.ObterValorParametro(_3M.Comodato.Utility.ControlesUtility.Constantes.URLSite)";
+        var URLCriptografarChave = "@Url.Action("CriptografarChaveJson")";
+
+        var nidUsuario = @Convert.ToInt64(((_3M.Comodato.Entity.UsuarioPerfilEntity)Session["_CurrentUser"]).usuario.nidUsuario);
+    </script>
+}
+
+

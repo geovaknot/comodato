@@ -1,0 +1,1 @@
+Alter Table TB_DadosFaturamento add AtivoFixo varchar(6) null

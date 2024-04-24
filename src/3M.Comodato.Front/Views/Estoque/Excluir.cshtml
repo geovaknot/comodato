@@ -1,0 +1,29 @@
+﻿@model _3M.Comodato.Front.Models.Estoque
+
+@{
+    ViewBag.Title = "Unidade de Estoque";
+}
+
+<i class="fab fa-dropbox fa-3x fa-pull-left"></i>
+<h3>Unidade de Estoque (Excluir)</h3>
+
+<h5>Confirma exclusão deste registro?</h5>
+<div>
+    <hr />
+    <div class="form-group">
+        <label class="control-label font-weight-bold">N° Contrato</label>
+        <br />
+        @Html.DisplayFor(model => model.nnrContrato)
+    </div>
+    
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

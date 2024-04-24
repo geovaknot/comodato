@@ -1,0 +1,62 @@
+﻿@model _3M.Comodato.Front.Models.Dashboard
+
+<div class="card text-black rounded-0 mb-0">
+    <div class="card-header py-1 px-1">
+        <div class="row">
+            <div class="col-xl-9 col-lg-8 col-md-8 col-sm-8" style="font-size: 9pt">Atendimento</div>
+            <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3">
+                <div class="badge badge-pill badge-warning">
+                    <label id="Atendimento" class="mb-0"></label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-body py-1 px-1" style="min-height: 337px">
+        <div class="row">
+            <label class="col-sm-8 mb-0">Total de períodos:</label>
+            <div class="col-sm-4 mb-0">
+                <div class="font-weight-bold">
+                    <label id="TotalPeriodos" class="mb-0"></label>
+                </div>
+            </div>
+        </div>
+        <div class="row text-primary" style="font-size: 9pt">
+            <label class="col-sm-8 mb-0">Técnicos:</label>
+            <div class="col-sm-4 mb-0">
+                <div class="font-weight-bold">
+                    <label id="Tecnicos" class="mb-0"></label>
+                </div>
+            </div>
+        </div>
+        <div class="row mx-1 mb-3 mt-3">
+            <label class="col-12 text-center mb-0" style="font-size: 9pt">Atendimentos realizados no período</label>
+            <div id="PERCENTUAL_GRAFICO_REALIZADO" class="bg-primary" style="width: 1%; height: 25px; float: left">
+                <label id="PERCENTUAL_GRAFICO_REALIZADO_label" class="m-0 p-0 text-center" style="width: 100%"></label>
+            </div>
+            <div id="PERCENTUAL_GRAFICO_GAP" class="bg-warning" style="width: 1%; height: 25px; float: left">
+                <label id="PERCENTUAL_GRAFICO_GAP_label" class="m-0 p-0 text-center" style="width: 100%"></label>
+            </div>
+            <div id="PERCENTUAL_GRAFICO_RESTANTE" class="bg-secondary" style="width: 1%; height: 25px; float: left">
+                <label id="PERCENTUAL_GRAFICO_RESTANTE_label" class="m-0 p-0 text-center" style="width: 100%"></label>
+            </div>
+        </div>
+        <div class="row text-primary" style="font-size: 9pt">
+            <label class="col-sm-8 mb-0">Períodos realizados:</label>
+            <div class="col-sm-4 mb-0">
+                <div class="font-weight-bold">
+                    <label id="PeriodosRealizados" class="mb-0"></label>
+                </div>
+            </div>
+        </div>
+        <div class="row text-primary" style="font-size: 9pt">
+            <label class="col-sm-8 mb-0">Períodos planejados:</label>
+            <div class="col-sm-4 mb-0">
+                <div class="font-weight-bold">
+                    <label id="PeriodosPlanejados" class="mb-0"></label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

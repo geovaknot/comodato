@@ -1,0 +1,31 @@
+﻿@model IEnumerable<_3M.Comodato.Front.Models.SoliticacaoAtendimento>
+
+@using GridMvc.Html
+
+<div class="table table-hover">
+    @Html.Grid(Model).Columns(columns =>
+{
+    columns.Add(foo => foo.DataSolicitacao).Titled("DATA SOLICITAÇÃO").Format("{0:dd/MM/yyyy}");
+
+    if (ViewBag.VisaoTecnico || ViewBag.VisaoAdmin)
+    {
+        columns.Add(foo => foo.NomeCliente).Titled("CLIENTE");
+    }
+
+    columns.Add(foo => foo.StatusSolicitacao).Titled("STATUS");
+    columns.Add(foo => foo.Observacao).Titled("MOTIVO PRINCIPAL");
+    columns.Add(foo => foo.TipoAtendimento).Titled("TIPO DA SOLICITAÇÃO");
+    columns.Add(foo => foo.CD_ATIVO_FIXO).Titled("Cod. Ativo");
+    columns.Add(foo => foo.ID_OS).Titled("Cod. OS");
+
+
+    columns.Add()
+        .Encoded(false)
+        .Sanitized(false)
+        .SetWidth(30)
+        .RenderValueAs(o => "<a href='#' onclick='Detalhar(" + o.CodigoSolicitacao + ")' class='fas fa-pencil-alt fa-lg'> </a>");
+
+
+}).Sortable(true).Filterable(true).SetLanguage("pt-BR")
+</div>
+

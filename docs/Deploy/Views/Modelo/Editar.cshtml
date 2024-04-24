@@ -1,0 +1,198 @@
+﻿@model _3M.Comodato.Front.Models.Modelo
+
+@{
+    ViewBag.Title = "Modelo";
+}
+
+<i class="fas fa-cubes fa-3x fa-pull-left"></i>
+<h3>Modelo (Editar)</h3>
+
+<div class="well">
+
+    @using (Html.BeginForm())
+    {
+    <div class="form-horizontal">
+        <hr />
+        @Html.HiddenFor(model => model.CancelarVerificarCodigo)
+
+        <div class="form-group">
+            <div class="form-row">
+                <div class="col-4">
+                    <label class="control-label">Código</label>
+                    @Html.EditorFor(model => model.CD_MODELO, new { htmlAttributes = new { @class = "form-control col-12" } })
+                    @Html.ValidationMessageFor(model => Model.CD_MODELO, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="col-8">
+                    <label class="control-label">Descrição</label>
+                    @Html.EditorFor(model => model.DS_MODELO, new { htmlAttributes = new { @class = "form-control col-12" } })
+                    @Html.ValidationMessageFor(model => Model.DS_MODELO, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="form-row">
+                <div class="col-6">
+                    <label class="control-label">Grupo</label><br />
+                    @Html.DropDownListFor(model => model.grupoModelo.CD_GRUPO_MODELO, new SelectList(Model.gruposModelos, "CD_GRUPO_MODELO", "CD_GRUPO_MODELO"), new { @class = "valid form-control col-12" })
+                </div>
+
+                <div class="col-6">
+                    <label class="control-label">Modelo NR12</label><br />
+                    @Html.EditorFor(model => model.CD_MOD_NR12, new { htmlAttributes = new { @class = "form-control col-12" } })
+                    @Html.ValidationMessageFor(model => Model.CD_MOD_NR12, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group col-2">
+            <label class="control-label">Condição (Ativo)</label>
+            @Html.DropDownListFor(model => model.FL_ATIVO, new SelectList(Model.SimNao, "value", "key"), new { @class = "valid form-control col-12" })
+        </div>
+
+
+        <hr />
+        <h6>Informações do Modelo</h6>
+        <div class="form-group">
+            <div class="form-row">
+                <div class="col-6">
+                    <label class="control-label">Categoria</label><br />
+                    @Html.DropDownListFor(model => model.ID_CATEGORIA, new SelectList(Model.categorias, "ID_CATEGORIA", "DS_CATEGORIA"), new { @class = "valid form-control col-12" })
+                </div>
+                <div class="col-6">
+                    <label class="control-label">Tipo de Empacotamento</label><br />
+                    @Html.DropDownListFor(model => model.TP_EMPACOTAMENTO, new SelectList(Model.TipoEmpacotamento, "key", "value"), new { @class = "valid form-control col-12" })
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="col-6">
+                    <label class="control-label">Linha de Produto</label><br />
+                    @Html.DropDownListFor(model => model.CD_LINHA_PRODUTO, new SelectList(Model.produtos, "CD_LINHA_PRODUTO", "DS_LINHA_PRODUTO"), new { @class = "valid form-control col-12" })
+                </div>
+                <div class="col-6">
+                    <label class="control-label">Peso Cubado</label><br />
+                    @Html.EditorFor(model => model.VL_PESO_CUBADO, new { htmlAttributes = new { @class = "form-control col-12" } })
+                    @Html.ValidationMessageFor(model => Model.VL_PESO_CUBADO, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="col-6">
+                    <label class="control-label">Envio Projetado no Período</label><br />
+                    @Html.EditorFor(model => model.VL_PROJETADO, new { htmlAttributes = new { @class = "form-control col-12" } })
+                    @Html.ValidationMessageFor(model => Model.VL_PROJETADO, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="col-6">
+                    <label class="control-label">Complexidade</label>
+                    @Html.EditorFor(model => model.VL_COMPLEXIDADE_EQUIP, new { htmlAttributes = new { @class = "form-control col-12" } })
+                    @Html.ValidationMessageFor(model => Model.VL_COMPLEXIDADE_EQUIP, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <hr />
+        <h6>Dados da Caixa (Apenas se Fechador)</h6>
+
+        <div class="form-group">
+            <div class="form-group">
+                <h6>Tamanhos Limites do Modelo</h6>
+                <div class="form-row">
+                    <div class="col-3">
+                        <label class="control-label">Altura Mínima (mm)</label><br />
+                        @Html.EditorFor(model => model.VL_ALTUR_MIN, new { htmlAttributes = new { @class = "form-control col-12" } })
+                        @Html.ValidationMessageFor(model => Model.VL_ALTUR_MIN, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-3">
+                        <label class="control-label">Altura Máxima (mm)</label><br />
+                        @Html.EditorFor(model => model.VL_ALTUR_MAX, new { htmlAttributes = new { @class = "form-control col-12" } })
+                        @Html.ValidationMessageFor(model => Model.VL_ALTUR_MAX, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="col-3">
+                        <label class="control-label">Largura Mínima (mm)</label><br />
+                        @Html.EditorFor(model => model.VL_LARG_MIN, new { htmlAttributes = new { @class = "form-control col-12" } })
+                        @Html.ValidationMessageFor(model => Model.VL_LARG_MIN, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-3">
+                        <label class="control-label">Largura Máxima (mm)</label><br />
+                        @Html.EditorFor(model => model.VL_LARG_MAX, new { htmlAttributes = new { @class = "form-control col-12" } })
+                        @Html.ValidationMessageFor(model => Model.VL_LARG_MAX, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="col-3">
+                        <label class="control-label">Comprimento Mínimo (mm)</label><br />
+                        @Html.EditorFor(model => model.VL_COMP_MIN, new { htmlAttributes = new { @class = "form-control col-12" } })
+                        @Html.ValidationMessageFor(model => Model.VL_COMP_MIN, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col-3">
+                        <label class="control-label">Comprimento Máximo (mm)</label><br />
+                        @Html.EditorFor(model => model.VL_COMP_MAX, new { htmlAttributes = new { @class = "form-control col-12" } })
+                        @Html.ValidationMessageFor(model => Model.VL_COMP_MAX, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <h6>Tamanho Padrão da Caixa</h6>
+                <div class="form-row">
+                    <div class="col-3">
+                        <label class="control-label">Altura da Caixa (mm)</label><br />
+                        @Html.EditorFor(model => model.VL_ALTUR_CAIXA, new { htmlAttributes = new { @class = "form-control col-12" } })
+                        @Html.ValidationMessageFor(model => Model.VL_ALTUR_CAIXA, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-3">
+                        <label class="control-label">Largura da Caixa (mm)</label><br />
+                        @Html.EditorFor(model => model.VL_LARG_CAIXA, new { htmlAttributes = new { @class = "form-control col-12" } })
+                        @Html.ValidationMessageFor(model => Model.VL_LARG_CAIXA, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-3">
+                        <label class="control-label">Comprimento da Caixa (mm)</label><br />
+                        @Html.EditorFor(model => model.VL_COMP_CAIXA, new { htmlAttributes = new { @class = "form-control col-12" } })
+                        @Html.ValidationMessageFor(model => Model.VL_COMP_CAIXA, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <img src="~/Images/imgBoxWF.png" />
+        </div>
+
+        <div class="form-group">
+            <div class="col-12">
+                <input type="submit" value="Gravar" class="btn btn-primary btn-sm" />
+                @Html.ActionLink("Voltar", "Index", new { area = "" }, new { @class = "btn btn-primary btn-sm" })
+            </div>
+        </div>
+    </div>
+    }
+
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript" src="~/Scripts/Comodato/Util.js"></script>
+    <script type="text/javascript" src="~/Scripts/Comodato/Modelo.js"></script>
+
+    <script type="text/javascript">
+     @Model.JavaScriptToRun
+
+        function MensagemSucesso() {
+            var mensagem = '@_3M.Comodato.Utility.ControlesUtility.Constantes.MensagemGravacaoSucesso';
+
+            AlertaRedirect("Aviso", mensagem, "window.location = '../Modelo';");
+        };
+    </script>
+}
+
+
+

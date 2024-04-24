@@ -1,0 +1,1 @@
+Alter table tb_pedido add Origem varchar(1) null

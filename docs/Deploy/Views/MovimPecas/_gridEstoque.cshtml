@@ -1,0 +1,12 @@
+﻿@model IEnumerable<_3M.Comodato.Front.Models.EstoquePeca>
+@using GridMvc.Html
+
+<div class="table table-hover">
+    @Html.Grid(Model).Named("gridConsulta").Columns(columns =>
+{
+    columns.Add(c => c.Peca.DS_PECA).Titled("DESCRIÇÃO PEÇA");
+    columns.Add(c => c.Peca.CD_PECA).Titled("CODIGO 3M");
+    columns.Add(c => c.QT_PECA_ATUAL).Titled("QTDE ESTOQUE").RenderValueAs(v => string.Format("{0:N0}", Convert.ToDouble(v.QT_PECA_ATUAL))).Css("text-center");
+    columns.Add(c => c.DT_ULT_MOVIM).Titled("ULTIMA UTILIZAÇÃO").Css("text-center");
+}).WithPaging(10).Filterable(true).Sortable(true)
+</div>

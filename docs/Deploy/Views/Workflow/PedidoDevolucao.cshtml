@@ -1,0 +1,293 @@
+﻿@model _3M.Comodato.Front.Models.WfPedidoDevolucaoEquipamento
+
+<i class="fas fa-cubes fa-3x fa-pull-left"></i>
+<h3>@ViewBag.Title</h3>
+<div class="form-group row h3">
+    @*@Html.EditorFor(model => model.TituloPagina, new { htmlAttributes = new { @class = "form-control-plaintext col-11", @readonly = "readonly" } })*@
+</div>
+
+@if (Model.ST_STATUS_PEDIDO == 21)
+{
+    <div class="pre-scrollable">
+        <div id="gridmvcMensagem">
+        </div>
+    </div>
+}
+
+<div class="well">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal container-fluid">
+            <hr />
+            @Html.HiddenFor(model => model.ID_WF_PEDIDO_EQUIP)
+            @Html.HiddenFor(model => model.CD_WF_PEDIDO_EQUIP)
+            @Html.HiddenFor(model => model.ST_STATUS_PEDIDO)
+
+            <div class="form-control">
+                <div class="form-row">
+                    <div class="form-group col-md-6 text-left">
+                        <label id="CD_WF_PEDIDO_EQUIP" class="control-label" style="font-weight: bold;">Número do Documento: #@Model.CD_WF_PEDIDO_EQUIP</label>
+
+                    </div>
+                    <div class="form-group col-md-6 text-right">
+                        <label id="DT_PEDIDO" class="control-label" style="font-weight: bold;">Data do Pedido: @Model.DT_PEDIDO</label>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-12 col-sm-12">
+                        <label class="control-label">Nome do Emitente</label>
+                        @Html.TextBoxFor(model => model.NM_EMITENTE, new { @class = "form-control col-md-12", @readonly = "readonly" })
+                        @Html.HiddenFor(model => model.ID_USU_EMITENTE)
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-12 col-sm-12">
+                        <label class="control-label">Título</label>
+                        @Html.TextBoxFor(model => model.DS_TITULO, Model.ReadOnly ? (object)new { @class = "form-control col-md-12", @readonly = "readonly" } : (object)new { @class = "form-control col-md-12" })
+                    </div>
+                </div>
+                <!-- Solicitante -->
+                <div class="card">
+                    <div class="card-header">
+                        <label class="control-label">Dados do Solicitante</label>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <label class="control-label">Nome do Solicitante/Vendendor</label>
+                                @Html.DropDownListFor(model => model.ID_USU_SOLICITANTE, Model.ListaVendedor, "Selecione...", Model.ReadOnly ? (object)new { @class = "form-control col-md-12", @disabled = "disabled" } : (object)new { @class = "form-control col-md-12" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+
+                <!-- Cliente -->
+                <div class="card">
+                    <div class="card-header">
+                        <label class="control-label">Dados do Cliente</label>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-row">
+                            <div class="form-group col-md-9">
+                                <label class="control-label">Cliente</label>
+                                @Html.DropDownListFor(model => model.CD_CLIENTE, Model.ListaCliente, "Selecione...", Model.ReadOnly ? (object)new { @class = "form-control col-md-12", @disabled = "disabled" } : (object)new { @class = "form-control col-md-12" })
+                                @Html.ValidationMessageFor(model => Model.CD_CLIENTE, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label class="control-label">Segmento</label>
+                                @Html.TextBoxFor(model => model.DS_SEGMENTO, new { @class = "form-control col-md-12", @readonly = "readonly" })
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-8">
+                                <label class="control-label">Razão Social</label>
+                                @Html.TextBoxFor(model => model.NM_CLIENTE, new { @class = "form-control col-md-12", @readonly = "readonly" })
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label class="control-label">CNPJ</label>
+                                @Html.TextBoxFor(model => model.NR_CNPJ, new { @class = "form-control col-md-12", @readonly = "readonly" })
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <label class="control-label">Endereço (Rua/Av.)</label>
+                                @Html.TextBoxFor(model => model.EN_ENDERECO, new { @class = "form-control col-md-12", @readonly = "readonly" })
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-3">
+                                <label class="control-label">Bairro</label>
+                                @Html.TextBoxFor(model => model.EN_BAIRRO, new { @class = "form-control col-md-12", @readonly = "readonly" })
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label class="control-label">CEP</label>
+                                @Html.TextBoxFor(model => model.EN_CEP, new { @class = "form-control col-md-12", @readonly = "readonly" })
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label class="control-label">Cidade</label>
+                                @Html.TextBoxFor(model => model.EN_CIDADE, new { @class = "form-control col-md-12", @readonly = "readonly" })
+                            </div>
+                            <div class="form-group col-md-2">
+                                <label class="control-label">UF</label>
+                                @Html.TextBoxFor(model => model.EN_ESTADO, new { @class = "form-control col-md-12", @readonly = "readonly" })
+                            </div>
+                        </div>
+
+
+                        <div class="form-row">
+                            <!-- Contato Empresa -->
+                            <div class="form-group col-md-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <label class="control-label">Contato</label>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="form-row">
+                                            <div class="form-group col-md-4">
+                                                <label class="control-label">Nome</label>
+                                                @Html.TextBoxFor(model => model.DS_CONTATO_NOME, Model.ReadOnly ? (object)new { @class = "form-control col-md-12", @readonly = "readonly" } : (object)new { @class = "form-control col-md-12" })
+                                                @*@Html.ValidationMessageFor(model => Model.DS_CONTATO_NOME, "", new { @class = "text-danger" })*@
+                                            </div>
+                                            <div class="form-group col-md-4">
+                                                <label class="control-label">E-Mail</label>
+                                                @Html.TextBoxFor(model => model.TX_EMAIL, Model.ReadOnly ? (object)new { @class = "form-control col-md-12", @readonly = "readonly" } : (object)new { @class = "form-control col-md-12" })
+                                                @*@Html.ValidationMessageFor(model => Model.TX_EMAIL, "", new { @class = "text-danger" })*@
+                                            </div>
+                                            <div class="form-group col-md-4">
+                                                <label class="control-label">Telefone Principal</label>
+                                                @Html.TextBoxFor(model => model.TX_TELEFONE, Model.ReadOnly ? (object)new { @class = "form-control col-md-12", @readonly = "readonly" } : (object)new { @class = "form-control col-md-12" })
+                                                @*@Html.ValidationMessageFor(model => Model.TX_TELEFONE, "", new { @class = "text-danger" })*@
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label class="control-label">Cliente possui copia da Nota Fiscam 3M?</label>
+                                <div class="form-inline">
+                                    <div class="form-group">
+                                        @Html.RadioButtonFor(model => model.PossuiNotaFiscal3M, "S")
+                                        <label class="control-label col-md-2">Sim</label>
+                                    </div>
+                                    <div class="form-group col-md-1"></div>
+                                    <div class="form-group">
+                                        @Html.RadioButtonFor(model => model.PossuiNotaFiscal3M, "N")
+                                        <label class="control-label col-md-2">Não</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label class="control-label">Valor Nota Fiscal 3M:</label>
+                                @Html.TextBoxFor(model => model.ValorNotaFiscal3M, Model.ReadOnly ? (object)new { @class = "form-control col-md-12", @readonly = "readonly" } : (object)new { @class = "form-control col-md-12" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+
+                <!-- Dados do Equipamento -->
+                <div class="card">
+                    <div class="card-header">
+                        <label class="control-label">Dados dos Equipamentos a Devolver</label>
+                    </div>
+                    <div class="card-body">
+                        @if (!Model.ReadOnly)
+                        {
+                            <div class="form-row">
+                                <div class="form-group col-md-10">
+                                    <label class="control-label">Ativo – placa de Ativo do equipamento</label>
+                                    @Html.DropDownList("ddlAtivo", Model.ListaAtivosCliente, "Selecione...", Model.ReadOnly ? (object)new { @class = "form-control col-md-12", @disabled = "disabled" } : (object)new { @class = "form-control col-md-12" })
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <label class="control-label">&nbsp; </label>
+                                    <input type="button" id="btnAdicionarEquipamento" value="Adicionar" class="col-md-12 btn btn-primary btn-sm" />
+                                </div>
+                            </div>
+                        }
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <div id="gridAtivoDevolucao"></div>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <label class="control-label">Motivo da Devolução</label>
+                                @Html.DropDownListFor(model => model.MotivoDevolucao, Model.ListaMotivoDevolucao, "Selecione...", Model.ReadOnly ? (object)new { @class = "form-control col-md-12", @disabled = "disabled" } : (object)new { @class = "form-control col-md-12" })
+                            </div>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="card">
+                        <div class="card-header">
+                            <label class="control-label">Anexos</label>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label class="control-label">Título</label>
+                                    @Html.TextBoxFor(model => model.DS_TITULO_ANEXO, new { @class = "form-control col-md-12" })
+                                </div>
+
+                                <div class="form-group col-md-6">
+                                    <label class="control-label">Descrição</label>
+                                    @Html.TextAreaFor(model => model.DS_DESCRICAO_ANEXO, new { @class = "form-control col-md-12", @rows = 1 })
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label class="control-label">Responsável</label>
+                                    <text id="NomeResponsavel" class="form-control col-md-12" readonly="readonly">@Convert.ToString(((_3M.Comodato.Entity.UsuarioPerfilEntity)Session["_CurrentUser"]).usuario.cnmNome)</text>
+                                </div>
+
+                                <div class="form-group col-md-6">
+                                    <label class="control-label">Nome do Arquivo</label>
+                                    @Html.HiddenFor(model => model.DS_ARQUIVO)
+                                    <div class="custom-file">
+                                        <input type="file" id="file" class="custom-file-input" onchange="SelecionarArquivo(this, $('#labelFile'), $('#btnAnexar'));">
+                                        <label class="custom-file-label" id="labelFile" for="file">Selecionar Arquivo</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row" style="text-align:right">
+                                <input type="button" id="btnAnexar" value="Anexar" class="btn btn-primary btn-sm" onclick="uploadAnexo()" />
+                            </div>
+                            <p></p><hr />
+                            <div id="anexos">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                @if (!Model.ReadOnly)
+                {
+                    <div class="form-row ">
+                        <div class="form-group col-md-12 text-right">
+                            @if (Model.ST_STATUS_PEDIDO == (int)_3M.Comodato.Utility.ControlesUtility.Enumeradores.WorkflowPedidoDevolucao.Rascunho)
+                            {
+                                <input type="button" id="btnSalvarRascunho" value="Salvar Rascunho" class="btn btn-primary btn-sm" />
+                            }
+                            <input type="button" id="btnSalvarSubmeter" value="Salvar e Submeter" class="btn btn-primary btn-sm" />
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+
+    }
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript" src="~/Scripts/Comodato/Util.js"></script>
+    <script type="text/javascript" src="~/Scripts/Comodato/WorkflowPedidoDevolucao.js"></script>
+
+    @Model.JavaScriptToRun
+
+    <script type="text/javascript">
+        var URLAPI = "@_3M.Comodato.Utility.ControlesUtility.Parametro.ObterValorParametro(_3M.Comodato.Utility.ControlesUtility.Constantes.URLAPI)";
+        var URL_UPLOAD = '@Url.Action("Upload")';
+        var actionListarEquipamentos = '@Url.Action("PopularGridEquipamentosDevolucao", "Workflow")';
+        var nidUsuario = @Convert.ToInt64(((_3M.Comodato.Entity.UsuarioPerfilEntity)Session["_CurrentUser"]).usuario.nidUsuario);
+        var codigoStatusRascunho = @Convert.ToInt32(_3M.Comodato.Utility.ControlesUtility.Enumeradores.WorkflowPedidoDevolucao.Rascunho);
+        var codigoStatusPendenteAnexar = @Convert.ToInt32(_3M.Comodato.Utility.ControlesUtility.Enumeradores.WorkflowPedidoDevolucao.PendenteAnexar);
+        var codigoStatusEnvio = @Convert.ToInt32(_3M.Comodato.Utility.ControlesUtility.Enumeradores.WorkflowPedidoDevolucao.AnaliseLogistica);
+
+        var idWFDevolucao = @Model.ID_WF_PEDIDO_EQUIP;
+
+        var URLObterListaMensagem = "@Url.Action("ObterListaMensagemJson", "Workflow")";
+
+        function MensagemSucesso() {
+            var mensagem = '@_3M.Comodato.Utility.ControlesUtility.Constantes.MensagemGravacaoSucesso';
+            AlertaRedirect("Aviso", mensagem, "window.location = '@Url.Action("Index", "Workflow")';");
+        };
+    </script>
+}

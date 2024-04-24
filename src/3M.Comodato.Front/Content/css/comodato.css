@@ -1,0 +1,23 @@
+﻿.btn-Iniciar {
+    background-color: #3D7DB7;
+    color: WHITE;
+    font-weight: bold;
+}
+
+.btn-Aberta {
+    background-color: #3CAE5C;
+    color: WHITE;
+    font-weight: bold;
+}
+
+.btn-Finalizada {
+    background-color: #817D7D;
+    color: WHITE;
+    font-weight: bold;
+}
+
+.btn-Cancelada {
+    background-color: #A8A8A8;
+    color: WHITE;
+    font-weight: bold;
+}

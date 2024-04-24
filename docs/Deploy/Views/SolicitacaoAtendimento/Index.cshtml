@@ -1,0 +1,60 @@
+﻿@{
+    ViewBag.Title = "Solicitação de Atendimento";
+}
+
+<i class="fas fa-cubes fa-3x fa-pull-left"></i>
+<h3>Solicitação de Atendimento</h3>
+@if (ViewBag.VisaoCliente || ViewBag.VisaoAdmin)
+{
+    <p>
+        <a class="btn btn-primary btn-sm" id="btnNovaSolicitacao" href="#">Nova Solicitação <i class="far fa-sticky-note"></i></a>
+    </p>
+}
+<hr />
+
+<div class="well">
+    <div class="container">
+        <div class="form-row">
+            <div class="form-group col-md-5">
+                <label class="control-label">Cliente: </label>
+                <select id="ddlCliente" class="js-select-basic-single col-12" style="width:100%"></select>
+                <label id="validaClienteObrigatorio" class="control-label text-danger" style="display: none;">Conteúdo obrigatório!</label>
+            </div>
+
+            <div class="form-group col-md-5">
+                <label class="control-label">Técnico: </label>
+                <select id="ddlTecnico" class="js-select-basic-single col-12" style="width:100%"></select>
+            </div>
+
+            <div class="form-group col-md-2">
+                <br />
+                <button id="btnFiltrar" class="btn btn-primary btn-sm">Filtrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+
+@Html.Partial("_modalSolicitacao")
+<div id="gridMvc"></div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+        var URLAPI = "@_3M.Comodato.Utility.ControlesUtility.Parametro.ObterValorParametro(_3M.Comodato.Utility.ControlesUtility.Constantes.URLAPI)";
+        var URLSITE = "@_3M.Comodato.Utility.ControlesUtility.Parametro.ObterValorParametro(_3M.Comodato.Utility.ControlesUtility.Constantes.URLSite)";
+
+        var actionObterSolicitacoes = "@Url.Action("ObterSolicitacoes", "SolicitacaoAtendimento")";
+        var nidUsuario = @Convert.ToInt64(((_3M.Comodato.Entity.UsuarioPerfilEntity)Session["_CurrentUser"]).usuario.nidUsuario);
+        var nidPerfil = @Convert.ToInt64(((_3M.Comodato.Entity.UsuarioPerfilEntity)Session["_CurrentUser"]).perfil.nidPerfil);
+        var perfilAdministrador3M = @Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.Perfil.Administrador3M);
+        var perfilCliente = @Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.Perfil.Cliente);
+        var perfilTecnico = @Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.Perfil.Tecnico3M);
+        var perfilTecnicoEmpresaTerceira = @Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.Perfil.TecnicoEmpresaTerceira);
+    </script>
+    <script type="text/javascript" src="~/Scripts/Comodato/Util.js"></script>
+    <script type="text/javascript" src="~/Scripts/xjsapi/clienteapi.js"></script>
+
+    <script type="text/javascript" src="~/Scripts/Comodato/SolicitacaoAtendimento.js"></script>
+}

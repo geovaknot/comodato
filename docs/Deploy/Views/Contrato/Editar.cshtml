@@ -1,0 +1,212 @@
+﻿@model _3M.Comodato.Front.Models.Contrato
+
+@{
+    ViewBag.Title = "Contrato";
+}
+
+<i class="fas fa-cubes fa-3x fa-pull-left"></i>
+<h3>Contrato (Editar)</h3>
+
+<div class="well">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(m => m.nidCliente);
+
+        <div class="form-horizontal">
+            <hr />
+
+            <div class="form-row">
+                <div class="form-group col-12">
+                    <label class="control-label">Cliente</label>
+                    <select id="ddlCliente" class="js-select-basic-single valid form-control col-md-12"></select>
+                    @Html.HiddenFor(c => c.nidCliente)<br />
+                    @Html.ValidationMessageFor(model => model.nidCliente, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-3">
+                    <label class="control-label">Nº Contrato</label>
+                    @Html.EditorFor(model => model.nnrContrato, new { htmlAttributes = new { @class = "form-control col-md-12" } })
+                    @Html.ValidationMessageFor(model => model.nnrContrato, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group col-3">
+                    <label class="control-label">Status</label>
+                    <select id="ddlStatus" class="valid form-control col-md-12"></select>
+                    @Html.HiddenFor(model => model.cdsStatus)<br />
+                    @Html.ValidationMessageFor(model => model.cdsStatus, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-row">
+
+                <div class="form-group col-3">
+                    <label class="control-label">Data de Emissão</label>
+                    <div id="ddtEmissao-container">
+                        <div class="input-group date">
+                            @Html.EditorFor(model => model.ddtEmissao, new { htmlAttributes = new { @class = "form-control col-md-12" } })
+                            <div class="input-group-addon">
+                                <i class="far fa-calendar-alt fa-2x" style="background: #d9d6d6; padding: 3px 3px 3px 3px"></i>
+                            </div>
+                        </div>
+                    </div>
+                    @Html.ValidationMessageFor(model => model.ddtEmissao, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group col-3">
+                    <label class="control-label">Data de Recebimento</label>
+                    <div id="ddtRecebimento-container">
+                        <div class="input-group date">
+                            @Html.EditorFor(model => model.ddtRecebimento, new { htmlAttributes = new { @class = "form-control col-md-12" } })
+                            <div class="input-group-addon">
+                                <i class="far fa-calendar-alt fa-2x" style="background: #d9d6d6; padding: 3px 3px 3px 3px"></i>
+                            </div>
+                        </div>
+                    </div>
+                    @Html.ValidationMessageFor(model => model.ddtRecebimento, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group col-3">
+                    <label class="control-label">Data OK</label>
+                    <div id="ddtOk-container">
+                        <div class="input-group date">
+                            @Html.EditorFor(model => model.ddtOk, new { htmlAttributes = new { @class = "form-control col-md-12" } })
+                            <div class="input-group-addon">
+                                <i class="far fa-calendar-alt fa-2x" style="background: #d9d6d6; padding: 3px 3px 3px 3px"></i>
+                            </div>
+                        </div>
+                    </div>
+                    @Html.ValidationMessageFor(model => model.ddtOk, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-12">
+                    @Html.HiddenFor(model => model.cdsContratoTipo)
+                    <label class="control-label">Modelos de Contrato</label>
+
+                    <div class="form-row">
+                        <div class="form-inline col-12">
+                            <div class="radio">
+                                <label class="btn btn-default">
+                                    <input name="tipo" type="radio" value="ADITIVO" class="form-control col-md-2" />&nbsp;Aditivo
+                                </label>
+                            </div>
+
+                            @*<div class="radio">
+                    <label class="btn btn-default">
+                        <input name="tipo" type="radio" value="DISTRATO" class="form-control col-md-2" />&nbsp;Distrato
+                    </label>
+                </div>
+                <div class="radio">
+                    <label class="btn btn-default">
+                        <input name="tipo" type="radio" value="DENUNCIA" class="form-control col-md-2" />&nbsp;Denuncia
+                    </label>
+                </div>*@
+                            <div class="radio">
+                                <label class="btn btn-default">
+                                    <input name="tipo" type="radio" value="" class="form-control col-md-2" />&nbsp;Contrato
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    @*<div class="form-row">
+            <div class="form-inline col-12" id="groupTipoContrato">
+                <div class="checkbox-inline">
+                    <label class="btn btn-default">
+                        <input name="tipoContrato" type="checkbox" value="FECHADOR" class="form-control" />&nbsp;Contrato de Fechador
+                    </label>
+                </div>
+                <div class="checkbox-inline">
+                    <label class="btn btn-default">
+                        <input name="tipoContrato" type="checkbox" value="PVA" class="form-control" />&nbsp;Contrato de PVA
+                    </label>
+                </div>
+
+                <div class="checkbox-inline">
+                    <label class="btn btn-default">
+                        <input name="tipoContrato" type="checkbox" value="ISS" class="form-control" />&nbsp;Contrato de ISS
+                    </label>
+                </div>
+
+                <div class="checkbox-inline">
+                    <label class="btn btn-default">
+                        <input name="tipoContrato" type="checkbox" value="INKJET" class="form-control" />&nbsp;Contrato de Inkjet
+                    </label>
+                </div>
+
+                <div class="checkbox-inline">
+                    <label class="btn btn-default">
+                        <input name="tipoContrato" type="checkbox" value="FILME" class="form-control" />&nbsp;Contrato de Filme
+                    </label>
+                </div>
+            </div>
+        </div>*@
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">Observação</label>
+                @Html.EditorFor(model => model.cdsObservacao, new { htmlAttributes = new { @class = "form-control col-12" } })
+                @Html.ValidationMessageFor(model => model.cdsObservacao, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">Clausulas</label>
+                @Html.EditorFor(model => model.cdsClausulas, new { htmlAttributes = new { @class = "form-control col-12", rows = "8" } })
+                @Html.ValidationMessageFor(model => model.cdsClausulas, "", new { @class = "text-danger" })
+            </div>
+
+            @if (!string.IsNullOrEmpty(ViewBag.Mensagem))
+            {
+                <div class="form-group">
+                    <label class="text-danger">@ViewBag.Mensagem</label>
+                </div>
+            }
+        </div>
+
+        <div class="form-group">
+            <input type="submit" value="Gravar" class="btn btn-primary btn-sm" />
+            @Html.ActionLink("Voltar", "Index", new { id = Model.nidCliente }, new { @class = "btn btn-primary btn-sm" })
+        </div>
+    }
+</div>
+
+@section Scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript" src="~/Scripts/Comodato/Util.js"></script>
+    <script type="text/javascript" src="~/Scripts/Comodato/Contrato.js"></script>
+
+    <script>
+        var URLAPI = "@_3M.Comodato.Utility.ControlesUtility.Parametro.ObterValorParametro(_3M.Comodato.Utility.ControlesUtility.Constantes.URLAPI)";
+
+        var modeloValue = '@(Model.cdsContratoTipo??String.Empty)';
+        var nidCliente = '@Model.nidCliente.ToString()';
+        var cdStatus = '@(Model.cdsStatus??String.Empty)';
+
+        var clienteSelect2Disabled = true;
+
+        $().ready(function () {
+            $('#ddlStatus').select2();
+            popularStatusContrato('#ddlStatus', cdStatus);
+
+            //Status Selecionado
+            $('#ddlStatus').on('select2:select', function (e) {
+                $('#cdsStatus').val(e.params.data.id);
+            });
+
+            popularClientes('#ddlCliente', nidCliente, clienteSelect2Disabled,true);
+        })
+
+        @Model.JavaScriptToRun
+
+        function MensagemSucesso() {
+            var mensagem = '@_3M.Comodato.Utility.ControlesUtility.Constantes.MensagemGravacaoSucesso';
+
+            AlertaRedirect("Aviso", mensagem, "window.location = '@Url.Action("Index", "Contrato", new { id = Model.nidCliente })';");
+        };
+    </script>
+}

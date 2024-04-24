@@ -1,0 +1,59 @@
+﻿@model _3M.Comodato.Front.Models.UsuarioLogin
+
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_LayoutPageLogin.cshtml";
+}
+
+<div class="container">
+    <div class="well">
+
+        @*@using (Html.BeginForm("LoginUsuario", "LoginUsuario", FormMethod.Post, new { enctype = "multipart/form-data" }))*@
+        @using (Html.BeginForm())
+        {
+            <div class="card mb-md-3 mx-auto" style="max-width: 20rem; background-color:rgba(225, 223, 223, 0.85); border-radius:5pt; margin-top:50px; ">
+
+                <div class="card-header">
+                    <div class="row" style="width:20rem; height:5pt; background-color:#bc3535; margin-top:-10pt; margin-left:-21px;"></div>
+                    <h3 style="color:#bc3535; margin-top:3pt;">Entrar</h3>
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label class="control-label">Login</label>
+                        @Html.EditorFor(model => model.cdsLogin, new { htmlAttributes = new { placeholder = "login", @class = "form-control mx-auto" } })
+                        @Html.ValidationMessageFor(model => model.cdsLogin, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label">Senha</label>
+                        @Html.PasswordFor(model => model.cdsSenha, new { placeholder = "senha", @class = "form-control mx-auto" })
+                        @Html.ValidationMessageFor(model => model.cdsLogin, "", new { @class = "text-danger" })
+                        @if (!string.IsNullOrEmpty(ViewBag.Mensagem))
+                        {
+                            <label class="text-danger" id="lblERRO">@ViewBag.Mensagem</label>
+                        }
+                    </div>
+                    <div class="form-group">
+                        <div class="col-12">
+                            <input type="submit" value="Login" class="btn btn-primary btn-lg" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-12">
+                            @Html.ActionLink("Esqueci minha senha", "RecuperaSenha", new { area = "" }, new { @class = "card-link" })
+                        </div>
+                    </div>
+                    @*<h5 class="card-title">Light card title</h5>
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>*@
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript" src="~/Scripts/Comodato/Util.js"></script>
+    <script type="text/javascript" src="~/Scripts/Comodato/Login.js"></script>
+}

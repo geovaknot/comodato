@@ -1,0 +1,42 @@
+﻿@model IEnumerable<_3M.Comodato.Front.Models.ListaClienteDistribuicaoGM>
+
+@using GridMvc.Html
+
+<div class="table table-hover">
+    @Html.Grid(Model).Columns(columns =>
+{
+    //columns.Add()
+    //    .Encoded(false)
+    //    .Sanitized(false)
+    //    .Titled("VISITA TÉC.")
+    //    .RenderValueAs(o => Html.ActionLink(o.DS_TP_STATUS_VISITA_OS == "" ? " " : o.DS_TP_STATUS_VISITA_OS, "EditarVisita", new { idKey = HttpUtility.HtmlDecode(o.idKey) }, new
+    //    {
+    //        @class =
+    //        o.ST_TP_STATUS_VISITA_OS == 0 ? "btn btn-info btn-sm btn-block" :
+    //        o.ST_TP_STATUS_VISITA_OS == 1 ? "btn btn-success btn-sm btn-block" :                  // Nova
+    //        o.ST_TP_STATUS_VISITA_OS == 2 ? "btn btn-success btn-sm btn-block" :                  // Aberta
+    //        o.ST_TP_STATUS_VISITA_OS == 3 ? "btn btn-primary btn-sm btn-block" :                  // Finalizada
+    //        o.ST_TP_STATUS_VISITA_OS == 4 ? "btn btn-primary btn-sm btn-block" :                  // Confirmada
+    //        o.ST_TP_STATUS_VISITA_OS == 5 ? "btn btn-warning btn-sm btn-block" :                  // Pausada
+    //        o.ST_TP_STATUS_VISITA_OS == 6 ? "btn btn-warning btn-sm btn-block" :                  // Pendente
+    //        o.ST_TP_STATUS_VISITA_OS == 7 ? "btn btn-danger btn-sm btn-block" :                   // Cancelada
+    //        o.ST_TP_STATUS_VISITA_OS == 8 ? "btn btn-secondary btn-sm btn-block" :                // Portaria
+    //        o.ST_TP_STATUS_VISITA_OS == 9 ? "btn btn-secondary btn-sm btn-block" :                // Integração
+    //        o.ST_TP_STATUS_VISITA_OS == 10 ? "btn btn-secondary btn-sm btn-block" : string.Empty  // Treinamento
+    //    }));
+
+
+    columns.Add(foo => foo.cliente.CD_CLIENTE).Titled("CÓDIGO").Sortable(false).Filterable(false);
+    columns.Add(foo => foo.cliente.NM_CLIENTE).Titled("CLIENTE").Sortable(false).Filterable(false);
+    columns.Add(foo => foo.cliente.regiao.DS_REGIAO).Titled("REGIÃO").Sortable(false).Filterable(false);
+    columns.Add(foo => foo.GM1).Titled("GM1").Sortable(false).Filterable(false).Css("text-center");
+    columns.Add(foo => foo.GM2).Titled("GM2").Sortable(false).Filterable(false).Css("text-center");
+    columns.Add(foo => foo.Venda1).Titled("VENDA1").Sortable(false).Filterable(false).Css("text-center");
+    columns.Add(foo => foo.Venda2).Titled("VENDA2").Sortable(false).Filterable(false).Css("text-center");
+    //columns.Add()
+    //    .Encoded(false)
+    //    .Sanitized(false)
+    //    .SetWidth(30)
+    //    .RenderValueAs(o => o.NR_ORDENACAO == 1 ? " " : "<a href='#' onclick='Subir(" + o.NR_ORDENACAO + ")' class='fas fa-angle-up fa-lg' data-toggle='tooltip' data-placement='top' title='Subir' > </a>");
+})
+</div>

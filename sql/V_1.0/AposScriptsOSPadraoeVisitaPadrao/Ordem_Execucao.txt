@@ -1,0 +1,16 @@
+1-Script_Campos_Tabelas
+2-Script_Indices
+3-CriaçãoTabela_TB_PEDIDO_PECA_LOG
+4-Relacionamento_tabelas
+5-tbNotificacao
+6-Script_Atualizacao
+7-Scripts_Indices_Manutencao
+8-insert_St_Confirmada_OS
+9-insert_St_Confirmada_Visita
+10-Insert_Tipo_OSPadrao_Outros
+11-script_atualiza_Valor_peca_antiga
+12-script_insercao_motivodecarga
+13-script_Relatorio_pecas_KatVisita
+14-Criacaocoluna_tb_cliente_ID_USUARIO_TEC
+15-CamposNovos
+

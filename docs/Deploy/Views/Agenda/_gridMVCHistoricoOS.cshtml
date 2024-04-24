@@ -1,0 +1,21 @@
+﻿@model IEnumerable<_3M.Comodato.Front.Models.LogStatusOS>
+
+@using GridMvc.Html
+
+<div class="table table-hover">
+    @Html.Grid(Model).Columns(columns =>
+    {
+        columns.Add(foo => foo.DT_DATA_LOG_OS).Titled("DATA").Sortable(false).Filterable(false);
+        columns.Add(foo => foo.tpStatusVisitaOS.DS_TP_STATUS_VISITA_OS).Titled("STATUS").Sortable(false).Filterable(false);
+        columns.Add(foo => foo.usuario.cnmNome).Titled("USUÁRIO").Sortable(false).Filterable(false);
+        if (ViewBag.Administrador3M == "S")
+        {
+            columns.Add()
+                .Encoded(false)
+                .Sanitized(false)
+                .SetWidth(30)
+                .RenderValueAs(o => "<a href='#' onclick='AlterarLogStatusOS(" + o.ID_LOG_STATUS_OS + ")' class='fas fa-pencil-alt fa-lg'> </a>");
+                //.RenderValueAs(o => o.ST_STATUS_PENDENCIA == "2" ? " " : "<a href='#' onclick='ExcluirPendenciaOS(" + o.ID_PENDENCIA_OS + ")' class='fas fa-trash-alt fa-lg'> </a>");
+        }
+    })
+</div>

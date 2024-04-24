@@ -1,0 +1,12 @@
+﻿@model IEnumerable<_3M.Comodato.Front.Models.LogStatusVisita>
+
+@using GridMvc.Html
+
+<div class="table table-hover">
+    @Html.Grid(Model).Columns(columns =>
+         {
+             columns.Add(foo => foo.DT_DATA_LOG_VISITA).Titled("DATA").Sortable(false).Filterable(false);
+             columns.Add(foo => foo.tpStatusVisitaOS.DS_TP_STATUS_VISITA_OS).Titled("STATUS").Sortable(false).Filterable(false);
+         })
+</div>
+

@@ -1,0 +1,29 @@
+﻿@model IEnumerable<_3M.Comodato.Front.Models.Peca>
+
+@using GridMvc.Html
+
+@{
+    ViewBag.Title = "Técnico";
+}
+
+<i class="fas fa-cubes fa-3x fa-pull-left"></i>
+<h3>Estoque Intermediário</h3>
+
+<hr />
+<p>
+    @*<h4>Técnico</h4>*@
+    <h5>Técnico: @ViewBag.NM_TECNICO</h5>
+</p>
+
+<div class="table table-hover">
+    @Html.Grid(Model).Columns(columns =>
+    {
+        columns.Add(foo => foo.CD_PECA).Titled("CÓDIGO").Sortable(true).Filterable(true);
+        columns.Add(foo => foo.DS_PECA).Titled("DESCRIÇÃO").Sortable(true).Filterable(true);
+        columns.Add(foo => foo.QTD_ESTOQUE_GRID).Titled("QT. ESTOQUE").Sortable(true).Filterable(true);
+        columns.Add(foo => foo.TX_UNIDADE).Titled("UNIDADE").Sortable(true).Filterable(true);
+
+    }).WithPaging(10)
+</div>
+
+@Html.ActionLink("Voltar", "Editar", new { idKey = HttpUtility.HtmlDecode(ViewBag.idKey) }, new { @class = "btn btn-primary btn-sm" })

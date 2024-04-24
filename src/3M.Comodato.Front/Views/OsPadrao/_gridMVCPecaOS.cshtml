@@ -1,0 +1,34 @@
+﻿@model IEnumerable<_3M.Comodato.Front.Models.PecaOS>
+
+@using GridMvc.Html
+
+@{
+    var perfil = (_3M.Comodato.Entity.UsuarioPerfilEntity)Session["_CurrentUser"];
+    int PERFIL_CLIENTE = 8;
+    var SIM = "S";
+}
+
+<div class="table table-hover">
+    @Html.Grid(Model).Columns(columns =>
+{
+    columns.Add(foo => foo.peca.DS_PECA).Titled("PEÇA").Sortable(false).Filterable(false);
+    columns.Add(foo => foo.peca.TX_UNIDADE).Titled("UN").Sortable(false).Filterable(false);
+    columns.Add(foo => foo.QT_PECA).Titled("QTDE").Sortable(false).Filterable(false);
+    columns.Add(foo => foo.DS_TP_ESTOQUE_CLI_TEC).Titled("ORIGEM").Sortable(false).Filterable(false);
+    columns.Add(foo => foo.DS_OBSERVACAO).Titled("OBSERVAÇÃO").Sortable(false).Filterable(false);
+
+    if (perfil.perfil.ccdPerfil != PERFIL_CLIENTE)
+    {
+        if(ViewBag.Tecnico3M == SIM && ViewBag.Visualizar == false)
+        {
+            columns.Add()
+                .Encoded(false)
+                .Sanitized(false)
+                .SetWidth(30)
+                .RenderValueAs(o => "<a href='#' onclick='ExcluirPecaOS(" + o.ID_PECA_OS + ")' class='fas fa-trash-alt fa-lg'> </a>");
+        }
+    }
+})
+</div>
+
+

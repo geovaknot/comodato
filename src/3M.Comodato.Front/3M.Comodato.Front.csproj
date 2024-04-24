@@ -1,0 +1,2382 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.Default.props')" />
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.2.6.1\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.2.6.1\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{FEB62651-D7A7-475B-90B2-3862F81348E1}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>_3M.Comodato.Front</RootNamespace>
+    <AssemblyName>3M.Comodato.Front</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <Use64BitIISExpress />
+    <IISExpressSSLPort>44369</IISExpressSSLPort>
+    <IISExpressAnonymousAuthentication>enabled</IISExpressAnonymousAuthentication>
+    <IISExpressWindowsAuthentication>disabled</IISExpressWindowsAuthentication>
+    <IISExpressUseClassicPipelineMode>
+    </IISExpressUseClassicPipelineMode>
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TypeScriptToolsVersion>3.1</TypeScriptToolsVersion>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TypeScriptTarget>ES5</TypeScriptTarget>
+    <TypeScriptJSXEmit>React</TypeScriptJSXEmit>
+    <TypeScriptModuleKind />
+    <TypeScriptCompileOnSaveEnabled>True</TypeScriptCompileOnSaveEnabled>
+    <TypeScriptNoImplicitAny>False</TypeScriptNoImplicitAny>
+    <TypeScriptRemoveComments>False</TypeScriptRemoveComments>
+    <TypeScriptOutFile />
+    <TypeScriptOutDir />
+    <TypeScriptGeneratesDeclarations>False</TypeScriptGeneratesDeclarations>
+    <TypeScriptNoEmitOnError>True</TypeScriptNoEmitOnError>
+    <TypeScriptSourceMap>True</TypeScriptSourceMap>
+    <TypeScriptMapRoot />
+    <TypeScriptSourceRoot />
+    <IncludeIisSettings>false</IncludeIisSettings>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="EPPlus, Version=6.2.3.0, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPPlus.6.2.3\lib\net35\EPPlus.dll</HintPath>
+    </Reference>
+    <Reference Include="EPPlus.Interfaces, Version=6.1.1.0, Culture=neutral, PublicKeyToken=a694d7f3b0907a61, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPPlus.Interfaces.6.1.1\lib\net35\EPPlus.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="EPPlus.System.Drawing, Version=6.1.1.0, Culture=neutral, PublicKeyToken=2308d35469c9bac0, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPPlus.System.Drawing.6.1.1\lib\net35\EPPlus.System.Drawing.dll</HintPath>
+    </Reference>
+    <Reference Include="GridMvc, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Grid.Mvc.3.0.0\lib\net40\GridMvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.Agent.Intercept, Version=2.4.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.4.0\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.DependencyCollector, Version=2.5.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.DependencyCollector.2.5.1\lib\net45\Microsoft.AI.DependencyCollector.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.PerfCounterCollector, Version=2.5.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.PerfCounterCollector.2.5.1\lib\net45\Microsoft.AI.PerfCounterCollector.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.ServerTelemetryChannel, Version=2.5.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.TelemetryChannel.2.5.1\lib\net45\Microsoft.AI.ServerTelemetryChannel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.Web, Version=2.5.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.Web.2.5.1\lib\net45\Microsoft.AI.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AI.WindowsServer, Version=2.5.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.WindowsServer.2.5.1\lib\net45\Microsoft.AI.WindowsServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ApplicationInsights, Version=2.5.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ApplicationInsights.2.5.1\lib\net46\Microsoft.ApplicationInsights.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.TelemetryCorrelation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.TelemetryCorrelation.1.0.0\lib\net45\Microsoft.AspNet.TelemetryCorrelation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.8.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommonServiceLocator.1.0\lib\NET35\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.Common, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.140.1000.523\lib\net40\Microsoft.ReportViewer.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.DataVisualization, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.140.1000.523\lib\net40\Microsoft.ReportViewer.DataVisualization.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.Design, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.140.1000.523\lib\net40\Microsoft.ReportViewer.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.ProcessingObjectModel, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.140.1000.523\lib\net40\Microsoft.ReportViewer.ProcessingObjectModel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WebDesign, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.140.1000.523\lib\net40\Microsoft.ReportViewer.WebDesign.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WebForms, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.140.1000.523\lib\net40\Microsoft.ReportViewer.WebForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.140.1000.523\lib\net40\Microsoft.ReportViewer.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.Types, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.SqlServer.Types.14.0.314.76\lib\net40\Microsoft.SqlServer.Types.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MvcCheckBoxList, Version=1.4.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvcCheckBoxList.1.4.5\lib\net45\MvcCheckBoxList.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.2.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.4.1\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.DirectoryServices.AccountManagement" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <!--
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Threading.Thread, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Thread.4.0.0\lib\net46\System.Threading.Thread.dll</HintPath>
+    </Reference>
+-->
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Extensions.Design" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.6\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.4\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.4\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Abstractions, Version=4.1.0.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.9.7\lib\net46\Unity.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Container, Version=5.9.7.0, Culture=neutral, PublicKeyToken=489b6accfaf20ef0, processorArchitecture=MSIL">
+      <HintPath>..\packages\Unity.5.9.7\lib\net46\Unity.Container.dll</HintPath>
+    </Reference>
+    <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebActivatorEx.2.0.5\lib\net40\WebActivatorEx.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="3MAuthentication\3MAuthentication.cs" />
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\MoneyMaskBundleConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AcompanhamentosController.cs" />
+    <Compile Include="Controllers\AgendaController.cs" />
+    <Compile Include="Controllers\AnaliseConsumoController.cs" />
+    <Compile Include="Controllers\AtivoClienteController.cs" />
+    <Compile Include="Controllers\AtivoClienteFilter.cs" />
+    <Compile Include="Controllers\AtivoController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\CarteiraAtendimentoVisitaController.cs" />
+    <Compile Include="Controllers\CarteiraAtendimentoController.cs" />
+    <Compile Include="Controllers\ClienteController.cs" />
+    <Compile Include="Controllers\CompletosController.cs" />
+    <Compile Include="Controllers\ConsumivelController.cs" />
+    <Compile Include="Controllers\ContatoController.cs" />
+    <Compile Include="Controllers\ContratoController.cs" />
+    <Compile Include="Controllers\AnaliseSatisfacaoController.cs" />
+    <Compile Include="Controllers\DadosFaturamentoController.cs" />
+    <Compile Include="Controllers\DadosPagamentoController.cs" />
+    <Compile Include="Controllers\DashboardController.cs" />
+    <Compile Include="Controllers\FatorPonderacaoController.cs" />
+    <Compile Include="Controllers\HistoricoVisitaController.cs" />
+    <Compile Include="Controllers\KatTecnicoController.cs" />
+    <Compile Include="Controllers\KatTecnicoVisitaController.cs" />
+    <Compile Include="Controllers\MonitoramentoWFController.cs" />
+    <Compile Include="Controllers\DistribuidorController.cs" />
+    <Compile Include="Controllers\GrupoModeloController.cs" />
+    <Compile Include="Controllers\KATController.cs" />
+    <Compile Include="Controllers\RelatorioPecasController.cs" />
+    <Compile Include="Controllers\RelatorioReclamacaoController.cs" />
+    <Compile Include="Controllers\ConsolidadoVendasController.cs" />
+    <Compile Include="Controllers\SegmentoController.cs" />
+    <Compile Include="Controllers\SolicitacaoAtendimentoController.cs" />
+    <Compile Include="Controllers\SumarizadosController.cs" />
+    <Compile Include="Controllers\GeralManutencaoController.cs" />
+    <Compile Include="Controllers\LocadosController.cs" />
+    <Compile Include="Controllers\ManutencaoController.cs" />
+    <Compile Include="Controllers\PedidosController.cs" />
+    <Compile Include="Controllers\InventariosController.cs" />
+    <Compile Include="Controllers\DevolvidosController.cs" />
+    <Compile Include="Controllers\EmpresaController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\EstoqueController.cs" />
+    <Compile Include="Controllers\EstoqueIntermediarioController.cs" />
+    <Compile Include="Controllers\ExecutivoController.cs" />
+    <Compile Include="Controllers\FuncaoController.cs" />
+    <Compile Include="Controllers\GrupoController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LinhaProdutoController.cs" />
+    <Compile Include="Controllers\ModeloController.cs" />
+    <Compile Include="Controllers\MovimPecasController.cs" />
+    <Compile Include="Controllers\ParametroController.cs" />
+    <Compile Include="Controllers\PecaController.cs" />
+    <Compile Include="Controllers\PerfilController.cs" />
+    <Compile Include="Controllers\PerfilXFuncaoController.cs" />
+    <Compile Include="Controllers\PlanoZeroController.cs" />
+    <Compile Include="Controllers\RazaoComodatoController.cs" />
+    <Compile Include="Controllers\RecolhidosController.cs" />
+    <Compile Include="Controllers\ResumosController.cs" />
+    <Compile Include="Controllers\SituacaoAtivoController.cs" />
+    <Compile Include="Controllers\SolicitacaoPecasController.cs" />
+    <Compile Include="Controllers\StatusAtivoController.cs" />
+    <Compile Include="Controllers\StatusContratoController.cs" />
+    <Compile Include="Controllers\TBFuncaoController.cs" />
+    <Compile Include="Controllers\TecnicoController.cs" />
+    <Compile Include="Controllers\TecnicoXClienteController.cs" />
+    <Compile Include="Controllers\SQLQueryController.cs" />
+    <Compile Include="Controllers\TipoController.cs" />
+    <Compile Include="Controllers\TreinamentosEADController.cs" />
+    <Compile Include="Controllers\UsuarioClienteController.cs" />
+    <Compile Include="Controllers\UsuarioController.cs" />
+    <Compile Include="Controllers\UsuarioXWFGrupoController.cs" />
+    <Compile Include="Controllers\VendedorController.cs" />
+    <Compile Include="Controllers\OsPadraoController.cs" />
+    <Compile Include="Controllers\VisitaPadraoController.cs" />
+    <Compile Include="Controllers\WorkflowController.cs" />
+    <Compile Include="dsAgendaVisita.Designer.cs">
+      <DependentUpon>dsAgendaVisita.xsd</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="dsAgenda.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsAgenda.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="dsRptKatPorTecnico.Designer.cs" />
+    <Compile Include="dsRptKatPorTecnico1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsRptKatPorTecnico.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Acompanhamentos.cs" />
+    <Compile Include="Models\Agenda.cs" />
+    <Compile Include="Models\AvaliacaoVisita.cs" />
+    <Compile Include="Models\Categoria.cs" />
+    <Compile Include="Models\Completos.cs" />
+    <Compile Include="Models\DadosFaturamento.cs" />
+    <Compile Include="Models\DadosPagamento.cs" />
+    <Compile Include="Models\KAT.cs" />
+    <Compile Include="Models\LogStatusOsPadrao.cs" />
+    <Compile Include="Models\ManutencaoDetalhesCliente.cs" />
+    <Compile Include="Models\MonitoramentoWF.cs" />
+    <Compile Include="Models\Distribuidor.cs" />
+    <Compile Include="Models\Lote.cs" />
+    <Compile Include="Models\OsPadrao.cs" />
+    <Compile Include="Models\PEDIDO_BPCS_NF.cs" />
+    <Compile Include="Models\ReclamacaoOs.cs" />
+    <Compile Include="Models\RelatorioReclamacaoItem.cs" />
+    <Compile Include="Models\RRComent.cs" />
+    <Compile Include="Models\RRStatus.cs" />
+    <Compile Include="Models\TB_PONDERACAO_pz.cs" />
+    <Compile Include="Models\VisitaPadrao.cs" />
+    <Compile Include="Models\VisitaResposta.cs" />
+    <Compile Include="Models\WfEquipamentoItemDevolucao.cs" />
+    <Compile Include="Models\GrupoModelo.cs" />
+    <Compile Include="Models\WfPedidoEquipamento.cs" />
+    <Compile Include="Models\WfPedidoEquipamentoItem.cs" />
+    <Compile Include="Models\SatisfacaoPesquisa.cs" />
+    <Compile Include="Models\SatisfacaoResposta.cs" />
+    <Compile Include="Models\Dashboard.cs" />
+    <Compile Include="Models\Segmento.cs" />
+    <Compile Include="Models\SoliticacaoAtendimento.cs" />
+    <Compile Include="Models\Sumarizados.cs" />
+    <Compile Include="Models\GeralManutencao.cs" />
+    <Compile Include="Models\Locados.cs" />
+    <Compile Include="Models\Inventarios.cs" />
+    <Compile Include="Models\Devolvidos.cs" />
+    <Compile Include="Models\Estoque.cs" />
+    <Compile Include="Models\EstoqueIntermediario.cs" />
+    <Compile Include="Models\EstoqueMovimentacao.cs" />
+    <Compile Include="Models\EstoquePeca.cs" />
+    <Compile Include="Models\LogStatusOS.cs" />
+    <Compile Include="Models\LogStatusVisita.cs" />
+    <Compile Include="Models\Mensagem.cs" />
+    <Compile Include="Models\OS.cs" />
+    <Compile Include="Models\PecaOS.cs" />
+    <Compile Include="Models\Pedido.cs" />
+    <Compile Include="Models\PedidoPeca.cs" />
+    <Compile Include="Models\Pedidos.cs" />
+    <Compile Include="Models\PendenciaOS.cs" />
+    <Compile Include="Models\Recolhidos.cs" />
+    <Compile Include="Models\Resumos.cs" />
+    <Compile Include="Models\StatusPedido.cs" />
+    <Compile Include="Models\TpStatusVisitaOS.cs" />
+    <Compile Include="Models\PlanoZero.cs" />
+    <Compile Include="Models\UsuarioCliente.cs" />
+    <Compile Include="Models\WfGrupoUsu.cs" />
+    <Compile Include="Models\Visita.cs" />
+    <Compile Include="Models\WfGrupo.cs" />
+    <Compile Include="Models\WfPedidoComent.cs" />
+    <Compile Include="Models\TreinamentoEAD.cs" />
+    <Compile Include="Models\WfPedidoEquipLog.cs" />
+    <Compile Include="RelatorioAcompanhamentos.aspx.cs">
+      <DependentUpon>RelatorioAcompanhamentos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RelatorioAcompanhamentos.aspx.designer.cs">
+      <DependentUpon>RelatorioAcompanhamentos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RelatorioCarteiraAtendimentoVisita.aspx.cs">
+      <DependentUpon>RelatorioCarteiraAtendimentoVisita.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RelatorioCarteiraAtendimentoVisita.aspx.designer.cs">
+      <DependentUpon>RelatorioCarteiraAtendimentoVisita.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RelatorioCarteiraAtendimento.aspx.cs">
+      <DependentUpon>RelatorioCarteiraAtendimento.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RelatorioCarteiraAtendimento.aspx.designer.cs">
+      <DependentUpon>RelatorioCarteiraAtendimento.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RelatorioCompletos.aspx.cs">
+      <DependentUpon>RelatorioCompletos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RelatorioCompletos.aspx.designer.cs">
+      <DependentUpon>RelatorioCompletos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RelatorioConsolidadoVendas.aspx.cs">
+      <DependentUpon>RelatorioConsolidadoVendas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RelatorioConsolidadoVendas.aspx.designer.cs">
+      <DependentUpon>RelatorioConsolidadoVendas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RelatorioConsumo.aspx.cs">
+      <DependentUpon>RelatorioConsumo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RelatorioConsumo.aspx.designer.cs">
+      <DependentUpon>RelatorioConsumo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RelatorioDI.aspx.cs">
+      <DependentUpon>RelatorioDI.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RelatorioDI.aspx.designer.cs">
+      <DependentUpon>RelatorioDI.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RelatorioKAT.aspx.cs">
+      <DependentUpon>RelatorioKAT.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RelatorioKAT.aspx.designer.cs">
+      <DependentUpon>RelatorioKAT.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RelatorioKatTecnico.aspx.cs">
+      <DependentUpon>RelatorioKatTecnico.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RelatorioKatTecnico.aspx.designer.cs">
+      <DependentUpon>RelatorioKatTecnico.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RelatorioKatTecnicoVisita.aspx.cs">
+      <DependentUpon>RelatorioKatTecnicoVisita.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RelatorioKatTecnicoVisita.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RelatorioLote.aspx.cs">
+      <DependentUpon>RelatorioLote.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RelatorioLote.aspx.designer.cs">
+      <DependentUpon>RelatorioLote.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RelatorioMonitoramentoWF.aspx.cs">
+      <DependentUpon>RelatorioMonitoramentoWF.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RelatorioMonitoramentoWF.aspx.designer.cs">
+      <DependentUpon>RelatorioMonitoramentoWF.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RelatorioMovimPecas.aspx.cs">
+      <DependentUpon>RelatorioMovimPecas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RelatorioMovimPecas.aspx.designer.cs">
+      <DependentUpon>RelatorioMovimPecas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RelatorioPecas.aspx.cs">
+      <DependentUpon>RelatorioPecas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RelatorioPecas.aspx.designer.cs">
+      <DependentUpon>RelatorioPecas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RelatorioPesquisaSatisfacao.aspx.cs">
+      <DependentUpon>RelatorioPesquisaSatisfacao.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RelatorioPesquisaSatisfacao.aspx.designer.cs">
+      <DependentUpon>RelatorioPesquisaSatisfacao.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RelatorioReclamacaoCompras.aspx.cs">
+      <DependentUpon>RelatorioReclamacaoCompras.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RelatorioReclamacaoCompras.aspx.designer.cs">
+      <DependentUpon>RelatorioReclamacaoCompras.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RelatorioSumarizados.aspx.cs">
+      <DependentUpon>RelatorioSumarizados.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RelatorioSumarizados.aspx.designer.cs">
+      <DependentUpon>RelatorioSumarizados.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RelatorioEstoqueIntermediario.aspx.cs">
+      <DependentUpon>RelatorioEstoqueIntermediario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RelatorioEstoqueIntermediario.aspx.designer.cs">
+      <DependentUpon>RelatorioEstoqueIntermediario.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RelatorioGeralManutencao.aspx.cs">
+      <DependentUpon>RelatorioGeralManutencao.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RelatorioGeralManutencao.aspx.designer.cs">
+      <DependentUpon>RelatorioGeralManutencao.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RelatorioLocados.aspx.cs">
+      <DependentUpon>RelatorioLocados.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RelatorioLocados.aspx.designer.cs">
+      <DependentUpon>RelatorioLocados.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RelatorioManutencao.aspx.cs">
+      <DependentUpon>RelatorioManutencao.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RelatorioManutencao.aspx.designer.cs">
+      <DependentUpon>RelatorioManutencao.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RelatorioPedidos.aspx.cs">
+      <DependentUpon>RelatorioPedidos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RelatorioPedidos.aspx.designer.cs">
+      <DependentUpon>RelatorioPedidos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RelatorioInventarios.aspx.cs">
+      <DependentUpon>RelatorioInventarios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RelatorioInventarios.aspx.designer.cs">
+      <DependentUpon>RelatorioInventarios.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RelatorioDevolvidos.aspx.cs">
+      <DependentUpon>RelatorioDevolvidos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RelatorioDevolvidos.aspx.designer.cs">
+      <DependentUpon>RelatorioDevolvidos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RelatorioRecolhidos.aspx.cs">
+      <DependentUpon>RelatorioRecolhidos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RelatorioRecolhidos.aspx.designer.cs">
+      <DependentUpon>RelatorioRecolhidos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RelatorioComodato.aspx.cs">
+      <DependentUpon>RelatorioComodato.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RelatorioComodato.aspx.designer.cs">
+      <DependentUpon>RelatorioComodato.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RelatorioResumos.aspx.cs">
+      <DependentUpon>RelatorioResumos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RelatorioResumos.aspx.designer.cs">
+      <DependentUpon>RelatorioResumos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RelatorioSolicitacaoPecas.aspx.cs">
+      <DependentUpon>RelatorioSolicitacaoPecas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RelatorioSolicitacaoPecas.aspx.designer.cs">
+      <DependentUpon>RelatorioSolicitacaoPecas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RelatorioReclamacao.aspx.cs">
+      <DependentUpon>RelatorioReclamacao.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RelatorioReclamacao.aspx.designer.cs">
+      <DependentUpon>RelatorioReclamacao.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RelatorioWorkflowDevolucao.aspx.cs">
+      <DependentUpon>RelatorioWorkflowDevolucao.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="RelatorioWorkflowDevolucao.aspx.designer.cs">
+      <DependentUpon>RelatorioWorkflowDevolucao.aspx</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="RelatorioWorkflow.aspx.cs">
+      <DependentUpon>RelatorioWorkflow.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RelatorioWorkflow.aspx.designer.cs">
+      <DependentUpon>RelatorioWorkflow.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ReportBasePage.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Reports\Acompanhamentos\dsReportAcompanhamentos1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsReportAcompanhamentos.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\AgendaVisita\ReportDataSourceCarteiraAtendimentoVisita.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Reports\Agenda\ReportDataSourceCarteiraAtendimento.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Reports\AnaliseConsumo\dsRptConsumo.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsRptConsumo.xsd</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Reports\AnaliseSatisfacao\ReportDataSourceResultadoPesquisa.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Reports\Completos\dsReportCompletos.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsReportCompletos.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\ConsolidadoVendas\dsRptConsolidadoVendas.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsRptConsolidadoVendas.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\ConsolidadoVendas\dsRptConsolidadoVendasTab.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsRptConsolidadoVendasTab.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\ConsolidadoVendas\ReportDataSourceConsolidadoVendas.cs" />
+    <Compile Include="Reports\Contrato\dsRelatorioContrato.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsRelatorioContrato.xsd</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Ativo.cs" />
+    <Compile Include="Models\AtivoCliente.cs" />
+    <Compile Include="Models\BaseModel.cs" />
+    <Compile Include="Models\Cliente.cs" />
+    <Compile Include="Models\Consumivel.cs" />
+    <Compile Include="Models\Contato.cs" />
+    <Compile Include="Models\Contrato.cs" />
+    <Compile Include="Models\Depreciacao.cs" />
+    <Compile Include="Models\Empresa.cs" />
+    <Compile Include="Models\Executivo.cs" />
+    <Compile Include="Models\Funcao.cs" />
+    <Compile Include="Models\Grupo.cs" />
+    <Compile Include="Models\LinhaProduto.cs" />
+    <Compile Include="Models\Modelo.cs" />
+    <Compile Include="Models\MotivoDevolucao.cs" />
+    <Compile Include="Models\Parametro.cs" />
+    <Compile Include="Models\Peca.cs" />
+    <Compile Include="Models\Perfil.cs" />
+    <Compile Include="Models\PerfilXFuncao.cs" />
+    <Compile Include="Models\RazaoComodato.cs" />
+    <Compile Include="Models\Regiao.cs" />
+    <Compile Include="Models\SituacaoAtivo.cs" />
+    <Compile Include="Models\StatusAtivo.cs" />
+    <Compile Include="Models\StatusContrato.cs" />
+    <Compile Include="Models\TBFuncao.cs" />
+    <Compile Include="Models\Tecnico.cs" />
+    <Compile Include="Models\TecnicoXCliente.cs" />
+    <Compile Include="Models\Tipo.cs" />
+    <Compile Include="Models\TipoContato.cs" />
+    <Compile Include="Models\Usuario.cs" />
+    <Compile Include="Models\Vendedor.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reports\Devolvidos\dsReportDevolvidos.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsReportDevolvidos.xsd</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Reports\Distribuidor\ReportDataSourceDI.cs" />
+    <Compile Include="Reports\EstoqueIntermediario\dsRptEstoqueIntermediario.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsRptEstoqueIntermediario.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\EstoqueIntermediario\dsRptEstoqueIntermediarioPeca.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsRptEstoqueIntermediarioPeca.xsd</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Reports\EstoqueIntermediario\dsRptEstoqueIntermediarioTecnico.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsRptEstoqueIntermediarioTecnico.xsd</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Reports\Inventarios\dsRelatorioInventarioV4.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsRelatorioInventarioV4.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\KatTecnicoVisita\dsPrcRptKatPorTecnicoVisita.Designer.cs" />
+    <Compile Include="Reports\KatTecnicoVisita\dsPrcRptKatPorTecnicoVisita1.Designer.cs" />
+    <Compile Include="Reports\KatTecnicoVisita\dsPrcRptKatPorTecnicoVisita2.Designer.cs" />
+    <Compile Include="Reports\KatTecnico\dsPrcRptKatPorTecnico.Designer.cs" />
+    <Compile Include="Reports\KatTecnico\dsPrcRptKatPorTecnico1.Designer.cs" />
+    <Compile Include="Reports\KatTecnico\dsPrcRptKatPorTecnico2.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsPrcRptKatPorTecnico.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\KAT\dsReportKAT.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsReportKAT.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\Locados\dsReportLocados.Designer.cs" />
+    <Compile Include="Reports\Manutencao\dsRptManutencaoTab.Designer.cs" />
+    <Compile Include="Reports\MonitoramentoWF\dsMonitoramento.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsMonitoramento.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\Pecas\dsRptRelatorioPecas.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsRptRelatorioPecas.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\Pecas\dsRptRelatorioPecasTab.Designer.cs" />
+    <Compile Include="Reports\Pecas\dsRptRelatorioPecasTab1.Designer.cs" />
+    <Compile Include="Reports\Pecas\dsRptRelatorioPecasTab2.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsRptRelatorioPecasTab.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\Recolhidos\dsReportRecolhidos.Designer.cs" />
+    <Compile Include="Reports\Recolhidos\dsReportRecolhidos1.Designer.cs" />
+    <Compile Include="Reports\Sumarizados\dsReportSumarizados.Designer.cs" />
+    <Compile Include="Reports\WorkflowDevolucao\ReportDataSourcePedidoEquipamentoDevolucao.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Services\AtivoClienteService.cs" />
+    <Compile Include="Services\OsPadraoService.cs" />
+    <Compile Include="Services\VisitaPadraoService.cs" />
+    <Compile Include="_3M_ComodatoDataSet.Designer.cs" />
+    <Compile Include="_3M_ComodatoDataSet1.Designer.cs" />
+    <Content Include="Content\bootstrap-datepicker.css" />
+    <Content Include="Content\bootstrap-datepicker.min.css" />
+    <Content Include="Content\bootstrap-datepicker.standalone.css" />
+    <Content Include="Content\bootstrap-datepicker.standalone.min.css" />
+    <Content Include="Content\bootstrap-datepicker3.css" />
+    <Content Include="Content\bootstrap-datepicker3.min.css" />
+    <Content Include="Content\bootstrap-datepicker3.standalone.css" />
+    <Content Include="Content\bootstrap-datepicker3.standalone.min.css" />
+    <Content Include="Content\bootstrap-grid.css" />
+    <Content Include="Content\bootstrap-grid.min.css" />
+    <Content Include="Content\bootstrap-reboot.css" />
+    <Content Include="Content\bootstrap-reboot.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\css\comodato.css" />
+    <Content Include="Content\css\select2.min.css" />
+    <Content Include="HTMLMail\button.html" />
+    <Content Include="RelatorioCarteiraAtendimentoVisita.aspx" />
+    <Content Include="RelatorioConsolidadoVendas.aspx" />
+    <Content Include="RelatorioKatTecnico.aspx" />
+    <Content Include="RelatorioKatTecnicoVisita.aspx" />
+    <Content Include="RelatorioMonitoramentoWF.aspx" />
+    <Content Include="RelatorioPecas.aspx" />
+    <Content Include="RelatorioReclamacaoCompras.aspx" />
+    <Content Include="Images\Geral_Export_min.png" />
+    <Content Include="RelatorioWorkflowDevolucao.aspx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\Agenda\CarteiraAtendimento2.rdlc">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Reports\EstoqueIntermediario\EstoqueIntermediario.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\Devolvidos\ReportDevolvidosTab.rdlc">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <EmbeddedResource Include="Reports\ConsolidadoVendas\ConsolidadoVendas.rdlc" />
+    <EmbeddedResource Include="Reports\Inventarios\ReportInventarios.rdlc" />
+    <EmbeddedResource Include="Reports\Inventarios\ReportInventariosTab.rdlc" />
+    <EmbeddedResource Include="Reports\KatTecnicoVisita\RptKatPorTecnicoVisita.rdlc" />
+    <EmbeddedResource Include="Reports\KatTecnico\RptKatPorTecnico.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\KAT\KAT.rdlc" />
+    <EmbeddedResource Include="Reports\Locados\ReportLocados.rdlc" />
+    <EmbeddedResource Include="Reports\Lotes\dsLote.Designer.cs" />
+    <Compile Include="Reports\Manutencao\dsReportGeralManutencao.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsReportGeralManutencao.xsd</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Reports\Manutencao\dsRptManutencao.cs">
+      <DependentUpon>dsRptManutencao.xsd</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Reports\Manutencao\dsRptManutencao.Designer.cs">
+      <DependentUpon>dsRptManutencao.cs</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Reports\MovimPecas\ReportDataSourceMovimPecas.cs">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Reports\Pedidos\dsReportPedidos.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsReportPedidos.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\RelatorioReclamacao\ReportDataSourceRelatorioReclamacao.cs" />
+    <Compile Include="Reports\Resumos\dsReportResumos.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsReportResumos.xsd</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Reports\SolicitacaoPecas\dsReportSolicitacaoPecasMensagem.Designer.cs" />
+    <Compile Include="Reports\SolicitacaoPecas\dsReportSolicitacaoPecasPedido.Designer.cs" />
+    <Compile Include="Reports\SolicitacaoPecas\dsReportSolicitacaoPecasPedidoItem.Designer.cs" />
+    <Compile Include="Reports\Workflow\ReportDataSourcePedidoEquipamento.cs" />
+    <Compile Include="SqlServerTypes\Loader.cs" />
+    <Content Include="Reports\RelatorioReclamacao\ReportRelatorioReclamacao.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\RelatorioReclamacao\ReportRelatorioReclamacaoCompras.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\MonitoramentoWF\ReportMonitoramentoWF.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\Lotes\RptObs.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <EmbeddedResource Include="Reports\Manutencao\ManutencaoTabCompleto.rdlc" />
+    <EmbeddedResource Include="Reports\Manutencao\ManutencaoTab.rdlc" />
+    <EmbeddedResource Include="Reports\Pecas\PecasTab.rdlc" />
+    <EmbeddedResource Include="Reports\Pedidos\ReportPedidosSimplificado.rdlc" />
+    <!--    
+    <EmbeddedResource Include="Reports\Manutencao\RptKatPorTecnico.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+-->
+    <Content Include="Reports\Recolhidos\ReportRecolhidos.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\Sumarizados\ReportSumarizados.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\WorkflowDevolucao\ReportPedidoEquipamentoDevolucao.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\Pedidos\ReportPedidosSimplificado.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\css\select2.css" />
+    <Content Include="Content\fa-brands.css" />
+    <Content Include="Content\fa-brands.min.css" />
+    <Content Include="Content\fa-regular.css" />
+    <Content Include="Content\fa-regular.min.css" />
+    <Content Include="Content\fa-solid.css" />
+    <Content Include="Content\fa-solid.min.css" />
+    <Content Include="Content\fontawesome-all.css" />
+    <Content Include="Content\fontawesome-all.min.css" />
+    <Content Include="Content\fontawesome.css" />
+    <Content Include="Content\fontawesome.min.css" />
+    <Content Include="Content\Gridmvc.css" />
+    <Content Include="Content\loading-2.gif" />
+    <Content Include="Images\loading-2.gif" />
+    <Content Include="Content\rateYo\v2.3.2\jquery.rateyo.css" />
+    <Content Include="Content\rateYo\v2.3.2\jquery.rateyo.min.css" />
+    <Content Include="favicon.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Global.asax" />
+    <Content Include="Content\Site.css" />
+    <Content Include="ApplicationInsights.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Grid.mvc.readme" />
+    <None Include="bundleconfig.json" />
+    <Content Include="HTMLMail\EmailCorpo.html" />
+    <Content Include="Images\3M Logo.png" />
+    <Content Include="Images\3M_ComodatoLogin.png" />
+    <Content Include="Images\Esteiras3M.png" />
+    <Content Include="Images\imgAplImpWF.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\imgBoxWF.png" />
+    <Content Include="Images\repeating_meshed_grid.png" />
+    <Content Include="Images\stock-photo-packages-delivery-packaging-service-and-parcels-transportation-system-concept-cardboard-boxes-on-625771727.jpg" />
+    <Content Include="Images\ui-icons_222222_256x240.png" />
+    <Content Include="RelatorioAcompanhamentos.aspx" />
+    <Content Include="RelatorioCarteiraAtendimento.aspx" />
+    <Content Include="RelatorioCompletos.aspx" />
+    <Content Include="RelatorioConsumo.aspx" />
+    <Content Include="RelatorioDI.aspx" />
+    <Content Include="RelatorioKAT.aspx" />
+    <Content Include="RelatorioLote.aspx" />
+    <Content Include="RelatorioMovimPecas.aspx" />
+    <Content Include="RelatorioPesquisaSatisfacao.aspx" />
+    <Content Include="RelatorioSumarizados.aspx" />
+    <Content Include="RelatorioEstoqueIntermediario.aspx" />
+    <Content Include="RelatorioGeralManutencao.aspx" />
+    <Content Include="RelatorioLocados.aspx" />
+    <Content Include="RelatorioManutencao.aspx" />
+    <Content Include="RelatorioPedidos.aspx" />
+    <Content Include="RelatorioInventarios.aspx" />
+    <Content Include="RelatorioDevolvidos.aspx" />
+    <Content Include="RelatorioRecolhidos.aspx" />
+    <Content Include="RelatorioComodato.aspx" />
+    <Content Include="RelatorioResumos.aspx" />
+    <Content Include="RelatorioSolicitacaoPecas.aspx" />
+    <Content Include="RelatorioReclamacao.aspx" />
+    <Content Include="RelatorioWorkflow.aspx" />
+    <Content Include="Scripts\bootstrap-datepicker.js" />
+    <Content Include="Scripts\bootstrap-datepicker.min.js" />
+    <Content Include="Scripts\bootstrap.bundle.js" />
+    <Content Include="Scripts\bootstrap.bundle.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\Chart.js" />
+    <Content Include="Scripts\Chart.min.js" />
+    <Content Include="Scripts\Comodato\Acompanhamentos.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\Comodato\CarteiraAtendimentoVisita.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\Comodato\Faturamento.js" />
+    <Content Include="Scripts\Comodato\KatTecnicoVisita.js" />
+    <Content Include="Scripts\Comodato\OsLista.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\Comodato\Os.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\Comodato\OsPeca.js" />
+    <Content Include="Scripts\Comodato\OsPendencia.js" />
+    <Content Include="Scripts\Comodato\OsReclamacao.js" />
+    <Content Include="Scripts\Comodato\RelatorioPeca.js" />
+    <Content Include="Scripts\Comodato\Consolidado.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\Comodato\EnvioPecasBPCS.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\Comodato\UtilCliente.js" />
+    <Content Include="Scripts\Comodato\UtilRegiao.js" />
+    <Content Include="Scripts\Comodato\UtilSolicitacaoPeca.js" />
+    <Content Include="Scripts\Comodato\UtilTecnico.js" />
+    <Content Include="Scripts\Comodato\VisitaConsultaAvaliacao.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\Comodato\VisitaLista.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\Comodato\Agenda.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\Comodato\AnaliseConsumo.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\Comodato\AnaliseSatisfacao.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\Comodato\Ativo.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\Comodato\AtivoCliente.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\Comodato\AtivoClienteFiltroGrid.js" />
+    <Content Include="Scripts\Comodato\AtivoFiltroGrid.js" />
+    <Content Include="Scripts\Comodato\CarteiraAtendimento.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\Comodato\Cliente.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\Comodato\Completos.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\Comodato\ConsultarMovimentacao.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\Comodato\Consumivel.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\Comodato\Contato.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\Comodato\Contrato.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\Comodato\dashAreaTecnica.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\Comodato\dashBoard.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\Comodato\dashNegocios.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\Comodato\dashPlanejamento.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\Comodato\dashVendas.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\Comodato\HistoricoVisita.js" />
+    <Content Include="Scripts\Comodato\KatTecnico.js" />
+    <Content Include="Scripts\Comodato\MonitoramentoWF.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\Comodato\Estoque.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\Comodato\EstoqueIntermediarioRpt.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\Comodato\Modelo.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\Comodato\RelatorioReclamacao.js" />
+    <Content Include="Scripts\Comodato\RRAcompanhamento.js" />
+    <Content Include="Scripts\Comodato\SolicitacaoAtendimento.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\Comodato\Sumarizados.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\Comodato\Devolvidos.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\Comodato\Empresa.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\Comodato\EstoqueIntermediario.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\Comodato\GeralManutencao.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\Comodato\Locados.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\Comodato\Manutencao.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\Comodato\Pedidos.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\Comodato\Inventarios.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\Comodato\LinhaProduto.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\Comodato\Login.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\Comodato\MovimPecas.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\Comodato\AgendaOs.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\Comodato\Peca.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\Comodato\PerfilXFuncao.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\Comodato\PlanoZero.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\Comodato\Recolhidos.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\Comodato\Resumos.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\Comodato\SolicitacaoPecas.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\Comodato\SolicitacaoPecasAvulso.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\Comodato\SolicitacaoPecasCliente.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\Comodato\SolicitacaoPecasDetalhe.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\Comodato\SolicitacaoPecasTecnico.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\Comodato\Tecnico.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\Comodato\TecnicoXCliente.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\Comodato\TecnicoXClienteDetalhe.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\Comodato\Usuario.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\Comodato\UsuarioCliente.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\Comodato\UsuarioClienteDetalhe.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\Comodato\UsuarioXWFGrupo.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\Comodato\Util.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\Comodato\Vendedor.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\Comodato\Visita.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\Comodato\VisitaConsulta.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\Comodato\WorkflowAcompanhamentoPedidoDevolucao.js" />
+    <Content Include="Scripts\Comodato\WorkflowAcompanhamentoPedidoEnvio.js" />
+    <Content Include="Scripts\Comodato\WorkflowPedido.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\Comodato\WorkflowPedidoEnvio.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Scripts\Comodato\WorkflowPedidoDevolucao.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\Contrato\dsRelatorioContrato.xsc">
+      <DependentUpon>dsRelatorioContrato.xsd</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\rateYo\v2.3.2\jquery.rateyo.less" />
+    <Content Include="dsAgenda.xsc">
+      <DependentUpon>dsAgenda.xsd</DependentUpon>
+    </Content>
+    <Content Include="dsAgendaVisita.xsc">
+      <DependentUpon>dsAgendaVisita.xsd</DependentUpon>
+    </Content>
+    <Content Include="Content\bootstrap-datepicker3.standalone.css.map" />
+    <Content Include="Content\bootstrap-datepicker3.css.map" />
+    <Content Include="Content\bootstrap-datepicker.standalone.css.map" />
+    <Content Include="Content\bootstrap-datepicker.css.map" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.css.map" />
+    <Content Include="Content\bootstrap-grid.min.css.map" />
+    <Content Include="Content\bootstrap-grid.css.map" />
+    <None Include="dsAgendaVisita.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsAgendaVisita.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="dsAgendaVisita.xss">
+      <DependentUpon>dsAgendaVisita.xsd</DependentUpon>
+    </Content>
+    <None Include="dsAgenda.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsAgenda.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="dsAgenda.xss">
+      <DependentUpon>dsAgenda.xsd</DependentUpon>
+    </Content>
+    <Content Include="json.json" />
+    <Content Include="Reports\Acompanhamentos\dsReportAcompanhamentos.xsc">
+      <DependentUpon>dsReportAcompanhamentos.xsd</DependentUpon>
+    </Content>
+    <Content Include="dsRptKatPorTecnico.xsc">
+      <DependentUpon>dsRptKatPorTecnico.xsd</DependentUpon>
+    </Content>
+    <None Include="dsRptKatPorTecnico.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsRptKatPorTecnico1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="dsRptKatPorTecnico.xss">
+      <DependentUpon>dsRptKatPorTecnico.xsd</DependentUpon>
+    </Content>
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile2.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile3.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile4.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile5.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile6.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile7.pubxml" />
+    <None Include="Properties\PublishProfiles\FolderProfile8.pubxml" />
+    <None Include="Reports\Acompanhamentos\dsReportAcompanhamentos.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsReportAcompanhamentos1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsReportAcompanhamentos.Designer.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <Content Include="Reports\Acompanhamentos\dsReportAcompanhamentos.xss">
+      <DependentUpon>dsReportAcompanhamentos.xsd</DependentUpon>
+    </Content>
+    <Content Include="Reports\Completos\dsReportCompletos.xsc">
+      <DependentUpon>dsReportCompletos.xsd</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\AnaliseConsumo\dsRptConsumo.xsc">
+      <DependentUpon>dsRptConsumo.xsd</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\AgendaVisita\CarteiraAtendimentoVisita2.rdlc" />
+    <None Include="Reports\AnaliseConsumo\dsRptConsumo.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsRptConsumo.Designer.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <Content Include="Reports\AnaliseConsumo\dsRptConsumo.xss">
+      <DependentUpon>dsRptConsumo.xsd</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="Reports\Completos\dsReportCompletos.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsReportCompletos.Designer.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <Content Include="Reports\Completos\dsReportCompletos.xss">
+      <DependentUpon>dsReportCompletos.xsd</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\ConsolidadoVendas\dsRptConsolidadoVendasTab.xsc">
+      <DependentUpon>dsRptConsolidadoVendasTab.xsd</DependentUpon>
+    </Content>
+    <Content Include="Reports\ConsolidadoVendas\dsRptConsolidadoVendas.xsc">
+      <DependentUpon>dsRptConsolidadoVendas.xsd</DependentUpon>
+    </Content>
+    <None Include="Reports\ConsolidadoVendas\dsRptConsolidadoVendas.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsRptConsolidadoVendas.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Reports\ConsolidadoVendas\dsRptConsolidadoVendas.xss">
+      <DependentUpon>dsRptConsolidadoVendas.xsd</DependentUpon>
+    </Content>
+    <None Include="Reports\ConsolidadoVendas\dsRptConsolidadoVendasTab.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsRptConsolidadoVendasTab.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Reports\ConsolidadoVendas\dsRptConsolidadoVendasTab.xss">
+      <DependentUpon>dsRptConsolidadoVendasTab.xsd</DependentUpon>
+    </Content>
+    <None Include="Reports\Contrato\dsRelatorioContrato.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsRelatorioContrato.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <Content Include="Reports\Contrato\dsRelatorioContrato.xss">
+      <DependentUpon>dsRelatorioContrato.xsd</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\Devolvidos\dsReportDevolvidos.xsc">
+      <DependentUpon>dsReportDevolvidos.xsd</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="Reports\Devolvidos\dsReportDevolvidos.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsReportDevolvidos.Designer.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <Content Include="Reports\Devolvidos\dsReportDevolvidos.xss">
+      <DependentUpon>dsReportDevolvidos.xsd</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\EstoqueIntermediario\dsRptEstoqueIntermediarioPeca.xsc">
+      <DependentUpon>dsRptEstoqueIntermediarioPeca.xsd</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\EstoqueIntermediario\dsRptEstoqueIntermediario.xsc">
+      <DependentUpon>dsRptEstoqueIntermediario.xsd</DependentUpon>
+    </Content>
+    <None Include="Reports\EstoqueIntermediario\dsRptEstoqueIntermediario.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsRptEstoqueIntermediario.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Reports\EstoqueIntermediario\dsRptEstoqueIntermediario.xss">
+      <DependentUpon>dsRptEstoqueIntermediario.xsd</DependentUpon>
+    </Content>
+    <None Include="Reports\EstoqueIntermediario\dsRptEstoqueIntermediarioPeca.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsRptEstoqueIntermediarioPeca.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <Content Include="Reports\EstoqueIntermediario\dsRptEstoqueIntermediarioPeca.xss">
+      <DependentUpon>dsRptEstoqueIntermediarioPeca.xsd</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\EstoqueIntermediario\dsRptEstoqueIntermediarioTecnico.xsc">
+      <DependentUpon>dsRptEstoqueIntermediarioTecnico.xsd</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="Reports\EstoqueIntermediario\dsRptEstoqueIntermediarioTecnico.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsRptEstoqueIntermediarioTecnico.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <Content Include="Reports\EstoqueIntermediario\dsRptEstoqueIntermediarioTecnico.xss">
+      <DependentUpon>dsRptEstoqueIntermediarioTecnico.xsd</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\KAT\dsReportKAT.xsc">
+      <DependentUpon>dsReportKAT.xsd</DependentUpon>
+    </Content>
+    <Content Include="Reports\Inventarios\dsRelatorioInventarioV4.xsc">
+      <DependentUpon>dsRelatorioInventarioV4.xsd</DependentUpon>
+    </Content>
+    <None Include="Reports\Inventarios\dsRelatorioInventarioV4.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsRelatorioInventarioV4.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Reports\Inventarios\dsRelatorioInventarioV4.xss">
+      <DependentUpon>dsRelatorioInventarioV4.xsd</DependentUpon>
+    </Content>
+    <Content Include="Reports\KatTecnico\dsPrcRptKatPorTecnico.xsc">
+      <DependentUpon>dsPrcRptKatPorTecnico.xsd</DependentUpon>
+    </Content>
+    <Content Include="Reports\KatTecnicoVisita\dsPrcRptKatPorTecnicoVisita.xsc">
+      <DependentUpon>dsPrcRptKatPorTecnicoVisita.xsd</DependentUpon>
+    </Content>
+    <None Include="Reports\KatTecnicoVisita\dsPrcRptKatPorTecnicoVisita.xsd" />
+    <Content Include="Reports\KatTecnicoVisita\dsPrcRptKatPorTecnicoVisita.xss">
+      <DependentUpon>dsPrcRptKatPorTecnicoVisita.xsd</DependentUpon>
+    </Content>
+    <None Include="Reports\KatTecnico\dsPrcRptKatPorTecnico.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsPrcRptKatPorTecnico2.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Reports\KatTecnico\dsPrcRptKatPorTecnico.xss">
+      <DependentUpon>dsPrcRptKatPorTecnico.xsd</DependentUpon>
+    </Content>
+    <None Include="Reports\KAT\dsReportKAT.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsReportKAT.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Reports\KAT\dsReportKAT.xss">
+      <DependentUpon>dsReportKAT.xsd</DependentUpon>
+    </Content>
+    <Content Include="Reports\Manutencao\dsRptManutencao.xsc">
+      <DependentUpon>dsRptManutencao.xsd</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\Manutencao\dsReportGeralManutencao.xsc">
+      <DependentUpon>dsReportGeralManutencao.xsd</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\Lotes\dsLote.xsc">
+      <DependentUpon>dsLote.xsd</DependentUpon>
+    </Content>
+    <Content Include="Reports\Locados\dsReportLocados.xsc">
+      <DependentUpon>dsReportLocados.xsd</DependentUpon>
+    </Content>
+    <None Include="Reports\Locados\dsReportLocados.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsReportLocados1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Reports\Locados\dsReportLocados.xss">
+      <DependentUpon>dsReportLocados.xsd</DependentUpon>
+    </Content>
+    <None Include="Reports\Lotes\dsLote.xsd" />
+    <Content Include="Reports\Lotes\dsLote.xss">
+      <DependentUpon>dsLote.xsd</DependentUpon>
+    </Content>
+    <None Include="Reports\Manutencao\dsReportGeralManutencao.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsReportGeralManutencao.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <Content Include="Reports\Manutencao\dsReportGeralManutencao.xss">
+      <DependentUpon>dsReportGeralManutencao.xsd</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="Reports\Manutencao\dsRptManutencao.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsRptManutencao1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <Content Include="Reports\Manutencao\dsRptManutencao.xss">
+      <DependentUpon>dsRptManutencao.xsd</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\Pedidos\dsReportPedidos.xsc">
+      <DependentUpon>dsReportPedidos.xsd</DependentUpon>
+    </Content>
+    <Content Include="Reports\MonitoramentoWF\dsMonitoramento.xsc">
+      <DependentUpon>dsMonitoramento.xsd</DependentUpon>
+    </Content>
+    <Content Include="Reports\Manutencao\dsRptManutencaoTab.xsc">
+      <DependentUpon>dsRptManutencaoTab.xsd</DependentUpon>
+    </Content>
+    <None Include="Reports\Manutencao\dsRptManutencaoTab.xsd" />
+    <Content Include="Reports\Manutencao\dsRptManutencaoTab.xss">
+      <DependentUpon>dsRptManutencaoTab.xsd</DependentUpon>
+    </Content>
+    <None Include="Reports\MonitoramentoWF\dsMonitoramento.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsMonitoramento.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Reports\MonitoramentoWF\dsMonitoramento.xss">
+      <DependentUpon>dsMonitoramento.xsd</DependentUpon>
+    </Content>
+    <Content Include="Reports\Pecas\dsRptRelatorioPecas.xsc">
+      <DependentUpon>dsRptRelatorioPecas.xsd</DependentUpon>
+    </Content>
+    <None Include="Reports\Pecas\dsRptRelatorioPecas.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsRptRelatorioPecas.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Reports\Pecas\dsRptRelatorioPecas.xss">
+      <DependentUpon>dsRptRelatorioPecas.xsd</DependentUpon>
+    </Content>
+    <Content Include="Reports\Pecas\dsRptRelatorioPecasTab.xsc">
+      <DependentUpon>dsRptRelatorioPecasTab.xsd</DependentUpon>
+    </Content>
+    <None Include="Reports\Pecas\dsRptRelatorioPecasTab.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsRptRelatorioPecasTab2.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Reports\Pecas\dsRptRelatorioPecasTab.xss">
+      <DependentUpon>dsRptRelatorioPecasTab.xsd</DependentUpon>
+    </Content>
+    <None Include="Reports\Pedidos\dsReportPedidos.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsReportPedidos.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Reports\Pedidos\dsReportPedidos.xss">
+      <DependentUpon>dsReportPedidos.xsd</DependentUpon>
+    </Content>
+    <Content Include="Reports\Resumos\dsReportResumos.xsc">
+      <DependentUpon>dsReportResumos.xsd</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\Recolhidos\dsReportRecolhidos.xsc">
+      <DependentUpon>dsReportRecolhidos.xsd</DependentUpon>
+    </Content>
+    <None Include="Reports\Recolhidos\dsReportRecolhidos.xsd" />
+    <Content Include="Reports\Recolhidos\dsReportRecolhidos.xss">
+      <DependentUpon>dsReportRecolhidos.xsd</DependentUpon>
+    </Content>
+    <None Include="Reports\Resumos\dsReportResumos.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsReportResumos.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <Content Include="Reports\Resumos\dsReportResumos.xss">
+      <DependentUpon>dsReportResumos.xsd</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\SolicitacaoPecas\dsReportSolicitacaoPecasMensagem.xsc">
+      <DependentUpon>dsReportSolicitacaoPecasMensagem.xsd</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="Reports\SolicitacaoPecas\dsReportSolicitacaoPecasMensagem.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsReportSolicitacaoPecasMensagem1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <Content Include="Reports\SolicitacaoPecas\dsReportSolicitacaoPecasMensagem.xss">
+      <DependentUpon>dsReportSolicitacaoPecasMensagem.xsd</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\SolicitacaoPecas\dsReportSolicitacaoPecasPedido.xsc">
+      <DependentUpon>dsReportSolicitacaoPecasPedido.xsd</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="Reports\SolicitacaoPecas\dsReportSolicitacaoPecasPedido.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsReportSolicitacaoPecasPedido1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <Content Include="Reports\SolicitacaoPecas\dsReportSolicitacaoPecasPedido.xss">
+      <DependentUpon>dsReportSolicitacaoPecasPedido.xsd</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\SolicitacaoPecas\dsReportSolicitacaoPecasPedidoItem.xsc">
+      <DependentUpon>dsReportSolicitacaoPecasPedidoItem.xsd</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="Reports\SolicitacaoPecas\dsReportSolicitacaoPecasPedidoItem.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsReportSolicitacaoPecasPedidoItem1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <Content Include="Reports\SolicitacaoPecas\dsReportSolicitacaoPecasPedidoItem.xss">
+      <DependentUpon>dsReportSolicitacaoPecasPedidoItem.xsd</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\Sumarizados\dsReportSumarizados.xsc">
+      <DependentUpon>dsReportSumarizados.xsd</DependentUpon>
+    </Content>
+    <None Include="Reports\Sumarizados\dsReportSumarizados.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsReportSumarizados2.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="Reports\Sumarizados\dsReportSumarizados.xss">
+      <DependentUpon>dsReportSumarizados.xsd</DependentUpon>
+    </Content>
+    <Content Include="Scripts\esm\popper-utils.js" />
+    <Content Include="Scripts\esm\popper-utils.min.js" />
+    <Content Include="Scripts\esm\popper.js" />
+    <Content Include="Scripts\esm\popper.min.js" />
+    <Content Include="Scripts\gridmvc.js" />
+    <Content Include="Scripts\gridmvc.lang.ru.js" />
+    <Content Include="Scripts\gridmvc.min.js">
+      <DependentUpon>gridmvc.js</DependentUpon>
+    </Content>
+    <Content Include="Scripts\index.js.flow" />
+    <Content Include="Scripts\esm\popper.min.js.map" />
+    <Content Include="Scripts\esm\popper.js.map" />
+    <Content Include="Scripts\esm\popper-utils.min.js.map" />
+    <Content Include="Scripts\esm\popper-utils.js.map" />
+    <Content Include="Scripts\bootstrap.min.js.map" />
+    <Content Include="Scripts\bootstrap.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.min.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.js.map" />
+    <None Include="Scripts\jquery-3.6.0.intellisense.js" />
+    <Content Include="Scripts\i18n\af.js" />
+    <Content Include="Scripts\i18n\ar.js" />
+    <Content Include="Scripts\i18n\az.js" />
+    <Content Include="Scripts\i18n\bg.js" />
+    <Content Include="Scripts\i18n\bn.js" />
+    <Content Include="Scripts\i18n\bs.js" />
+    <Content Include="Scripts\i18n\ca.js" />
+    <Content Include="Scripts\i18n\cs.js" />
+    <Content Include="Scripts\i18n\da.js" />
+    <Content Include="Scripts\i18n\de.js" />
+    <Content Include="Scripts\i18n\dsb.js" />
+    <Content Include="Scripts\i18n\el.js" />
+    <Content Include="Scripts\i18n\en.js" />
+    <Content Include="Scripts\i18n\es.js" />
+    <Content Include="Scripts\i18n\et.js" />
+    <Content Include="Scripts\i18n\eu.js" />
+    <Content Include="Scripts\i18n\fa.js" />
+    <Content Include="Scripts\i18n\fi.js" />
+    <Content Include="Scripts\i18n\fr.js" />
+    <Content Include="Scripts\i18n\gl.js" />
+    <Content Include="Scripts\i18n\he.js" />
+    <Content Include="Scripts\i18n\hi.js" />
+    <Content Include="Scripts\i18n\hr.js" />
+    <Content Include="Scripts\i18n\hsb.js" />
+    <Content Include="Scripts\i18n\hu.js" />
+    <Content Include="Scripts\i18n\hy.js" />
+    <Content Include="Scripts\i18n\id.js" />
+    <Content Include="Scripts\i18n\is.js" />
+    <Content Include="Scripts\i18n\it.js" />
+    <Content Include="Scripts\i18n\ja.js" />
+    <Content Include="Scripts\i18n\ka.js" />
+    <Content Include="Scripts\i18n\km.js" />
+    <Content Include="Scripts\i18n\ko.js" />
+    <Content Include="Scripts\i18n\lt.js" />
+    <Content Include="Scripts\i18n\lv.js" />
+    <Content Include="Scripts\i18n\mk.js" />
+    <Content Include="Scripts\i18n\ms.js" />
+    <Content Include="Scripts\i18n\nb.js" />
+    <Content Include="Scripts\i18n\ne.js" />
+    <Content Include="Scripts\i18n\nl.js" />
+    <Content Include="Scripts\i18n\pl.js" />
+    <Content Include="Scripts\i18n\ps.js" />
+    <Content Include="Scripts\i18n\pt-BR.js" />
+    <Content Include="Scripts\i18n\pt.js" />
+    <Content Include="Scripts\i18n\ro.js" />
+    <Content Include="Scripts\i18n\ru.js" />
+    <Content Include="Scripts\i18n\sk.js" />
+    <Content Include="Scripts\i18n\sl.js" />
+    <Content Include="Scripts\i18n\sq.js" />
+    <Content Include="Scripts\i18n\sr-Cyrl.js" />
+    <Content Include="Scripts\i18n\sr.js" />
+    <Content Include="Scripts\i18n\sv.js" />
+    <Content Include="Scripts\i18n\th.js" />
+    <Content Include="Scripts\i18n\tk.js" />
+    <Content Include="Scripts\i18n\tr.js" />
+    <Content Include="Scripts\i18n\uk.js" />
+    <Content Include="Scripts\i18n\vi.js" />
+    <Content Include="Scripts\i18n\zh-CN.js" />
+    <Content Include="Scripts\i18n\zh-TW.js" />
+    <Content Include="Scripts\jquery-3.6.0.js" />
+    <Content Include="Scripts\jquery-3.6.0.min.js" />
+    <Content Include="Scripts\jquery-3.6.0.slim.js" />
+    <Content Include="Scripts\jquery-3.6.0.slim.min.js" />
+    <Content Include="Scripts\jquery-3.6.0.slim.min.map" />
+    <Content Include="Scripts\jquery-3.6.0.min.map" />
+    <Content Include="Scripts\jquery.cookie.js" />
+    <Content Include="Scripts\jquery.freezeheader-Dash.js" />
+    <Content Include="Scripts\jquery.freezeheader.js" />
+    <Content Include="Scripts\jquery.mask.js" />
+    <Content Include="Scripts\jquery.moneymask.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.date.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.ar.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.az.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.bg.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.bs.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.ca.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.cs.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.cy.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.da.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.de.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.el.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.en-AU.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.en-GB.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.eo.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.es.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.et.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.eu.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.fa.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.fi.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.fo.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.fr-CH.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.fr.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.gl.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.he.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.hr.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.hu.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.hy.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.id.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.is.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.it-CH.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.it.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.ja.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.ka.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.kh.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.kk.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.ko.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.kr.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.lt.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.lv.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.me.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.mk.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.mn.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.ms.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.nl-BE.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.nl.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.no.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.pl.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.pt-BR.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.pt.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.ro.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.rs-latin.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.rs.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.ru.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.sk.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.sl.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.sq.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.sr-latin.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.sr.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.sv.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.sw.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.th.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.tr.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.uk.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.vi.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.zh-CN.min.js" />
+    <Content Include="Scripts\locales\bootstrap-datepicker.zh-TW.min.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\moment-with-locales.js" />
+    <Content Include="Scripts\moment-with-locales.min.js" />
+    <Content Include="Scripts\moment.js" />
+    <Content Include="Scripts\moment.min.js" />
+    <Content Include="Scripts\popper-utils.js" />
+    <Content Include="Scripts\popper-utils.min.js" />
+    <Content Include="Scripts\popper.js" />
+    <Content Include="Scripts\popper.min.js" />
+    <Content Include="Scripts\rateYo\v2.3.2\jquery.rateyo.js" />
+    <Content Include="Scripts\rateYo\v2.3.2\jquery.rateyo.min.js" />
+    <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\respond.matchmedia.addListener.js" />
+    <Content Include="Scripts\respond.matchmedia.addListener.min.js" />
+    <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\select2.js" />
+    <Content Include="Scripts\select2.min.js" />
+    <Content Include="Scripts\src\index.js" />
+    <Content Include="Scripts\src\methods\defaults.js" />
+    <Content Include="Scripts\src\methods\destroy.js" />
+    <Content Include="Scripts\src\methods\disableEventListeners.js" />
+    <Content Include="Scripts\src\methods\enableEventListeners.js" />
+    <Content Include="Scripts\src\methods\placements.js" />
+    <Content Include="Scripts\src\methods\update.js" />
+    <Content Include="Scripts\src\modifiers\applyStyle.js" />
+    <Content Include="Scripts\src\modifiers\arrow.js" />
+    <Content Include="Scripts\src\modifiers\computeStyle.js" />
+    <Content Include="Scripts\src\modifiers\flip.js" />
+    <Content Include="Scripts\src\modifiers\hide.js" />
+    <Content Include="Scripts\src\modifiers\index.js" />
+    <Content Include="Scripts\src\modifiers\inner.js" />
+    <Content Include="Scripts\src\modifiers\keepTogether.js" />
+    <Content Include="Scripts\src\modifiers\offset.js" />
+    <Content Include="Scripts\src\modifiers\preventOverflow.js" />
+    <Content Include="Scripts\src\modifiers\shift.js" />
+    <Content Include="Scripts\src\utils\clockwise.js" />
+    <Content Include="Scripts\src\utils\computeAutoPlacement.js" />
+    <Content Include="Scripts\src\utils\debounce.js" />
+    <Content Include="Scripts\src\utils\find.js" />
+    <Content Include="Scripts\src\utils\findCommonOffsetParent.js" />
+    <Content Include="Scripts\src\utils\findIndex.js" />
+    <Content Include="Scripts\src\utils\getBordersSize.js" />
+    <Content Include="Scripts\src\utils\getBoundaries.js" />
+    <Content Include="Scripts\src\utils\getBoundingClientRect.js" />
+    <Content Include="Scripts\src\utils\getClientRect.js" />
+    <Content Include="Scripts\src\utils\getFixedPositionOffsetParent.js" />
+    <Content Include="Scripts\src\utils\getOffsetParent.js" />
+    <Content Include="Scripts\src\utils\getOffsetRect.js" />
+    <Content Include="Scripts\src\utils\getOffsetRectRelativeToArbitraryNode.js" />
+    <Content Include="Scripts\src\utils\getOppositePlacement.js" />
+    <Content Include="Scripts\src\utils\getOppositeVariation.js" />
+    <Content Include="Scripts\src\utils\getOuterSizes.js" />
+    <Content Include="Scripts\src\utils\getParentNode.js" />
+    <Content Include="Scripts\src\utils\getPopperOffsets.js" />
+    <Content Include="Scripts\src\utils\getReferenceNode.js" />
+    <Content Include="Scripts\src\utils\getReferenceOffsets.js" />
+    <Content Include="Scripts\src\utils\getRoot.js" />
+    <Content Include="Scripts\src\utils\getRoundedOffsets.js" />
+    <Content Include="Scripts\src\utils\getScroll.js" />
+    <Content Include="Scripts\src\utils\getScrollParent.js" />
+    <Content Include="Scripts\src\utils\getStyleComputedProperty.js" />
+    <Content Include="Scripts\src\utils\getSupportedPropertyName.js" />
+    <Content Include="Scripts\src\utils\getViewportOffsetRectRelativeToArtbitraryNode.js" />
+    <Content Include="Scripts\src\utils\getWindow.js" />
+    <Content Include="Scripts\src\utils\getWindowSizes.js" />
+    <Content Include="Scripts\src\utils\includeScroll.js" />
+    <Content Include="Scripts\src\utils\index.js" />
+    <Content Include="Scripts\src\utils\isBrowser.js" />
+    <Content Include="Scripts\src\utils\isFixed.js" />
+    <Content Include="Scripts\src\utils\isFunction.js" />
+    <Content Include="Scripts\src\utils\isIE.js" />
+    <Content Include="Scripts\src\utils\isModifierEnabled.js" />
+    <Content Include="Scripts\src\utils\isModifierRequired.js" />
+    <Content Include="Scripts\src\utils\isNumeric.js" />
+    <Content Include="Scripts\src\utils\isOffsetContainer.js" />
+    <Content Include="Scripts\src\utils\removeEventListeners.js" />
+    <Content Include="Scripts\src\utils\runModifiers.js" />
+    <Content Include="Scripts\src\utils\setAttributes.js" />
+    <Content Include="Scripts\src\utils\setStyles.js" />
+    <Content Include="Scripts\src\utils\setupEventListeners.js" />
+    <Content Include="Scripts\umd\popper-utils.js" />
+    <Content Include="Scripts\umd\popper-utils.min.js" />
+    <Content Include="Scripts\umd\popper.js" />
+    <Content Include="Scripts\umd\popper.min.js" />
+    <Content Include="Scripts\xjsapi\clienteapi.js" />
+    <Content Include="SqlServerTypes\readme.htm" />
+    <Content Include="SqlServerTypes\x64\msvcr120.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x64\SqlServerSpatial140.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x86\msvcr120.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x86\SqlServerSpatial140.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\_GridPager.cshtml" />
+    <Content Include="Views\Shared\_Grid.cshtml" />
+    <Content Include="Views\Perfil\Index.cshtml" />
+    <Content Include="Views\Perfil\Incluir.cshtml" />
+    <Content Include="Views\Perfil\Editar.cshtml" />
+    <Content Include="Views\Perfil\Excluir.cshtml" />
+    <Content Include="Views\Funcao\Index.cshtml" />
+    <Content Include="Views\Funcao\Incluir.cshtml" />
+    <Content Include="Views\Funcao\Editar.cshtml" />
+    <Content Include="Views\Funcao\Excluir.cshtml" />
+    <Content Include="Views\Home\AcessoNegado.cshtml" />
+    <Content Include="Views\Parametro\Editar.cshtml" />
+    <Content Include="Views\Parametro\Excluir.cshtml" />
+    <Content Include="Views\Parametro\Incluir.cshtml" />
+    <Content Include="Views\Parametro\Index.cshtml" />
+    <Content Include="Views\PerfilXFuncao\Editar.cshtml" />
+    <Content Include="Views\Usuario\Editar.cshtml" />
+    <Content Include="Views\Usuario\Excluir.cshtml" />
+    <Content Include="Views\Usuario\Incluir.cshtml" />
+    <Content Include="Views\Usuario\Index.cshtml" />
+    <Content Include="Views\Usuario\Login.cshtml" />
+    <Content Include="Views\Shared\_LayoutPageLogin.cshtml" />
+    <Content Include="Views\Usuario\RecuperaSenha.cshtml" />
+    <Content Include="Views\Grupo\Editar.cshtml" />
+    <Content Include="Views\Grupo\Excluir.cshtml" />
+    <Content Include="Views\Grupo\Incluir.cshtml" />
+    <Content Include="Views\Grupo\Index.cshtml" />
+    <Content Include="Views\Modelo\Index.cshtml" />
+    <Content Include="Views\Modelo\Incluir.cshtml" />
+    <Content Include="Views\Modelo\Editar.cshtml" />
+    <Content Include="Views\Modelo\Excluir.cshtml" />
+    <Content Include="Views\SituacaoAtivo\Index.cshtml" />
+    <Content Include="Views\SituacaoAtivo\Incluir.cshtml" />
+    <Content Include="Views\SituacaoAtivo\Editar.cshtml" />
+    <Content Include="Views\SituacaoAtivo\Excluir.cshtml" />
+    <Content Include="Views\StatusAtivo\Index.cshtml" />
+    <Content Include="Views\StatusAtivo\Incluir.cshtml" />
+    <Content Include="Views\StatusAtivo\Editar.cshtml" />
+    <Content Include="Views\StatusAtivo\Excluir.cshtml" />
+    <Content Include="Views\StatusContrato\Index.cshtml" />
+    <Content Include="Views\StatusContrato\Incluir.cshtml" />
+    <Content Include="Views\StatusContrato\Editar.cshtml" />
+    <Content Include="Views\StatusContrato\Excluir.cshtml" />
+    <Content Include="Views\RazaoComodato\Index.cshtml" />
+    <Content Include="Views\RazaoComodato\Incluir.cshtml" />
+    <Content Include="Views\RazaoComodato\Editar.cshtml" />
+    <Content Include="Views\RazaoComodato\Excluir.cshtml" />
+    <Content Include="Views\Tipo\Index.cshtml" />
+    <Content Include="Views\Tipo\Incluir.cshtml" />
+    <Content Include="Views\Tipo\Editar.cshtml" />
+    <Content Include="Views\Tipo\Excluir.cshtml" />
+    <Content Include="Views\Executivo\Index.cshtml" />
+    <Content Include="Views\Executivo\Incluir.cshtml" />
+    <Content Include="Views\Executivo\Editar.cshtml" />
+    <Content Include="Views\Executivo\Excluir.cshtml" />
+    <Content Include="Views\Vendedor\Index.cshtml" />
+    <Content Include="Views\Vendedor\Incluir.cshtml" />
+    <Content Include="Views\Vendedor\Editar.cshtml" />
+    <Content Include="Views\Vendedor\Excluir.cshtml" />
+    <Content Include="Views\Tecnico\Index.cshtml" />
+    <Content Include="Views\Tecnico\Incluir.cshtml" />
+    <Content Include="Views\Tecnico\Editar.cshtml" />
+    <Content Include="Views\Tecnico\Excluir.cshtml" />
+    <Content Include="Views\Usuario\TrocarSenha.cshtml" />
+    <Content Include="Views\Usuario\TrocarSenhaViaChave.cshtml" />
+    <Content Include="Views\PerfilXFuncao\_gridMVC.cshtml" />
+    <Content Include="webfonts\fa-brands-400.svg" />
+    <Content Include="webfonts\fa-regular-400.svg" />
+    <Content Include="webfonts\fa-solid-900.svg" />
+    <Content Include="webfonts\fa-solid-900.woff2" />
+    <Content Include="webfonts\fa-solid-900.woff" />
+    <Content Include="webfonts\fa-solid-900.ttf" />
+    <Content Include="webfonts\fa-solid-900.eot" />
+    <Content Include="webfonts\fa-regular-400.woff2" />
+    <Content Include="webfonts\fa-regular-400.woff" />
+    <Content Include="webfonts\fa-regular-400.ttf" />
+    <Content Include="webfonts\fa-regular-400.eot" />
+    <Content Include="webfonts\fa-brands-400.woff2" />
+    <Content Include="webfonts\fa-brands-400.woff" />
+    <Content Include="webfonts\fa-brands-400.ttf" />
+    <Content Include="webfonts\fa-brands-400.eot" />
+    <Content Include="Views\Tecnico\EstoqueIntermediario.cshtml" />
+    <Content Include="Views\Contato\Index.cshtml" />
+    <Content Include="Views\Contato\Incluir.cshtml" />
+    <Content Include="Views\Contato\Editar.cshtml" />
+    <Content Include="Views\Contato\Excluir.cshtml" />
+    <Content Include="Views\Consumivel\Index.cshtml" />
+    <Content Include="Views\Error\Index.cshtml" />
+    <Content Include="Views\Consumivel\Incluir.cshtml" />
+    <Content Include="Views\Consumivel\Editar.cshtml" />
+    <Content Include="Views\Consumivel\Excluir.cshtml" />
+    <Content Include="Views\Peca\Index.cshtml" />
+    <Content Include="Views\Peca\Incluir.cshtml" />
+    <Content Include="Views\Peca\Editar.cshtml" />
+    <Content Include="Views\Peca\Excluir.cshtml" />
+    <Content Include="Views\Ativo\Index.cshtml" />
+    <Content Include="Views\Ativo\Incluir.cshtml" />
+    <Content Include="Views\Ativo\Editar.cshtml" />
+    <Content Include="Views\Ativo\Excluir.cshtml" />
+    <Content Include="Views\Cliente\Index.cshtml" />
+    <Content Include="Views\Cliente\Incluir.cshtml" />
+    <Content Include="Views\Cliente\DetalhesCliente.cshtml" />
+    <Content Include="Views\Cliente\Editar.cshtml" />
+    <Content Include="Views\Cliente\Excluir.cshtml" />
+    <Content Include="Views\AtivoCliente\Index.cshtml" />
+    <Content Include="Views\AtivoCliente\Incluir.cshtml" />
+    <Content Include="Views\AtivoCliente\Editar.cshtml" />
+    <Content Include="Views\AtivoCliente\Excluir.cshtml" />
+    <Content Include="Views\Contrato\Index.cshtml" />
+    <Content Include="Views\Contrato\_gridContratos.cshtml" />
+    <Content Include="Views\TecnicoXCliente\Index.cshtml" />
+    <Content Include="Views\TBFuncao\Index.cshtml" />
+    <Content Include="Views\TBFuncao\Incluir.cshtml" />
+    <Content Include="Views\TBFuncao\Editar.cshtml" />
+    <Content Include="Views\TBFuncao\Excluir.cshtml" />
+    <Content Include="Views\TecnicoXCliente\_gridMVC.cshtml" />
+    <Content Include="Views\TecnicoXCliente\Editar.cshtml" />
+    <Content Include="Views\TecnicoXCliente\_gridMVCEscala.cshtml" />
+    <Content Include="Views\Contrato\Editar.cshtml" />
+    <Content Include="Views\Contrato\Excluir.cshtml" />
+    <Content Include="Views\Contrato\Incluir.cshtml" />
+    <Content Include="Views\LinhaProduto\Editar.cshtml" />
+    <Content Include="Views\LinhaProduto\Excluir.cshtml" />
+    <Content Include="Views\LinhaProduto\Incluir.cshtml" />
+    <Content Include="Views\LinhaProduto\Index.cshtml" />
+    <Content Include="Views\Agenda\Index.cshtml" />
+    <Content Include="Views\Agenda\_gridMVC.cshtml" />
+    <Content Include="Views\MovimPecas\Index.cshtml" />
+    <Content Include="Views\MovimPecas\_gridEstoque.cshtml" />
+    <Content Include="Views\MovimPecas\_gridMovimentacao.cshtml" />
+    <Content Include="Views\Estoque\Editar.cshtml" />
+    <Content Include="Views\Estoque\Incluir.cshtml" />
+    <Content Include="Views\Estoque\Index.cshtml" />
+    <Content Include="Views\EstoqueIntermediario\Index.cshtml" />
+    <Content Include="Views\MovimPecas\_modalMovimentacao.cshtml" />
+    <Content Include="Views\MovimPecas\_modalMovimentacaoTecnico.cshtml" />
+    <Content Include="Views\MovimPecas\ConsultarMovimentacao.cshtml" />
+    <Content Include="Views\Agenda\EditarVisita.cshtml" />
+    <Content Include="Views\Agenda\_modalHistoricoVisita.cshtml" />
+    <Content Include="Views\Agenda\_gridMVCHistoricoVisita.cshtml" />
+    <Content Include="Views\PlanoZero\Index.cshtml" />
+    <Content Include="Views\PlanoZero\_modalAdicionarPeca.cshtml" />
+    <Content Include="Views\PlanoZero\_gridPlanoZero.cshtml" />
+    <Content Include="Views\Agenda\EditarOS.cshtml" />
+    <Content Include="Views\Agenda\_modalHistoricoOS.cshtml" />
+    <Content Include="Views\Agenda\_gridMVCHistoricoOS.cshtml" />
+    <Content Include="Views\Recolhidos\Index.cshtml" />
+    <Content Include="Views\EstoqueIntermediario\_gridEstoquePecas.cshtml" />
+    <Content Include="Views\SolicitacaoPecas\_gridMVC.cshtml" />
+    <Content Include="Views\SolicitacaoPecas\Editar.cshtml" />
+    <Content Include="Views\SolicitacaoPecas\_gridmvcMensagem.cshtml" />
+    <Content Include="Views\SolicitacaoPecas\_modalPedidoPecaAvulso.cshtml" />
+    <Content Include="Views\SolicitacaoPecas\_gridmvcPedidoItem.cshtml" />
+    <Content Include="Views\SolicitacaoPecas\AprovaSolicitacaoPecas.cshtml" />
+    <Content Include="Views\SolicitacaoPecas\_gridMVCAprovaSolicitacaoPecas.cshtml" />
+    <Content Include="Views\SolicitacaoPecas\_modalPedidoPecaCliente.cshtml" />
+    <Content Include="Views\SolicitacaoPecas\ConfirmaRecebimentoPecas.cshtml" />
+    <Content Include="Views\SolicitacaoPecas\_gridMVCConfirmaSolicitacaoPecas.cshtml" />
+    <Content Include="Views\Devolvidos\Index.cshtml" />
+    <Content Include="Views\Inventarios\Index.cshtml" />
+    <Content Include="Views\Pedidos\Index.cshtml" />
+    <Content Include="Views\Locados\Index.cshtml" />
+    <Content Include="Views\Acompanhamentos\Index.cshtml" />
+    <Content Include="Views\Resumos\Index.cshtml" />
+    <Content Include="Views\Manutencao\Index.cshtml" />
+    <Content Include="Views\EstoqueIntermediario\Relatorio.cshtml" />
+    <Content Include="Views\AnaliseConsumo\Index.cshtml" />
+    <Content Include="Views\Agenda\_modalPeca.cshtml" />
+    <Content Include="Views\Agenda\_modalPendencia.cshtml" />
+    <Content Include="Views\Agenda\_gridMVCPendenciaOS.cshtml" />
+    <Content Include="Views\MovimPecas\_modalMovimentacaoEstoque.cshtml" />
+    <Content Include="Views\Agenda\_gridMVCPecaOS.cshtml" />
+    <Content Include="Views\Empresa\Editar.cshtml" />
+    <Content Include="Views\Empresa\Excluir.cshtml" />
+    <Content Include="Views\Empresa\Incluir.cshtml" />
+    <Content Include="Views\Empresa\Index.cshtml" />
+    <Content Include="Views\Agenda\ConsultaConfirmaVisita.cshtml" />
+    <Content Include="Views\Agenda\_gridMVCConsultaConfirmaVisita.cshtml" />
+    <Content Include="Views\Agenda\_modalAvaliacaoVisita.cshtml" />
+    <Content Include="Views\SolicitacaoPecas\Index.cshtml" />
+    <Content Include="Views\SolicitacaoPecas\_modalPedidoPecaTecnico.cshtml" />
+    <Content Include="Views\GeralManutencao\Index.cshtml" />
+    <Content Include="Views\Agenda\_gridMVCHistorico.cshtml" />
+    <Content Include="Views\Contrato\Imprimir.cshtml" />
+    <Content Include="Views\Estoque\Excluir.cshtml" />
+    <Content Include="Views\CarteiraAtendimento\Index.cshtml" />
+    <Content Include="Views\Sumarizados\Index.cshtml" />
+    <Content Include="Views\Dashboard\Planejamento.cshtml" />
+    <Content Include="Views\Dashboard\_boxSeletor.cshtml" />
+    <Content Include="Views\Dashboard\_boxCliente.cshtml" />
+    <Content Include="Views\Dashboard\_boxEquipamentoComodato.cshtml" />
+    <Content Include="Views\Dashboard\_boxEquipamentoLocado.cshtml" />
+    <Content Include="Views\Dashboard\_boxEquipamentoEnviado.cshtml" />
+    <Content Include="Views\Dashboard\_boxProjEnvioEquipamento.cshtml" />
+    <Content Include="Views\Dashboard\_boxPecaEnviada.cshtml" />
+    <Content Include="Views\Dashboard\_boxAtendimento.cshtml" />
+    <Content Include="Views\Dashboard\_boxGraficoValorPecaEnviadaMes.cshtml" />
+    <Content Include="Views\Dashboard\_boxGraficoMaquinaEnviadaDevolvidaMes.cshtml" />
+    <Content Include="Views\Dashboard\_boxGraficoEnvioEquipamentoLinhaProd.cshtml" />
+    <Content Include="Views\Dashboard\_boxGraficoTipoEnvioEquipamento.cshtml" />
+    <Content Include="Views\Dashboard\_boxEquipamentoModeloEnvio.cshtml" />
+    <Content Include="Views\Dashboard\Vendas.cshtml" />
+    <Content Include="Views\Dashboard\_boxFechadorAtivo.cshtml" />
+    <Content Include="Views\Dashboard\_boxIdentificadorAtivo.cshtml" />
+    <Content Include="Views\Dashboard\_boxAtendimentoAndamento.cshtml" />
+    <Content Include="Views\Dashboard\_boxPeriodo.cshtml" />
+    <Content Include="Views\Dashboard\_boxVenda.cshtml" />
+    <Content Include="Views\Dashboard\_boxVendedor.cshtml" />
+    <Content Include="Views\Dashboard\_boxModelo.cshtml" />
+    <Content Include="Views\Dashboard\_boxGraficoVenda.cshtml" />
+    <Content Include="Views\Dashboard\Negocios.cshtml" />
+    <Content Include="Views\Dashboard\_boxPecaTrocada.cshtml" />
+    <Content Include="Views\Dashboard\_boxLinhaProduto.cshtml" />
+    <Content Include="Views\Dashboard\_boxGradeCliente.cshtml" />
+    <Content Include="Views\Dashboard\_gridMVCCliente.cshtml" />
+    <Content Include="Views\Dashboard\AreaTecnica.cshtml" />
+    <Content Include="Views\Dashboard\_boxSolicitacaoAtendimentoPendente.cshtml" />
+    <Content Include="Views\Dashboard\_boxDistribuicaoKAT.cshtml" />
+    <Content Include="Views\Dashboard\_boxAtivoEnviadoNaoInstalado.cshtml" />
+    <Content Include="Views\Dashboard\_boxExcecaoAtendimento.cshtml" />
+    <Content Include="Views\Dashboard\_boxAtendimentoAreaTecnica.cshtml" />
+    <Content Include="Views\AnaliseSatisfacao\ConsultarResultadoPesquisa.cshtml" />
+    <Content Include="Views\AnaliseSatisfacao\Editar.cshtml" />
+    <Content Include="Views\AnaliseSatisfacao\Incluir.cshtml" />
+    <Content Include="Views\AnaliseSatisfacao\Index.cshtml" />
+    <Content Include="Views\AnaliseSatisfacao\_modalPesquisaSatisfacao.cshtml" />
+    <Content Include="Views\Dashboard\_boxGraficoAtendimento.cshtml" />
+    <Content Include="Views\Dashboard\_boxGraficoPeriodoRealizadoMes.cshtml" />
+    <Content Include="Views\Dashboard\_boxGraficoAtendimentoTecnicoRegional.cshtml" />
+    <Content Include="Views\Dashboard\_boxGraficoTipoManutencao.cshtml" />
+    <Content Include="Views\Dashboard\_boxGraficoTrocaPecaMes.cshtml" />
+    <Content Include="Views\Dashboard\_boxGradeModelo.cshtml" />
+    <Content Include="Views\Dashboard\_gridMVCModelo.cshtml" />
+    <Content Include="Views\Dashboard\_boxGradeClienteVisaoResumida.cshtml" />
+    <Content Include="Views\Dashboard\_boxGradeEquipamento.cshtml" />
+    <Content Include="Views\Dashboard\_boxGradeHistorico.cshtml" />
+    <Content Include="Views\Dashboard\_boxGradeHistoricoValores.cshtml" />
+    <Content Include="Views\Dashboard\_boxGradeTecnico.cshtml" />
+    <Content Include="Views\Dashboard\_boxGraficoVolumeVenda.cshtml" />
+    <Content Include="Views\Dashboard\_gridMVCClienteVisaoResumida.cshtml" />
+    <Content Include="Views\Dashboard\_gridMVCClienteVisaoResumidaAreaTecnica.cshtml" />
+    <Content Include="Views\Dashboard\_gridMVCEquipamento.cshtml" />
+    <Content Include="Views\Dashboard\_gridMVCEquipamentoWorkFlow.cshtml" />
+    <Content Include="Views\Dashboard\_gridMVCHistorico.cshtml" />
+    <Content Include="Views\GrupoModelo\Editar.cshtml" />
+    <Content Include="Views\GrupoModelo\Excluir.cshtml" />
+    <Content Include="Views\GrupoModelo\Incluir.cshtml" />
+    <Content Include="Views\GrupoModelo\Index.cshtml" />
+    <Content Include="Views\PlanoZero\_adicionarPeca.cshtml" />
+    <Content Include="Views\SolicitacaoAtendimento\Index.cshtml" />
+    <Content Include="Views\SolicitacaoAtendimento\_gridMVCListaSolicitacao.cshtml" />
+    <Content Include="Views\SolicitacaoAtendimento\_modalSolicitacao.cshtml" />
+    <Content Include="Views\Segmento\Index.cshtml" />
+    <Content Include="Views\Segmento\Incluir.cshtml" />
+    <Content Include="Views\Segmento\Editar.cshtml" />
+    <Content Include="Views\Segmento\Excluir.cshtml" />
+    <Content Include="Views\Completos\Index.cshtml" />
+    <Content Include="Views\UsuarioCliente\Index.cshtml" />
+    <Content Include="Views\UsuarioCliente\_gridMVC.cshtml" />
+    <Content Include="Views\UsuarioCliente\Editar.cshtml" />
+    <Content Include="Views\UsuarioCliente\_gridMVCSelecionado.cshtml" />
+    <Content Include="Views\KAT\Index.cshtml" />
+    <Content Include="Views\Distribuidor\Index.cshtml" />
+    <Content Include="Views\Dashboard\_gridMVCHistoricoValores.cshtml" />
+    <Content Include="Views\Dashboard\_gridMVCTecnico.cshtml" />
+    <Content Include="Views\Workflow\Index.cshtml" />
+    <Content Include="Views\Workflow\PedidoDevolucao.cshtml" />
+    <Content Include="Views\Workflow\PedidoEnvio.cshtml" />
+    <Content Include="Views\Workflow\_gridMvcPedidos.cshtml" />
+    <Content Include="Views\UsuarioXWFGrupo\index.cshtml" />
+    <Content Include="Views\UsuarioXWFGrupo\_gridMVC.cshtml" />
+    <Content Include="Views\Workflow\_gridAcessoriosModeloEnvio.cshtml" />
+    <Content Include="Views\Workflow\_gridEquipamentoItem.cshtml" />
+    <Content Include="Views\Workflow\AcompanhamentoPedidoEnvio.cshtml" />
+    <Content Include="Views\Workflow\AcompanhamentoPedidoDevolucao.cshtml" />
+    <Content Include="Views\Workflow\_gridmvcMensagem.cshtml" />
+    <Content Include="Views\Dashboard\_boxGraficoDistribuicaoEquipamento.cshtml" />
+    <Content Include="Views\Dashboard\_boxClienteDistribuicaoGM.cshtml" />
+    <Content Include="Views\Dashboard\_boxEquipamento.cshtml" />
+    <Content Include="Views\Dashboard\_boxGraficoVolume.cshtml" />
+    <Content Include="Views\Workflow\_AcoesHistoricosDevolucao.cshtml" />
+    <Content Include="Views\Workflow\_AcoesHistoricosEnvio.cshtml" />
+    <Content Include="Views\TreinamentosEAD\TreinamentosEAD.cshtml" />
+    <Content Include="Views\TreinamentosEAD\View.cshtml" />
+    <Content Include="Views\TreinamentosEAD\Index.cshtml" />
+    <Content Include="Views\RelatorioReclamacao\AcoesRelatorioReclamacao.cshtml" />
+    <Content Include="Views\RelatorioReclamacao\AcompanhamentoReclamacao.cshtml" />
+    <Content Include="Views\RelatorioReclamacao\Index.cshtml" />
+    <Content Include="Views\RelatorioReclamacao\_AcoesHistoricosReclamacao.cshtml" />
+    <Content Include="Views\RelatorioReclamacao\_gridmvcMensagem.cshtml" />
+    <Content Include="Views\RelatorioReclamacao\_gridMvcRelatorioReclamacao.cshtml" />
+    <Content Include="Views\SQLQuery\Index.cshtml" />
+    <Content Include="Views\MonitoramentoWF\Index.cshtml" />
+    <Content Include="Views\Dashboard\_boxEnvioDeEquipamentos.cshtml" />
+    <Content Include="Views\MonitoramentoWF\gridMonitoramentoWF.cshtml" />
+    <Content Include="Views\KatTecnico\Index.cshtml" />
+    <Content Include="Views\Dashboard\_boxAtendimentoVisitasAndamento.cshtml" />
+    <Content Include="Views\Dashboard\_boxPesquisaSatisfacao.cshtml" />
+    <Content Include="Views\Agenda\_gridMVCConsultaConfirmaVisitaCliente.cshtml" />
+    <Content Include="Views\HistoricoVisita\Index.cshtml" />
+    <Content Include="Views\HistoricoVisita\_gridMVC.cshtml" />
+    <Content Include="Views\Ativo\_gridMVCAtivo.cshtml" />
+    <Content Include="Views\AtivoCliente\_gridMVCAtivoCliente.cshtml" />
+    <Content Include="_3M_ComodatoDataSet.xsc">
+      <DependentUpon>_3M_ComodatoDataSet.xsd</DependentUpon>
+    </Content>
+    <Content Include="Views\VisitaPadrao\_gridMVC.cshtml" />
+    <Content Include="Views\VisitaPadrao\_gridMVCConsultaConfirmaVisita.cshtml" />
+    <Content Include="Views\VisitaPadrao\_gridMVCConsultaConfirmaVisitaCliente.cshtml" />
+    <Content Include="Views\VisitaPadrao\_gridMVCHistorico.cshtml" />
+    <Content Include="Views\VisitaPadrao\_gridMVCHistoricoVisita.cshtml" />
+    <Content Include="Views\VisitaPadrao\_modalAvaliacaoVisita.cshtml" />
+    <Content Include="Views\VisitaPadrao\_modalHistoricoVisita.cshtml" />
+    <Content Include="Views\VisitaPadrao\ConsultaConfirmaVisita.cshtml" />
+    <Content Include="Views\VisitaPadrao\Index.cshtml" />
+    <Content Include="Views\Agenda\Incluir.cshtml" />
+    <Content Include="Views\VisitaPadrao\Excluir.cshtml" />
+    <Content Include="Views\VisitaPadrao\Visualizar.cshtml" />
+    <Content Include="Views\VisitaPadrao\Editar.cshtml" />
+    <Content Include="Views\VisitaPadrao\Incluir.cshtml" />
+    <Content Include="Views\OsPadrao\_gridMVC.cshtml" />
+    <Content Include="Views\OsPadrao\_gridMVCHistorico.cshtml" />
+    <Content Include="Views\OsPadrao\_modalPeca.cshtml" />
+    <Content Include="Views\OsPadrao\Editar.cshtml" />
+    <Content Include="Views\OsPadrao\Excluir.cshtml" />
+    <Content Include="Views\OsPadrao\Incluir.cshtml" />
+    <Content Include="Views\OsPadrao\Index.cshtml" />
+    <Content Include="Views\OsPadrao\Visualizar.cshtml" />
+    <Content Include="Views\OsPadrao\_gridMVCHistoricoOS.cshtml" />
+    <Content Include="Views\OsPadrao\_gridMVCPecaOS.cshtml" />
+    <Content Include="Views\OsPadrao\_gridMVCPendenciaOS.cshtml" />
+    <Content Include="Views\OsPadrao\_modalHistoricoOS.cshtml" />
+    <Content Include="Views\OsPadrao\_modalPendencia.cshtml" />
+    <Content Include="Views\OsPadrao\_gridMVCReclamacaoOS.cshtml" />
+    <Content Include="Views\OsPadrao\_modalReclamacao.cshtml" />
+    <Content Include="Views\RelatorioPecas\Index.cshtml" />
+    <Content Include="Views\KatTecnicoVisita\Index.cshtml" />
+    <Content Include="Views\AtivoCliente\_gridMVCDadosFaturamento.cshtml" />
+    <Content Include="Views\AtivoCliente\_gridMVCDadosPagamento.cshtml" />
+    <Content Include="Views\AtivoCliente\_gridMVCBotoes.cshtml" />
+    <Content Include="Views\CarteiraAtendimentoVisita\Index.cshtml" />
+    <Content Include="Views\Agenda\Visualizar.cshtml" />
+    <Content Include="Views\AtivoCliente\_modalEditFaturamento.cshtml" />
+    <Content Include="Views\ConsolidadoVendas\Index.cshtml" />
+    <Content Include="Views\VisitaPadrao\Pesquisa.cshtml" />
+    <Content Include="Views\OsPadrao\Pesquisa.cshtml" />
+    <Content Include="Scripts\umd\popper.min.js.map" />
+    <Content Include="Scripts\umd\popper.js.map" />
+    <Content Include="Scripts\umd\popper.js.flow" />
+    <Content Include="Scripts\umd\popper-utils.min.js.map" />
+    <Content Include="Scripts\umd\popper-utils.js.map" />
+    <Content Include="Scripts\README.md" />
+    <Content Include="Scripts\popper.min.js.map" />
+    <Content Include="Scripts\popper.js.map" />
+    <Content Include="Scripts\popper-utils.min.js.map" />
+    <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\SolicitacaoPecas\EnviaSolicitacaodePecaBCPS.cshtml" />
+    <Content Include="Views\SolicitacaoPecas\_gridMVCBPCS.cshtml" />
+    <Content Include="Views\SolicitacaoPecas\EditarEnvioBPCS.cshtml" />
+    <Content Include="Views\SolicitacaoPecas\_gridmvcPedidoItemBPCS.cshtml" />
+    <Content Include="Views\SolicitacaoPecas\_modalDadosPedido.cshtml" />
+    <Content Include="Views\SolicitacaoPecas\_gridmvcNotas.cshtml" />
+    <Content Include="Views\SolicitacaoPecas\_modaPedidoEspecial.cshtml" />
+    <Content Include="Views\FatorPonderacao\Editar.cshtml" />
+    <Content Include="Views\FatorPonderacao\Excluir.cshtml" />
+    <Content Include="Views\FatorPonderacao\Incluir.cshtml" />
+    <Content Include="Views\FatorPonderacao\Index.cshtml" />
+    <None Include="_3M_ComodatoDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>_3M_ComodatoDataSet2.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="_3M_ComodatoDataSet.xss">
+      <DependentUpon>_3M_ComodatoDataSet.xsd</DependentUpon>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Arquivos\Workflow\Devolucao\" />
+    <Folder Include="Arquivos\Workflow\Envio\" />
+    <Folder Include="fonts\" />
+    <Folder Include="Views\Base\" />
+    <Folder Include="Views\DadosFaturamento\" />
+    <Folder Include="Views\DadosPagamento\" />
+    <Folder Include="Views\Treinamentos\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\3M.Comodato.Data\3M.Comodato.Data.csproj">
+      <Project>{61e69b01-2698-44b6-9032-4dba345177ba}</Project>
+      <Name>3M.Comodato.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\3M.Comodato.Entity\3M.Comodato.Entity.csproj">
+      <Project>{3062841c-3ffd-4826-8081-7a2131319f2a}</Project>
+      <Name>3M.Comodato.Entity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\3M.Comodato.Utility\3M.Comodato.Utility.csproj">
+      <Project>{8c523804-297f-43eb-8722-f372da8a8fea}</Project>
+      <Name>3M.Comodato.Utility</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Reports\Contrato\Aditivo.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\Contrato\Contrato.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\Contrato\Denuncia.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\Contrato\Distrato.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Reports\Acompanhamentos\ReportAcompanhamentos.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\AnaliseConsumo\AnaliseConsumoCliente.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\AnaliseConsumo\AnaliseConsumoMensal.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\AnaliseSatisfacao\ResultadoPesquisa.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\Completos\ReportCompletos.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\Completos\ReportSub1.rdlc">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\Completos\SubItensConsumidos.rdlc">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\Completos\SubReportComp.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\EstoqueIntermediario\EstoqueIntermediarioPorPeca.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\EstoqueIntermediario\EstoqueIntermediarioPorTecnico.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\Manutencao\Manutencao.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\Manutencao\ReportGeralManutencao.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\MovimPecas\MovimPecas.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\Pedidos\ReportPedidos.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\Devolvidos\ReportDevolvidos.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Reports\Pedidos\ReportPedidosMensagens.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\Resumos\ReportResumos.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\SolicitacaoPecas\ReportSolicitacaoPecas.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\SolicitacaoPecas\ReportSolicitacaoPecasItem.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\SolicitacaoPecas\ReportSolicitacaoPecasMensagem.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Reports\Distribuidor\AtivosDI.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\Workflow\ReportPedidoEquipamento.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\Lotes\Lote.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="Scripts\index.d.ts" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="Exists('$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets')" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>2147</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>https://localhost:44349/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.2.6.1\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.2.6.1\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.8\build\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

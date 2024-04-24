@@ -1,0 +1,72 @@
+﻿@{
+    ViewBag.Title = "Movimentação de Peças";
+}
+
+<i class="fas fa-cubes fa-3x fa-pull-left"></i>
+<h3>Movimentação de Peças</h3>
+
+
+<div class="well">
+
+    <div class="form-horizontal">
+        <hr />
+
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label class="control-label">Estoque</label>
+                <div class="form-group">
+                    @Html.DropDownList("ddlEstoque", ViewBag.ListaEstoque as IEnumerable<SelectListItem>, new { @class = "js-select-basic-single form-control col-md-12 field-validation-valid" })
+                    <label id="validaComboEstoque" class="control-label text-danger" style="display: none;">Conteúdo obrigatório!</label>
+
+                </div>
+            </div>
+            <div class="form-group col-md-6">
+                <label class="control-label">Ação</label>
+                <div class="form-group">
+                    @Html.DropDownList("ddlAcao", ViewBag.ListaAcao as IEnumerable<SelectListItem>, new { @class = "js-select-basic-single form-control col-md-12 field-validation-valid" })
+                    <label id="validaComboAcao" class="control-label text-danger" style="display: none;">Conteúdo obrigatório!</label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-6">
+                <input type="button" id="btnConsultarEstoque" class="btn btn-primary btn-sm" value="Consultar Estoque" />&nbsp;
+                <a class="btn btn-primary btn-sm" href="MovimPecas/ConsultarMovimentacao">Consultar Movimentação</a>
+                @*@Html.ActionLink("Consultar Movimentação", "ConsultarMovimentacao", "MovimPecas", new { @class = "btn btn-primary btn-sm" })*@
+            </div>
+            <div class="form-group col-md-6">
+                <input type="button" id="btnAcao" data-toggle="modal" data-target="#MovimentacaoAcao" class="btn btn-primary btn-sm" value="Iniciar Ação" />&nbsp;
+                <button class="btn btn-primary btn-sm col-md-2" type="button" id="btnImprimir">Imprimir</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="gridConsulta"></div>
+
+
+
+@section Scripts
+{
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    <script>
+        var URLAPI = "@_3M.Comodato.Utility.ControlesUtility.Parametro.ObterValorParametro(_3M.Comodato.Utility.ControlesUtility.Constantes.URLAPI)";
+        var actionConsultarEstoque = '@Url.Action("ConsultarEstoque", "MovimPecas")';
+        var actionAcao = '@Url.Action("MovimentarEstoque", "MovimPecas")';
+        var nidUsuario = @Convert.ToInt64(((_3M.Comodato.Entity.UsuarioPerfilEntity)Session["_CurrentUser"]).usuario.nidUsuario);
+        var actionImprimir = '@Url.Action("Imprimir", "MovimPecas")';
+        var MensagemGravacaoSucesso = '@_3M.Comodato.Utility.ControlesUtility.Constantes.MensagemGravacaoSucesso';
+        var token = "@Convert.ToString(((_3M.Comodato.Entity.UsuarioPerfilEntity)Session["_CurrentUser"]).token)";
+    </script>
+
+    <script type="text/javascript" src="~/Scripts/Comodato/Util.js"></script>
+    <script type="text/javascript" src="~/Scripts/Comodato/MovimPecas.js"></script>
+    <script>
+        $('#mySelect2').select2({
+            dropdownParent: $('#myModal')
+        });
+    </script>
+}
+@Html.Partial("_modalMovimentacao")
+@Html.Partial("_modalMovimentacaoEstoque")
+@Html.Partial("_modalMovimentacaoTecnico")

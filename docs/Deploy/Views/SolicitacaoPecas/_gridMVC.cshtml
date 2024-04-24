@@ -1,0 +1,42 @@
+﻿@model IEnumerable<_3M.Comodato.Front.Models.ListaSolicitacaoPecas>
+
+@using GridMvc.Html
+
+<div class="table table-hover">
+    @Html.Grid(Model).Columns(columns =>
+{
+    columns.Add(foo => foo.CD_PEDIDO_Formatado).Titled("PEDIDO").Sortable(false).Filterable(false);
+    columns.Add(foo => foo.DT_CRIACAO).Titled("DATA").Sortable(false).Filterable(false);
+    columns.Add(foo => foo.statusPedido.DS_STATUS_PEDIDO).Titled("STATUS").Sortable(false).Filterable(false);
+    columns.Add(foo => foo.QTD_SOLICITADA).Titled("QTD PEÇAS").Sortable(false).Filterable(false);
+    columns.Add(foo => foo.cliente.NM_CLIENTE).Titled("CLIENTE").Sortable(false).Filterable(false);
+    columns.Add(foo => foo.tecnico.NM_TECNICO).Titled("TÉCNICO").Sortable(false).Filterable(false);
+    columns.Add(foo => foo.tecnico.empresa.NM_Empresa).Titled("EMPRESA").Sortable(false).Filterable(false);
+    columns.Add(foo => foo.DS_TP_TIPO_PEDIDO).Titled("TIPO").Sortable(false).Filterable(false);
+
+    columns.Add()
+        .Encoded(false)
+        .Sanitized(false)
+        .SetWidth(30)
+        .RenderValueAs(o => "<a href='#' onclick='Imprimir(" + o.ID_PEDIDO + ")' class='fas fa-print fa-lg'> </a>");
+
+    columns.Add()
+        .Encoded(false)
+        .Sanitized(false)
+        .SetWidth(30)
+        //.RenderValueAs(o => Html.ActionLink(" ", "Editar", new { idKey = HttpUtility.HtmlDecode(o.idKey) }, new
+        //{
+        //    @class =
+        //    o.ST_TP_STATUS_VISITA_OS == null ? string.Empty :
+        //    o.ST_TP_STATUS_VISITA_OS == 0 ? string.Empty : "fas fa-search fa-lg"
+        //}));
+        .RenderValueAs(o => Html.ActionLink(" ", "Editar", new { idKey = HttpUtility.HtmlDecode(o.idKey) }, new { @class = "fas fa-pencil-alt fa-lg" }));
+
+    columns.Add()
+        .Encoded(false)
+        .Sanitized(false)
+        .SetWidth(30)
+        .RenderValueAs(o => o.ExibirExcluir == false ? " " : "<a href='#' onclick='ExcluirConfirmar(" + o.ID_PEDIDO + "," + o.statusPedido.ID_STATUS_PEDIDO + ")' class='fas fa-trash-alt fa-lg'> </a>");
+
+})
+</div>

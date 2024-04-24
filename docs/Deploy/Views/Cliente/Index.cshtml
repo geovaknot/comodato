@@ -1,0 +1,114 @@
+﻿@model IEnumerable<_3M.Comodato.Front.Models.Cliente>
+
+@using GridMvc.Html
+
+@{
+    ViewBag.Title = "Cliente";
+}
+
+<i class="fas fa-cubes fa-3x fa-pull-left"></i>
+<h3>Cliente</h3>
+
+<p>
+    <a class="btn btn-primary btn-sm" href="Cliente/Incluir">Novo registro <i class="far fa-sticky-note"></i></a>
+    <button class="btn btn-primary btn-sm" type="button" id="btnCalcular">
+        (Re)calcular TODOS os KAT <i class="fas fa-calculator"></i>
+    </button>
+</p>
+
+<div class="table table-hover">
+    @Html.Grid(Model).Columns(columns =>
+{
+    //columns.Add(foo => foo.CD_CLIENTE).Titled("CÓDIGO").Sortable(true).Filterable(true);
+    columns.Add(foo => foo.NM_CLIENTE).Titled("CLIENTE").Sortable(true).Filterable(true);
+    //columns.Add(foo => foo.NR_CNPJ).Titled("CNPJ").Sortable(true).Filterable(true);
+    //columns.Add(foo => foo.grupo.DS_GRUPO).Titled("GRUPO").Sortable(true).Filterable(true);
+    columns.Add(foo => foo.executivo.NM_EXECUTIVO).Titled("EXECUTIVO").Sortable(true).Filterable(true);
+    columns.Add(foo => foo.vendedor.NM_VENDEDOR).Titled("VENDEDOR").Sortable(true).Filterable(true);
+    //columns.Add(foo => foo.EN_CIDADE).Titled("CIDADE").Sortable(true).Filterable(true);
+    columns.Add(foo => foo.NM_TECNICO).Titled("TÉCNICO").Sortable(true).Filterable(true);
+    columns.Add(foo => foo.DT_DESATIVACAO).Titled("DESATIVAÇÃO").Sortable(true).Filterable(true).Format("{0:dd/MM/yyyy}");
+    //columns.Add(foo => foo.FL_PESQ_SATISF).Titled("PESQ. SATISFAÇÃO").Sortable(true).Filterable(true);
+    //columns.Add(foo => foo.FL_KAT_FIXO ).Titled("KAT FIXO").Sortable(true).Filterable(true);
+    columns.Add(foo => foo.FL_KAT_FIXO).Encoded(false).Sanitized(false).RenderValueAs(p => RenderCustomValue(p.FL_KAT_FIXO)).Titled("KAT FIXO").Sortable(true).Filterable(true);
+    columns.Add(foo => foo.DS_CLASSIFICACAO_KAT).Titled("CLAS.").Sortable(true).Filterable(true);
+    columns.Add(foo => foo.QT_PERIODO).Titled("PERÍODOS").Sortable(true).Filterable(true);
+    columns.Add()
+        .Encoded(false)
+        .Sanitized(false)
+        .SetWidth(30)
+        .RenderValueAs(o => Html.ActionLink(" ", "Editar", new { idKey = HttpUtility.HtmlDecode(o.idKey) }, new { @class = "fas fa-pencil-alt fa-lg" }));
+    columns.Add()
+                .Encoded(false)
+                .Sanitized(false)
+                .SetWidth(30)
+                .RenderValueAs(o => Html.ActionLink(" ", "Excluir", new { idKey = HttpUtility.HtmlDecode(o.idKey) }, new { @class = "fas fa-trash-alt fa-lg" }));
+}).WithPaging(10)
+</div>
+
+@helper RenderCustomValue(bool? FL_KAT_FIXO)
+{
+    if (FL_KAT_FIXO == true)
+    {
+        <span>Sim</span>
+    }
+    else
+    {
+        <span>Não</span>
+    }
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript" src="~/Scripts/Comodato/Util.js"></script>
+
+    <script>
+        var URLSite = "@_3M.Comodato.Utility.ControlesUtility.Parametro.ObterValorParametro(_3M.Comodato.Utility.ControlesUtility.Constantes.URLSite)";
+        var URLAPI = "@_3M.Comodato.Utility.ControlesUtility.Parametro.ObterValorParametro(_3M.Comodato.Utility.ControlesUtility.Constantes.URLAPI)";
+    </script>
+
+    <script type="text/javascript">
+
+        $("#btnCalcular").click(function () {
+            btnConfirmarCalculo();
+        });
+
+        function btnConfirmarCalculo() {
+            ConfirmarSimNao('Aviso', 'O cálculo do KAT para TODOS os clientes pode demorar alguns minutos... Deseja prosseguir com o cálculo?', 'CalcularKAT()')
+        }
+
+        function CalcularKAT() {
+            var URL = URLAPI + "ClienteAPI/CalcularKAT?CD_Cliente=0";
+
+            $.ajax({
+                type: 'POST',
+                url: URL,
+                dataType: "json",
+                cache: false,
+                async: true,
+                contentType: "application/json",
+                //headers: { "Authorization": "Basic " + localStorage.token },
+                //data: null,
+                beforeSend: function () {
+                    $("#loader").css("display", "block");
+                },
+                complete: function () {
+                    $("#loader").css("display", "none");
+                },
+                success: function (res) {
+                    if (res.retorno != null) {
+                        AlertaRedirect("AVISO", JSON.parse(res.retorno), "window.location = '" + URLSite + "/Cliente';");
+                    }
+                },
+                error: function (res) {
+                    //atualizarPagina();
+                    $("#loader").css("display", "none");
+                    Alerta("ERRO", JSON.parse(res.responseText).Message);
+                }
+
+            });
+
+        }
+    </script>
+
+}

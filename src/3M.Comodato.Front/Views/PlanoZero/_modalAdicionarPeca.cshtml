@@ -1,0 +1,104 @@
+﻿
+<div class="modal fade" id="PecaModal" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <input type="hidden" id="hidIdPlanoZero" value="" />
+    <div class="modal-dialog" style="max-width: 800px !important;">
+        <div class="modal-content" style="width:800px">
+            <div class="modal-header bg-dark">
+                <h5 class="modal-title text-white">Plano Zero</h5>
+            </div>
+            <div class="modal-body">
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <label class="control-label">Peça</label>
+                        <select id="ddlPeca" class="js-select-basic-single" style="white-space: nowrap; width:100%;"></select>
+                        <label id="validaPeca" class="control-label text-danger" style="display: none;">Conteúdo obrigatório!</label>
+                    </div>
+
+                    <div class="form-horizontal">
+                        <div class="row">
+                            <div class="form-group col-md-9">
+                                <label class="control-label col-md-9">Qtde Estoque A.Téc.</label>
+                            </div>
+                                
+                            <div class="form-group col-md-3">
+                                <input id="txtQtdEstoqueATec" value="0" class="form-control" type="text" readonly />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-9">
+                                <label class="control-label col-md-9">Qtde Estoque A.Téc.</label>
+                            </div>
+                            
+                            <div class="form-group col-md-3">
+                                <input id="txtQtdEstoqueRec" value="0" class="form-control" type="text" readonly />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-9">
+                                <label class="control-label col-md-9">Qtde Estoque com Técnicos</label>
+                            </div>
+                            
+                            <div class="form-group col-md-3">
+                                <input id="txtQtdEstoqueComTec" value="0" class="form-control" type="text" readonly />
+                            </div>
+                        </div>
+                    </div>
+
+                    <br />
+                    <div class="form-horizontal">
+                        <div class="row">
+                            <div class="form-group col-md-9">
+                                <label class="control-label col-md-9">Quantidade na máquina</label>
+                            </div>
+                            
+                            <div class="form-group col-md-3">
+                                <input id="txtQtMaquina" class="form-control" />
+                            </div>
+                            <label id="validaQuantidadeMaq" class="control-label col-md-6 text-danger" style="display: none;">Conteúdo obrigatório!</label>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-md-9">
+                                <label class="control-label col-md-9">Criticidade da peça (A, B, C)</label>
+                            </div>
+                            
+                            <div class="form-group col-md-3">
+                                <select id="ddlCriticidade" class="js-select-basic-single" style="white-space: nowrap; width:100%;">
+                                    <option value="" selected>Selecione...</option>
+                                    <option value="A">A</option>
+                                    <option value="B">B</option>
+                                    <option value="C">C</option>
+                                </select>
+                            </div>
+                            <label id="validaComboCriticidade" class="control-label col-md-6 text-danger" style="display: none;">Conteúdo obrigatório!</label>
+                        </div>
+
+                        <div class="row">
+                            <div class="form-group col-md-9">
+                                <label class="control-label col-md-9">Percentual de Ponderação</label>
+                            </div>
+                            
+                            <div class="form-group col-md-3">
+                                <input id="txtPonderacao" class="form-control" />
+                            </div>
+                            <label id="validaPonderacao" class="control-label col-md-6 text-danger" style="display: none;">Conteúdo obrigatório!</label>
+                        </div>
+
+                        @*<div class="row">
+                            <label class="control-label col-md-6">Estoque mínimo do técnico p/ Ativo atendido</label>
+                            <div class="form-group col-md-3">
+                                <input id="txtQtEstoqueMin" class="form-control" />
+                            </div>
+                            <label id="validaQuantidadeMin" class="control-label col-md-6 text-danger" style="display: none;">Conteúdo obrigatório!</label>
+                        </div>*@
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" id="btnSalvar" class="btn btn-primary">Salvar</button>
+                <button type="button" id="btnFechar" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>

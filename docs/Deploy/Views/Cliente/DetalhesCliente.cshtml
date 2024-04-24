@@ -1,0 +1,149 @@
+﻿@*@model IEnumerable<_3M.Comodato.Front.Models.Cliente>*@
+
+@*@using GridMvc.Html*@
+
+@{
+    ViewBag.Title = "Cliente";
+}
+
+<i class="fas fa-cubes fa-3x fa-pull-left"></i>
+<h3>Detalhes do Cliente</h3>
+
+<hr />
+<p>
+    <h4>Cliente</h4>
+    <h5>@ViewBag.NM_CLIENTE</h5>
+</p>
+
+<div class="table table-hover">
+    @*@Html.Grid(Model).Columns(columns =>
+        {
+            columns.Add(foo => foo.CD_PECA).Titled("CÓDIGO").Sortable(true).Filterable(true);
+            columns.Add(foo => foo.DS_PECA).Titled("DESCRIÇÃO").Sortable(true).Filterable(true);
+            columns.Add(foo => foo.QTD_ESTOQUE).Titled("QT. ESTOQUE").Sortable(true).Filterable(true);
+            columns.Add(foo => foo.TX_UNIDADE).Titled("UNIDADE").Sortable(true).Filterable(true);
+
+
+        }).WithPaging(10)*@
+
+    <div class="table-responsive-md">
+        <table class="table table-sm table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">&nbsp;</th>
+                    @Html.Raw(ViewBag.Thead)
+                    @*<th scope="col">Fita</th>
+                    <th scope="col">PVA</th>
+                    <th scope="col">Tinta</th>*@
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">Nr.Equipamentos</th>
+                    @Html.Raw(ViewBag.tdNrEquipamentos)
+                    @*<td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>*@
+                </tr>
+                <tr>
+                    <th scope="row">Vendas Mês Anterior</th>
+                    @Html.Raw(ViewBag.tdVendasMES)
+                    @*<td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>*@
+                </tr>
+                <tr>
+                    <th scope="row">Volume Mês Anterior</th>
+                    @Html.Raw(ViewBag.tdVolumeMES)
+                    @*<td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>*@
+                </tr>
+                <tr>
+                    <th scope="row">Vendas (3 meses)</th>
+                    @Html.Raw(ViewBag.tdVendas3M)
+                    @*<td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>*@
+                </tr>
+                <tr>
+                    <th scope="row">Volume (3 meses)</th>
+                    @Html.Raw(ViewBag.tdVolume3M)
+                    @*<td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>*@
+                </tr>
+                <tr>
+                    <th scope="row">Vendas (12 meses)</th>
+                    @Html.Raw(ViewBag.tdVendas12M)
+                    @*<td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>*@
+                </tr>
+                <tr>
+                    <th scope="row">Volume (12 meses)</th>
+                    @Html.Raw(ViewBag.tdVolume12M)
+                    @*<td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>*@
+                </tr>
+                <tr>
+                    <th scope="row">Custo (12 meses)</th>
+                    @Html.Raw(ViewBag.tdCusto12M)
+                    @*<td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>*@
+                </tr>
+                <tr>
+                    <th scope="row">Depreciação (12 meses)</th>
+                    @Html.Raw(ViewBag.tdDepreciacao12M)
+                    @*<td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>*@
+                </tr>
+                <tr>
+                    <th scope="row">Manutenção (12 meses)</th>
+                    @Html.Raw(ViewBag.tdManutencao12M)
+                    @*<td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>*@
+                </tr>
+                <tr>
+                    <th scope="row">DEPCOM (12 meses)</th>
+                    @Html.Raw(ViewBag.tdDEPCOM12M)
+                    @*<td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>*@
+                </tr>
+                <tr>
+                    <th scope="row">LESAFO (12 meses)</th>
+                    @Html.Raw(ViewBag.tdLESAFO12M)
+                    @*<td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>*@
+                </tr>
+                <tr>
+                    <th scope="row">GM (12 meses)</th>
+                    @Html.Raw(ViewBag.tdGM12M)
+                    @*<td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>*@
+                </tr>
+                <tr>
+                    <th scope="row">OI (12 meses)</th>
+                    @Html.Raw(ViewBag.tdOI12M)
+                    @*<td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>*@
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@Html.ActionLink("Voltar", "Editar", new { idKey = HttpUtility.HtmlDecode(ViewBag.idKey) }, new { @class = "btn btn-primary btn-sm" })
+
+
+
+
+

@@ -1,0 +1,77 @@
+﻿@model dynamic
+
+
+@{
+    Layout = "~/Views/Shared/_Email.cshtml";
+    _3M.Comodato.Entity.ClienteEntity cliente = Model.cliente;
+    List<_3M.Comodato.Entity.WfPedidoEquipItemEntity> ListaPedidoItem = Model.itens;
+}
+
+
+<p>Bom dia @Model.pedido.DS_CONTATO_NOME!</p>
+<p>Por favor, preciso que realizem a coleta abaixo. Aproveito para ressaltar a <strong>importância de agendar</strong> as coletas de comodato previamente junto ao cliente.<br />Sem que o agendamento prévio seja realizado, a coleta não será liberada.</p>
+<hr />
+<p>
+    <strong>Local de Retirada</strong><br />
+
+    Razão Social: @Model.pedido.NM_CLIENTE<br />
+    Endereço do cliente: @cliente.EN_ENDERECO<br />
+    CNPJ/CPF: @cliente.NR_CNPJ <br />
+    Inscrição Estadual: <br />
+    Contato: @Model.pedido.DS_CONTATO_NOME <br />
+    Telefone/E-mail/Fax: @cliente.TX_TELEFONE / @cliente.TX_EMAIL / @cliente.TX_EMAIL <br />
+
+    <br />
+    Cliente possui cópia da Nota Fiscal 3M: @( !String.IsNullOrEmpty(Model.pedido.FL_COPIA_NF3M) ? (Model.pedido.FL_COPIA_NF3M.ToUpper() == "S" ? "Sim" : "Não" ) : "" ) <br />
+    <br />
+    Nr. da Nota Fiscal de Origem: @cliente.NM_CLIENTE <br />
+    Valor da Nota Fiscal 3M: @Model.pedido.VL_NOTA_FISCAL_3M<br />
+
+    <br />
+    -O frete é de responsabilidade da 3M.<br />
+    -É necessário entrar em contato com o cliente para realizar o agendamento da retirada.<br />
+    -O material deve ser coletado até <br />
+    -Coletar o material apenas se o mesmo estiver embalado de maneira adequada.<br />
+    -Os equipamentos retirados deverão ser enviados para a 
+    <strong>
+        3M Sumaré (CNPJ 45.985.371/0001-08).<br />
+        -Se faz necessário realizar o agendamento para a devolução, através do telefone (19) 3838-6466 e/ou e-mail:<mailto:agendamento3m@mmm.com>agendamento3m@mmm.com além de solicitação de pré senha via TMS Orion.
+    </strong><br />
+
+</p>
+<hr />
+
+
+<strong>Equipamentos a serem coletados</strong>: <br />
+
+@if(ListaPedidoItem != null && ListaPedidoItem.Count > 0)
+{
+    <table>
+        <thead>
+            <tr>
+                <td>Número do Ativo</td>
+                <td>Envio</td>
+                <td>Caixa Largura</td>
+                <td>Caixa Altura</td>
+                <td>Caixa Comprimento</td>
+                <td>Peso (Kg)</td>
+                <td>Nota Fiscal de Envio</td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in ListaPedidoItem)
+            {
+                <tr>
+                    <td>@item.CD_ATIVO_FIXO.ToString()</td>
+                    <td></td>
+                    <td>@item.Modelo.VL_LARG_CAIXA.ToString()</td>
+                    <td>@item.Modelo.VL_ALTUR_CAIXA.ToString()</td>
+                    <td>@item.Modelo.VL_COMP_CAIXA.ToString()</td>
+                    <td>@item.Modelo.VL_PESO_CUBADO.ToString()</td>
+                    <td>@item.Ativo.NR_NOTAFISCAL.ToString()</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+}

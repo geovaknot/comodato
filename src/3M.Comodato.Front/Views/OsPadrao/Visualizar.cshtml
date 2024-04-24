@@ -1,0 +1,269 @@
+﻿@model _3M.Comodato.Front.Models.OsPadrao
+
+@using GridMvc.Html
+
+
+@{
+    ViewBag.Title = "Agenda de Atendimento - Ordem de Serviço";
+    var perfil = (_3M.Comodato.Entity.UsuarioPerfilEntity)Session["_CurrentUser"];
+    int PERFIL_CLIENTE = 8;
+}
+
+<i class="fas fa-cubes fa-3x fa-pull-left"></i>
+<h3>Agenda de Atendimento - Ordem de Serviço</h3>
+
+<div class="well">
+
+    @using (Html.BeginForm())
+    {
+    <div class="form-horizontal">
+        <hr />
+        @Html.HiddenFor(model => model.idKey)
+        @Html.HiddenFor(model => model.ID_OS)
+        @Html.HiddenFor(model => model.cliente.CD_CLIENTE)
+        @Html.HiddenFor(model => model.tecnico.CD_TECNICO)
+        @Html.HiddenFor(model => model.TpStatusOS.ST_STATUS_OS)
+        <input type="hidden" id="visualizarOS" name="visualizarOS" value="true">
+
+        <div class="card-group">
+            <div class="card">
+                <div class="card-body">
+                    <div class="form-group row">
+                        <div class="form-group col-md-6 col-sm-12 font-weight-bold">
+                            @Html.LabelFor(model => model.ID_OS, $"Ordem de Serviço: #{Model.ID_OS.ToString()}", new { @class = "control-label m-2" })
+                        </div>
+
+                        <label for="TpStatusOS_DS_STATUS_OS" class="col-form-label">Status</label>
+                        <div class="col-sm-5 col-sm-5">
+                            @Html.EditorFor(model => model.TpStatusOS.DS_STATUS_OS, new { htmlAttributes = new { @class = "form-control", @id = "TpStatusOS_DS_STATUS_OS", @readonly = "readonly" } })
+                        </div>
+                    </div>
+
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6 col-sm-12">
+                            <label class="control-label">Técnico</label>
+                            @Html.EditorFor(model => model.tecnico.NM_TECNICO, new { htmlAttributes = new { @class = "form-control col-12", @readonly = "readonly" } })
+                        </div>
+
+                        <div class="form-group col-md-6 col-sm-12">
+                            <label class="control-label">Empresa</label>
+                            @Html.EditorFor(model => model.tecnico.empresa.NM_Empresa, new { htmlAttributes = new { @class = "form-control col-12", @readonly = "readonly" } })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">Cliente</label>
+                        @Html.EditorFor(model => model.cliente.NM_CLIENTE_Codigo, new { htmlAttributes = new { @class = "form-control col-12", @readonly = "readonly" } })
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="control-label">Ativo</label>
+                        @Html.EditorFor(model => model.ativoFixo.DS_ATIVO_FIXO_COMPLETA, new { htmlAttributes = new { @class = "form-control col-12", @readonly = "readonly" } })
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <div class="form-row">
+                        <div class="form-group col-md-6 col-sm-12">
+                            <label class="control-label">Tipo da OS</label>
+                            @if (Model.TpStatusOS.ST_STATUS_OS == 3 || Model.TpStatusOS.ST_STATUS_OS == 4)
+                            {
+                                @Html.DropDownListFor(model => model.TpOS.CD_TIPO_OS, new SelectList(Model.tiposOsPadrao, "CD_TIPO_OS", "DS_TIPO_OS"), new { @class = "valid form-control col-12", @readonly = "readonly", @disabled = true })
+                            }
+                            else
+                            {
+                                @Html.DropDownListFor(model => model.TpOS.CD_TIPO_OS, new SelectList(Model.tiposOsPadrao, "CD_TIPO_OS", "DS_TIPO_OS"), new { @class = "valid form-control col-12", @readonly = "readonly" })
+                            }
+                        </div>
+                        <div class="form-group col-md-3 col-sm-12">
+                            <label class="control-label">Origem</label>
+                            @if (Model.Origem != null)
+                            {
+                                if (Model.Origem == "W")
+                                {
+                                    <input type="text" readonly class="form-control col-12 text-center" value="Web" />
+                                }
+                                else if (Model.Origem == "A")
+                                {
+                                    <input type="text" readonly class="form-control col-12 text-center" value="App" />
+                                }
+
+                            }
+                            else
+                            {
+                                <input type="text" readonly class="form-control col-12 text-center" value="" />
+                            }
+
+                        </div>
+                    </div>
+
+                    <div class="form-row align-items-end">
+                        <div class="form-group mb-2 col-6 col-md-4 col-sm-5">
+                            <label class="control-label">Data OS</label>
+                            <div id="DT_DATA_VISITA-container">
+                                <div class="input-group date">
+                                    @Html.TextBoxFor(model => model.DT_DATA_OS, "{0:dd/MM/yyyy}", new { @class = "form-control col-12 text-center", @readonly = "readonly" })
+                                </div>
+                            </div>
+                            @Html.ValidationMessageFor(model => model.DT_DATA_OS, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-4 col-md-3">
+                            <label class="control-label">Hora Início</label>
+                            @Html.EditorFor(model => model.HR_INICIO, new { htmlAttributes = new { @class = "form-control col-12 text-center", @readonly = "readonly" } })
+                        </div>
+
+                        <div class="form-group col-3">
+                            <label class="control-label">Hora Término</label>
+                            @Html.EditorFor(model => model.HR_FIM, new { htmlAttributes = new { @class = "form-control col-12 text-center", @readonly = "readonly" } })
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label class="control-label">Duração do Atendimento</label>
+                            @Html.EditorFor(model => model.HR_TOTAL, new { htmlAttributes = new { @class = "form-control col-6 text-center font-weight-bold", @readonly = "readonly" } })
+                        </div>
+                        <div class="form-group m-4">
+                            @if (perfil.perfil.ccdPerfil != PERFIL_CLIENTE)
+                            {
+                                <button class="btn btn-danger m-1" type="button" id="btnCancelar">Cancelar OS</button>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <br />
+
+        <div class="form-group">
+            ACOMPANHAMENTO OS
+            @Html.EditorFor(model => model.DS_RESPONSAVEL, new { htmlAttributes = new { @class = "form-control col-12", @rows = 1, @readonly = "readonly" } })
+            @Html.ValidationMessageFor(model => model.DS_RESPONSAVEL, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            Email
+            @Html.EditorFor(model => model.EMAIL, new { htmlAttributes = new { @class = "form-control col-12", @rows = 1, @readonly = "readonly" } })
+            @Html.ValidationMessageFor(model => model.EMAIL, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            Nome da linha
+            @Html.EditorFor(model => model.NOME_LINHA, new { htmlAttributes = new { @class = "form-control col-12", @rows = 1, @readonly = "readonly" } })
+            @Html.ValidationMessageFor(model => model.NOME_LINHA, "", new { @class = "text-danger" })
+        </div>
+
+        <br />
+
+        <div class="form-group">
+            Observações
+            @Html.EditorFor(model => model.DS_OBSERVACAO, new { htmlAttributes = new { @class = "form-control col-12", @rows = 3, @readonly = "readonly" } })
+            @Html.ValidationMessageFor(model => model.DS_OBSERVACAO, "", new { @class = "text-danger" })
+        </div>
+
+        <br />
+
+        <div class="form-group">
+            @*@Html.ActionLink("Voltar", "Index", new { area = "" }, new { @class = "btn btn-primary btn-sm" })*@
+            <button class="btn btn-primary btn-sm" type="button" onclick="ReturnPage()">Voltar</button>
+        </div>
+        <script>
+            function ReturnPage() {
+                history.back();
+            }
+        </script>
+
+    </div>
+
+        <hr class="mt-3 mb-3" />
+        <div id="tabsAdicionais">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="tabPeca" data-toggle="tab" href="#tab-area-Peca" role="tab" aria-controls="home" aria-selected="true">Peças utilizadas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="tabPendencia" data-toggle="tab" href="#tab-area-Pendencia" role="tab" aria-controls="profile" aria-selected="false">Pendências</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="tabReclamacao" data-toggle="tab" href="#tab-area-Reclamacao" role="tab" aria-controls="contact" aria-selected="false">Reclamações</a>
+                </li>
+            </ul>
+
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="tab-area-Peca" role="tabpanel" aria-labelledby="home-tab">
+                    <div class="card-body">
+                        <div class="pre-scrollable">
+                            <div id="gridmvcPecaOS">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="tab-area-Pendencia" role="tabpanel" aria-labelledby="profile-tab">
+                    <div class="card-body">
+                        <div class="pre-scrollable">
+                            <div id="gridmvcPendenciaOS">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane fade" id="tab-area-Reclamacao" role="tabpanel" aria-labelledby="contact-tab">
+                    <div class="card-body">
+                        <div class="pre-scrollable">
+                            <div id="gridmvcReclamacaoOS">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+            var URLObterListaPendenciaOS = "@Url.Action("ObterListaPendenciaOSJson", "OsPadrao")";
+            var URLObterListaPecaOS = "@Url.Action("ObterListaPecaOSJson", "OsPadrao")";
+            var URLObterListaReclamacaoOS = "@Url.Action("ObterListaReclamacaoOSJson", "OsPadrao")";
+            var URLCancelar = "@Url.Action("Cancelar", "OsPadrao")";
+            var URLAPI = "@_3M.Comodato.Utility.ControlesUtility.Parametro.ObterValorParametro(_3M.Comodato.Utility.ControlesUtility.Constantes.URLAPI)";
+            var nidUsuario = @Convert.ToInt64(((_3M.Comodato.Entity.UsuarioPerfilEntity)Session["_CurrentUser"]).usuario.nidUsuario);
+            var nidPerfil = @Convert.ToInt64(((_3M.Comodato.Entity.UsuarioPerfilEntity)Session["_CurrentUser"]).perfil.nidPerfil);
+            var perfilCliente = @Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.Perfil.Cliente);
+            var UsuarioTecnico = '@_3M.Comodato.Utility.ControlesUtility.Seguranca.VerificaUsuarioPerfisTecnicos(Convert.ToInt64(((_3M.Comodato.Entity.UsuarioPerfilEntity)Session["_CurrentUser"]).usuario.nidUsuario))';
+            var perfilLiderEmpresaTecnica = @Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.Perfil.LiderEmpresaTecnica);
+
+            var statusIniciar = @Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.TpStatusOSPadrao.AguardandoInicio);
+            var statusAberta = @Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.TpStatusOSPadrao.Aberta);
+            var statusFinalizada = @Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.TpStatusOSPadrao.Finalizada);
+            var statusCancelada = @Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.TpStatusOSPadrao.Cancelada);
+            var MensagemGravacaoSucesso = "@_3M.Comodato.Utility.ControlesUtility.Constantes.MensagemGravacaoSucesso";
+
+            var statusTpEstoqueUtilizadoIntermediario = "@_3M.Comodato.Utility.ControlesUtility.Dicionarios.TipoEstoqueUtilizado().ToArray()[0].Value";
+            var statusTpEstoqueUtilizadoCliente = "@_3M.Comodato.Utility.ControlesUtility.Dicionarios.TipoEstoqueUtilizado().ToArray()[1].Value";
+            var token = "@Convert.ToString(((_3M.Comodato.Entity.UsuarioPerfilEntity)Session["_CurrentUser"]).token)";
+            var statusTpPendenciaPendente = "@_3M.Comodato.Utility.ControlesUtility.Dicionarios.TipoStatusPendenciaOS().ToArray()[0].Value";
+            var statusTpPendenciaFinalizada = "@_3M.Comodato.Utility.ControlesUtility.Dicionarios.TipoStatusPendenciaOS().ToArray()[1].Value";
+            var statusTpPendenciaCancelada = "@_3M.Comodato.Utility.ControlesUtility.Dicionarios.TipoStatusPendenciaOS().ToArray()[2].Value";
+
+            var statusPendenciaPeca = "@_3M.Comodato.Utility.ControlesUtility.Dicionarios.TipoPendenciaOS().ToArray()[0].Value";
+            var statusPendenciaOutros = "@_3M.Comodato.Utility.ControlesUtility.Dicionarios.TipoPendenciaOS().ToArray()[1].Value";
+
+    </script>
+
+    <script type="text/javascript" src="~/Scripts/Comodato/Util.js"></script>
+    <script type="text/javascript" src="~/Scripts/Comodato/Os.js"></script>
+    <script type="text/javascript" src="~/Scripts/Comodato/OsPeca.js"></script>
+    <script type="text/javascript" src="~/Scripts/Comodato/OsPendencia.js"></script>
+    <script type="text/javascript" src="~/Scripts/Comodato/OsReclamacao.js"></script>
+}

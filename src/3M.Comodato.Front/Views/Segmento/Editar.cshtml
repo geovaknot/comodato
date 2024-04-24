@@ -1,0 +1,73 @@
+﻿@model _3M.Comodato.Front.Models.Segmento
+@{
+    ViewBag.Title = "Segmento";
+}
+
+<i class="fas fa-cubes fa-3x fa-pull-left"></i>
+<h3>Segmento (Editar)</h3>
+<div class="well">
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.id_segmento);
+        <div class="form-horizontal">
+            <hr />
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    @Html.LabelFor(model => model.ds_segmentomin, new { @class = "control-label" })
+                    @Html.EditorFor(model => model.ds_segmentomin, ViewBag.PermitirAlteracao ? (object)new { htmlAttributes = new { @class = "form-control col-md-12" } } : (object)new { htmlAttributes = new { @class = "form-control col-md-12", @readonly = "readonly" } })
+                    @Html.ValidationMessageFor(model => model.ds_segmentomin, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group col-md-6">
+                    @Html.LabelFor(model => model.nm_criticidade, new { @class = "control-label" })
+                    @Html.EditorFor(model => model.nm_criticidade, new { htmlAttributes = new { @class = "form-control col-md-12" } })
+                    @Html.ValidationMessageFor(model => model.nm_criticidade, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    @Html.LabelFor(model => model.ds_segmento, new { @class = "control-label" })
+                    @Html.EditorFor(model => model.ds_segmento, new { htmlAttributes = new { @class = "form-control col-md-12" } })
+                    @Html.ValidationMessageFor(model => model.ds_segmento, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    @Html.LabelFor(model => model.ds_descricao, new { @class = "control-label" })
+                    @Html.TextAreaFor(model => model.ds_descricao, new { @class = "form-control col-md-12", @rows = "3" })
+                </div>
+            </div>
+
+            @if (!string.IsNullOrEmpty(ViewBag.Mensagem))
+            {
+                <div class="form-group">
+                    <label class="text-danger">@ViewBag.Mensagem</label>
+                </div>
+            }
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Gravar" CausesValidation="True" class="btn btn-primary btn-sm" />
+            @Html.ActionLink("Voltar", "Index", new { area = "" }, new { @class = "btn btn-primary btn-sm" })
+        </div>
+    }
+
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript" src="~/Scripts/Comodato/Util.js"></script>
+
+    <script type="text/javascript">
+     @Model.JavaScriptToRun
+
+        function MensagemSucesso() {
+            var mensagem = '@_3M.Comodato.Utility.ControlesUtility.Constantes.MensagemGravacaoSucesso';
+
+            AlertaRedirect("Aviso", mensagem, "window.location = '../Segmento';");
+        };
+    </script>
+}
+

@@ -1,0 +1,1 @@
+alter table TB_PEDIDO add EnviaBPCS varchar(1) null

@@ -1,0 +1,149 @@
+﻿@model _3M.Comodato.Front.Models.ConsultaConfirmaVista
+
+@using GridMvc.Html
+
+@{
+    /**/
+
+    ViewBag.Title = "Consulta/Confirma Visitas Técnicas realizadas";
+}
+
+<i class="fas fa-cubes fa-3x fa-pull-left"></i>
+<h3>Consulta/Confirma Visitas Técnicas realizadas</h3>
+
+<div class="well">
+
+    @using (Html.BeginForm())
+    {
+        <div class="form-horizontal">
+            <hr />
+
+            <div class="form-group">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="form-row">
+                            <div class="form-group col-12">
+                                @*col-sm-6 col-md-7 col-xl-7*@
+                                <label class="control-label">Cliente</label>
+                                @Html.DropDownListFor(model => model.cliente.CD_CLIENTE, new SelectList(Model.tecnicos, "CD_CLIENTE", "NM_CLIENTE"), "Selecione...", new { @class = "js-example-basic-single", @style = "width: 100%" })
+                            </div>
+                            <fieldset id="areaKatCliente" class="col-md-12 border">
+                                <legend>KAT - (Quantidade de Períodos Programados por Ano)</legend>
+                                <div class="row">
+                                    <div class="col-md-3 col-sm-12">
+                                        <h6>Total</h6>
+                                        <p id="katTotal"></p>
+                                    </div>
+                                    <div class="col-md-3 col-sm-12">
+                                        <h6>Realizado</h6>
+                                        <p id="katUtilizado"></p>
+                                    </div>
+                                    <div class="col-md-3 col-sm-12">
+                                        <h6>Disponível</h6>
+                                        <p id="katDisponivel"></p>
+                                    </div>
+                                    <div class="col-md-3 col-sm-12">
+                                        <h6>% Disponível</h6>
+                                        <p id="katPercentual"></p>
+                                    </div>
+                                </div>
+                            </fieldset>
+
+                            @*<div class="form-group col-sm-6 col-md-5 col-xl-5">
+                                    <label class="control-label">Ativo</label>
+                                    @Html.DropDownListFor(model => model.ativoFixo.CD_ATIVO_FIXO, new SelectList(Model.ativos, "CD_ATIVO_FIXO", "DS_MODELO"), "Selecione...", new { @class = "js-example-basic-single", @style = "width: 100%" })
+                                </div>*@
+                        </div>
+
+                        <div id="divTecnicoEmpresa"class="form-row">
+                            <div class="form-group col-sm-6 col-md-5 col-xl-5">
+                                <label class="control-label">Técnico</label>
+                                @Html.DropDownListFor(model => model.tecnico.CD_TECNICO, new SelectList(Model.tecnicos, "CD_TECNICO", "NM_TECNICO"), "Selecione...", new { @class = "js-example-basic-single", @style = "width: 100%" })
+                            </div>
+
+                            <div class="form-group col-sm-6 col-md-7 col-xl-7">
+                                <label class="control-label">Empresa</label>
+                                @Html.EditorFor(model => model.tecnico.empresa.NM_Empresa, new { htmlAttributes = new { @class = "form-control col-12", @readonly = "readonly" } })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="form-row">
+                            <div class="form-group col-sm-6 col-md-4 col-xl-4">
+                                <label class="control-label">Período</label>
+                                <div id="DT_DATA_ABERTURA-container">
+                                    @*<div class="input-group date">*@
+                                    <div class="input-daterange input-group">
+                                        @Html.TextBoxFor(model => model.DT_DATA_ABERTURA_INICIO, "{0:dd/MM/yyyy}", new { @class = "form-control col-12" })
+                                        <span class="input-group-addon">&nbsp;até&nbsp;</span>
+                                        @Html.TextBoxFor(model => model.DT_DATA_ABERTURA_FIM, "{0:dd/MM/yyyy}", new { @class = "form-control col-12" })
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id="divOS" class="form-group col-sm-6 col-md-2 col-xl-2">
+                                <label class="control-label">OS</label>
+                                @Html.DropDownListFor(model => model.OS.ID_OS, new SelectList(Model.OSs, "ID_OS", "ID_OS_Formatado"), "Selecione...", new { @class = "js-example-basic-single", @style = "width: 100%" })
+                            </div>
+
+                            <div id="divStatusVisita" class="form-group col-sm-6 col-md-3 col-xl-3">
+                                <label class="control-label">Status da Visita</label>
+                                @Html.DropDownListFor(model => model.tpStatusVisitaOS.ST_TP_STATUS_VISITA_OS, new SelectList(Model.tiposStatusVisitaOS, "ST_TP_STATUS_VISITA_OS", "DS_TP_STATUS_VISITA_OS"), new { @class = "valid form-control col-12" })
+                            </div>
+
+                            <div class="form-group col-sm-6 col-md-3 col-xl-3 text-right">
+                                <br />
+                                <button class="btn btn-primary btn-sm" type="button" id="btnFiltrar">Filtrar</button>
+                                <button class="btn btn-primary btn-sm" type="button" id="btnLimpar">Limpar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br />
+        </div>
+
+        @Html.Partial("_modalAvaliacaoVisita")
+        <div id="modalDinamico"></div>
+    }
+
+</div>
+
+<div id="gridmvc">
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        var URLObterListaVisita = "@Url.Action("ObterListaVisitaJson", "Agenda")";
+        var URL_PESQUISA = "@Url.Action("PesquisaSatisfacao", "AnaliseSatisfacao")";
+        var URLAPI = "@_3M.Comodato.Utility.ControlesUtility.Parametro.ObterValorParametro(_3M.Comodato.Utility.ControlesUtility.Constantes.URLAPI)";
+        var URLSITE = "@_3M.Comodato.Utility.ControlesUtility.Parametro.ObterValorParametro(_3M.Comodato.Utility.ControlesUtility.Constantes.URLSite)";
+
+        var nidUsuario = @Convert.ToInt64(((_3M.Comodato.Entity.UsuarioPerfilEntity)Session["_CurrentUser"]).usuario.nidUsuario);
+        var nidPerfil  = @Convert.ToInt64(((_3M.Comodato.Entity.UsuarioPerfilEntity)Session["_CurrentUser"]).perfil.nidPerfil);
+        var UsuarioTecnico = '@_3M.Comodato.Utility.ControlesUtility.Seguranca.VerificaUsuarioPerfisTecnicos(Convert.ToInt64(((_3M.Comodato.Entity.UsuarioPerfilEntity)Session["_CurrentUser"]).usuario.nidUsuario))';
+        var perfilCliente = @Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.Perfil.Cliente);
+        var perfilAdministrador3M = @Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.Perfil.Administrador3M);
+
+        @*var periodoINICIAL = "@DateTime.Now.AddDays(-30).ToString("dd/MM/yyyy")";
+        var periodoFINAL = "@DateTime.Now.ToString("dd/MM/yyyy")";*@
+
+        var MensagemGravacaoSucesso = "@_3M.Comodato.Utility.ControlesUtility.Constantes.MensagemGravacaoSucesso";
+        var MensagemExclusaoSucesso = "@_3M.Comodato.Utility.ControlesUtility.Constantes.MensagemExclusaoSucesso";
+        var totalClientes = 0;
+    </script>
+
+
+    <link rel="stylesheet" href="@Url.Content("~/Content/rateYo/v2.3.2/jquery.rateyo.min.css")">
+    <script type="text/javascript" src="@Url.Content("~/Scripts/rateYo/v2.3.2/jquery.rateyo.min.js")"></script>
+    <script type="text/javascript" src="~/Scripts/Comodato/Util.js"></script>
+    <script type="text/javascript" src="~/Scripts/xjsapi/clienteapi.js"></script>
+    <script type="text/javascript" src="~/Scripts/Comodato/VisitaConsulta.js"></script>
+}

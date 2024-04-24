@@ -1,0 +1,47 @@
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+CREATE PROCEDURE [dbo].[prcMotivoVisitaPadraoSelect]
+	@p_ID_MOTIVO_VISITA		BIGINT			= NULL, 
+	@p_CD_MOTIVO_VISITA		INT				= NULL,
+	@p_DS_MOTIVO_VISITA		VARCHAR(MAX)	= NULL
+AS
+BEGIN
+
+	-- Declaração de Variáveis
+	DECLARE @cdsErrorMessage	NVARCHAR(4000),
+			@nidErrorSeverity	INT,
+			@nidErrorState		INT
+
+	-- SET NOCOUNT ON added to prevent extra result sets from
+	-- interfering with SELECT statements.
+	SET NOCOUNT ON;
+
+	BEGIN TRY
+		
+		SELECT	dbo.tbTpMotivoVisitaPadrao.*
+		FROM	dbo.tbTpMotivoVisitaPadrao
+		WHERE (	dbo.tbTpMotivoVisitaPadrao.ID_MOTIVO_VISITA	= @p_ID_MOTIVO_VISITA		OR @p_ID_MOTIVO_VISITA	IS NULL )
+		AND   ( dbo.tbTpMotivoVisitaPadrao.CD_MOTIVO_VISITA	= @p_CD_MOTIVO_VISITA		OR @p_CD_MOTIVO_VISITA	IS NULL )
+		AND   ( dbo.tbTpMotivoVisitaPadrao.DS_MOTIVO_VISITA	LIKE @p_DS_MOTIVO_VISITA	OR @p_DS_MOTIVO_VISITA	IS NULL )
+		ORDER BY
+				dbo.tbTpMotivoVisitaPadrao.CD_MOTIVO_VISITA
+
+	END TRY
+
+	BEGIN CATCH
+
+		SELECT	@cdsErrorMessage	= ERROR_MESSAGE(),
+				@nidErrorSeverity	= ERROR_SEVERITY(),
+				@nidErrorState		= ERROR_STATE();
+
+		RAISERROR (@cdsErrorMessage, -- Message text.
+				   @nidErrorSeverity, -- Severity.
+				   @nidErrorState -- State.
+				   )
+
+	END CATCH
+
+END

@@ -1,0 +1,52 @@
+﻿@model IEnumerable<_3M.Comodato.Front.Models.Ativo>
+
+@using GridMvc.Html
+
+<div class="table table-hover">
+    @Html.Grid(Model).Columns(columns =>
+{
+    columns.Add(foo => foo.CD_ATIVO_FIXO).Titled("NR. ATIVO").Sortable(false).Filterable(false);
+    columns.Add(foo => foo.TX_ANO_MAQUINA).Titled("ANO").Sortable(false).Filterable(false);
+    columns.Add(foo => foo.linhaProduto.DS_LINHA_PRODUTO).Titled("LINHA DE PRODUTO").Sortable(false).Filterable(false);
+    columns.Add(foo => foo.modelo.DS_MODELO).Titled("MODELO").Sortable(false).Filterable(false);
+
+    columns.Add().Titled("").Sortable(false).Filterable(false).Encoded(false).Sanitized(false).RenderValueAs(
+            foo =>
+            (Convert.ToDateTime(foo.DT_GARANTIA) <= DateTime.Now)
+            && (DateTime.Now <= Convert.ToDateTime(foo.DT_FIM_GARANTIA)) ?
+            "<font color='blue'><b>G</b></font>"
+            :
+            ((Convert.ToDateTime(foo.DT_MANUTENCAO) <= DateTime.Now)
+            && (DateTime.Now <= Convert.ToDateTime(foo.DT_FIM_MANUTENCAO)) ?
+            "<font color='blue'><b>GR</b></font>" : "")
+            );
+
+    //columns.Add(foo => foo.situacaoAtivo.DS_SITUACAO_ATIVO).Titled("SITUAÇÃO").Sortable(true).Filterable(true);
+    //columns.Add(foo => foo.statusAtivo.DS_STATUS_ATIVO).Titled("STATUS").Sortable(true).Filterable(true);
+    //columns.Add(foo => foo.cdsFL_STATUS).Titled("CONDIÇÃO").Sortable(true).Filterable(true);
+
+    columns.Add()
+        .Encoded(false)
+        .Sanitized(false)
+        .SetWidth(30)
+        .RenderValueAs(o => o.DT_DEVOLUCAO != null ? "<i class='fas fa-cog fa-lg' style='color: Tomato'></i>" :
+                            "<i class='fas fa-cog fa-lg' style='color: Green'></i>");
+
+    columns.Add(foo => foo.DT_DEVOLUCAO_GRID).Titled("DEVOLUÇÃO").Sortable(false).Filterable(false).Format("{0:dd/MM/yyyy}");
+
+    columns.Add(foo => foo.NM_CLIENTE).Titled("CLIENTE").Sortable(false).Filterable(false);
+
+    columns.Add()
+        .Encoded(false)
+        .Sanitized(false)
+        .SetWidth(30)
+        .RenderValueAs(o => Html.ActionLink(" ", "Editar", new { idKey = HttpUtility.HtmlDecode(o.idKey) }, new { @class = "fas fa-pencil-alt fa-lg" }));
+    columns.Add()
+        .Encoded(false)
+        .Sanitized(false)
+        .SetWidth(30)
+        .RenderValueAs(o => Html.ActionLink(" ", "Excluir", new { idKey = HttpUtility.HtmlDecode(o.idKey) }, new { @class = "fas fa-trash-alt fa-lg" }));
+})
+</div>
+
+

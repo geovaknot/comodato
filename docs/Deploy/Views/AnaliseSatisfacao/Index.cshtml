@@ -1,0 +1,66 @@
+﻿@model IEnumerable<_3M.Comodato.Front.Models.SatisfacaoPesquisa>
+@using GridMvc.Html
+@{
+    ViewBag.Title = "Pesquisa de Satisfação";
+}
+
+<i class="fas fa-cubes fa-3x fa-pull-left"></i>
+<h3>Consulta de Pesquisa de Satisfação</h3>
+<div class="container">
+    <div class="row">
+        <p class="col-md-8 col-sm-4">
+            <a class="btn btn-primary btn-sm" href="AnaliseSatisfacao/Incluir">Novo registro <i class="far fa-sticky-note"></i></a>
+        </p>
+
+        @if (Convert.ToInt32(((_3M.Comodato.Entity.UsuarioPerfilEntity)Session["_CurrentUser"]).perfil.ccdPerfil) == (int)_3M.Comodato.Utility.ControlesUtility.Enumeradores.Perfil.Administrador3M)
+        {
+            <div class="form-control col-md-4 col-sm-8">
+                <label class="control-label">Considerar todos os clientes: </label>
+                <div class="form-group">
+                    @Html.DropDownList("ddlAcao", new SelectList(ViewBag.ListaAcao, "Value", "Text"), new { @class = "js-select-basic-single col-8", @style = "width: 80%" })
+                    <button id="btnExecutarAcao" class="btn btn-primary btn-sm col-2">>></button>
+                </div>
+            </div>
+        }
+
+    </div>
+
+</div>
+<br />
+
+<div class="table table-hover">
+    @Html.Grid(Model).Columns(columns =>
+{
+    columns.Add(foo => foo.Titulo).Titled("TITULO").Sortable(true).Filterable(true);
+    columns.Add(foo => foo.DataCriacao).Titled("DT.CRIAÇÃO").Sortable(true).Filterable(true);
+    columns.Add(foo => foo.DataFinalizacao).Titled("DT.FINALIZAÇÃO").Sortable(true).Filterable(true);
+    columns.Add(foo => foo.TipoPesquisa).Titled("TP.<br>PESQUISA").Sortable(true).Filterable(true).Css("text-center");
+    columns.Add(foo => foo.cdsAtivo).Titled("STATUS").Sortable(true).Filterable(true);
+    columns.Add(foo => foo.QuantidadeVisitas).Titled("QTD.<br>VISITAS").Sortable(true).Filterable(true).Css("text-center");
+    columns.Add(foo => foo.QuantidadeRespostas).Titled("QTD.<br>RESPOSTAS").Sortable(true).Filterable(true).Css("text-center");
+    columns.Add(foo => foo.Percentual).Titled("PERC. %").Sortable(true).Filterable(true).Format("{0:N2}");
+    columns.Add(foo => foo.IndiceSatisfacao).Titled("SATISF. (0-5)").Sortable(true).Filterable(true).Format("{0:N2}");
+    columns.Add()
+                .Encoded(false)
+                .Sanitized(false)
+                .SetWidth(30)
+                .RenderValueAs(o => Html.ActionLink(" ", "Editar", new { idKey = HttpUtility.HtmlDecode(o.idKey) }, new { @class = "fas fa-pencil-alt fa-lg" }));
+    columns.Add()
+                .Encoded(false)
+                .Sanitized(false)
+                .SetWidth(30)
+                .RenderValueAs(o => Html.ActionLink(" ", "ConsultarResultadoPesquisa", new { idKey = HttpUtility.HtmlDecode(o.idKey) }, new { @class = "fas fa-search fa-lg" }));
+}).WithPaging(10)
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript" src="~/Scripts/Comodato/Util.js"></script>
+    <script type="text/javascript">
+        var URLAPI = "@_3M.Comodato.Utility.ControlesUtility.Parametro.ObterValorParametro(_3M.Comodato.Utility.ControlesUtility.Constantes.URLAPI)";
+        var nidUsuario = @Convert.ToInt64(((_3M.Comodato.Entity.UsuarioPerfilEntity)Session["_CurrentUser"]).usuario.nidUsuario);
+    </script>
+    <script type="text/javascript" src="~/Scripts/Comodato/AnaliseSatisfacao.js"></script>
+}

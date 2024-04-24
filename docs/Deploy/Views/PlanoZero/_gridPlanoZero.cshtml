@@ -1,0 +1,39 @@
+﻿@model IEnumerable<_3M.Comodato.Front.Models.PlanoZero>
+@using GridMvc.Html
+<style>
+    .itemGrid-style {
+        text-align: center;
+    }
+</style>
+<div class="table table-hover">
+    @Html.Grid(Model).Columns(columns =>
+{
+columns.Add(c => c.nidPlanoZero, true);
+columns.Add(c => c.nSequencia).Titled("ITEM").Sortable(true).Filterable(false);
+columns.Add(c => c.PecaModel.DS_PECA).Titled("DESCRIÇÃO").Sortable(true).Filterable(false);
+columns.Add(c => c.ccdPeca).Titled("CÓDIGO 3M").Sortable(true).Filterable(false);
+columns.Add(c=> c.nqtPecaModelo).Titled("<center>QTDE<br>MAQUINA</center>").Css("itemGrid-style").RenderValueAs(c => string.Format("{0:N0}",c.nqtPecaModelo)).Sortable(true).Filterable(false);
+columns.Add(c => c.nqtEstoqueATec).Titled("<center>QTDE ESTOQUE<br>A.TÉC.</center>").Css("itemGrid-style").Sortable(true).Filterable(false);
+columns.Add(c => c.nqtEstoqueRec).Titled("<center>QTDE ESTOQUE<br>REC</center>").Css("itemGrid-style").Sortable(true).Filterable(false);
+columns.Add(c => c.ccdCriticidadeAbc).Titled("CRITICIDADE").Sortable(true).Css("itemGrid-style").Filterable(false);
+
+
+columns.Add()
+.Encoded(false)
+.Sanitized(false)
+.SetWidth(30)
+.RenderValueAs(m =>
+                    @<b>
+                        <a href="#" data-toggle="modal" data-target="#PecaModal" data-id="@m.nidPlanoZero" class='edit-peca fas fa-pencil-alt fa-lg' data-placement='top' title='Alterar'></a>
+                    </b>);
+
+                columns.Add()
+        .Encoded(false)
+        .Sanitized(false)
+        .SetWidth(30)
+        .RenderValueAs(d =>
+            @<b>
+                <a href="#" onclick="ConfirmarSimNao('Aviso', 'Confirma a exclusão do item?', 'fnExcluirPlanoZero(  @d.nidPlanoZero );')" class='fas fa-trash-alt fa-lg' data-toggle='tooltip' data-placement='top' title='Excluir'></a>
+            </b>);
+        }).WithPaging(10)
+</div>

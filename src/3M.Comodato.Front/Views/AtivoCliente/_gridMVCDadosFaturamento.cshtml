@@ -1,0 +1,37 @@
+﻿@model IEnumerable<_3M.Comodato.Front.Models.DadosFaturamento>
+
+@using GridMvc.Html
+
+@{
+    var perfil = (_3M.Comodato.Entity.UsuarioPerfilEntity)Session["_CurrentUser"];
+    int PERFIL_CLIENTE = 8;
+    var SIM = "S";
+}
+
+<div class="table table-hover">
+    @Html.Grid(Model).Columns(columns =>
+{
+    columns.Add(foo => foo.CD_Material).Titled("Código do Material").Sortable(false).Filterable(false);
+    columns.Add(foo => foo.DepartamentoVenda).Titled("Depto Vendas").Sortable(false).Filterable(false);
+    columns.Add(foo => foo.AluguelApos3anos).Titled("Valor do aluguel").Sortable(false).Filterable(false);
+    columns.Add(foo => foo.Data_Fat).Titled("Data último faturamento").Sortable(false).Filterable(false);
+    columns.Add(foo => foo.DSStatus).Titled("Status").Sortable(false).Filterable(false);
+    columns.Add()
+        .Encoded(false)
+        .Sanitized(false)
+        .SetWidth(30)
+        .RenderValueAs(model => model.Ativo == true ? new HtmlString("<a onclick='DeleteFaturamento(" + model.ID + ")'><i class='fas fa-trash-alt fa-lg'></i></a>") :
+                        new HtmlString("<span>Inativo</spam>"));
+    columns.Add()
+        .Encoded(false)
+        .Sanitized(false)
+        .SetWidth(30)
+        .RenderValueAs(model => new HtmlString("<input id='IDFAT' type='hidden' class='hidden' value='" + model.FaturamentosID + "'></input>"));
+
+    //.RenderValueAs(o => new HtmlString("< a onclick = 'Editar("+ o.ID +")' class='fas fa-pencil-alt fa-lg'></a>"));
+
+})
+
+ 
+
+</div>

@@ -1,0 +1,131 @@
+﻿@model _3M.Comodato.Front.Models.Dashboard
+
+<div class="card text-black rounded-0 mb-0">
+    <div class="card-header py-1 px-1">
+        <div class="row">
+            <div class="col-xl-9 col-lg-8 col-md-8 col-sm-8" style="font-size: 9pt">Atendimento</div>
+            <div class="col-xl-2 col-lg-3 col-md-3 col-sm-3">
+                <div class="badge badge-pill badge-warning">
+                    <label id="Atendimento" class="mb-0"></label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card-body py-1 px-1" style="min-height: 337px">
+        <div class="row">
+            <label class="col-sm-7 mb-0">Total de períodos:</label>
+            <div class="col-sm-5 mb-0">
+                <div class="font-weight-bold">
+                    <label id="TotalPeriodos" class="mb-0"></label>
+                </div>
+            </div>
+        </div>
+        <div class="row text-primary" style="font-size: 9pt">
+            <label class="col-sm-7 mb-0">Períodos realizados:</label>
+            <div class="col-sm-5 mb-0">
+                <div class="font-weight-bold">
+                    <label id="PeriodosRealizados" class="mb-0"></label>
+                </div>
+            </div>
+        </div>
+        <div class="row text-primary" style="font-size: 9pt">
+            <label class="col-sm-7 mb-0">Períodos planejados:</label>
+            <div class="col-sm-5 mb-0">
+                <div class="font-weight-bold">
+                    <label id="PeriodosPlanejados" class="mb-0"></label>
+                </div>
+            </div>
+        </div>
+        <div class="row text-primary" style="font-size: 9pt">
+            <label class="col-sm-7 mb-0">Visitas realizadas:</label>
+            <div class="col-sm-5 mb-0">
+                <div class="font-weight-bold">
+                    <label id="VisitasRealizadas" class="mb-0"></label>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="font-size: 9pt">
+            <label class="col-sm-7 mb-0">OS realizadas:</label>
+            <div class="col-sm-5 mb-0">
+                <div class="font-weight-bold">
+                    <label id="OSRealizadas" class="mb-0"></label>
+                </div>
+            </div>
+        </div>
+        <div class="row text-primary" style="font-size: 9pt">
+            <label class="col-sm-7 mb-0">Técnicos:</label>
+            <div class="col-sm-5 mb-0">
+                <div class="font-weight-bold">
+                    <label id="Tecnicos" class="mb-0"></label>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="font-size: 9pt">
+            <label class="col-sm-6 mb-0">Vigência:</label>
+            <div class="col-sm-6 mb-0" style="padding-left: 39px;">
+                <div class="font-weight-bold" style="font-size: 8pt">
+                    <label id="Vigencia" class="mb-0"></label>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="font-size: 9pt">
+            <label class="col-sm-7 mb-0">Clientes perdidos:</label>
+            <div class="col-sm-5 mb-0">
+                <div class="font-weight-bold">
+                    <label id="ClientesPerdidos" class="mb-0"></label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <p style="font-weight: 600;font-size: 10pt;" class="col-sm-12 mb-0">Meta Peças Enviadas Ano</p>
+        </div>
+        <div class="row" style="font-size: 9pt">
+            <label class="col-sm-7 mb-0" style="padding-right: 0;">Vlr de peças enviado 3M1:</label>
+            <div class="col-sm-5 mb-0">
+                <div class="font-weight-bold">
+                    <label id="ValorPecaEnviada" class="mb-0"></label>
+                    @*&nbsp;<span class="badge  badge-success">&nbsp;Meta&nbsp;</span>*@
+                </div>
+            </div>
+        </div>
+        <div class="row" style="font-size: 9pt">
+            <label class="col-sm-7 mb-0" style="padding-right: 0;">Vlr de peças recuperadas:</label>
+            <div class="col-sm-5 mb-0">
+                <div class="font-weight-bold">
+                    <label id="ValorMetaPecaRecupEnviado" class="mb-0"></label>
+                    @*&nbsp;<span class="badge  badge-success">&nbsp;Meta&nbsp;</span>*@
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <p style="font-weight: 600;font-size: 10pt;" class="col-sm-12 mb-0">Realizado Peças Enviadas</p>
+        </div>
+        <div class="row" style="font-size: 9pt">
+            <label class="col-sm-7 mb-0" style="padding-right: 0;">Vlr de peças 3M1:</label>
+            <div class="col-sm-5 mb-0">
+                <div class="font-weight-bold">
+                    <label id="ValorPecaEnviada3M1" class="mb-0"></label>
+                    @*&nbsp;<span class="badge  badge-success">&nbsp;Meta&nbsp;</span>*@
+                </div>
+            </div>
+        </div>
+        <div class="row" style="font-size: 9pt">
+            <label class="col-sm-7 mb-0" style="padding-right: 0;">Vlr de peças recuperadas:</label>
+            <div class="col-sm-5 mb-0">
+                <div class="font-weight-bold">
+                    <label id="ValorPecaEnviadaRec" class="mb-0"></label>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="font-size: 9pt">
+            <label class="col-sm-7 mb-0" style="padding-right: 0;">Vlr de peças recuperadas ano:</label>
+            <div class="col-sm-5 mb-0">
+                <div class="font-weight-bold">
+                    <label id="ValorPecaRecuperadaMes" class="mb-0"></label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

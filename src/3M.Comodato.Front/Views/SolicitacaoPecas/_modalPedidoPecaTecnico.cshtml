@@ -1,0 +1,151 @@
+﻿@model _3M.Comodato.Front.Models.PreenchimentoSolicitacaoPecas
+
+<!-- Modal -->
+<div class="modal fade" id="PedidoPecaTecnicoModal" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-dark">
+                <h5 class="modal-title text-white" id="exampleModalLongTitle">Pedido de peça para técnico</h5>
+                @*<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>*@
+            </div>
+            <div class="modal-body">
+                <div class="form-horizontal">
+                    @Html.HiddenFor(model => model.pedidoPecaTecnico.pedidoPeca.ID_ITEM_PEDIDO)
+
+                    <div class="form-group">
+                        <label class="control-label">Peça</label>
+                        @Html.DropDownListFor(model => model.pedidoPecaTecnico.peca.CD_PECA, new SelectList(Model.pedidoPecaTecnico.listaPecas, "CD_PECA", "DS_PECA"), "Selecione...", new { @class = "js-example-basic-single", @style = "width: 100%" })
+                        <label id="validaid_item_pedido_Tecnico" class="control-label text-danger" style="display: none;">Conteúdo obrigatório!</label>
+                        <label id="validaPecaDuplicadaPedido_Tecnico" class="control-label text-danger" style="display: none;">Peça já cadastrada neste pedido!</label>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-sm-12 col-md-4 col-lg-4">
+                            <label class="control-label">Última atualização</label>
+                            @Html.EditorFor(model => model.pedidoPecaTecnico.DT_ULTIMA_UTILIZACAO, new { htmlAttributes = new { @class = "form-control col-12", @readonly = "readonly" } })
+                        </div>
+
+                        <div class="form-group col-sm-12 col-md-4 col-lg-4">
+                            <label class="control-label">Qtde. em estoque</label>
+                            @Html.EditorFor(model => model.pedidoPecaTecnico.QTD_ESTOQUE, new { htmlAttributes = new { @class = "form-control col-12", @readonly = "readonly" } })
+                        </div>
+
+                        <div class="form-group col-sm-12 col-md-4 col-lg-4">
+                            <label class="control-label">Qtde. sugerida PZ</label>
+                            @Html.EditorFor(model => model.pedidoPecaTecnico.QTD_SUGERIDA_PZ, new { htmlAttributes = new { @class = "form-control col-12", @readonly = "readonly" } })
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-sm-12 col-md-4 col-lg-4">
+                            <label class="control-label">Qtde. pedida</label>
+                            @Html.EditorFor(model => model.pedidoPecaTecnico.pedidoPeca.QTD_SOLICITADA, new { htmlAttributes = new { @class = "form-control col-12" } })
+                            <label class="control-label">(uso técnico)</label>
+                            <label id="validaQTDSOLICITADA_Tecnico" class="control-label text-danger" style="display: none;">Conteúdo obrigatório!</label>
+                            <label id="validaQTDSOLICITADARange_Tecnico" class="control-label text-danger" style="display: none;">Somente valor positivo acima de 0(zero)!</label>
+                            <label id="validaQTDSOLICITADARangeMax_Tecnico" class="control-label text-danger" style="display: none;">Limite de caracteres ultrapassado!</label>
+                        </div>
+
+                        <div class="form-group col-sm-12 col-md-4 col-lg-4">
+                            <label class="control-label">Qtde. aprovada</label>
+                            @Html.EditorFor(model => model.pedidoPecaTecnico.pedidoPeca.QTD_APROVADA, new { htmlAttributes = new { @class = "form-control col-12", @readonly = "readonly" } })
+                            <label class="control-label">(uso 3M)</label>
+                            <label id="validaQTDAPROVADARange_Tecnico" class="control-label text-danger" style="display: none;">Somente valor positivo!</label>
+                            <label id="validaQTDAPROVADARangeMax_Tecnico" class="control-label text-danger" style="display: none;">Limite de caracteres ultrapassado!</label>
+                        </div>
+
+                        <div class="form-group col-sm-12 col-md-4 col-lg-4">
+                            <label class="control-label">Qtde. recebida</label>
+                            @Html.EditorFor(model => model.pedidoPecaTecnico.pedidoPeca.QTD_RECEBIDA, new { htmlAttributes = new { @class = "form-control col-12" } })
+                            @Html.EditorFor(model => model.pedidoPecaTecnico.pedidoPeca.QTD_ULTIMO_RECEBIMENTO, new { htmlAttributes = new { @class = "form-control col-12" } })
+                            <label class="control-label">(uso técnico)</label>
+                            <label id="validaQTDULTIMORECEBIMENTORange_Tecnico" class="control-label text-danger" style="display: none;">Somente valor positivo acima de 0(zero)!</label>
+                            <label id="validaQTDULTIMORECEBIMENTORangeMax_Tecnico" class="control-label text-danger" style="display: none;">Limite de caracteres ultrapassado!</label>
+                            <label id="validaQTDRECEBIDARange_Tecnico" class="control-label text-danger" style="display: none;">Somente valor positivo acima de 0(zero)!</label>
+                            <label id="validaQTDRECEBIDARangeMax_Tecnico" class="control-label text-danger" style="display: none;">Limite de caracteres ultrapassado!</label>
+                        </div>
+                    </div>
+
+                    @if (Model.tipoOrigemPagina == "Aprovacao")
+                    {
+                        <label class="control-label">Estoque a debitar</label>
+                        <div class="form-control col-12">
+                            <div class="form-row">
+                                <div class="form-group col-sm-12 col-md-3 col-lg-3">
+                                    <label class="control-label">@Model.pedidoPecaTecnico.pedidoPeca.Estoque3M1.CD_ESTOQUE.Trim()</label>
+                                    <div class="form-group">
+                                        <input type="text" data-id="@Model.pedidoPecaTecnico.pedidoPeca.Estoque3M1.ID_ESTOQUE.ToString()" class="form-control" id="txtEstoque3M1" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-sm-12 col-md-3 col-lg-3">
+                                    <label class="control-label">Qtd. Disponível</label>
+                                    <div class="form-group">
+                                        @Html.EditorFor(model => model.pedidoPecaTecnico.QTD_ESTOQUE_3M1, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    </div>
+                                </div>
+                                <div class="form-group col-sm-12 col-md-3 col-lg-3">
+                                    <label class="control-label">@Model.pedidoPecaTecnico.pedidoPeca.Estoque3M2.CD_ESTOQUE.Trim()</label>
+                                    <div class="form-group">
+                                        <input type="text" data-id="@Model.pedidoPecaTecnico.pedidoPeca.Estoque3M2.ID_ESTOQUE.ToString()" class="form-control" id="txtEstoque3M2" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-sm-12 col-md-3 col-lg-3">
+                                    <label class="control-label">Qtd. Disponível</label>
+                                    <div class="form-group">
+                                        @Html.EditorFor(model => model.pedidoPecaTecnico.QTD_ESTOQUE_3M2, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                    </div>
+                                </div>
+                                @*<label class="control-label">Estoque a debitar</label>*@
+                                @*@Html.DropDownListFor(model => model.pedidoPecaTecnico.pedidoPeca.estoque.ID_ESTOQUE, new SelectList(Model.pedidoPecaTecnico.listaEstoques, "ID_ESTOQUE", "DS_ESTOQUE"), "Selecione...", new { @class = "js-example-basic-single", @style = "width: 100%" })*@
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <label id="validaIDESTOQUE_Tecnico_3M1" class="control-label text-danger col-12" style="display: none;">O estoque @Model.pedidoPecaTecnico.pedidoPeca.Estoque3M1.CD_ESTOQUE.Trim(), não possui peça suficiente para aprovação!</label>
+                            <label id="validaIDESTOQUE_Tecnico_3M2" class="control-label text-danger col-12" style="display: none;">O estoque @Model.pedidoPecaTecnico.pedidoPeca.Estoque3M2.CD_ESTOQUE.Trim(), não possui peça suficiente para aprovação!</label>
+                        </div>
+
+                    }
+                    else
+                    {
+                        @*@Html.HiddenFor(model => model.pedidoPecaTecnico.pedidoPeca.estoque.ID_ESTOQUE)*@
+                        @Html.HiddenFor(model => model.pedidoPecaTecnico.pedidoPeca.Estoque3M1.ID_ESTOQUE)
+                        @Html.HiddenFor(model => model.pedidoPecaTecnico.pedidoPeca.Estoque3M2.ID_ESTOQUE)
+                        //@Html.HiddenFor(model => model.pedidoPecaTecnico.pedidoPeca.QTD_APROVADA_3M1)
+                        //@Html.HiddenFor(model => model.pedidoPecaTecnico.pedidoPeca.QTD_APROVADA_3M2)
+
+                        if (@Model.pedidoPecaTecnico.pedidoPeca.Estoque3M1 != null)
+                        {
+                            <input type="text" hidden data-id="@Model.pedidoPecaTecnico.pedidoPeca.Estoque3M1.ID_ESTOQUE.ToString()" class="" id="txtEstoque3M1" />
+                        }
+                        if (@Model.pedidoPecaTecnico.pedidoPeca.Estoque3M2 != null)
+                        {
+                            <input type="text" hidden data-id="@Model.pedidoPecaTecnico.pedidoPeca.Estoque3M2.ID_ESTOQUE.ToString()" class="" id="txtEstoque3M2" />
+                        }
+
+
+                        <input type="text" hidden data-id="@Model.pedidoPecaTecnico.pedidoPeca.QTD_APROVADA_3M1" class="" id="txtQtdAprovada3M1" />
+                        <input type="text" hidden data-id="@Model.pedidoPecaTecnico.pedidoPeca.QTD_APROVADA_3M2" class="" id="txtQtdAprovada3M2" />
+                    }
+
+                    <div class="form-group">
+                        <label class="control-label">Observações</label>
+                        @Html.EditorFor(model => model.pedidoPecaTecnico.pedidoPeca.DS_OBSERVACAO, new { htmlAttributes = new { @class = "form-control col-12", @rows = 3 } })
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnSalvarPedidoPecaTecnicoModal">Salvar</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                @*<button type="button" class="btn btn-primary">Save changes</button>*@
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

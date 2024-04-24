@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<CmxItensDscErpErpCollection xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://xmlns.ecomex.com.br/interface/inbound/cmxitensdscerperp">
+  <CmxItensDscErpErp>
+    <item_codigo>HI010233198</item_codigo>
+    <tipo>G</tipo>
+    <idioma_codigo> </idioma_codigo>
+    <pais_codigo> </pais_codigo>
+    <descricao>BRACKETS 3M GEMINI CRYSTAL CLEAR &#x1A; MODELO: 002-622 - TRATA-SE DE BRACKET CERAMIC O QUE PODE SER UTILIZADO EM COMBINACAO COM ARCOS E OUTROS DISPOSITIVOS NO TRATAM ENTO ORTODONTICO. ITEM REGULAMENTADO PELA ANVISA &#x1A; CONDICAO DO PRODUTO: NOVO. Nome Comercial: -</descricao>
+    <entidade_codigo xsi:nil="true" />
+    <entidade_site_codigo xsi:nil="true" />
+    <aplicacao>I</aplicacao>
+    <aux xsi:nil="true" />
+    <part_number xsi:nil="true" />
+    <atributo1 xsi:nil="true" />
+    <atributo2 xsi:nil="true" />
+    <atributo3 xsi:nil="true" />
+    <atributo4 xsi:nil="true" />
+    <atributo5 xsi:nil="true" />
+    <atributo6 xsi:nil="true" />
+    <atributo7 xsi:nil="true" />
+    <atributo8 xsi:nil="true" />
+    <atributo9 xsi:nil="true" />
+    <atributo10 xsi:nil="true" />
+    <atributo11 xsi:nil="true" />
+    <atributo12 xsi:nil="true" />
+    <atributo13 xsi:nil="true" />
+    <atributo14 xsi:nil="true" />
+    <atributo15 xsi:nil="true" />
+    <atributo16 xsi:nil="true" />
+    <atributo17 xsi:nil="true" />
+    <atributo18 xsi:nil="true" />
+    <atributo19 xsi:nil="true" />
+    <atributo20 xsi:nil="true" />
+    <global_atributo1 xsi:nil="true" />
+    <global_atributo2 xsi:nil="true" />
+    <global_atributo3 xsi:nil="true" />
+    <global_atributo4 xsi:nil="true" />
+    <global_atributo5 xsi:nil="true" />
+    <global_atributo6 xsi:nil="true" />
+    <global_atributo7 xsi:nil="true" />
+    <global_atributo8 xsi:nil="true" />
+    <global_atributo9 xsi:nil="true" />
+    <global_atributo10 xsi:nil="true" />
+    <global_atributo11 xsi:nil="true" />
+    <global_atributo12 xsi:nil="true" />
+    <global_atributo13 xsi:nil="true" />
+    <global_atributo14 xsi:nil="true" />
+    <global_atributo15 xsi:nil="true" />
+    <global_atributo16 xsi:nil="true" />
+    <global_atributo17 xsi:nil="true" />
+    <global_atributo18 xsi:nil="true" />
+    <global_atributo19 xsi:nil="true" />
+    <global_atributo20 xsi:nil="true" />
+    <origem_codigo>BPCS</origem_codigo>
+  </CmxItensDscErpErp>
+</CmxItensDscErpErpCollection>

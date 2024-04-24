@@ -1,0 +1,23 @@
+﻿@model IEnumerable<_3M.Comodato.Front.Models.ListaUsuarioCliente>
+
+@using GridMvc.Html
+
+<div class="table table-hover">
+    @Html.Grid(Model).Columns(columns =>
+{
+    //columns.Add(foo => foo.CD_CLIENTE).Titled("CÓDIGO").Sortable(false).Filterable(false);
+    columns.Add(foo => foo.NM_CLIENTE).Titled("CLIENTE").Sortable(true).Filterable(false);
+    columns.Add(foo => foo.nvlQtdeUsuarios).Titled("QTDE. USUÁRIOS").Sortable(true).Filterable(false);
+    columns.Add()
+        .Encoded(false)
+        .Sanitized(false)
+        .SetWidth(30)
+        .RenderValueAs(o => Html.ActionLink(" ", "Editar", new { idKey = HttpUtility.HtmlDecode(o.idKey) }, new { @class = "fas fa-pencil-alt fa-lg" }));
+    //columns.Add()
+    //.Encoded(false)
+    //.Sanitized(false)
+    //.SetWidth(30)
+    //.RenderValueAs(o => Html.ActionLink("Excluir", "Excluir", new { idKey = HttpUtility.HtmlDecode(o.idKey) }));
+}).WithPaging(10)
+</div>
+

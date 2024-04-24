@@ -1,0 +1,13 @@
+ALTER TABLE [dbo].[tbPecaOS] NOCHECK CONSTRAINT [FK_tbPecaOS_tbOS]
+
+insert into tbtpstatusospadrao (st_status_os, ds_status_os, nidusuarioatualizacao, dtmdatahoraatualizacao) values (1, 'Aguardando Início', 1, getdate());
+insert into tbtpstatusospadrao (st_status_os, ds_status_os, nidusuarioatualizacao, dtmdatahoraatualizacao) values (2, 'Aberta', 1, getdate());
+insert into tbtpstatusospadrao (st_status_os, ds_status_os, nidusuarioatualizacao, dtmdatahoraatualizacao) values (3, 'Finalizada', 1, getdate());
+insert into tbtpstatusospadrao (st_status_os, ds_status_os, nidusuarioatualizacao, dtmdatahoraatualizacao) values (4, 'Cancelada', 1, getdate());
+
+insert into tbTpOSPadrao (cd_tipo_os, ds_tipo_os, nidusuarioatualizacao, dtmdatahoraatualizacao) values (1, 'Manutenção preventiva', 1, getdate());
+insert into tbTpOSPadrao (cd_tipo_os, ds_tipo_os, nidusuarioatualizacao, dtmdatahoraatualizacao) values (2, 'Manutenção corretiva', 1, getdate());
+insert into tbTpOSPadrao (cd_tipo_os, ds_tipo_os, nidusuarioatualizacao, dtmdatahoraatualizacao) values (3, 'Instalação', 1, getdate());
+
+insert into tbTpReclamacao (cd_tipo_reclamacao, ds_tipo_reclamacao, nidusuarioatualizacao, dtmdatahoraatualizacao) values (1, 'Peça', 1, getdate());
+insert into tbTpReclamacao (cd_tipo_reclamacao, ds_tipo_reclamacao, nidusuarioatualizacao, dtmdatahoraatualizacao) values (2, 'Equipamento', 1, getdate());

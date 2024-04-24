@@ -1,0 +1,39 @@
+﻿@{
+    ViewBag.Title = "Home";
+}
+
+    <div style="width:100%; align-items:center; text-align:center;">
+        <p></p>
+        @*<input type="submit" name="Visualizar" id="Visualizar" value="Conheça mais detalhes sobre as nossas soluções clicando aqui!"
+               onclick="window.open('https://www.3m.com.br/3M/pt_BR/embalagem-empacotamento/?utm_medium=redirect&utm_source=vanity-url&utm_campaign=www.3m.com.br/solucoes-para-embalagem#solucoesEmbalagens', '_blank');" />*@
+
+        <button class="btn btn-primary btn-sm" type="button" id="btn" value="" style="font-size:larger"
+                onclick="window.open('https://www.3m.com.br/3M/pt_BR/embalagem-empacotamento/?utm_medium=redirect&utm_source=vanity-url&utm_campaign=www.3m.com.br/solucoes-para-embalagem#solucoesEmbalagens', '_blank');"
+                ><b>Conheça mais detalhes sobre as nossas<br /> soluções clicando aqui!</b></button>
+    </div>
+
+    <Homefooter>
+        <font size="2" class="mr-1">p.2023-08-23</font>
+        @*<font size="4" style="color:black">Conheça mais detalhes sobre as nossas soluções! Acesse o link:</font>
+        <font size="5" face="Arial Black"><a style="color:#c41111" target="_blank" href="https://www.3m.com.br/3M/pt_BR/embalagem-empacotamento/?utm_medium=redirect&utm_source=vanity-url&utm_campaign=www.3m.com.br/solucoes-para-embalagem#solucoesEmbalagens">3M &nbsp;</a></font>*@
+    </Homefooter>
+
+
+
+<style>
+    body {
+        background-image: url('../Images/Geral_Export_min.png');
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    Homefooter {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        /*padding: 1rem;*/
+        background-color: rgba(0, 0, 0, 0.40);
+        text-align: right;
+    }
+</style>

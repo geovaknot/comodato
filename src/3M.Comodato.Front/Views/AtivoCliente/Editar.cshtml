@@ -1,0 +1,434 @@
+﻿@model _3M.Comodato.Front.Models.AtivoCliente
+
+@{
+    ViewBag.Title = "Equipamento X Cliente";
+}
+
+
+<i class="fas fa-cubes fa-3x fa-pull-left"></i>
+<h3>Equipamento X Cliente (Editar)</h3>
+
+<div class="well">
+
+    @using (Html.BeginForm())
+    {
+
+        <div class="form-horizontal">
+
+            <hr />
+            @Html.HiddenFor(model => model.ID_ATIVO_CLIENTE)
+            <!--input type="hidden" class="hidden" id="idPagFat" value=""/>-->
+            @Html.TextBoxFor(x => x.ID_ATIVO_CLIENTE, new { @class = "hidden", @id = "idPagFat", @type = "hidden" })
+            @Html.TextBoxFor(x => x.ativoFixo.CD_ATIVO_FIXO, new { @class = "hidden", @id = "nrAtivo", @type = "hidden" })
+            @Html.TextBoxFor(x => x.cliente.CD_CLIENTE, new { @class = "hidden", @id = "cdCliente", @type = "hidden" })
+            <div class="form-group">
+                <label class="control-label">Cliente</label>
+                @Html.DropDownListFor(model => model.cliente.CD_CLIENTE, new SelectList(Model.clientes, "CD_CLIENTE", "NM_CLIENTE"), new { @class = "js-example-basic-single", @style = "width: 100%" })
+                <label id="validaCD_CLIENTE" class="control-label text-danger" style="display: none;">Conteúdo obrigatório!</label>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">Nr. do Ativo</label>
+                @Html.DropDownListFor(model => model.ativoFixo.CD_ATIVO_FIXO, new SelectList(Model.ativosFixos, "CD_ATIVO_FIXO", "modelo.DS_MODELO"), new { @class = "js-example-basic-single", @style = "width: 100%" })
+                <label id="validaCD_ATIVO_FIXO" class="control-label text-danger" style="display: none;">Conteúdo obrigatório!</label>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-6">
+                    <label class="control-label">Razão do Comodato</label>
+                    @Html.DropDownListFor(model => model.razaoComodato.CD_RAZAO_COMODATO, new SelectList(Model.razoesComodatos, "CD_RAZAO_COMODATO", "DS_RAZAO_COMODATO"), new { @class = "valid form-control col-12" })
+                </div>
+
+                <div class="form-group col-6">
+                    <label class="control-label">Tipo de Serviço</label>
+                    @Html.DropDownListFor(model => model.tipo.CD_TIPO, new SelectList(Model.tipos, "CD_TIPO", "DS_TIPO"), new { @class = "valid form-control col-12" })
+                    @*@Html.DropDownList("tipo_CD_TIPO", new SelectList(Model.tipos, "CD_TIPO", "DS_TIPO"), new { @class = "valid form-control col-12" })*@
+                    @*@Html.HiddenFor(model => model.tipo.CD_TIPO)*@
+                    @Html.ValidationMessageFor(model => model.tipo.CD_TIPO, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            @*<div class="form-row">
+                    <div class="form-group col-3">
+                        <label class="control-label">Status de Devolução</label>
+                        @Html.DropDownListFor(model => model.razaoComodato.CD_RAZAO_COMODATO, new SelectList(Model.razoesComodatos, "CD_RAZAO_COMODATO", "DS_RAZAO_COMODATO"), new { @class = "valid form-control col-12" })
+                    </div>
+                </div>*@
+
+            <div class="form-row">
+                <div class="form-group col-3">
+                    <label class="control-label">Data de Devolução</label>
+                    <div id="DT_DEVOLUCAO-container">
+                        <div class="input-group date">
+                            @Html.TextBoxFor(model => model.DT_DEVOLUCAO, "{0:dd/MM/yyyy}", new { @class = "form-control col-12" })
+                            <div class="input-group-addon">
+                                <i class="far fa-calendar-alt fa-2x" style="background: #d9d6d6; padding: 3px 3px 3px 3px"></i>
+                            </div>
+                        </div>
+                    </div>
+                    @Html.ValidationMessageFor(model => Model.DT_DEVOLUCAO, "", new { @class = "text-danger" })
+                    <label id="validaDT_DEVOLUCAO" class="control-label text-danger" style="display: none;">Conteúdo obrigatório!</label>
+                </div>
+
+                <div class="form-group col-2">
+                    <label class="control-label">Destino</label>
+                    @Html.DropDownListFor(model => model.motivoDevolucao.CD_MOTIVO_DEVOLUCAO, new SelectList(Model.motivosDevolucoes, "CD_MOTIVO_DEVOLUCAO", "DS_MOTIVO_DEVOLUCAO"), new { @class = "valid form-control col-12" })
+                    <label id="validaCD_MOTIVO_DEVOLUCAO" class="control-label text-danger" style="display: none;">Conteúdo obrigatório!</label>
+                </div>
+
+                <div class="form-group- col-2">
+                    <label class="control-label">Termo Pagto.</label>
+                    @Html.EditorFor(model => model.TX_TERMOPGTO, new { htmlAttributes = new { @class = "form-control col-12" } })
+                    @Html.ValidationMessageFor(model => Model.TX_TERMOPGTO, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group col-2">
+                    <label class="control-label">Valor do Aluguel</label>
+                    @Html.EditorFor(model => model.VL_ALUGUEL, new { htmlAttributes = new { @class = "form-control col-12" } })
+                    @Html.ValidationMessageFor(model => Model.VL_ALUGUEL, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group col-3">
+                    <label class="control-label">Tempo de locação (Meses)</label>
+                    @Html.EditorFor(model => model.QTD_MESES_LOCACAO, new { htmlAttributes = new { @class = "form-control col-12" } })
+                    @Html.ValidationMessageFor(model => Model.QTD_MESES_LOCACAO, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-3">
+                    <label class="control-label">Data da Nota Fiscal</label>
+                    <div id="DT_NOTAFISCAL-container">
+                        <div class="input-group date">
+                            @Html.TextBoxFor(model => model.DT_NOTAFISCAL, "{0:dd/MM/yyyy}", new { @class = "form-control col-12" })
+                            <div class="input-group-addon">
+                                <i class="far fa-calendar-alt fa-2x" style="background: #d9d6d6; padding: 3px 3px 3px 3px"></i>
+                            </div>
+                        </div>
+                    </div>
+                    @Html.ValidationMessageFor(model => Model.DT_NOTAFISCAL, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group col-2">
+                    <label class="control-label">Nr. Nota</label>
+                    @Html.EditorFor(model => model.NR_NOTAFISCAL, new { htmlAttributes = new { @class = "form-control col-12" } })
+                    @Html.ValidationMessageFor(model => Model.NR_NOTAFISCAL, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group col-7">
+                    <label class="control-label">Anexo Nota</label>
+                    <div class="input-group col-md-12">
+                        @Html.HiddenFor(model => model.DS_ARQUIVO_FOTO)
+                        <div class="custom-file">
+                            <input style="z-index:-1" type="file" id="file" class="custom-file-input" onchange="SelecionarArquivo(this, $('#labelFile'), $('#fileUpload'));">
+                            <label class="custom-file-label" id="labelFile" for="file">Selecionar Arquivo</label>
+                        </div>
+
+                        <div class="col-md-3 alig">
+                            <a href="#" id="fileUpload" title="Enviar Anexo" style="visibility:hidden;"><i class="fas fa-2x fa-upload"></i></a> &nbsp;
+                            @if (!string.IsNullOrEmpty(Model.DS_ARQUIVO_FOTO))
+                            {
+                                @Html.ActionLink(" ", "DownloadFile", new { pastaConstante = "PastaAtivoClienteNF", fileName = Model.DS_ARQUIVO_FOTO }, new { @class = "fas fa-2x fa-file", @title = "Baixar Anexo" })
+                                <a href="#" id="fileEraser" title="Apagar Anexo" name="@Model.DS_ARQUIVO_FOTO" for="DS_ARQUIVO_FOTO"><i class="fas fa-2x fa-eraser"></i></a>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group offset-3">
+                </div>
+
+                <div class="form-group offset-2">
+                </div>
+
+                <div class="form-group col-7">
+                    <label class="control-label">Anexo Foto</label>
+                    <div class="input-group col-md-12">
+                        @Html.HiddenFor(model => model.DS_ARQUIVO_FOTO2)
+                        <div class="custom-file">
+                            <input style="z-index:-1" type="file" id="file2" class="custom-file-input" onchange="SelecionarArquivo(this, $('#labelFile2'), $('#fileUpload2'));">
+                            <label class="custom-file-label" id="labelFile2" for="file2">Selecionar Arquivo</label>
+                        </div>
+
+                        <div class="col-md-3 alig">
+                            <a href="#" id="fileUpload2" title="Enviar Anexo" style="visibility:hidden;"><i class="fas fa-2x fa-upload"></i></a> &nbsp;
+                            @if (!string.IsNullOrEmpty(Model.DS_ARQUIVO_FOTO2))
+                            {
+                                @Html.ActionLink(" ", "DownloadFile", new { pastaConstante = "PastaAtivoClienteNF", fileName = Model.DS_ARQUIVO_FOTO2 }, new { @class = "fas fa-2x fa-camera", @title = "Baixar Anexo" })
+                                <a href="#" id="fileEraser2" title="Apagar Anexo" name="@Model.DS_ARQUIVO_FOTO2" for="DS_ARQUIVO_FOTO2"><i class="fas fa-2x fa-eraser"></i></a>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label class="control-label">Observações</label>
+                @Html.EditorFor(model => model.TX_OBS, new { htmlAttributes = new { @class = "form-control col-12", @rows = 3 } })
+                @Html.ValidationMessageFor(model => model.TX_OBS, "", new { @class = "text-danger" })
+            </div>
+
+            <br />
+
+            <div class="form-group">
+                <input type="submit" id="btnGravar" value="Gravar" class="btn btn-primary btn-sm" />
+                @Html.ActionLink("Voltar", "Index", new { area = "" }, new { @class = "btn btn-primary btn-sm" })
+            </div>
+
+            <br>
+
+            <hr class="mt-3 mb-3" />
+            <div id="tabsAdicionais">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="tabFaturamento" data-toggle="tab" href="#tab-area-Faturamento" role="tab" aria-controls="home" aria-selected="true" onclick="mostrarFaturamento()">Dados Faturamento</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="tabPagamento" data-toggle="tab" href="#tab-area-Pagamento" role="tab" aria-controls="profile" aria-selected="false" onclick="mostrarPagamento()">Controle de Pagamento</a>
+                    </li>
+                </ul>
+
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="tab-area-Faturamento" role="tabpanel" aria-labelledby="home-tab">
+                        <div class="card-body">
+                            <div class="pre-scrollable">
+                                <div id="gridmvcDadosFaturamento">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="tab-area-Pagamento" role="tabpanel" aria-labelledby="profile-tab">
+                        <div class="card-body">
+                            <div class="pre-scrollable">
+                                <div id="gridmvcDadosPagamento">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @if (Model.DT_DEVOLUCAO == null || Model.DT_DEVOLUCAO == "")
+            {
+                <div class="form-group">
+                    <input type="button" id="btnFat" value="Registrar faturamento" class="btn btn-primary btn-sm ml-2" data-toggle="modal" data-target="#modalFat" />
+                    @*<input type="button" id="btnPag" value="Registrar pagamento" class="display-none btn btn-primary btn-sm ml-2" data-toggle="modal" data-target="#modalPag" />*@
+                </div>
+            }
+
+            <hr />
+
+
+            <!--Modal Faturamento-->
+            <div id="modalFat" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal conteúdo-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Novo registro - Faturamento</h4>
+                        </div>
+                        <div class="modal-body">
+                            @using (Html.BeginForm())
+                            {
+                                <div class="row">
+                                    <div class="form-group col-md">
+                                        <label class="control-label">Código do material</label>
+                                        <div class="input-group">
+                                            <select class="form-control" id="cdMaterial">
+                                                @if (ViewBag.CodigoMat != null)
+                                                {
+                                                    foreach (var c in ViewBag.CodigoMat)
+                                                    {
+                                                        <option value="@c" selected>@c</option>
+                                                    }
+                                                }
+
+                                            </select>
+                                            @*@Html.TextBoxFor(x => x.dadosFaturamento.CD_Material, new { htmlAttributes = new { @class = "form-control col-6", @id = "cdMaterial" } })*@
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-md">
+                                        <label class="control-label">Departamento de venda</label>
+                                        <div class="input-group">
+                                            <!--<input type="text" class="form-control col-12" id="deptoVenda" />-->
+                                            <select class="form-control" id="deptoVenda">
+                                                @if (ViewBag.Depto != null)
+                                                {
+                                                    foreach (var d in ViewBag.Depto)
+                                                    {
+                                                        <option value="@d" selected>@d</option>
+                                                    }
+                                                }
+
+                                            </select>
+                                            @*@Html.DropDownListFor(x => x.dadosFaturamento.DepartamentoVenda, new SelectList(ViewBag.Depto), new { @class = "js-example-basic-single", @style = "width: 100%" })*@
+                                        </div>
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="row">
+                                    <div class="form-group col-sm">
+                                        <label class="control-label">Valor do aluguel</label>
+                                        <div class="input-group">
+                                            <input type="text" value="@Model.VL_ALUGUEL" readonly="readonly" class="form-control col-12" id="aluguel" onkeypress="$(this).mask('R$ ########0,00', {reverse: true});" />
+                                            @*@Html.TextBoxFor(x => x.dadosFaturamento.AluguelApos3anos, new { htmlAttributes = new { @class = "form-control col-6", @id = "aluguel" } })*@
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group col-sm">
+                                        <label class="control-label">Data último faturamento</label>
+                                        <div class="input-group date">
+                                            <input type="text" name="dateModal" class="form-control col-12" id="dtUltimoFat" autocomplete="off" />
+                                            @*@Html.TextBoxFor(x => x.dadosFaturamento.DT_UltimoFaturamento, "{0:dd/MM/yyyy}", new { @class = "form-control col-6", @id = "dtUltimoFat" })*@
+                                            <div class="input-group-addon calendario">
+                                                <i class="far fa-calendar-alt fa-2x" style="background: #d9d6d6; padding: 3px 3px 3px 3px"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <br />
+
+                                <div class="form-group">
+                                    <input type="submit" id="registrarFat" value="Registrar" class="btn btn-primary btn-sm" data-dismiss="modal" />
+                                </div>
+
+                            }
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+            <!--Modal Pagamento-->
+            <div id="modalPag" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal conteúdo-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Novo registro - Pagamento</h4>
+                        </div>
+                        <div class="modal-body">
+                            @using (Html.BeginForm())
+                            {
+                                <div class="form-group">
+                                    <label class="control-label">Número solicitação SESM</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control col-6" id="nrSESM" />
+                                        @*@Html.TextBoxFor(x => x.dadosPagamento.NRSolicitacaoSESM, new { htmlAttributes = new { @class = "form-control col-6", @id = "nrSESM" } })*@
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label">Número da NF</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control col-6" id="nrNF" />
+                                        @*@Html.TextBoxFor(x => x.dadosPagamento.NR_NotaFiscal, new { htmlAttributes = new { @class = "form-control col-6", @id = "nrNF" } })*@
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label">Série NF</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control col-6" id="serieNF" />
+                                        @*@Html.TextBoxFor(x => x.dadosPagamento.SerieNF, new { htmlAttributes = new { @class = "form-control col-6", @id = "serieNF" } })*@
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label">Data emissão NF</label>
+                                    <div class="input-group date">
+                                        <input type="text" name="dateModal" class="form-control col-6" id="dtEmissaoNF" />
+                                        @*@Html.TextBoxFor(x => x.dadosPagamento.DataEmissaoNF, "{0:dd/MM/yyyy}", new { @class = "form-control col-6", @id = "dtEmissaoNF" })*@
+                                        <div class="input-group-addon calendario">
+                                            <i class="far fa-calendar-alt fa-2x" style="background: #d9d6d6; padding: 3px 3px 3px 3px"></i>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label">Data da solicitação</label>
+                                    <div class="input-group date">
+                                        <input type="text" name="dateModal" class="form-control col-6" id="dtSolicitacao" />
+                                        @*@Html.TextBoxFor(x => x.dadosPagamento.DT_Solicitacao, "{0:dd/MM/yyyy}", new { @class = "form-control col-6", @id = "dtSolicitacao" })*@
+                                        <div class="input-group-addon calendario">
+                                            <i class="far fa-calendar-alt fa-2x" style="background: #d9d6d6; padding: 3px 3px 3px 3px"></i>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <input id="registrarPag" value="Registrar" class="btn btn-primary btn-sm" data-dismiss="modal" />
+                                </div>
+
+                            }
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            @*@Html.Partial("_modalEditFaturamento")*@
+
+        </div>
+    }
+</div>
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+
+<script type="text/javascript" src="~/Scripts/Comodato/AtivoCliente.js"></script>
+<script type="text/javascript" src="~/Scripts/Comodato/Util.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+<script type="text/javascript">
+        var URLAPI = "@_3M.Comodato.Utility.ControlesUtility.Parametro.ObterValorParametro(_3M.Comodato.Utility.ControlesUtility.Constantes.URLAPI)";
+        var URL_UPLOAD = '@Url.Action("Upload")';
+        var URL_CLEAR = '@Url.Action("clearFile")';
+        var URLObterListaFaturamento = "@Url.Action("ObterListaFaturamentoJson", "DadosFaturamento")";
+        var URLObterListaPagamento = "@Url.Action("ObterListaPagamentoJson", "DadosPagamento")";
+        var URLRegistrarPagamento = "@Url.Action("Incluir", "DadosPagamento")";
+        var URLRegistrarFaturamento = "@Url.Action("Incluir", "DadosFaturamento")";
+        var URLObterListaDeptovenda = "@Url.Action("ObterListaDeptoVenda", "DadosFaturamento")"
+        var token = "@Convert.ToString(((_3M.Comodato.Entity.UsuarioPerfilEntity)Session["_CurrentUser"]).token)";
+    @Model.JavaScriptToRun
+        function MensagemSucesso() {
+            var mensagem = '@_3M.Comodato.Utility.ControlesUtility.Constantes.MensagemGravacaoSucesso';
+
+            AlertaRedirect("Aviso", mensagem);
+        };
+</script>
+<script>
+    //$('input[name="dateModal"]').mask('00/00/0000');
+
+    function mostrarFaturamento() {
+        document.getElementById("btnFat").classList.remove('display-none');
+        document.getElementById("btnPag").classList.add('display-none');
+    }
+
+    function mostrarPagamento() {
+        document.getElementById("btnFat").classList.add('display-none');
+        document.getElementById("btnPag").classList.remove('display-none');
+    }
+</script>
+<style>
+    .display-none {
+        display: none;
+    }
+</style>
+}
+
+

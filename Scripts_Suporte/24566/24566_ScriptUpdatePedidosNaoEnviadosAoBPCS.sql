@@ -1,0 +1,33 @@
+select * from TB_PEDIDO where CD_PEDIDO in (7822, 7821)
+
+update TB_PEDIDO
+set ID_STATUS_PEDIDO = 4
+where ID_PEDIDO in (19056,
+19130,
+19147,
+19155,
+19191)
+
+
+update TB_PEDIDO_PECA
+set ST_STATUS_ITEM = '5'
+where ID_PEDIDO in (19056,
+19130,
+19147,
+19155,
+19191) and ST_STATUS_ITEM not in ('4')
+
+
+update TB_PEDIDO
+set ID_STATUS_PEDIDO = 3
+where ID_PEDIDO in (19156,
+19157)
+
+
+update TB_PEDIDO_PECA
+set ST_STATUS_ITEM = '3'
+where ID_PEDIDO in (19156,
+19157) and ST_STATUS_ITEM not in ('4')
+
+
+

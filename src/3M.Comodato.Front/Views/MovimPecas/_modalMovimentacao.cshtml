@@ -1,0 +1,41 @@
+﻿@model _3M.Comodato.Front.Models.EstoqueMovimentacao
+
+<div class="modal fade" id="MovimentacaoAcao1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-dark">
+                <h6 id="hTitulo" class="modal-title text-white">Movimentação completa de Estoque</h6>
+            </div>
+            <div class="modal-body">
+                <div class="form-horizontal">
+
+                    <div class="form-horizontal">
+                        <div class="row">
+                            <label class="control-label col-md-2">De</label>
+                            <div class="form-horizontal col-md-10">
+                                <select id="ddlEstoqueDe" class="js-select-basic-m1" style="white-space: nowrap; width:100%;"></select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="control-label col-md-2">Para</label>
+                            <div class="form-horizontal col-md-10">
+                                <select id="ddlEstoquePara" class="js-select-basic-m1" style="white-space: nowrap; width:100%;"></select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">&nbsp;</div>
+                    <div class="form-horizontal">
+                        <div class="form-horizontal">
+                            <label class="control-label">Todo o estoque será movido do técnico de origem para o técnico de destino.</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" id="btnFechar" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="button" id="btnSalvar" onclick="fnSalvarTransferenciaEstoque();" class="btn btn-primary">Salvar</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>

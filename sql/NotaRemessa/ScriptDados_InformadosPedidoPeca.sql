@@ -1,0 +1,1 @@
+Alter table TB_PEDIDO_PECA add InformadoDados varchar(1) null

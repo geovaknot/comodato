@@ -1,0 +1,164 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{3062841C-3FFD-4826-8081-7A2131319F2A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>_3M.Comodato.Entity</RootNamespace>
+    <AssemblyName>3M.Comodato.Entity</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ClienteComboEntity.cs" />
+    <Compile Include="DadosPedidoEntity.cs" />
+    <Compile Include="LogSincronismoEntity.cs" />
+    <Compile Include="LogStatusOSPadraoEntity.cs" />
+    <Compile Include="PEDIDO_BPCS_NFEntity.cs" />
+    <Compile Include="MonitoramentoWFEntity.cs" />
+    <Compile Include="LotesEntity.cs" />
+    <Compile Include="AcompanhamentosEntity.cs" />
+    <Compile Include="AgendaEntity.cs" />
+    <Compile Include="AtivoClienteEntity.cs" />
+    <Compile Include="AtivoFixoEntity.cs" />
+    <Compile Include="AvaliacaoVisitaEntity.cs" />
+    <Compile Include="BaseEntity.cs" />
+    <Compile Include="CategoriaEntity.cs" />
+    <Compile Include="ClienteEntity.cs" />
+    <Compile Include="CompletosEntity.cs" />
+    <Compile Include="ConsumivelEntity.cs" />
+    <Compile Include="ContatoEntity.cs" />
+    <Compile Include="ContratoEntity.cs" />
+    <Compile Include="DepreciacaoEntity.cs" />
+    <Compile Include="EtiquetaEntity.cs" />
+    <Compile Include="FitaEntity.cs" />
+    <Compile Include="GrupoModeloEntity.cs" />
+    <Compile Include="LarguraFitaEntity.cs" />
+    <Compile Include="NotificacaoEntity.cs" />
+    <Compile Include="DadosPagamentoEntity.cs" />
+    <Compile Include="DadosFaturamentoEntity.cs" />
+    <Compile Include="PedidoPecaLogEntity.cs" />
+    <Compile Include="RelatorioReclamacaoEntity.cs" />
+    <Compile Include="RRComentEntity.cs" />
+    <Compile Include="RRStatusEntity.cs" />
+    <Compile Include="TB_PONDERACAO_pzEntity.cs" />
+    <Compile Include="TesteEntity.cs" />
+    <Compile Include="TpMotivoVisitaPadraoEntity.cs" />
+    <Compile Include="TpAtendimentoReclamacaoEntity.cs" />
+    <Compile Include="TpReclamacaoEntity.cs" />
+    <Compile Include="TpOSPadraoEntity.cs" />
+    <Compile Include="TpStatusOSPadraoEntity.cs" />
+    <Compile Include="TpStatusVisitaPadraoEntity.cs" />
+    <Compile Include="OSPadraoEntity.cs" />
+    <Compile Include="VisitaPadraoEntity.cs" />
+    <Compile Include="VisitaRespostaEntity.cs" />
+    <Compile Include="WfPedidoEquipEntity.cs" />
+    <Compile Include="SatisfacaoPesquisaEntity.cs" />
+    <Compile Include="SegmentoEntity.cs" />
+    <Compile Include="SolicitacaoAtendimentoEntity.cs" />
+    <Compile Include="StatusAtendimentoEntity.cs" />
+    <Compile Include="SumarizadosEntity.cs" />
+    <Compile Include="LocadosEntity.cs" />
+    <Compile Include="PedidosEntity.cs" />
+    <Compile Include="InventariosEntity.cs" />
+    <Compile Include="DevolvidosEntity.cs" />
+    <Compile Include="EmpresaEntity.cs" />
+    <Compile Include="EstoqueEntity.cs" />
+    <Compile Include="EstoqueMoviEntity.cs" />
+    <Compile Include="EstoquePecaEntity.cs" />
+    <Compile Include="ExecutivoEntity.cs" />
+    <Compile Include="FuncaoEntity.cs" />
+    <Compile Include="GrupoEntity.cs" />
+    <Compile Include="LinhaProdutoEntity.cs" />
+    <Compile Include="LogDetalheEntity.cs" />
+    <Compile Include="LogEntity.cs" />
+    <Compile Include="LogErroEntity.cs" />
+    <Compile Include="LogStatusOSEntity.cs" />
+    <Compile Include="LogStatusVisitaEntity.cs" />
+    <Compile Include="LogTabelaCampoEntity.cs" />
+    <Compile Include="LogTabelaEntity.cs" />
+    <Compile Include="MensagemEntity.cs" />
+    <Compile Include="ModeloEntity.cs" />
+    <Compile Include="MotivoDevolucaoEntity.cs" />
+    <Compile Include="OSEntity.cs" />
+    <Compile Include="ParametroEntity.cs" />
+    <Compile Include="PecaEntity.cs" />
+    <Compile Include="PecaOSEntity.cs" />
+    <Compile Include="PedidoEntity.cs" />
+    <Compile Include="PedidoPecaEntity.cs" />
+    <Compile Include="PendenciaOSEntity.cs" />
+    <Compile Include="PerfilEntity.cs" />
+    <Compile Include="PerfilFuncaoEntity.cs" />
+    <Compile Include="PlanoZeroEntity.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RazaoComodatoEntity.cs" />
+    <Compile Include="RecolhidosEntity.cs" />
+    <Compile Include="RegiaoEntity.cs" />
+    <Compile Include="ResumosEntity.cs" />
+    <Compile Include="SincronismoEntity.cs" />
+    <Compile Include="SituacaoAtivoEntity.cs" />
+    <Compile Include="StatusAtivoEntity.cs" />
+    <Compile Include="StatusContratoEntity.cs" />
+    <Compile Include="StatusPedidoEntity.cs" />
+    <Compile Include="StatusVisitaOSEntity.cs" />
+    <Compile Include="TBFuncaoEntity.cs" />
+    <Compile Include="TecnicoClienteEntity.cs" />
+    <Compile Include="TecnicoEmpresaEntity.cs" />
+    <Compile Include="TecnicoEntity.cs" />
+    <Compile Include="TipoAtendimentoEntity.cs" />
+    <Compile Include="TipoContatoEntity.cs" />
+    <Compile Include="TipoEntity.cs" />
+    <Compile Include="TipoFitaEntity.cs" />
+    <Compile Include="TpEstoqueMovi.cs" />
+    <Compile Include="TpEstoqueMoviEntity.cs" />
+    <Compile Include="WfStatusPedidoEquipEntity.cs" />
+    <Compile Include="TpStatusVisitaOSEntity.cs" />
+    <Compile Include="UsuarioClienteEntity.cs" />
+    <Compile Include="UsuarioEntity.cs" />
+    <Compile Include="UsuarioPerfilEntity.cs" />
+    <Compile Include="WfGrupoUsuEntity.cs" />
+    <Compile Include="VendedorEntity.cs" />
+    <Compile Include="VisitaEntity.cs" />
+    <Compile Include="WfAcessorioPedidoEntity.cs" />
+    <Compile Include="WfGrupoEntity.cs" />
+    <Compile Include="WfPedidoComentEntity.cs" />
+    <Compile Include="WfPedidoEquipItemEntity.cs" />
+    <Compile Include="WfPedidoEquipLogEntity.cs" />
+    <Compile Include="WfTipoSolicitacaoEntity.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

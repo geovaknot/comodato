@@ -1,0 +1,102 @@
+﻿
+@using GridMvc.Html
+
+@{
+    ViewBag.Title = "SQLQuery";
+}
+
+<i class="fas fa-print fa-3x fa-pull-left"></i>
+<h3>SQLQuery</h3>
+
+<div class="well">
+    <hr />
+
+    @using (Html.BeginForm())
+    {
+        <div class="card">
+            <div class="card-header">
+                <label class="control-label">Query</label>
+            </div>
+            <div class="card-body">
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <input type="text" id="chave" class="form-control col-md-12" placeholder="Chave de Acesso..." />
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <textarea id="comandoSQL" rows="3" class="form-control col-md-12"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                &nbsp;&nbsp;&nbsp;
+                <button class="btn btn-primary btn-sm" type="button" id="btnExecutar">Executar</button>
+                <button class="btn btn-primary btn-sm" type="button" id="btnLimpar">Limpar</button>
+            </div>
+        </div>
+    }
+</div>
+
+<br/>
+<div class="form-group">
+    <div id="gridMVC" style="font-size: 8pt">
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript" src="~/Scripts/Comodato/Util.js"></script>
+
+    <script>
+        var URLAPI = "@_3M.Comodato.Utility.ControlesUtility.Parametro.ObterValorParametro(_3M.Comodato.Utility.ControlesUtility.Constantes.URLAPI)";
+        var token = "@Convert.ToString(((_3M.Comodato.Entity.UsuarioPerfilEntity)Session["_CurrentUser"]).token)";
+        @*var URLSite = "@_3M.Comodato.Utility.ControlesUtility.Parametro.ObterValorParametro(_3M.Comodato.Utility.ControlesUtility.Constantes.URLSite)";*@
+        @*var URLCriptografarChave = "@Url.Action("CriptografarChaveJson")";*@
+
+        @*var URLObterDados = "@Url.Action("ObterDados", "Query")";*@
+        @*var nidUsuario = @Convert.ToInt64(((_3M.Comodato.Entity.UsuarioPerfilEntity)Session["_CurrentUser"]).usuario.nidUsuario);*@
+
+        $('#btnExecutar').click(function () {
+            debugger
+            $('table tbody').empty();
+
+            var comandoSQL = $("#comandoSQL").val();
+            var chave = $("#chave").val();
+            var URL = URLAPI + "SQLQueryAPI/ObterDados?comandoSQL=" + comandoSQL + "&chave=" + chave;
+
+            if (comandoSQL.trim() == '')
+                return true;
+
+            $.ajax({
+                type: "POST",
+                url: URL,
+                processData: true,
+                dataType: "json",
+                cache: false,
+                contentType: "application/json",
+                beforeSend: function () {
+                    $("#loader").css("display", "block");
+                },
+                complete: function () {
+                    $("#loader").css("display", "none");
+                },
+                success: function (res) {
+                    $("#loader").css("display", "none");
+                    var Dados = JSON.parse(res.Dados);
+                    $('#gridMVC').html(Dados);
+                },
+                error: function (res) {
+                    $("#loader").css("display", "none");
+                    Alerta("ERRO", res.responseText);
+                }
+
+            });
+
+        });
+
+        $('#btnLimpar').click(function () {
+            $('table tbody').empty();
+        });
+    </script>
+}

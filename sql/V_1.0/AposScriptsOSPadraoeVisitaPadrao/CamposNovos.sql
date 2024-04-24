@@ -1,0 +1,32 @@
+DELETE FROM tbLogSincronismo
+ WHERE CAST(dt_data_sincronismo AS DATE) <= CAST(DATEADD(DAY, -30, GETDATE()) AS DATE)
+
+ALTER TABLE dbo.TB_PEDIDO_PECA ADD QTD_ULTIMO_RECEBIMENTO numeric(18,0) NULL;
+
+ALTER TABLE dbo.tbOSPadrao ADD DS_OBSERVACAO nvarchar(max) NULL;
+
+ALTER TABLE dbo.TB_PEDIDO_PECA ADD TIPO_PECA tinyint NULL;
+
+ALTER TABLE dbo.TB_PEDIDO_PECA ADD CONSTRAINT DF_TB_PEDIDO_PECA_TIPO_PECA DEFAULT ((1)) FOR TIPO_PECA
+
+EXEC sys.sp_addextendedproperty @name=N'MS_Description', @value=N'1 = Peça com Item
+ 
+ 2 = Peça sem Item ou Especial' , @level0type=N'SCHEMA',@level0name=N'dbo', @level1type=N'TABLE',@level1name=N'TB_PEDIDO_PECA', @level2type=N'COLUMN',@level2name=N'TIPO_PECA'
+GO
+
+ALTER TABLE dbo.TB_PEDIDO_PECA ADD DESCRICAO_PECA varchar(150) NULL;
+
+CREATE NONCLUSTERED INDEX [IX_tbLogSincronismo_id_usuario] ON [dbo].[tbLogSincronismo]
+(
+	[id_usuario] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)
+
+GO
+
+
+CREATE NONCLUSTERED INDEX [IX_tbLogSincronismo_dt_sincronismo] ON [dbo].[tbLogSincronismo]
+(
+	[dt_data_sincronismo] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON)
+
+GO

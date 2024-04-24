@@ -1,0 +1,1 @@
+alter table TB_PECA add QTD_PlanoZero numeric(6,0) Not null default 0;

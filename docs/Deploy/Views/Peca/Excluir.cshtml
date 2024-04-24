@@ -1,0 +1,96 @@
+﻿@model _3M.Comodato.Front.Models.Peca
+
+@{
+    ViewBag.Title = "Peça";
+}
+
+<i class="fas fa-cubes fa-3x fa-pull-left"></i>
+<h3>Peça (Inativar)</h3>
+
+<h5>Confirma inativação deste registro?</h5>
+<div>
+    <hr />
+    @Html.HiddenFor(model => model.CancelarVerificarCodigo)
+
+    <div class="form-row">
+        <div class="form-group col-4">
+            <label class="control-label font-weight-bold">Código</label>
+            <br />
+            @Html.DisplayFor(model => model.CD_PECA)
+        </div>
+
+        <div class="form-group col-3">
+            <label class="control-label font-weight-bold">Tipo</label>
+            <br />
+            @Html.DisplayFor(model => model.cdsTP_PECA)
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-12">
+            <label class="control-label font-weight-bold">Descrição</label>
+            <br />
+            @Html.DisplayFor(model => model.DS_PECA)
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-2">
+            <label class="control-label font-weight-bold">Unidade</label>
+            <br />
+            @Html.DisplayFor(model => model.TX_UNIDADE)
+        </div>
+
+        <div class="form-group col-4">
+            <label class="control-label font-weight-bold">Valor</label>
+            <br />
+            @Html.DisplayFor(model => model.VL_PECA)
+        </div>
+
+        <div class="form-group col-3">
+            <label class="control-label font-weight-bold">Qtde. Minima</label>
+            <br />
+            @Html.DisplayFor(model => model.QTD_MINIMA)
+        </div>
+
+        <div class="form-group col-3">
+            <label class="control-label font-weight-bold">Qtde. Estoque</label>
+            <br />
+            @Html.DisplayFor(model => model.QTD_ESTOQUE)
+        </div>
+
+        <div class="form-group col-2">
+            <label class="control-label font-weight-bold">Condição (Ativo)</label>
+            <br />
+            @Html.DisplayFor(model => model.cdsFL_ATIVO_PECA)
+        </div>
+    </div>
+</div>
+
+@using (Html.BeginForm())
+{
+    <div class="form-group">
+        <input type="submit" value="Inativar" class="btn btn-primary btn-sm" />
+        @Html.ActionLink("Voltar", "Index", new { area = "" }, new { @class = "btn btn-primary btn-sm" })
+    </div>
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript" src="~/Scripts/Comodato/Util.js"></script>
+
+    <script type="text/javascript">
+     @Model.JavaScriptToRun
+
+        function MensagemSucesso() {
+            var mensagem = '@_3M.Comodato.Utility.ControlesUtility.Constantes.MensagemInativacaoSucesso';
+
+            AlertaRedirect("Aviso", mensagem, "window.location = '../Peca';");
+        };
+    </script>
+}
+
+
+
+

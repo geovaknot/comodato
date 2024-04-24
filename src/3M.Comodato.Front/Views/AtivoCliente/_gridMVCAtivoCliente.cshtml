@@ -1,0 +1,77 @@
+﻿@model IEnumerable<_3M.Comodato.Front.Models.AtivoCliente>
+
+@using GridMvc.Html
+
+@{
+    var perfil = (_3M.Comodato.Entity.UsuarioPerfilEntity)Session["_CurrentUser"];
+
+}
+
+@helper RenderCheck2(string DS_ARQUIVO)
+{
+    if (!string.IsNullOrEmpty(DS_ARQUIVO))
+    {
+        @Html.ActionLink(" ", "DownloadFile", new { pastaConstante = "PastaAtivoClienteNF", fileName = DS_ARQUIVO }, new { @id = "lnkDownload", @class = "fas fa-file fa-lg", @title = "Baixar NF" })
+    }
+}
+
+@helper RenderCheck3(string DS_ARQUIVO2)
+{
+    if (!string.IsNullOrEmpty(DS_ARQUIVO2))
+    {
+        @Html.ActionLink(" ", "DownloadFile", new { pastaConstante = "PastaAtivoClienteNF", fileName = DS_ARQUIVO2 }, new { @id = "lnkDownload", @class = "fas fa-camera fa-lg", @title = "Baixar Foto" })
+    }
+
+}
+
+<div class="table table-hover">
+    @Html.Grid(Model).Columns(columns =>
+    {
+        columns.Add(foo => foo.ativoFixo.CD_ATIVO_FIXO).Titled("NR. ATIVO").Sortable(false).Filterable(false);
+        columns.Add(foo => foo.cliente.NM_CLIENTE).Titled("CLIENTE").Sortable(false).Filterable(false);
+        columns.Add(foo => foo.ativoFixo.TX_ANO_MAQUINA).Titled("ANO").Sortable(false).Filterable(false);
+        columns.Add(foo => foo.ativoFixo.linhaProduto.DS_LINHA_PRODUTO).Titled("LINHA DE PRODUTO").Sortable(false).Filterable(false);
+        columns.Add(foo => foo.ativoFixo.modelo.DS_MODELO).Titled("MODELO").Sortable(false).Filterable(false);
+        columns.Add(foo => foo.NR_NOTAFISCAL).Titled("NR. NF").Sortable(false).Filterable(false);
+
+columns.Add()
+            .Encoded(false)
+            .Sanitized(false)
+            .SetWidth(30)
+            .RenderValueAs(o => o.DT_DEVOLUCAO != null ? "<i class='fas fa-cog fa-lg' style='color: Tomato'></i>" :
+                                "<i class='fas fa-cog fa-lg' style='color: Green'></i>");
+
+        columns.Add(foo => foo.DT_DEVOLUCAO_GRID).Titled("DEVOLUÇÃO").Sortable(false).Filterable(false).Format("{0:dd/MM/yyyy}");
+
+        if (perfil.perfil.ccdPerfil == 1 || perfil.perfil.ccdPerfil == 5)
+        {
+                    columns.Add()
+                        .Encoded(false)
+                        .Sanitized(false)
+                        .SetWidth(30)
+                        .RenderValueAs(o => Html.ActionLink(" ", "Editar", new { idKey = HttpUtility.HtmlDecode(o.idKey) }, new { @class = "fas fa-pencil-alt fa-lg" }));
+
+                columns.Add()
+                    .Encoded(false)
+                    .Sanitized(false)
+                    .SetWidth(30)
+                    .RenderValueAs(o => Html.ActionLink(" ", "Excluir", new { idKey = HttpUtility.HtmlDecode(o.idKey) }, new { @class = "fas fa-trash-alt fa-lg" }));
+        }
+       columns.Add()
+            .Encoded(false)
+            .Sanitized(false)
+            .SetWidth(5)
+            .RenderValueAs(foo => RenderCheck2(foo.DS_ARQUIVO_FOTO));
+      columns.Add()
+            .Encoded(false)
+            .Sanitized(false)
+            .SetWidth(5)
+            .RenderValueAs(foo => RenderCheck3(foo.DS_ARQUIVO_FOTO2));
+
+
+})
+
+
+</div>
+
+

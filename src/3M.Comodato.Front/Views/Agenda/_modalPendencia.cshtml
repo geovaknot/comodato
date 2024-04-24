@@ -1,0 +1,97 @@
+﻿@model _3M.Comodato.Front.Models.PreenchimentoOS
+
+<!-- Modal -->
+<div class="modal fade" id="PendenciaModal" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-dark">
+                <h5 class="modal-title text-white" id="exampleModalLongTitle">Pendência Relatada</h5>
+                @*<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>*@
+            </div>
+            <div class="modal-body">
+                @Html.HiddenFor(model => model.pendenciaOS.ID_PENDENCIA_OS)
+
+                <div class="form-horizontal">
+                    <div class="form-row font-weight-bold">
+                        <div class="form-group col-4">
+                            <label class="control-label">OS</label>
+                            @Html.EditorFor(model => model.pendenciaOS.OS.ID_OS_Formatado, new { htmlAttributes = new { @class = "form-control col-12 font-weight-bold", @readonly = "readonly" } })
+                            @Html.HiddenFor(model => model.pendenciaOS.OS.ID_OS)
+                        </div>
+
+                        <div class="form-group col-4">
+                            <label class="control-label">Data</label>
+                            @Html.EditorFor(model => model.pendenciaOS.OS.DT_DATA_ABERTURA, new { htmlAttributes = new { @class = "form-control col-12 font-weight-bold", @readonly = "readonly" } })
+                        </div>
+
+                        <div class="form-group col-4">
+                            <label class="control-label">Status</label>
+                            @Html.EditorFor(model => model.pendenciaOS.OS.tpStatusVisitaOSAtual.DS_TP_STATUS_VISITA_OS, new { htmlAttributes = new { @class = "form-control col-12 font-weight-bold", @readonly = "readonly" } })
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-6">
+                            <label class="control-label">Status da Pendência</label>
+                            @Html.DropDownListFor(model => model.pendenciaOS.ST_STATUS_PENDENCIA, new SelectList(Model.pendenciaOS.tiposStatusPendenciaOS, "Value", "Key"), new { @class = "valid form-control col-12" })
+                        </div>
+                        <div class="form-group col-6">
+                            <label class="control-label">Tipo de Pendência</label>
+                            @Html.DropDownListFor(model => model.pendenciaOS.ST_TP_PENDENCIA, new SelectList(Model.pendenciaOS.tiposPendenciaOS, "Value", "Key"), new { @class = "valid form-control col-12" })
+                        </div>
+                    </div>
+
+                    <div id="tipoPeca">
+                        <div class="form-group">
+                            <label class="control-label">Peça</label>
+                            @Html.DropDownListFor(model => model.pendenciaOS.peca.CD_PECA, new SelectList(Model.pendenciaOS.listaPecas, "CD_PECA", "DS_PECA"), "Selecione...", new { @class = "js-example-basic-single", @style = "width: 100%" })
+                            <label id="validaid_item_pedido_Pendencia" class="control-label text-danger" style="display: none;">Conteúdo obrigatório!</label>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-8">
+                                <label class="control-label">Entrega</label>
+                                @Html.DropDownListFor(model => model.pendenciaOS.CD_TP_ESTOQUE_CLI_TEC, new SelectList(Model.pendenciaOS.tiposEstoqueUtilizado, "Value", "Key"), new { @class = "valid form-control col-12" })
+                            </div>
+
+                            <div class="form-group col-4">
+                                <label class="control-label">Qtde. em Estoque</label>
+                                @Html.EditorFor(model => model.pendenciaOS.peca.QTD_ESTOQUE, new { htmlAttributes = new { @class = "form-control col-12", @readonly = "readonly" } })
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-8">
+                                <label class="control-label">Quantidade</label>
+                                @Html.EditorFor(model => model.pendenciaOS.QT_PECA, new { htmlAttributes = new { @class = "form-control col-12" } })
+                                <label id="validaQTPECA_Pendencia" class="control-label text-danger" style="display: none;">Conteúdo obrigatório!</label>
+                                <label id="validaQTPECARange_Pendencia" class="control-label text-danger" style="display: none;">Somente valor positivo acima de 0(zero)!</label>
+                                <label id="validaQTPECARangeMax_Pendencia" class="control-label text-danger" style="display: none;">Limite de caracteres ultrapassado!</label>
+                            </div>
+
+                            <div class="form-group col-4">
+                                <label class="control-label">Unidade</label>
+                                @Html.EditorFor(model => model.pendenciaOS.peca.TX_UNIDADE, new { htmlAttributes = new { @class = "form-control col-12", @readonly = "readonly" } })
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">Observação</label>
+                        @Html.EditorFor(model => model.pendenciaOS.DS_DESCRICAO, new { htmlAttributes = new { @class = "form-control col-12", @rows = 4 } })
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                @if (ViewBag.Tecnico3M == "S")
+                {
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnSalvarPendenciaModal">Salvar</button>
+                }
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                @*<button type="button" class="btn btn-primary">Save changes</button>*@
+            </div>
+        </div>
+    </div>
+</div>

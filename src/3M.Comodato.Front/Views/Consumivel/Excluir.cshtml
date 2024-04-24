@@ -1,0 +1,120 @@
+﻿@model _3M.Comodato.Front.Models.Consumivel
+
+@{
+    ViewBag.Title = "Consumível";
+}
+
+<i class="fas fa-cubes fa-3x fa-pull-left"></i>
+<h3>Consumível (Inativar)</h3>
+
+<h5>Confirma inativação deste registro?</h5>
+<div>
+    <hr />
+    @Html.HiddenFor(model => model.CancelarVerificarCodigo)
+
+    <div class="form-row">
+        <div class="form-group col-4">
+            <label class="control-label font-weight-bold">Código</label>
+            <br />
+            @Html.DisplayFor(model => model.CD_CONSUMIVEL)
+        </div>
+
+        <div class="form-group col-8">
+            <label class="control-label font-weight-bold">Linha de Produto</label>
+            <br />
+            @Html.DisplayFor(model => model.linhaProduto.DS_LINHA_PRODUTO)
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label font-weight-bold">Descrição</label>
+        <br />
+        @Html.DisplayFor(model => model.DS_CONSUMIVEL)
+    </div>
+</div>
+
+<div class="card">
+    <h5 class="card-header">
+        Detalhes
+    </h5>
+    <div class="card-body">
+        <div class="form-row">
+            <div class="form-group col-5">
+                <label class="control-label font-weight-bold">Major</label>
+                <br />
+                @Html.DisplayFor(model => model.DS_MAJOR)
+            </div>
+
+            <div class="form-group col-5">
+                <label class="control-label font-weight-bold">Commodity</label>
+                <br />
+                @Html.DisplayFor(model => model.DS_COMMODITY)
+            </div>
+
+            <div class="form-group col-2">
+                <label class="control-label font-weight-bold">Unidade</label>
+                <br />
+                @Html.DisplayFor(model => model.TX_UNIDADE)
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-5">
+                <label class="control-label font-weight-bold">Família</label>
+                <br />
+                @Html.DisplayFor(model => model.DS_FAMILY)
+            </div>
+
+            <div class="form-group col-5">
+                <label class="control-label font-weight-bold">Sub-Família</label>
+                <br />
+                @Html.DisplayFor(model => model.DS_SUB_FAMILY)
+            </div>
+
+            <div class="form-group col-2">
+                <label class="control-label font-weight-bold">Unidade Fam.</label>
+                <br />
+                @Html.DisplayFor(model => model.TX_UNIDADE_CONV)
+            </div>
+        </div>
+
+        <div class="form-row">
+                <div class="form-group col-5">
+                    <label class="control-label font-weight-bold">CUSTO (R$/Unid.Conv)</label>
+                    <br />
+                    @Html.DisplayFor(model => model.CUSTO)
+                </div>
+            </div>
+    </div>
+</div>
+<br />
+
+@using (Html.BeginForm())
+{
+    <div class="form-group">
+        <input type="submit" value="Inativar" class="btn btn-primary btn-sm" />
+        @Html.ActionLink("Voltar", "Index", new { area = "" }, new { @class = "btn btn-primary btn-sm" })
+    </div>
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript" src="~/Scripts/Comodato/Util.js"></script>
+
+    <script type="text/javascript">
+     @Model.JavaScriptToRun
+
+        function MensagemSucesso() {
+            var mensagem = '@_3M.Comodato.Utility.ControlesUtility.Constantes.MensagemInativacaoSucesso';
+
+            AlertaRedirect("Aviso", mensagem, "window.location = '../Consumivel';");
+        };
+    </script>
+}
+
+
+
+
+

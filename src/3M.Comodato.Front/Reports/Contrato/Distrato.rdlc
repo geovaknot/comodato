@@ -1,0 +1,799 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="dsRelatorioContrato">
+      <ConnectionProperties>
+        <DataProvider>System.Data.DataSet</DataProvider>
+        <ConnectString>/* Local Connection */</ConnectString>
+      </ConnectionProperties>
+      <rd:DataSourceID>c76671e6-9608-43fa-9619-2c44c4d29fbf</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <DataSets>
+    <DataSet Name="dsContratoDistrato">
+      <Query>
+        <DataSourceName>dsRelatorioContrato</DataSourceName>
+        <CommandText>/* Local Query */</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="NM_CLIENTE">
+          <DataField>NM_CLIENTE</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Column1">
+          <DataField>Column1</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+      </Fields>
+      <rd:DataSetInfo>
+        <rd:DataSetName>dsRelatorioContrato</rd:DataSetName>
+        <rd:SchemaPath>C:\WA_Workspaces\COMODATO 3M\3M.Comodato.Front\Reports\Contrato\dsRelatorioContrato.xsd</rd:SchemaPath>
+        <rd:TableName>prcContratoDistratoSelect</rd:TableName>
+        <rd:TableAdapterFillMethod>Fill</rd:TableAdapterFillMethod>
+        <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>
+        <rd:TableAdapterName>prcContratoDistratoSelectTableAdapter</rd:TableAdapterName>
+      </rd:DataSetInfo>
+    </DataSet>
+  </DataSets>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <ReportItems>
+          <Textbox Name="Textbox1">
+            <CanGrow>true</CanGrow>
+            <CanShrink>true</CanShrink>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Parameters!pClausula.Value</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox1</rd:DefaultName>
+            <Top>0.31432cm</Top>
+            <Left>1.16035cm</Left>
+            <Height>8.06125cm</Height>
+            <Width>17.33784cm</Width>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox4">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Sumaré </Value>
+                    <Style />
+                  </TextRun>
+                  <TextRun>
+                    <Value>=String.Format("{0:dd/MM/yyyy}",Globals!ExecutionTime)</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox4</rd:DefaultName>
+            <Top>10.31558cm</Top>
+            <Left>13.3259cm</Left>
+            <Height>0.54875cm</Height>
+            <Width>5.17229cm</Width>
+            <ZIndex>1</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox5">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>3M DO BRASIL LTDA.</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox5</rd:DefaultName>
+            <Top>10.4447cm</Top>
+            <Left>1.5314cm</Left>
+            <Height>0.54875cm</Height>
+            <Width>4.69604cm</Width>
+            <ZIndex>2</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Line Name="Line1">
+            <Top>12.03854cm</Top>
+            <Left>11.12986cm</Left>
+            <Height>0cm</Height>
+            <Width>6.96828cm</Width>
+            <ZIndex>3</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+            </Style>
+          </Line>
+          <Line Name="Line2">
+            <Top>13.14979cm</Top>
+            <Left>11.12986cm</Left>
+            <Height>0cm</Height>
+            <Width>6.96828cm</Width>
+            <ZIndex>4</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+            </Style>
+          </Line>
+          <Textbox Name="NM_CLIENTE">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!NM_CLIENTE.Value, "dsContratoDistrato")</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>NM_CLIENTE</rd:DefaultName>
+            <Top>14.86157cm</Top>
+            <Left>1.5314cm</Left>
+            <Height>0.54875cm</Height>
+            <Width>6.73333cm</Width>
+            <ZIndex>5</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Line Name="Line3">
+            <Top>15.2812cm</Top>
+            <Left>11.12986cm</Left>
+            <Height>0cm</Height>
+            <Width>6.96828cm</Width>
+            <ZIndex>6</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+            </Style>
+          </Line>
+          <Line Name="Line4">
+            <Top>16.47031cm</Top>
+            <Left>11.12986cm</Left>
+            <Height>0cm</Height>
+            <Width>6.96828cm</Width>
+            <ZIndex>7</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+            </Style>
+          </Line>
+          <Textbox Name="Textbox6">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Testemunhas :</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox6</rd:DefaultName>
+            <Top>18.01178cm</Top>
+            <Left>1.69015cm</Left>
+            <Height>0.6cm</Height>
+            <Width>2.5cm</Width>
+            <ZIndex>8</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox7">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>1.</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox7</rd:DefaultName>
+            <Top>20.50891cm</Top>
+            <Left>1.13453cm</Left>
+            <Height>0.54875cm</Height>
+            <Width>0.62146cm</Width>
+            <ZIndex>9</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox8">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>2.</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox8</rd:DefaultName>
+            <Top>20.37979cm</Top>
+            <Left>10.49486cm</Left>
+            <Height>0.54875cm</Height>
+            <Width>0.62146cm</Width>
+            <ZIndex>10</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox9">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Nome :</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox9</rd:DefaultName>
+            <Top>21.18678cm</Top>
+            <Left>1.76953cm</Left>
+            <Height>0.54875cm</Height>
+            <Width>1.25646cm</Width>
+            <ZIndex>11</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox10">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>CPF :</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox10</rd:DefaultName>
+            <Top>21.7424cm</Top>
+            <Left>1.76953cm</Left>
+            <Height>0.54875cm</Height>
+            <Width>1.25646cm</Width>
+            <ZIndex>12</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox11">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Nome :</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox9</rd:DefaultName>
+            <Top>21.05766cm</Top>
+            <Left>11.12986cm</Left>
+            <Height>0.54875cm</Height>
+            <Width>1.25646cm</Width>
+            <ZIndex>13</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox12">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>CPF :</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox10</rd:DefaultName>
+            <Top>21.61328cm</Top>
+            <Left>11.12986cm</Left>
+            <Height>0.54875cm</Height>
+            <Width>1.25646cm</Width>
+            <ZIndex>14</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Line Name="Line5">
+            <Top>21.05766cm</Top>
+            <Left>1.76953cm</Left>
+            <Height>0cm</Height>
+            <Width>6.96828cm</Width>
+            <ZIndex>15</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+            </Style>
+          </Line>
+          <Line Name="Line6">
+            <Top>20.92854cm</Top>
+            <Left>11.12986cm</Left>
+            <Height>0cm</Height>
+            <Width>6.96828cm</Width>
+            <ZIndex>16</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+            </Style>
+          </Line>
+        </ReportItems>
+        <Height>8.94791in</Height>
+        <Style />
+      </Body>
+      <Width>7.4375in</Width>
+      <Page>
+        <PageHeader>
+          <Height>3.78354cm</Height>
+          <PrintOnFirstPage>true</PrintOnFirstPage>
+          <PrintOnLastPage>true</PrintOnLastPage>
+          <ReportItems>
+            <Textbox Name="Textbox2">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>Contrato de Comodato de Equipamento </Value>
+                      <Style>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox2</rd:DefaultName>
+              <Top>2.19136cm</Top>
+              <Left>1.16035cm</Left>
+              <Height>0.6cm</Height>
+              <Width>17.33784cm</Width>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox3">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>Firmado em </Value>
+                      <Style>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                    <TextRun>
+                      <Value>=String.Format("{0:dd/MM/yyyy}", Fields!Column1.Value)</Value>
+                      <Style>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox3</rd:DefaultName>
+              <Top>2.95865cm</Top>
+              <Left>1.16035cm</Left>
+              <Height>0.6cm</Height>
+              <Width>17.33784cm</Width>
+              <ZIndex>1</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Image Name="Image2">
+              <Source>Embedded</Source>
+              <Value>ID3MLogo</Value>
+              <Sizing>FitProportional</Sizing>
+              <Top>1.40698cm</Top>
+              <Left>1.16035cm</Left>
+              <Height>0.78438cm</Height>
+              <Width>1.06cm</Width>
+              <ZIndex>2</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+              </Style>
+            </Image>
+            <Textbox Name="Textbox13">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>3M do Brasil Ltda</Value>
+                      <Style>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Left</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox2</rd:DefaultName>
+              <Top>0.77198cm</Top>
+              <Left>1.16035cm</Left>
+              <Height>0.59972cm</Height>
+              <Width>3.47896cm</Width>
+              <ZIndex>3</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox36">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>Caixa Postal 123
+13001 970 Campinas SP
+Fax: (19) 3838-6999</Value>
+                      <Style>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Left</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox1</rd:DefaultName>
+              <Top>0.77198cm</Top>
+              <Left>14.06819cm</Left>
+              <Height>1.41938cm</Height>
+              <Width>4.43cm</Width>
+              <ZIndex>4</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+          </ReportItems>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+          </Style>
+        </PageHeader>
+        <PageFooter>
+          <Height>1.57cm</Height>
+          <PrintOnFirstPage>true</PrintOnFirstPage>
+          <PrintOnLastPage>true</PrintOnLastPage>
+          <ReportItems>
+            <Textbox Name="PageNumber">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=Globals!PageNumber</Value>
+                      <Style />
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Right</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>PageNumber</rd:DefaultName>
+              <Top>0.485cm</Top>
+              <Left>15.67148cm</Left>
+              <Height>0.6cm</Height>
+              <Width>0.99188cm</Width>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox15">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>/</Value>
+                      <Style />
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox13</rd:DefaultName>
+              <Top>0.485cm</Top>
+              <Left>16.73584cm</Left>
+              <Height>0.6cm</Height>
+              <Width>0.30396cm</Width>
+              <ZIndex>1</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="TotalPages1">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=Globals!TotalPages</Value>
+                      <Style />
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Left</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>TotalPages1</rd:DefaultName>
+              <Top>0.485cm</Top>
+              <Left>17.10626cm</Left>
+              <Height>0.6cm</Height>
+              <Width>0.99188cm</Width>
+              <ZIndex>2</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+          </ReportItems>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+          </Style>
+        </PageFooter>
+        <PageHeight>29.7cm</PageHeight>
+        <PageWidth>21cm</PageWidth>
+        <LeftMargin>0.63cm</LeftMargin>
+        <RightMargin>0.63cm</RightMargin>
+        <TopMargin>0.63cm</TopMargin>
+        <BottomMargin>0.63cm</BottomMargin>
+        <ColumnSpacing>0.13cm</ColumnSpacing>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <ReportParameters>
+    <ReportParameter Name="pClausula">
+      <DataType>String</DataType>
+      <DefaultValue>
+        <Values>
+          <Value>Por este instrumento particular entre partes, de um lado 3M DO BRASIL LTDA., (COMODANTE), por seus procuradores infra-assinados, e, de outro, RAZÃO SOCIAL, (COMODATÁRIA), por seu(s) procurador(es) infra-assinado(s) resolvem de comum acordo firmar o presente TERMO DE DISTRATO E QUITAÇÃO GERAL conforme segue:
+
+
+1.    Fica desde já acordado que o Contrato em epígrafe estará terminado para todos os fins de direito quando da assinatura do presente instrumento, uma vez as partes não terem mais interesse na continuação dos mesmos.
+
+2.    As partes se dão mútua, ampla, rasa, total, irrevogável e irretratável quitação, para nada mais reclamarem uma da outra, agora ou no futuro, seja a que título ou natureza for, por si ou seus sucessores.
+
+3.    Para que produza os jurídicos e legais efeitos, firmam a presente em 02 (duas) vias de igual teor e forma, juntamente com as testemunhas abaixo.</Value>
+        </Values>
+      </DefaultValue>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+  </ReportParameters>
+  <ReportParametersLayout>
+    <GridLayoutDefinition>
+      <NumberOfColumns>4</NumberOfColumns>
+      <NumberOfRows>2</NumberOfRows>
+      <CellDefinitions>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>0</RowIndex>
+          <ParameterName>pClausula</ParameterName>
+        </CellDefinition>
+      </CellDefinitions>
+    </GridLayoutDefinition>
+  </ReportParametersLayout>
+  <EmbeddedImages>
+    <EmbeddedImage Name="ID3MLogo">
+      <MIMEType>image/png</MIMEType>
+      <ImageData>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</ImageData>
+    </EmbeddedImage>
+  </EmbeddedImages>
+  <ConsumeContainerWhitespace>true</ConsumeContainerWhitespace>
+  <rd:ReportUnitType>Cm</rd:ReportUnitType>
+  <rd:ReportID>a66a1416-be3d-4c52-aa63-fd9ad88b74e2</rd:ReportID>
+</Report>

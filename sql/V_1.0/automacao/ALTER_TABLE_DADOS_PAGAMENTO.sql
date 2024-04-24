@@ -1,0 +1,22 @@
+USE [COMODATODEV]
+GO
+
+/****** Object:  Table [dbo].[TB_DadosPagamento]    Script Date: 18/11/2021 16:19:49 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+ALTER TABLE [dbo].[TB_DadosPagamento]
+ADD ID_ATIVO_CLIENTE [numeric](9, 0) NOT NULL
+
+GO
+
+ALTER TABLE [dbo].[TB_DadosPagamento]
+ADD CONSTRAINT [FK_ID_ATIVO_CLIENTE] Foreign Key (ID_ATIVO_CLIENTE)
+REFERENCES [dbo].[TB_ATIVO_CLIENTE](ID_ATIVO_CLIENTE)
+
+GO
+
+

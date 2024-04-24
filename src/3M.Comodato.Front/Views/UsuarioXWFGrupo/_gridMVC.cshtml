@@ -1,0 +1,22 @@
+﻿@model IEnumerable<_3M.Comodato.Front.Models.ListaUsuarioXWFGrupo>
+
+@using GridMvc.Html
+
+<div class="table table-hover">
+    @Html.Grid(Model).Columns(columns =>
+{
+    columns.Add(o => o.CD_GRUPOWF).Titled("Cód. Grupo").Sortable(true).Filterable(true);
+    columns.Add(o => o.cnmNome).Titled("Nome Usuário").Sortable(true).Filterable(true);
+    columns.Add(o => o.NM_PRIORIDADE).Titled("Prioridade").Sortable(true).Filterable(true);
+    columns.Add()
+        .Encoded(false)
+        .Sanitized(false)
+        .SetWidth(30)
+        .RenderValueAs(o => "<a href='#' onclick='ExcluirConfirmar(" + o.ID_GRUPOWF_USU + ")' class='fas fa-trash-alt fa-lg'> </a>");
+    //columns.Add()
+    //.Encoded(false)
+    //.Sanitized(false)
+    //.SetWidth(30)
+    //.RenderValueAs(o => Html.ActionLink("Excluir", "Excluir", new { idKey = HttpUtility.HtmlDecode(o.idKey) }));
+})
+</div>

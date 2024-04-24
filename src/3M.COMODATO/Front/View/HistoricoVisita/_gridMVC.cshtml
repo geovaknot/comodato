@@ -1,0 +1,25 @@
+﻿@model IEnumerable<_3M.Comodato.Front.Models.ListaHistoricoVisitas>
+
+@using GridMvc.Html
+
+<div class="table table-hover">
+    @Html.Grid(Model).Columns(columns =>
+{
+    columns.Add(foo => foo.ID_VISITA).Titled("VISITA").Sortable(false).Filterable(false);
+    columns.Add(foo => foo.logStatusVisitas[0].DT_DATA_LOG_VISITA_SHORT).Titled("DATA").Sortable(false).Filterable(false);
+    columns.Add(foo => foo.NM_CLIENTE).Titled("CLIENTE").Sortable(false).Filterable(false);
+    columns.Add(foo => foo.NM_TECNICO).Titled("TÉCNICO").Sortable(false).Filterable(false);
+    columns.Add(foo => foo.DS_TP_STATUS_VISITA_OS).Titled("STATUS").Sortable(false).Filterable(false);
+    columns.Add(foo => foo.QT_PERIODO).Titled("PERÍODOS").Sortable(false).Filterable(false);
+    columns.Add(foo => foo.QT_PERIODO_REALIZADO_FORMATADO).Titled("REALIZADO").Sortable(false).Filterable(false);
+    columns.Add(foo => foo.PERCENTUAL).Titled("%").Sortable(false).Filterable(false);
+    //columns.Add(foo => foo.TempoGastoTOTAL).Titled("REALIZADO (HR)").Sortable(false).Filterable(false);
+    columns.Add(foo => foo.HoraMinuto).Titled("REALIZADO (HR)").Sortable(false).Filterable(false);
+    columns.Add()
+        .Encoded(false)
+        .Sanitized(false)
+        .SetWidth(30)
+        .RenderValueAs(o => Html.ActionLink(" ", "EditarVisita", "Agenda", new { idKey = HttpUtility.HtmlDecode(o.idKey) }, new { @class = "fas fa-pencil-alt fa-lg" }));
+})
+</div>
+

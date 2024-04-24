@@ -1,0 +1,105 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+    background-image: url('../Images/repeating_meshed_grid.png');
+    background-repeat: repeat;
+}
+
+.bodyLogin {
+    background-image: url('../Images/3M_ComodatoLogin.png') !important;
+    background-attachment: fixed;
+    background-size: cover;
+    background-repeat: no-repeat
+}
+
+.bodyBackGround {
+    background-attachment: fixed;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position-x: center;
+}
+
+
+@media only screen and (max-width: 450px) {
+    .bodyLogin {
+        background-image: url('../Images/3M_ComodatoLogin.png') !important;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position-x: center;
+        min-height: 100vh !important;
+    }
+
+    .bodyBackGround {
+        background-attachment: fixed;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position-x: center;
+        min-height: 100vh !important;
+    }
+
+    .fixed-top {
+        max-height: 100%;
+        overflow: auto;
+    }
+
+    .responsiveMenu {
+        margin-left: 68% !important;
+    }
+}
+
+
+@media only screen and (max-width: 768px) {
+    .bodyLogin {
+        background-image: url('../Images/3M_ComodatoLogin.png') !important;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position-x: center;
+        min-height: 100vh !important;
+    }
+
+    .bodyBackGround {
+        background-attachment: fixed;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position-x: center;
+        min-height: 100vh !important;
+    }
+
+    .fixed-top {
+        max-height: 100%;
+        overflow: auto;
+    }
+
+    .responsiveMenu {
+        margin-left: 68% !important;
+    }
+}
+
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 100%;
+}
+
+.ead-div {
+    background-color: #525151;
+    height: 130pt;
+    margin: 10pt;
+    padding: 0pt;
+    color: #d3cccc;
+}

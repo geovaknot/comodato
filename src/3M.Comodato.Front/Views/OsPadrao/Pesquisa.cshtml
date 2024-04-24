@@ -1,0 +1,140 @@
+﻿@model _3M.Comodato.Front.Models.ConsultaConfirmaVista
+
+@using GridMvc.Html
+
+@{
+    /**/
+    Int64 id_visita = ViewBag.Visita;
+    string data = ViewBag.DataVisita;
+    string tecnico = ViewBag.NomeTecnico;
+    ViewBag.Title = "Avaliação de Visitas Técnicas realizadas";
+}
+
+<style>
+    body {
+        text-align: center;
+        padding-top: 50px
+    }
+
+    .estrelas input[type=radio] {
+        display: none;
+    }
+
+    .estrelas label i.fa {
+        font-size: 2.5em
+    }
+
+        .estrelas label i.fa:before {
+            content: '\f005';
+            color: #FC0;
+        }
+
+    .estrelas input[type=radio]:checked ~ label i.fa:before {
+        color: #CCC;
+    }
+</style>
+<div class="row" style="margin-top:5%;">
+    <div class="col-md-6">
+        <strong>
+            <span style="font-size: 15px;">
+                Atendimento Realizado por: @tecnico
+            </span>
+        </strong>
+        
+    </div>
+    <div class="col-md-3">
+        <strong>
+            <span style="font-size: 15px;">
+                OS.: @id_visita
+            </span>
+        </strong>
+        
+    </div>
+    <div class="col-md-3">
+        <strong>
+            <span style="font-size: 15px;">
+                Data: @data
+            </span>
+        </strong>
+        
+    </div>
+
+</div>
+
+<div class="row">
+    @*<div class="modal-header bg-dark">
+            <h5 class="modal-title text-white" id="exampleModalLongTitle">Confirmação do Atendimento</h5>
+        </div>*@
+    
+    <div class="col-md-12">
+        <div class="form-horizontal" style="margin-top: 7%">
+            <input type="hidden" id="ID_VISITA" value="@id_visita" />
+
+            <div class="form-group">
+                <label class="control-label" style="font-size: 25px">Avaliação do Atendimento</label>
+                <br />
+                <link rel="stylesheet" href="@Url.Content("~/Content/rateYo/v2.3.2/jquery.rateyo.min.css")">
+                <div class="estrelas">
+                    <input type="radio" id="cm_star-empty" name="fb" value="" checked />
+                    <label for="cm_star-1"><i class="fa"></i></label>
+                    <input type="radio" id="cm_star-1" name="fb" value="1" />
+                    <label for="cm_star-2"><i class="fa"></i></label>
+                    <input type="radio" id="cm_star-2" name="fb" value="2" />
+                    <label for="cm_star-3"><i class="fa"></i></label>
+                    <input type="radio" id="cm_star-3" name="fb" value="3" />
+                    <label for="cm_star-4"><i class="fa"></i></label>
+                    <input type="radio" id="cm_star-4" name="fb" value="4" />
+                    <label for="cm_star-5"><i class="fa"></i></label>
+                    <input type="radio" id="cm_star-5" name="fb" value="5" />
+                    <input type="hidden" id="nota" />
+                </div>
+                @*<div class="custom-control-inline col-md-12">
+                        <div id="ratingAvaliacaoVisita"></div>
+                        <div id="notaAvaliacaoVisita" class="font-weight-bold" style="font-size:3.6em; text-align:center;"></div>
+                    </div>*@
+            </div>
+
+            <div class="form-group">
+                <span style="color: red">
+                    Após selecionar a nota acima digite o comentário sobre o atendimento recebido!
+                </span>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">Observações do atendimento</label>
+                <textarea class="form-control col-12" rows=4 id="justificativa"></textarea>
+
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" id="btnSalvarAvaliacaoVisita" onclick="SalvarAvaliacaoOS();">Confirmar Avaliação</button>
+    </div>
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        var URLSITE = "@_3M.Comodato.Utility.ControlesUtility.Parametro.ObterValorParametro(_3M.Comodato.Utility.ControlesUtility.Constantes.URLSite)";
+
+        @*var nidUsuario = @Convert.ToInt64(((_3M.Comodato.Entity.UsuarioPerfilEntity)Session["_CurrentUser"]).usuario.nidUsuario);
+        var nidPerfil  = @Convert.ToInt64(((_3M.Comodato.Entity.UsuarioPerfilEntity)Session["_CurrentUser"]).perfil.nidPerfil);*@
+
+        var MensagemGravacaoSucesso = "@_3M.Comodato.Utility.ControlesUtility.Constantes.MensagemGravacaoSucesso";
+        var MensagemExclusaoSucesso = "@_3M.Comodato.Utility.ControlesUtility.Constantes.MensagemExclusaoSucesso";
+        var totalClientes = 0;
+        @*var token = @Convert.ToString(((_3M.Comodato.Entity.UsuarioPerfilEntity)Session["_CurrentUser"]).token);*@
+    </script>
+
+
+    <link rel="stylesheet" href="@Url.Content("~/Content/rateYo/v2.3.2/jquery.rateyo.min.css")">
+    <script type="text/javascript" src="@Url.Content("~/Scripts/rateYo/v2.3.2/jquery.rateyo.min.js")"></script>
+    <script type="text/javascript" src="~/Scripts/Comodato/Util.js"></script>
+    <script type="text/javascript" src="~/Scripts/xjsapi/clienteapi.js"></script>
+    <script type="text/javascript" src="~/Scripts/Comodato/VisitaConsultaAvaliacao.js"></script>
+
+}
+
+

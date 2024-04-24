@@ -1,0 +1,59 @@
+﻿
+@{
+    var PerfilTecnico = _3M.Comodato.Utility.ControlesUtility.Seguranca.VerificaUsuarioPerfisTecnicos(Convert.ToInt64(((_3M.Comodato.Entity.UsuarioPerfilEntity)Session["_CurrentUser"]).usuario.nidUsuario));
+    ViewBag.Title = "Consulta Estoque de Peças";
+}
+
+<i class="fas fa-cubes fa-3x fa-pull-left"></i>
+<h3>Consulta Estoque de Peças</h3>
+
+<div class="well">
+    <div class="form-horizontal">
+        <hr />
+
+        <div class="form-group">
+            <div class="row">
+                <div class="form-group col-4">
+                    <label class="control-label">Estoque</label>
+                    <div class="form-group">
+                        <select id="ddlEstoque" class="js-select-basic-single form-control col-md-12"></select>
+                    </div>
+                </div>
+                <div class="form-group col-6">
+                    <label class="control-label">Peça</label>
+                    <div class="form-group">
+                        <select id="ddlPeca" class="js-select-basic-single form-control col-md-12"></select>
+                    </div>
+                </div>
+                <div class="form-group col-2">
+                    <label class="control-label">Ativo</label>
+                    <div class="form-group">
+                        @Html.DropDownList("ddlAtivo", @_3M.Comodato.Utility.ControlesUtility.Dicionarios.SimNao().Select(c => new SelectListItem() { Text = c.Key, Value = c.Value }).ToList(), new { @class = "js-select-basic-single form-control col-md-12" })
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-md-12 text-right">
+                    <button id="btnConsultar" type="button" class="btn btn-primary btn-sm">Consultar</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div id="gridEstoquePecas"></div>
+
+@section Scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/Comodato/Util.js"></script>
+    <script src="~/Scripts/Comodato/EstoqueIntermediario.js"></script>
+    <script>
+        var URLAPI = "@_3M.Comodato.Utility.ControlesUtility.Parametro.ObterValorParametro(_3M.Comodato.Utility.ControlesUtility.Constantes.URLAPI)";
+        var nidUsuario = @Convert.ToInt64(((_3M.Comodato.Entity.UsuarioPerfilEntity)Session["_CurrentUser"]).usuario.nidUsuario);
+        var actionConsultar = '@Url.Action("ConsultarEstoquePecas", "EstoqueIntermediario")';
+        var UsuarioTecnico = '@PerfilTecnico';
+        var token = "@Convert.ToString(((_3M.Comodato.Entity.UsuarioPerfilEntity)Session["_CurrentUser"]).token)";
+    </script>
+}

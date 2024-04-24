@@ -1,0 +1,164 @@
+﻿@model _3M.Comodato.Front.Models.Dashboard
+
+<div class="card text-black rounded-0 mb-0">
+    <div class="card-header py-1 px-1" style="font-size: 9pt">Vendedor</div>
+
+    <div class="card-body py-1 px-1" style="min-height: 400px">
+        <div class="row">
+            <label class="col-sm-8 mb-0">Clientes atendidos:</label>
+            <div class="col-sm-4 mb-0">
+                <div class="font-weight-bold">
+                    <label id="ClientesAtendidos" class="m-0"></label>
+                </div>
+            </div>
+        </div>
+        <div class="row text-primary" style="font-size: 9pt">
+            <label class="col-sm-8 mb-0">Equipamentos:</label>
+            <div class="col-sm-4 mb-0">
+                <div class="font-weight-bold">
+                    <label id="Equipamentos" class="m-0"></label>
+                </div>
+            </div>
+        </div>
+        <div class="row text-primary" style="font-size: 9pt">
+            <label class="col-sm-8 mb-0">Depreciação 12 meses:</label>
+            <div class="col-sm-4 mb-0">
+                <div class="font-weight-bold">
+                    <label id="Depreciacao12Meses" class="m-0"></label>
+                </div>
+            </div>
+        </div>
+        <div class="row text-primary" style="font-size: 9pt">
+            <label class="col-sm-8 mb-0">Custo manuteção:</label>
+            <div class="col-sm-4 mb-0">
+                <div class="font-weight-bold">
+                    <label id="CustoManutencao" class="m-0"></label>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="font-size: 9pt">
+            <label class="col-sm-8 mb-0">Investimento:</label>
+            <div class="col-sm-4 mb-0">
+                <div class="font-weight-bold">
+                    <label id="Investimento" class="m-0"></label>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="font-size: 9pt">
+            <label class="col-sm-8">Qtde clientes s/consumo (últ. 3 meses):</label>
+            <div class="col-sm-4">
+                <div class="font-weight-bold">
+                    <label id="QtdeEquipamentosSemConsumo" class="m-0"></label>
+                </div>
+            </div>
+        </div>
+        @*<div class="row" style="font-size: 9pt">
+                <label class="col-sm-8 mb-0">Qtde cliente com emprestimo:</label>
+                <div class="col-sm-4 mb-0">
+                    <div class="font-weight-bold">
+                        <label id="QtdeClientesEmprestimo"></label>
+                    </div>
+                </div>
+            </div>*@
+
+        <div class="row text-primary">
+            <label class="col-sm-8 mb-0">Solicitação de envio:</label>
+            <div class="col-sm-4 mb-0">
+                <div class="font-weight-bold">
+                    <label id="SolicitacaoEnvio" class="m-0"></label>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="font-size: 9pt">
+            <label class="col-sm-8 mb-0">- Análise marketing:</label>
+            <div class="col-sm-4 mb-0">
+                <div class="font-weight-bold" style="font-size: 8pt">
+                    <label id="AnaliseMarketing" class="m-0"></label>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="font-size: 9pt">
+            <label class="col-sm-8 mb-0">- Análise área técnica:</label>
+            <div class="col-sm-4 mb-0">
+                <div class="font-weight-bold" style="font-size: 8pt">
+                    <label id="AnaliseAreaTecnica" class="m-0"></label>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="font-size: 9pt">
+            <label class="col-sm-8 mb-0">- Análise planejamento:</label>
+            <div class="col-sm-4 mb-0">
+                <div class="font-weight-bold" style="font-size: 8pt">
+                    <label id="AnalisePlanejamento" class="m-0"></label>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="font-size: 9pt">
+            <label class="col-sm-8 mb-0">- Enviado para cliente:</label>
+            <div class="col-sm-4 mb-0">
+                <div class="font-weight-bold" style="font-size: 8pt">
+                    <label id="EnviadoCliente" class="m-0"></label>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="font-size: 9pt">
+            <label class="col-sm-8">- Instalado:</label>
+            <div class="col-sm-4">
+                <div class="font-weight-bold" style="font-size: 8pt">
+                    <label id="Instalado"></label>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row text-primary">
+            <label class="col-sm-8 mb-0">Solicitação de retirada:</label>
+            <div class="col-sm-4 mb-0">
+                <div class="font-weight-bold">
+                    <label id="SolicitacaoRetirada" class="m-0"></label>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="font-size: 9pt">
+            <label class="col-sm-8 mb-0">- Análise logística:</label>
+            <div class="col-sm-4 mb-0">
+                <div class="font-weight-bold" style="font-size: 8pt">
+                    <label id="AnaliseLogistica" class="m-0"></label>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="font-size: 9pt">
+            <label class="col-sm-8 mb-0">- Com transportadora:</label>
+            <div class="col-sm-4 mb-0">
+                <div class="font-weight-bold" style="font-size: 8pt">
+                    <label id="ComTransportadora" class="m-0"></label>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="font-size: 9pt">
+            <label class="col-sm-8 mb-0">- Em agendamento TMS:</label>
+            <div class="col-sm-4 mb-0">
+                <div class="font-weight-bold" style="font-size: 8pt">
+                    <label id="EmAgendamentoTMS" class="m-0"></label>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="font-size: 9pt">
+            <label class="col-sm-8 mb-0">- Devolvido 3M:</label>
+            <div class="col-sm-4 mb-0">
+                <div class="font-weight-bold" style="font-size: 8pt">
+                    <label id="Devolvido3M" class="m-0"></label>
+                </div>
+            </div>
+        </div>
+        @*<div class="row" style="font-size: 9pt">
+            <label class="col-sm-8 mb-0">- Finalizado:</label>
+            <div class="col-sm-4 mb-0">
+                <div class="font-weight-bold" style="font-size: 8pt">
+                    <label id="FinalizadoRetirada" class="m-0"></label>
+                </div>
+            </div>
+        </div>*@
+    </div>
+</div>
+

@@ -1,0 +1,144 @@
+﻿@model _3M.Comodato.Front.Models.Empresa
+
+@{
+    ViewBag.Title = "Empresa";
+}
+
+<i class="fas fa-cubes fa-3x fa-pull-left"></i>
+<h3>Empresa (Editar)</h3>
+
+<div class="well">
+
+    @using (Html.BeginForm())
+    {
+    <div class="form-horizontal">
+        <hr />
+        @Html.HiddenFor(model => model.CancelarVerificarCodigo)
+
+        <div class="form-row">
+            <div class="form-group col-4">
+                <label class="control-label">Código</label>
+                @Html.EditorFor(model => model.CD_Empresa, new { htmlAttributes = new { @class = "form-control col-12", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.CD_Empresa, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @*<div class="form-group">
+            <div class="col-2">
+                <label class="control-label">IIComp</label>
+                @Html.EditorFor(model => model.IIComp, new { htmlAttributes = new { @class = "form-control col-12" } })
+                @Html.ValidationMessageFor(model => model.IIComp, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+
+        <div class="form-group">
+            <label class="control-label">Nome</label>
+            @Html.EditorFor(model => model.NM_Empresa, new { htmlAttributes = new { @class = "form-control col-12" } })
+            @Html.ValidationMessageFor(model => model.NM_Empresa, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-8">
+                <label class="control-label">CNPJ</label>
+                @Html.EditorFor(model => model.NR_Cnpj, new { htmlAttributes = new { @class = "form-control col-12" } })
+                @Html.ValidationMessageFor(model => Model.NR_Cnpj, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group col-4">
+                <label class="control-label">Tipo</label>
+                @*@Html.EditorFor(model => model.FL_Tipo_Empresa, new { htmlAttributes = new { @class = "form-control col-12" } })*@
+                @Html.DropDownListFor(model => model.FL_Tipo_Empresa, new SelectList(Model.TipoEmpresa, "value", "key"), new { @class = "valid form-control col-12" })
+                @Html.ValidationMessageFor(model => Model.FL_Tipo_Empresa, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-7">
+                <label class="control-label">Endereço</label>
+                @Html.EditorFor(model => model.EN_Endereco, new { htmlAttributes = new { @class = "form-control col-12" } })
+                @Html.ValidationMessageFor(model => Model.EN_Endereco, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group col-5">
+                <label class="control-label">Bairro</label>
+                @Html.EditorFor(model => model.EN_Bairro, new { htmlAttributes = new { @class = "form-control col-12" } })
+                @Html.ValidationMessageFor(model => Model.EN_Bairro, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-2">
+                <label class="control-label">CEP</label>
+                @Html.EditorFor(model => model.EN_Cep, new { htmlAttributes = new { @class = "form-control col-12" } })
+                @Html.ValidationMessageFor(model => Model.EN_Cep, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group col-8">
+                <label class="control-label">Cidade</label>
+                @Html.EditorFor(model => model.EN_Cidade, new { htmlAttributes = new { @class = "form-control col-12" } })
+                @Html.ValidationMessageFor(model => Model.EN_Cidade, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group col-2">
+                <label class="control-label">Estado</label>
+                @Html.EditorFor(model => model.EN_Estado, new { htmlAttributes = new { @class = "form-control col-12" } })
+                @Html.ValidationMessageFor(model => Model.EN_Estado, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-6">
+                <label class="control-label">Telefone 1</label>
+                @Html.EditorFor(model => model.TX_Telefone, new { htmlAttributes = new { @class = "form-control col-12" } })
+                @Html.ValidationMessageFor(model => Model.TX_Telefone, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group col-6">
+                <label class="control-label">Telefone 2</label>
+                @Html.EditorFor(model => model.TX_Fax, new { htmlAttributes = new { @class = "form-control col-12" } })
+                @Html.ValidationMessageFor(model => Model.TX_Fax, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-6">
+                <label class="control-label">Nome do Contato</label>
+                @Html.EditorFor(model => model.NM_Contato, new { htmlAttributes = new { @class = "form-control col-12" } })
+                @Html.ValidationMessageFor(model => Model.NM_Contato, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group col-6">
+                <label class="control-label">E-Mail de Contato</label>
+                @Html.EditorFor(model => model.TX_Email, new { htmlAttributes = new { @class = "form-control col-12" } })
+                @Html.ValidationMessageFor(model => Model.TX_Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-12">
+                <input type="submit" value="Gravar" class="btn btn-primary btn-sm" />
+                @Html.ActionLink("Voltar", "Index", new { area = "" }, new { @class = "btn btn-primary btn-sm" })
+            </div>
+        </div>
+    </div>
+    }
+
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript" src="~/Scripts/Comodato/Util.js"></script>
+
+    <script type="text/javascript">
+     @Model.JavaScriptToRun
+
+        function MensagemSucesso() {
+            var mensagem = '@_3M.Comodato.Utility.ControlesUtility.Constantes.MensagemGravacaoSucesso';
+
+            AlertaRedirect("Aviso", mensagem, "window.location = '../Empresa';");
+        };
+    </script>
+}
+
+
+

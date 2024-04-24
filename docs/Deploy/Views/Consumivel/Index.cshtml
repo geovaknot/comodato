@@ -1,0 +1,37 @@
+﻿@model IEnumerable<_3M.Comodato.Front.Models.Consumivel>
+
+@using GridMvc.Html
+
+@{
+    ViewBag.Title = "Consumível";
+}
+
+<i class="fas fa-cubes fa-3x fa-pull-left"></i>
+<h3>Consumível</h3>
+
+<p>
+    <a class="btn btn-primary btn-sm" href="Consumivel/Incluir">Novo registro <i class="far fa-sticky-note"></i></a>
+</p>
+
+<div class="table table-hover">
+    @Html.Grid(Model).Columns(columns =>
+    {
+        columns.Add(foo => foo.CD_CONSUMIVEL).Titled("CÓDIGO").Sortable(true).Filterable(true);
+        columns.Add(foo => foo.linhaProduto.DS_LINHA_PRODUTO).Titled("LINHA DE PRODUTO").Sortable(true).Filterable(true);
+        columns.Add(foo => foo.DS_CONSUMIVEL).Titled("DESCRIÇÃO").Sortable(true).Filterable(true);
+        columns.Add(foo => foo.DS_FAMILY).Titled("FAMÍLIA").Sortable(true).Filterable(true);
+        columns.Add(foo => foo.DS_SUB_FAMILY).Titled("SUB-FAMÍLIA").Sortable(true).Filterable(true);
+        columns.Add(foo => foo.cdsST_ATIVO).Titled("CONDIÇÃO").Sortable(true).Filterable(true);
+        columns.Add()
+                    .Encoded(false)
+                    .Sanitized(false)
+                    .SetWidth(30)
+                    .RenderValueAs(o => Html.ActionLink(" ", "Editar", new { idKey = HttpUtility.HtmlDecode(o.idKey) }, new { @class = "fas fa-pencil-alt fa-lg" }));
+        columns.Add()
+                    .Encoded(false)
+                    .Sanitized(false)
+                    .SetWidth(30)
+                    .RenderValueAs(o => Html.ActionLink(" ", "Excluir", new { idKey = HttpUtility.HtmlDecode(o.idKey) }, new { @class = "fas fa-trash-alt fa-lg" }));
+    }).WithPaging(10)
+</div>
+

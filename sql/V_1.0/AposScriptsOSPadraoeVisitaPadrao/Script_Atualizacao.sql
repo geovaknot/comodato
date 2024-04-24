@@ -1,0 +1,1 @@
+update tbparametro set cvlparametro = 90 where ccdparametro = 'diasTrocaSenhaExterno'

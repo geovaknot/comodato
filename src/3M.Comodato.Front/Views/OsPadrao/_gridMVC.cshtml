@@ -1,0 +1,77 @@
+﻿@model IEnumerable<_3M.Comodato.Front.Models.OsPadrao>
+
+@using GridMvc.Html
+
+@{
+    var perfil = (_3M.Comodato.Entity.UsuarioPerfilEntity)Session["_CurrentUser"];
+    int PERFIL_CLIENTE = 8;
+    int PERFIL_ADM = 1;
+}
+
+
+<div class="table table-hover">
+    @Html.Grid(Model).Columns(columns =>
+{
+    columns.Add()
+        .Encoded(false)
+        .Sanitized(false)
+        .Titled("STATUS")
+        .RenderValueAs(o => Html.ActionLink(o.TpStatusOS.DS_STATUS_OS == "" || o.TpStatusOS.DS_STATUS_OS == null ? " " : o.TpStatusOS.DS_STATUS_OS, "", "",
+        new
+        {
+            @onclick = "javascript:return false;",
+            @class =
+            o.TpStatusOS.ST_STATUS_OS == Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.TpStatusOSPadrao.AguardandoInicio)
+                    ? "btn btn-info btn-sm btn-block" :
+            o.TpStatusOS.ST_STATUS_OS == Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.TpStatusOSPadrao.Aberta)
+                    ? "btn btn-success btn-sm btn-block" :
+            o.TpStatusOS.ST_STATUS_OS == Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.TpStatusOSPadrao.Finalizada)
+                    ? "btn btn-primary btn-sm btn-block" :
+            o.TpStatusOS.ST_STATUS_OS == Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.TpStatusOSPadrao.Cancelada)
+                    ? "btn btn-danger btn-sm btn-block" : string.Empty
+        }));
+    columns.Add(foo => foo.ID_OS).Titled("NÚMERO").Sortable(false).Filterable(false);
+    columns.Add(foo => foo.DATA_OS_FORMATADA).Titled("ÚLTIMA OS").Sortable(false).Filterable(false);
+    columns.Add(foo => foo.TpOS.DS_TIPO_OS).Titled("TIPO").Sortable(false).Filterable(false);
+    columns.Add(foo => foo.cliente.NM_CLIENTE_Codigo).Titled("NOME DO CLIENTE").Sortable(false).Filterable(false);
+    if (perfil.perfil.ccdPerfil == PERFIL_ADM)
+    {
+        columns.Add(foo => foo.tecnico.NM_REDUZIDO).Titled("NOME DO TECNICO").Sortable(false).Filterable(false);
+    }
+    
+    columns.Add(foo => foo.cliente.regiao.DS_REGIAO).Titled("REGIÃO").Sortable(false).Filterable(false);
+    columns.Add(foo => foo.QT_PERIODO).Titled("PERÍODOS").Sortable(false).Filterable(false);
+    columns.Add(foo => foo.QT_PERIODO_REALIZADO_FORMATADO).Titled("REALIZADO").Sortable(false).Filterable(false);
+    columns.Add(foo => foo.PERCENTUAL).Titled("%").Sortable(false).Filterable(false);
+    columns.Add()
+        .Encoded(false)
+        .Sanitized(false)
+        .SetWidth(30)
+        .RenderValueAs(o => Html.ActionLink(" ", "Visualizar", new { idKey = HttpUtility.HtmlDecode(o.idKey) }, new { @class = "fas fa-search fa-lg" }));
+    if (perfil.perfil.ccdPerfil != PERFIL_CLIENTE)
+    {
+        columns.Add()
+            .Encoded(false)
+            .Sanitized(false)
+            .SetWidth(30)
+            .RenderValueAs(o => Html.ActionLink(" ", "Editar", new { idKey = HttpUtility.HtmlDecode(o.idKey) }, new
+            {
+                @class =
+                o.TpStatusOS.ST_STATUS_OS == Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.TpStatusOSPadrao.Finalizada)
+                        ? string.Empty :
+                o.TpStatusOS.ST_STATUS_OS == Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.TpStatusOSPadrao.Cancelada)
+                        ? string.Empty : "fas fa-pencil-alt fa-lg"
+            }));
+        columns.Add()
+            .Encoded(false)
+            .Sanitized(false)
+            .SetWidth(30)
+            .RenderValueAs(o => Html.ActionLink(" ", "Excluir", new { idKey = HttpUtility.HtmlDecode(o.idKey) }, new
+            {
+                @class =
+                o.TpStatusOS.ST_STATUS_OS == Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.TpStatusOSPadrao.AguardandoInicio)
+                        ? "fas fa-trash-alt fa-lg" : string.Empty
+            }));
+    }
+})
+</div>

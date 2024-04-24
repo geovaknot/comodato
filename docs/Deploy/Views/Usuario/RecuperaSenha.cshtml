@@ -1,0 +1,56 @@
+﻿@model _3M.Comodato.Front.Models.UsuarioLoginRecuperar
+
+@{
+    ViewBag.Title = "RecuperaSenha";
+    Layout = "~/Views/Shared/_LayoutPageLogin.cshtml";
+}
+
+@*<h2>RecuperaSenha</h2>*@
+<div class="container">
+    <div class="well">
+        @using (Html.BeginForm())
+        {
+            <div class="card mb-md-3 mx-auto" style="max-width: 20rem; background-color:rgba(225, 223, 223, 0.85); border-radius:5pt; margin-top:50px; ">
+
+                <div class="card-header">
+                    <div class="row" style="width:20rem; height:5pt; background-color:#bc3535; margin-top:-10pt; margin-left:-21px;"></div>
+                    <h3 style="color:#bc3535; margin-top:3pt;">Recuperar Senha</h3>
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label class="control-label">Digite seu e-mail para receber o link de recuperação de senha</label>
+                        @Html.EditorFor(model => model.cdsEmail, new { htmlAttributes = new { placeholder = "e-mail", @class = "form-control mx-auto" } })
+                        @Html.ValidationMessageFor(model => model.cdsEmail, "", new { @class = "text-danger" })
+                    </div>
+                    @if (!string.IsNullOrEmpty(ViewBag.Mensagem))
+                    {
+                        <div class="form-group">
+                            <label class="text-danger">@ViewBag.Mensagem</label>
+                        </div>
+                    }
+                    @if (!string.IsNullOrEmpty(ViewBag.MensagemOK))
+                    {
+                        <div class="form-group">
+                            <label class="text-success">@ViewBag.MensagemOK</label>
+                        </div>
+                    }
+                    <div class="form-group">
+                        <div class="col-12">
+                            <input type="submit" value="Enviar" class="btn btn-primary btn-lg" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-12">
+                            @Html.ActionLink("Retornar para login", "Login", new { area = "" }, new { @class = "card-link" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @*<label class="control-label">Válido somente para usuários com perfil&nbsp;@ViewBag.cdsPerfilExternoPadrao</label>*@
+                        <label class="control-label">Válido somente para usuários externos</label>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+

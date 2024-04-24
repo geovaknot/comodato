@@ -1,0 +1,52 @@
+GO
+
+/****** Object:  UserDefinedFunction [dbo].[fncValidaPonderacao]    Script Date: 08/03/2024 09:29:56 ******/
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+
+CREATE FUNCTION [dbo].[fncValidaPonderacao]
+	()
+RETURNS BIT
+AS
+BEGIN
+	DECLARE @cursor CURSOR,
+	@LINHA INT, @MIN_CLIENTES INT, @MAX_CLIENTES INT, @MAX_CLIENTESANT INT = 0, @retorno bit = 1;
+	SET @cursor = CURSOR FOR
+	SELECT MIN_CLIENTES, MAX_CLIENTES, ROW_NUMBER() OVER (ORDER BY MIN_CLIENTES ASC) AS LINHA
+	FROM TB_PONDERACAO_pz
+	 ORDER BY MIN_CLIENTES;
+
+	OPEN @cursor;
+
+	FETCH NEXT FROM @cursor INTO @MIN_CLIENTES, @MAX_CLIENTES, @LINHA;
+
+	WHILE @@FETCH_STATUS = 0
+		BEGIN
+			IF @LINHA = 1 AND @MIN_CLIENTES <> 1 
+			BEGIN
+				 SET @retorno = 0 --NO PRIMEIRO VALOR PRECISA SER 1
+				 RETURN @retorno
+			END
+			IF @MIN_CLIENTES = @MAX_CLIENTESANT + 1 AND @MIN_CLIENTES < @MAX_CLIENTES
+			BEGIN
+				Set @retorno = 1 --PONDERAÇÃO ESTÁ OK
+			END
+			ELSE
+			BEGIN
+				Set @retorno = 0 --ponderação inconsistente
+				return @retorno
+			END
+			SET @MAX_CLIENTESANT = @MAX_CLIENTES
+			FETCH NEXT FROM @cursor INTO @MIN_CLIENTES, @MAX_CLIENTES,  @LINHA;
+		END
+	CLOSE @cursor;
+	DEALLOCATE @cursor;
+	return @retorno
+END
+GO
+
+

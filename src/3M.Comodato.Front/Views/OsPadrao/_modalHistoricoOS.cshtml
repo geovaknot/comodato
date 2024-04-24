@@ -1,0 +1,70 @@
+﻿<!-- Modal -->
+<div class="modal fade" id="HistoricoModal" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-dark">
+                <h5 class="modal-title text-white" id="exampleModalLongTitle">Histórico da OS</h5>
+                @*<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>*@
+            </div>
+            <div class="modal-body">
+                <div class="pre-scrollable">
+                    <div id="gridmvcHistoricoOS">
+                    </div>
+                </div>
+                <br />
+
+                @if (ViewBag.Administrador3M == "S")
+                {
+                    <div class="card">
+                        <div class="card-header">
+                            <h5 class="card-title">Ajustar Histórico</h5>
+                        </div>
+
+                        <div class="card-body">
+                            <div class="form-row">
+                                <label class="control-label">Status</label>
+                                <input class="form-control col-12 text-box single-line" data-val="true" id="DS_TP_STATUS_VISITA_OS" name="DS_TP_STATUS_VISITA_OS" type="text" value="" readonly="readonly">
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-md-5">
+                                    <label class="control-label">Data</label>
+                                    <div id="DT_DATA_LOG_OS-container">
+                                        <div class="input-group date">
+                                            <input class="form-control col-12 text-box single-line" data-val="true" id="DT_DATA_LOG_OS" name="DT_DATA_LOG_OS" type="text" value="">
+                                            <div class="input-group-addon">
+                                                <i class="far fa-calendar-alt fa-2x" style="background: #d9d6d6; padding: 3px 3px 3px 3px"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <label id="validaDT_DATA_LOG_OS" class="control-label text-danger" style="display: none;">Conteúdo obrigatório!</label>
+                                </div>
+                                <div class="form-group col-md-4">
+                                    <label class="control-label">Hora</label>
+                                    <input class="form-control col-12 text-box single-line" data-val="true" id="DT_DATA_LOG_OS_HORA" name="DT_DATA_LOG_OS_HORA" type="text" value="">
+                                    <label id="validaDT_DATA_LOG_OS_HORA" class="control-label text-danger" style="display: none;">Conteúdo obrigatório!</label>
+                                </div>
+
+                                <div class="form-group col-md-3 text-right">
+                                    <br />
+                                    <button class="btn btn-primary btn-sm" type="button" id="btnGravarLogOS">Gravar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <input data-val="true" id="ST_TP_STATUS_VISITA_OS_LOG" name="ST_LOG_STATUS_VISITA_LOG" type="hidden" value="" />
+                    <input data-val="true" id="ID_LOG_STATUS_OS" name="ID_LOG_STATUS_OS" type="hidden" value="" />
+                }
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnFecharModalHistoricoOS">Fechar</button>
+                @*<button type="button" class="btn btn-primary">Save changes</button>*@
+            </div>
+        </div>
+    </div>
+</div>
+

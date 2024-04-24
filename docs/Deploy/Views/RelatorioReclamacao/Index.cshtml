@@ -1,0 +1,91 @@
+﻿@model _3M.Comodato.Front.Models.RelatorioReclamacaoItemFiltro
+@{
+    ViewBag.Title = "RR- Acompanhamento Reclamação";
+}
+
+<i class="fas fa-cubes fa-3x fa-pull-left"></i>
+<h3>RR- Acompanhamento Reclamação</h3>
+<p>
+    <hr />
+
+    <div class="well">
+        <div class="container">
+
+            <div class="form-row">
+                <div class="form-group col-xl-4 col-lg-4 col-md-6 col-sm-12">
+                    <label class="control-label">Técnico:</label>
+                    @*<div class="form-group">
+                        @Html.DropDownListFor(model => model.tecnico.CD_TECNICO, new SelectList(Model.tecnicos, "CD_TECNICO", "NM_TECNICO"), new { @class = "valid form-control col-12" })
+                    </div>*@
+                    <div class="form-group">
+                        <select id="ddlTecnico" class="js-select-basic-single form-control col-md-12"></select>
+                    </div>
+                </div>
+
+                <div class="form-group col-xl-4 col-lg-4 col-md-6 col-sm-12">
+                    <label class="control-label">Período Cadastro:</label>
+                    <div id="DT_FILTRO-container">
+                        <div class="input-daterange input-group">
+                            @Html.TextBoxFor(model => model.DataInicio, "{0:dd/MM/yyyy}", new { @class = "form-control col-12" })
+                            <span class="input-group-addon">&nbsp;até&nbsp;</span>
+                            @Html.TextBoxFor(model => model.DataFim, "{0:dd/MM/yyyy}", new { @class = "form-control col-12" })
+                        </div>
+                    </div>
+                </div>
+
+                @*<div class="form-group col-xl-4 col-lg-4 col-md-6 col-sm-12">
+                    <label class="control-label">Cliente</label>
+                    <div class="form-group">
+                        @Html.DropDownListFor(model => model.cliente, Model.ListaCliente, new { @class = "js-select-basic-single col-md-12" })
+                    </div>
+                </div>*@
+            </div>
+
+            <div class="form-row">
+                       
+                    <div class="col-md-4">
+                        <label class="control-label">Peca:</label>
+                        <div class="form-group">
+                            @Html.DropDownListFor(model => model.Peca, Model.ListaPeca, new { @class = "js-select-basic-single col-md-12" })
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="control-label">Ativo:</label>
+                        <div class="form-group">
+                            @Html.DropDownListFor(model => model.ativoFixo.CD_ATIVO_FIXO, new SelectList(Model.ativos, "CD_ATIVO_FIXO", "DS_ATIVO_FIXO"), new { @class = "valid form-control col-12" })
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <label class="control-label">Status:</label>
+                        <div class="form-group">
+                            <select id="Status" class="js-select-basic-single col-md-12"></select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12 text-right">
+                        <button id="btnImprimir" type="button" class="btn btn-primary">Imprimir</button>
+                        <button id="btnConsultar" type="button" class="btn btn-primary">Consultar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <br />
+
+    <div id="gridMvc"></div>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+        <script type="text/javascript" src="~/Scripts/Comodato/Util.js"></script>
+        <script type="text/javascript" src="~/Scripts/Comodato/RelatorioReclamacao.js"></script>
+        <script type="text/javascript">
+            var URLAPI = '@_3M.Comodato.Utility.ControlesUtility.Parametro.ObterValorParametro(_3M.Comodato.Utility.ControlesUtility.Constantes.URLAPI)';
+            var URLSite = "@_3M.Comodato.Utility.ControlesUtility.Parametro.ObterValorParametro(_3M.Comodato.Utility.ControlesUtility.Constantes.URLSite)";
+            var nidUsuario = @Convert.ToInt64(((_3M.Comodato.Entity.UsuarioPerfilEntity)Session["_CurrentUser"]).usuario.nidUsuario);
+
+            var URLCriptografarChave = "@Url.Action("CriptografarChaveJson")";
+            var actionConsultar = '@Url.Action("PopularGridReclamacao", "RelatorioReclamacao")';
+        </script>
+    }

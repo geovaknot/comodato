@@ -1,0 +1,56 @@
+﻿@model  _3M.Comodato.Front.Models.Contrato
+@{
+    ViewBag.Title = "Contrato";
+}
+
+<i class="fas fa-cubes fa-3x fa-pull-left"></i>
+<h3>Contrato</h3>
+
+<p>
+    <button id="btnNovoContrato" class="btn btn-primary btn-sm">Novo registro <i class="far fa-sticky-note"></i></button>
+    @*<a class="btn btn-primary btn-sm"  href="Contrato/Incluir">Novo registro <i class="far fa-sticky-note"></i></a>*@
+</p>
+
+@using (Html.BeginForm())
+{
+    <div class="well">
+        <div class="form-group">
+            <div class="col-12">
+                <label class="control-label">Cliente</label>
+                <select id="ddlClientes" class='js-select-basic-single col-12' type='text' placeholder='Selecione...' />
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript" src="~/Scripts/Comodato/Util.js"></script>
+    <script type="text/javascript" src="~/Scripts/Comodato/Contrato.js"></script>
+    <script>
+        var URLAPI = "@_3M.Comodato.Utility.ControlesUtility.Parametro.ObterValorParametro(_3M.Comodato.Utility.ControlesUtility.Constantes.URLAPI)";
+        var actionPesquisaContratos = '@Url.Action("ObterContratosPorCliente", "Contrato")';
+        var actionIncluirContrato = '@Url.Action("Incluir","Contrato")';
+        var token = "@Convert.ToString(((_3M.Comodato.Entity.UsuarioPerfilEntity)Session["_CurrentUser"]).token)";
+        var modeloValue = '';
+        var clienteSelect2Disabled = false;
+        var nidCliente = '@Model.nidCliente.ToString()';
+        
+        $().ready(function () {
+            $('#ddlClientes').select2({ minimumInputLength: 3});
+            $('#ddlClientes').on("select2:select", function (e) {
+                popularContratos(e.params.data.id);
+            });
+
+            popularClientes('#ddlClientes', nidCliente, clienteSelect2Disabled, false);
+            if (nidCliente > 0) {
+                popularContratos(nidCliente);
+            }
+
+            $('#btnNovoContrato').click(function () {
+                document.location.href = actionIncluirContrato + '/' + $('#ddlClientes').val();
+            });
+        });
+    </script>
+}

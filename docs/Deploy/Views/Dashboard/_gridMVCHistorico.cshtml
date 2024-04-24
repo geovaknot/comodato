@@ -1,0 +1,25 @@
+﻿@model IEnumerable<_3M.Comodato.Front.Models.ListaHistorico>
+
+@using GridMvc.Html
+
+<div class="table table-hover">
+    @Html.Grid(Model).Columns(columns =>
+{
+    //columns.Add(foo => foo.cliente.CD_CLIENTE).Titled("CÓDIGO").Sortable(false).Filterable(false);
+    columns.Add(foo => foo.ITEM).Titled("ITEM").Sortable(false).Filterable(false);
+    columns.Add(foo => foo.JANEIRO).Titled("JANEIRO").Sortable(false).Filterable(false).Css("text-center");
+    columns.Add(foo => foo.FEVEREIRO).Titled("FEVEREIRO").Sortable(false).Filterable(false).Css("text-center");
+    columns.Add(foo => foo.MARCO).Titled("MARÇO").Sortable(false).Filterable(false).Css("text-center");
+    columns.Add(foo => foo.ABRIL).Titled("ABRIL").Sortable(false).Filterable(false).Css("text-center");
+    columns.Add(foo => foo.MAIO).Titled("MAIO").Sortable(false).Filterable(false).Css("text-center");
+    columns.Add(foo => foo.JUNHO).Titled("JUNHO").Sortable(false).Filterable(false).Css("text-center");
+    columns.Add(foo => foo.JULHO).Titled("JULHO").Sortable(false).Filterable(false).Css("text-center");
+    columns.Add(foo => foo.AGOSTO).Titled("AGOSTO").Sortable(false).Filterable(false).Css("text-center");
+    columns.Add(foo => foo.SETEMBRO).Titled("SETEMBRO").Sortable(false).Filterable(false).Css("text-center");
+    columns.Add(foo => foo.OUTUBRO).Titled("OUTUBRO").Sortable(false).Filterable(false).Css("text-center");
+    columns.Add(foo => foo.NOVEMBRO).Titled("NOVEMBRO").Sortable(false).Filterable(false).Css("text-center");
+    columns.Add(foo => foo.DEZEMBRO).Titled("DEZEMBRO").Sortable(false).Filterable(false).Css("text-center");
+}).Named("tableMVCHistorico").SetRowCssClasses(foo => foo.TOTAL ? "bg-warning font-weight-bold" : string.Empty)
+
+</div>
+

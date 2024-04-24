@@ -1,0 +1,130 @@
+﻿@model _3M.Comodato.Front.Models.Consumivel
+
+@{
+    ViewBag.Title = "Consumível";
+}
+
+<i class="fas fa-cubes fa-3x fa-pull-left"></i>
+<h3>Consumível (Incluir)</h3>
+
+<div class="well">
+
+    @using (Html.BeginForm())
+    {
+        <div class="form-horizontal">
+            <hr />
+            @Html.HiddenFor(model => model.CancelarVerificarCodigo)
+            @Html.HiddenFor(model => model.CD_COMMODITY)
+            @Html.HiddenFor(model => model.CD_FAMILY)
+            @Html.HiddenFor(model => model.CD_MAJOR)
+            @Html.HiddenFor(model => model.CD_SUB_FAMILY)
+
+        <div class="form-row">
+            <div class="form-group col-4">
+                <label class="control-label">Código</label>
+                @Html.EditorFor(model => model.CD_CONSUMIVEL, new { htmlAttributes = new { @class = "form-control col-12" } })
+                @Html.ValidationMessageFor(model => Model.CD_CONSUMIVEL, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group col-8">
+                <label class="control-label">Linha de Produto</label>
+                @Html.DropDownListFor(model => model.linhaProduto.CD_LINHA_PRODUTO, new SelectList(Model.linhasProdutos, "CD_LINHA_PRODUTO", "DS_LINHA_PRODUTO"), new { @class = "valid form-control col-12" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label">Descrição</label>
+            @Html.EditorFor(model => model.DS_CONSUMIVEL, new { htmlAttributes = new { @class = "form-control col-12", @readonly = "readonly" } })
+            @Html.ValidationMessageFor(model => Model.DS_CONSUMIVEL, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="card">
+            <h5 class="card-header">
+                Detalhes
+            </h5>
+            <div class="card-body">
+                <div class="form-row">
+                    <div class="form-group col-5">
+                        <label class="control-label">Major</label>
+                        @Html.EditorFor(model => model.DS_MAJOR, new { htmlAttributes = new { @class = "form-control col-12", @readonly = "readonly" } })
+                        @Html.ValidationMessageFor(model => Model.DS_MAJOR, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group col-5">
+                        <label class="control-label">Commodity</label>
+                        @Html.EditorFor(model => model.DS_COMMODITY, new { htmlAttributes = new { @class = "form-control col-12", @readonly = "readonly" } })
+                        @Html.ValidationMessageFor(model => Model.DS_COMMODITY, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group col-2">
+                        <label class="control-label">Unidade</label>
+                        @Html.EditorFor(model => model.TX_UNIDADE, new { htmlAttributes = new { @class = "form-control col-12", @readonly = "readonly" } })
+                        @Html.ValidationMessageFor(model => Model.TX_UNIDADE, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-5">
+                        <label class="control-label">Família</label>
+                        @Html.EditorFor(model => model.DS_FAMILY, new { htmlAttributes = new { @class = "form-control col-12", @readonly = "readonly" } })
+                        @Html.ValidationMessageFor(model => Model.DS_FAMILY, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group col-5">
+                        <label class="control-label">Sub-Família</label>
+                        @Html.EditorFor(model => model.DS_SUB_FAMILY, new { htmlAttributes = new { @class = "form-control col-12", @readonly = "readonly" } })
+                        @Html.ValidationMessageFor(model => Model.DS_SUB_FAMILY, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="form-group col-2">
+                        <label class="control-label">Unidade Fam.</label>
+                        @Html.EditorFor(model => model.TX_UNIDADE_CONV, new { htmlAttributes = new { @class = "form-control col-12", @readonly = "readonly" } })
+                        @Html.ValidationMessageFor(model => Model.TX_UNIDADE_CONV, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-5">
+                        <label class="control-label">CUSTO (R$/Unid.Conv)</label>
+                        @Html.EditorFor(model => model.CUSTO, new { htmlAttributes = new { @class = "form-control col-12", @readonly = "readonly" } })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        <br />
+
+        <div class="form-group">
+            @*@Html.ActionLink("BPCS", "ImportarBPCS", new { CD_CONSUMIVEL = @Model.CD_CONSUMIVEL }, new { @class = "btn btn-info btn-sm" })*@
+            <input type="submit" value="Gravar" class="btn btn-primary btn-sm" />
+            @Html.ActionLink("Voltar", "Index", new { area = "" }, new { @class = "btn btn-primary btn-sm" })
+        </div>
+
+    }
+
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        var URLVerificarCodigo = "@Url.Action("VerificarCodigoJson", "Consumivel")";
+        var URLEditar = "@Url.Action("Editar", "Consumivel")";
+    </script>
+
+    <script type="text/javascript" src="~/Scripts/Comodato/Consumivel.js"></script>
+    <script type="text/javascript" src="~/Scripts/Comodato/Util.js"></script>
+
+    <script type="text/javascript">
+     @Model.JavaScriptToRun
+
+        function MensagemSucesso() {
+            var mensagem = '@_3M.Comodato.Utility.ControlesUtility.Constantes.MensagemGravacaoSucesso';
+
+            AlertaRedirect("Aviso", mensagem, "window.location = '../Consumivel';");
+        };
+    </script>
+}
+
+
+

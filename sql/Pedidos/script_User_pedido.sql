@@ -1,0 +1,1 @@
+alter table tb_pedido add nidUsuario bigint default 0;

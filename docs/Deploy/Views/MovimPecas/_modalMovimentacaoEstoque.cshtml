@@ -1,0 +1,57 @@
+﻿@model _3M.Comodato.Front.Models.EstoqueMovimentacao
+
+<div class="modal fade" id="MovimentacaoAcao2" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-dark">
+                <h6 id="hTitulo" class="modal-title text-white">Movimentação de peças entre Estoques</h6>
+            </div>
+            <div class="modal-body">
+                <div class="form-horizontal">
+                    <div class="form-control">
+                        <div class="row">
+                            <label class="control-label col-md-2">De</label>
+                            <div class="form-group row col-md-10">
+                                <select id="ddlEstoqueDe" class="js-select-basic-m2" style="white-space: nowrap; width:80%;"></select>&nbsp;
+                                <input type="text" id="txtQuantidadeDe" class="form-control col-sm-2 col-md-2" readonly />
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <label class="control-label col-md-2">Para</label>
+                            <div class="form-group row col-md-10">
+                                <select id="ddlEstoquePara" class="js-select-basic-m2" style="white-space: nowrap; width:80%;"></select>&nbsp;
+                                <input type="text" id="txtQuantidadePara" class="form-control col-md-2" readonly />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">&nbsp;</div>
+
+                    <div class="form-control">
+                        <div class="row">
+                            <label class="control-label col-md-2">Peça</label>
+                            <div class="form-group row col-md-10">
+                                <select id="ddlPeca" class="js-select-basic-m2" style="white-space: nowrap; width:100%;"></select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label class="control-label col-md-6">Quantidade a movimentar</label>
+                            <div class="form-group col-md-3">
+                                <input type="text" id="txtQuantidade" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label id="validaComboQuantidade" class="control-label text-danger" style="display: none;">Conteúdo obrigatório!</label>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" id="btnFechar" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                <button type="button" id="btnSalvar" onclick="fnSalvarMovimentacaoEstoque();" class="btn btn-primary">Salvar e Continuar</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div>

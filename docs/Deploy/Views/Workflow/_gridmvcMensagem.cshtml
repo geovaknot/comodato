@@ -1,0 +1,13 @@
+﻿@model IEnumerable<_3M.Comodato.Front.Models.WfPedidoComent>
+
+@using GridMvc.Html
+
+<div class="table table-hover">
+    @Html.Grid(Model).Columns(columns =>
+{
+    //columns.Add(foo => foo.DT_OCORRENCIA).Titled("DATA/HORA").Sortable(false).Filterable(false);
+    //columns.Add(foo => foo.usuario.cnmNome).Titled("USUÁRIO").Sortable(false).Filterable(false);
+    columns.Add(foo => foo.DS_COMENT).Titled("HISTÓRICO DE OBSERVAÇÕES").Sortable(false).Filterable(false);
+})
+</div>
+

@@ -1,0 +1,108 @@
+﻿@{
+    ViewBag.Title = "Plano Zero";
+}
+
+<i class="fas fa-cubes fa-3x fa-pull-left"></i>
+<h3>Plano Zero</h3>
+
+<style>
+    .criticidade-A { color: #721c24; border-color: #f5c6cb; }
+    .criticidade-B { color: #856404; border-color: #ffeeba; }
+    .criticidade-C { color: #155724; border-color: #c3e6cb; }
+</style>
+
+<div class="well">
+    <div class="form-horizontal">
+        <hr />
+        <div class="row">
+            <div class="col-md-6 align-left">                
+                <div class="form-group row">
+                    <label class="control-label col-md-4">Grupo de Modelo</label>
+                    <select id="ddlGrupoModelo" class="js-select-basic-single col-md-6" required></select>
+                    <label id="validaComboGrupoModelo" class="control-label text-danger" style="display: none;">Conteúdo obrigatório!</label>
+                </div>
+            </div>
+            <input type="hidden" id="CodigoGrupo"/>
+            @*<div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label col-md-2">Status</label>
+                <select id="ddlStatus" class="js-select-basic-single col-md-8"></select>
+            </div>
+        </div>*@
+
+            <div class="col-md-6">
+                <div class="form-group row">
+                    <label class="control-label col-md-4">Máquinas Carteira</label>
+                    <div class="col-md-2">
+                        <input type="text" id="txtMaquinasCarteira" style="text-align:center;" class="form-control" readonly />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group row">
+                    <label class="control-label col-md-2">Descrição: </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input id="txtDescricao" type="text" class="form-control col-md-7" readonly />
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group row">
+                    <label class="control-label col-md-2">Criticicade: </label>&nbsp;
+                    <div class="col-md-2" style="text-align:center;">
+                        <input id="txtA" type="text" class="form-control criticidade-A" style="text-align:center;background-color: #f8d7da;" readonly />
+                        <label class="control-label" style="font-size:12px;">A</label>
+                    </div>
+                    <div class="col-md-2" style="text-align:center;">
+                        <input id="txtB" type="text" class="form-control criticidade-B" style="text-align:center;background-color: #fff3cd;" readonly />
+                        <label class="control-label" style="font-size:12px;">B</label>
+                    </div>
+                    <div class="col-md-2" style="text-align:center;">
+                        <input id="txtC" type="text" class="form-control criticidade-C" style="text-align:center;background-color: #d4edda;" readonly />
+                        <label class="control-label" style="font-size:12px;">C</label>
+                    </div>
+                    <div class="col-md-2" style="text-align:center;">
+                        <input id="txtTotal" type="text" class="form-control text-dark" style="text-align:center;" readonly />
+                        <label class="control-label" style="font-size:12px;">Total</label>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="col-md-12">
+                    <div class="form-group row">
+                        <button class="btn btn-primary btn-sm" type="button" id="btnAdicionarPeca" data-toggle="modal" data-target="#PecaModal">Incluir Peça</button>
+                        <button class="btn btn-primary btn-sm" type="button" id="btnGerarPlanilha" style="margin-left: 2%;">Gerar Planilha</button>
+                    </div>
+                </div>
+                
+            </div>
+            
+        </div>
+        <hr />
+        <div id="divGridPlanoZero"></div>
+    </div>
+
+    @Html.Partial("_modalAdicionarPeca")
+
+</div>
+@section Scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        var URLAPI = "@_3M.Comodato.Utility.ControlesUtility.Parametro.ObterValorParametro(_3M.Comodato.Utility.ControlesUtility.Constantes.URLAPI)";
+        var URL = "@_3M.Comodato.Utility.ControlesUtility.Parametro.ObterValorParametro(_3M.Comodato.Utility.ControlesUtility.Constantes.URLSite)";
+        var MensagemGravacaoSucesso = "@_3M.Comodato.Utility.ControlesUtility.Constantes.MensagemGravacaoSucesso";
+        var token = "@Convert.ToString(((_3M.Comodato.Entity.UsuarioPerfilEntity)Session["_CurrentUser"]).token)";
+        var nidUsuario = @Convert.ToInt64(((_3M.Comodato.Entity.UsuarioPerfilEntity)Session["_CurrentUser"]).usuario.nidUsuario);
+        var actionListarPlanoZero = '@Url.Action("ListarPlanoZero", "PlanoZero")'
+        var actionAdicionarPeca = '@Url.Action("AdicionarPeca", "PlanoZero")'
+    </script>
+    <script src="~/Scripts/Comodato/Util.js"></script>
+    <script src="~/Scripts/Comodato/PlanoZero.js"></script>
+}

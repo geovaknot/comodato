@@ -1,0 +1,134 @@
+﻿@model _3M.Comodato.Front.Models.WfPedidoDevolucaoEquipamento
+
+<div class="form-row">
+    <div class="form-group col-sm-12 col-md-7 col-lg-7 col-xl-7">
+        @*<label class="control-label">Histórico e observações</label>*@
+        <button type="button" class="btn btn-primary btn-sm" id="btnNovoHistorico">
+            <i class="fas fa-plus-circle"></i>
+        </button>
+
+        <div class="pre-scrollable">
+            <div id="gridmvcMensagem">
+            </div>
+        </div>
+
+    </div>
+    <div class="form-group col-sm-12 col-md-5 col-lg-5 col-xl-5">
+        <label class="control-label">Grupo responsável</label>
+        @Html.DropDownListFor(model => model.CD_GRUPO_RESPONS, new SelectList(Model.acompanhamentoPedidoDevolucao.wfGrupos, "CD_GRUPOWF", "DS_GRUPOWF"), "Selecione...", new { @class = "valid form-control col-12 mb-1" })
+        <label id="validaIDGRUPORESPONS" class="control-label text-danger" style="display: none;">Conteúdo obrigatório!</label>
+        <label class="control-label">Responsável individual</label>
+        @Html.DropDownListFor(model => model.ID_USUARIO_RESPONS, new SelectList(Model.acompanhamentoPedidoDevolucao.wfGruposUsu, "usuario.nidUsuario", "usuario.cnmNome"), "Selecione...", new { @class = "valid form-control col-12 mb-1" })
+        <label id="validaIDUSUARIORESPONS" class="control-label text-danger" style="display: none;">Conteúdo obrigatório!</label>
+        <div>
+            <label class="control-label">Ação permitida</label>
+            @Html.DropDownListFor(model => model.acompanhamentoPedidoDevolucao.wfStatusPedidoEquip.ST_STATUS_PEDIDO, new SelectList(Model.acompanhamentoPedidoDevolucao.wfStatusPedidosEquip, "ST_STATUS_PEDIDO", "DS_TRANSICAO"), "Selecione...", new { @class = "valid form-control col-12 mb-1" })
+            <label id="validaSTSTATUSPEDIDO" class="control-label text-danger" style="display: none;">Conteúdo obrigatório!</label>
+            <button class="btn btn-primary btn-sm" type="button" id="btnAcao">Iniciar Ação</button>
+            @Html.ActionLink("Voltar", "Index", new { area = "" }, new { @class = "btn btn-primary btn-sm" })
+        </div>
+    </div>
+</div>
+
+<div class="form-group" id="Transportadora" style="display: none">
+    <label class="control-label">Transportadora selecionada</label>
+    @Html.DropDownListFor(model => model.acompanhamentoPedidoDevolucao.empresa.CD_Empresa, new SelectList(Model.acompanhamentoPedidoDevolucao.empresas, "CD_Empresa", "NM_Empresa"), "Selecione...", new { @class = "valid form-control col-12 mb-1" })
+    <label id="validaCDEmpresa" class="control-label text-danger" style="display: none;">Conteúdo obrigatório!</label>
+</div>
+
+<div class="form-row">
+    <div class="form-group col-sm-12 col-md-3 col-lg-3 col-xl-3" id="RetiradaAgendada" style="display: none">
+        <label class="control-label">Data da retirada agendada</label>
+        <div id="DT_RETIRADA_AGENDADA-container">
+            <div class="input-group date">
+                @Html.TextBoxFor(model => model.acompanhamentoPedidoDevolucao.DT_RETIRADA_AGENDADA, "{0:dd/MM/yyyy}", new { @class = "form-control col-12" })
+                <div class="input-group-addon">
+                    <i class="far fa-calendar-alt fa-2x" style="background: #d9d6d6; padding: 3px 3px 3px 3px"></i>
+                </div>
+            </div>
+        </div>
+        <label id="validaDTRETIRADAAGENDADA" class="control-label text-danger" style="display: none;">Conteúdo obrigatório!</label>
+    </div>
+
+    <div class="form-group col-sm-12 col-md-3 col-lg-3 col-xl-3" id="RetiradaRealizada" style="display: none">
+        <label class="control-label">Data da retirada realizada</label>
+        <div id="DT_RETIRADA_REALIZADA-container">
+            <div class="input-group date">
+                @Html.TextBoxFor(model => model.acompanhamentoPedidoDevolucao.DT_RETIRADA_REALIZADA, "{0:dd/MM/yyyy}", new { @class = "form-control col-12" })
+                <div class="input-group-addon">
+                    <i class="far fa-calendar-alt fa-2x" style="background: #d9d6d6; padding: 3px 3px 3px 3px"></i>
+                </div>
+            </div>
+        </div>
+        <label id="validaDTRETIRADAREALIZADA" class="control-label text-danger" style="display: none;">Conteúdo obrigatório!</label>
+    </div>
+
+    <div class="form-group col-sm-12 col-md-3 col-lg-3 col-xl-3" id="ProgramadaTMS" style="display: none">
+        <label class="control-label">Data programada TMS</label>
+        <div id="DT_PROGRAMADA_TMS-container">
+            <div class="input-group date">
+                @Html.TextBoxFor(model => model.acompanhamentoPedidoDevolucao.DT_PROGRAMADA_TMS, "{0:dd/MM/yyyy}", new { @class = "form-control col-12" })
+                <div class="input-group-addon">
+                    <i class="far fa-calendar-alt fa-2x" style="background: #d9d6d6; padding: 3px 3px 3px 3px"></i>
+                </div>
+            </div>
+        </div>
+        <label id="validaDTPROGRAMADATMS" class="control-label text-danger" style="display: none;">Conteúdo obrigatório!</label>
+    </div>
+
+    <div class="form-group col-sm-12 col-md-3 col-lg-3 col-xl-3" id="Devolucao3M" style="display: none">
+        <label class="control-label">Data de devolução 3M</label>
+        <div id="DT_DEVOLUCAO_3M-container">
+            <div class="input-group date">
+                @Html.TextBoxFor(model => model.acompanhamentoPedidoDevolucao.DT_DEVOLUCAO_3M, "{0:dd/MM/yyyy}", new { @class = "form-control col-12" })
+                <div class="input-group-addon">
+                    <i class="far fa-calendar-alt fa-2x" style="background: #d9d6d6; padding: 3px 3px 3px 3px"></i>
+                </div>
+            </div>
+        </div>
+        <label id="validaDTDEVOLUCAO3M" class="control-label text-danger" style="display: none;">Conteúdo obrigatório!</label>
+    </div>
+
+</div>
+
+<div class="form-row">
+    <div class="form-group col-sm-12 col-md-3 col-lg-3 col-xl-3" id="DevolucaoPlanejamento" style="display: none">
+        <label class="control-label">Data de devolução planejamento</label>
+        <div id="DT_DEVOLUCAO_PLANEJAMENTO-container">
+            <div class="input-group date">
+                @Html.TextBoxFor(model => model.acompanhamentoPedidoDevolucao.DT_DEVOLUCAO_PLANEJAMENTO, "{0:dd/MM/yyyy}", new { @class = "form-control col-12" })
+                <div class="input-group-addon">
+                    <i class="far fa-calendar-alt fa-2x" style="background: #d9d6d6; padding: 3px 3px 3px 3px"></i>
+                </div>
+            </div>
+        </div>
+        <label id="validaDTDEVOLUCAOPLANEJAMENTO" class="control-label text-danger" style="display: none;">Conteúdo obrigatório!</label>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="HistoricoModal" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-dark">
+                <h5 class="modal-title text-white" id="exampleModalLongTitle">Nova observação/comentário</h5>
+                @*<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>*@
+            </div>
+            <div class="modal-body">
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <label class="control-label">Observações</label>
+                        @Html.EditorFor(model => model.acompanhamentoPedidoDevolucao.wfPedidoComent.DS_COMENT, new { htmlAttributes = new { @class = "form-control col-12", @rows = 5 } })
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnSalvarHistoricoModal">Salvar</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                @*<button type="button" class="btn btn-primary">Save changes</button>*@
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,39 @@
+﻿@model IEnumerable<_3M.Comodato.Front.Models.Tecnico>
+@using GridMvc.Html
+
+@{
+    ViewBag.Title = "Técnico";
+}
+
+<i class="fas fa-cubes fa-3x fa-pull-left"></i>
+<h3>Técnico</h3>
+
+<p>
+    <a class="btn btn-primary btn-sm" href="Tecnico/Incluir">Novo registro <i class="far fa-sticky-note"></i></a>
+</p>
+
+    <div class="table table-hover">
+        @Html.Grid(Model).Columns(columns =>
+        {
+            columns.Add(foo => foo.NM_TECNICO).Titled("NOME").Sortable(true).Filterable(true);
+            columns.Add(foo => foo.NM_REDUZIDO).Titled("NOME REDUZIDO").Sortable(true).Filterable(true);
+            columns.Add(foo => foo.TX_EMAIL).Titled("E-MAIL").Sortable(true).Filterable(true);
+            columns.Add(foo => foo.usuario.cnmNome).Titled("USUÁRIO VINCULADO").Sortable(true).Filterable(true);
+            columns.Add(foo => foo.cdsFL_ATIVO).Titled("CONDIÇÃO (ATIVO)").Sortable(true).Filterable(true);
+            columns.Add(foo => foo.cdsFL_FERIAS).Titled("FÉRIAS/AUSENTE").Sortable(true).Filterable(true);
+            columns.Add()
+                            .Encoded(false)
+                            .Sanitized(false)
+                            .SetWidth(30)
+                            .RenderValueAs(o => Html.ActionLink(" ", "Editar", new { idKey = HttpUtility.HtmlDecode(o.idKey) }, new { @class = "fas fa-pencil-alt fa-lg" }));                                                              
+            columns.Add()
+                            .Encoded(false)
+                            .Sanitized(false)
+                            .SetWidth(30)
+                            .RenderValueAs(o => Html.ActionLink(" ", "Excluir", new { idKey = HttpUtility.HtmlDecode(o.idKey) }, new { @class = "fas fa-trash-alt fa-lg" }));
+        }).WithPaging(10)
+    </div>
+
+
+
+

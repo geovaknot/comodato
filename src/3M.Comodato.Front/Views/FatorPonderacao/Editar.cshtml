@@ -1,0 +1,170 @@
+﻿@model _3M.Comodato.Front.Models.TB_PONDERACAO_pz
+
+@{
+    ViewBag.Title = "Fator Ponderação Plano Zero";
+}
+
+<i class="fas fa-cubes fa-3x fa-pull-left"></i>
+<h3>Fator Ponderação Plano Zero (Editar)</h3>
+
+<div class="well">
+
+    @using (Html.BeginForm())
+    {
+        <div class="form-horizontal">
+            <hr />
+            @Html.HiddenFor(model => model.ID)
+            <input type="hidden" id="MinPonderacao" value="@ViewBag.PonderacaoInicial">
+            <input type="hidden" id="MaxPonderacao" value="@ViewBag.PonderacaoFinal">
+
+            <div class="form-row">
+                <div class="form-group col-4">
+                    <label class="control-label">Código</label>
+                    @Html.EditorFor(model => model.ID, new { htmlAttributes = new { @class = "form-control col-12", @readonly = "readonly" } })
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-6">
+                    <label class="control-label">Faixa Inicial Qtde Clientes</label>
+                    @Html.EditorFor(model => model.MIN_CLIENTES, new { htmlAttributes = new { @class = "form-control col-12", @onkeyup = "ValidaDigitacaoMinCliente()", @maxlength = "6" } })
+                </div>
+
+                <div class="form-group col-6">
+                    <label class="control-label">Faixa Final Qtde Clientes</label>
+                    @*@Html.EditorFor(model => model.FL_Tipo_Empresa, new { htmlAttributes = new { @class = "form-control col-12" } })*@
+                    @Html.EditorFor(model => model.MAX_CLIENTES, new { htmlAttributes = new { @class = "form-control col-12", @onkeyup = "ValidaDigitacaoMaxCliente()", @maxlength = "6" } })
+                </div>
+            </div>
+
+            <div class="form-row">
+
+                <div class="form-group col-12">
+                    <label class="control-label">Fator de Ponderação</label>
+                    @Html.EditorFor(model => model.FATOR, new { htmlAttributes = new { @class = "form-control col-12", @min = 0, @max = 9999999, @type = "number", @onkeyup = "ValidaDigitacao()" } })
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="col-12">
+                    <input type="submit" value="Gravar" class="btn btn-primary btn-sm" />
+                    @Html.ActionLink("Voltar", "Index", new { area = "" }, new { @class = "btn btn-primary btn-sm" })
+                </div>
+            </div>
+        </div>
+    }
+
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript" src="~/Scripts/Comodato/Util.js"></script>
+
+    <script>
+        function ValidaDigitacao() {
+            var valorDigitado = $("#FATOR").val();
+
+            if (!valorDigitado.match(/^-?\d+$/)) {
+                console.log("Caiu Aqui!!!")
+                $("#FATOR").val(0);
+                valorDigitado = 0;
+            }
+            console.log("Digitos", valorDigitado);
+            if (valorDigitado != null && valorDigitado != "" && valorDigitado != undefined) {
+
+                if (valorDigitado.length > 2) {
+                    valorDigitado = valorDigitado.substring(0, 3);
+                }
+
+                $("#FATOR").val(valorDigitado);
+            }
+        }
+
+        function ValidaDigitacaoMinCliente() {
+            var valorDigitado = $("#MIN_CLIENTES").val();
+
+            if (!valorDigitado.match(/^-?\d+$/)) {
+                console.log("Caiu Aqui!!!")
+                $("#MIN_CLIENTES").val(0);
+                valorDigitado = 0;
+            }
+            console.log("Digitos", valorDigitado);
+            if (valorDigitado != null && valorDigitado != "" && valorDigitado != undefined) {
+
+                if (valorDigitado.length > 6) {
+                    valorDigitado = valorDigitado.substring(0, 6);
+                }
+
+                $("#MIN_CLIENTES").val(valorDigitado);
+            }
+        }
+
+        function ValidaDigitacaoMaxCliente() {
+            var valorDigitado = $("#MAX_CLIENTES").val();
+
+            if (!valorDigitado.match(/^-?\d+$/)) {
+                console.log("Caiu Aqui!!!")
+                $("#MAX_CLIENTES").val(0);
+                valorDigitado = 0;
+            }
+            console.log("Digitos", valorDigitado);
+            if (valorDigitado != null && valorDigitado != "" && valorDigitado != undefined) {
+
+                if (valorDigitado.length > 6) {
+                    valorDigitado = valorDigitado.substring(0, 6);
+                }
+
+                $("#MAX_CLIENTES").val(valorDigitado);
+            }
+        }
+    </script>
+
+    <script type="text/javascript">
+            @Model.JavaScriptToRun
+
+            function MensagemSucesso() {
+                var mensagem = '@_3M.Comodato.Utility.ControlesUtility.Constantes.MensagemGravacaoSucesso';
+
+                AlertaRedirect("Aviso", mensagem, "window.location = '../FatorPonderacao';");
+            };
+            function MensagemExistePonderacao() {
+                var mensagem = '@_3M.Comodato.Utility.ControlesUtility.Constantes.MensagemExistePonderacao';
+
+                Alerta("Aviso", mensagem);
+            };
+            function MensagemRangePonderacao() {
+                var mensagem = '@_3M.Comodato.Utility.ControlesUtility.Constantes.MensagemRangePonderacao';
+
+                Alerta("Aviso", mensagem);
+            };
+            function MensagemValoresPonderacaoIncorretosMin() {
+                var mensagem = '@_3M.Comodato.Utility.ControlesUtility.Constantes.MensagemRangePonderacaoMin';
+
+                Alerta("Aviso", mensagem);
+            };
+            function MensagemValoresPonderacaoIncorretosMax() {
+                var mensagem = '@_3M.Comodato.Utility.ControlesUtility.Constantes.MensagemRangePonderacaoMax';
+
+                Alerta("Aviso", mensagem);
+            }; 
+            function MensagemValoresPonderacaoIncorretos() {
+                var mensagem = '@_3M.Comodato.Utility.ControlesUtility.Constantes.MensagemRangePonderacaoMinMax';
+
+                Alerta("Aviso", mensagem);
+             }; 
+            function MensagemValoresFatorPonderacaoIncorretos() {
+                var mensagem = '@_3M.Comodato.Utility.ControlesUtility.Constantes.MensagemRangePonderacaoMinMaxFator';
+
+                Alerta("Aviso", mensagem);
+            };
+            function MensagemValoresPonderacaoIncorretosMinMaiorMax() {
+                var mensagem = '@_3M.Comodato.Utility.ControlesUtility.Constantes.MensagemRangePonderacaoMinMaiorMax';
+
+                Alerta("Aviso", mensagem);
+            };
+    </script>
+}
+
+
+

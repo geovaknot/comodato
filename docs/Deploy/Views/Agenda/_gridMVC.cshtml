@@ -1,0 +1,105 @@
+﻿@model IEnumerable<_3M.Comodato.Front.Models.ListaAgendaAtendimento>
+
+@using GridMvc.Html
+
+
+@helper RenderCheckNmTecnico(string CD_TECNICO_PRINCIPAL, string NM_TECNICO_PRINCIPAL)
+{
+    if (CD_TECNICO_PRINCIPAL == (string)ViewBag.CD_TECNICO)
+    {
+        <span style="color:green"><strong>@NM_TECNICO_PRINCIPAL</strong></span>
+    }
+    else
+    {
+        <span style="color:black">@NM_TECNICO_PRINCIPAL</span>
+    }
+}
+
+
+<div class="table table-hover">
+    @Html.Grid(Model).Columns(columns =>
+{
+    columns.Add()
+        .Encoded(false)
+        .Sanitized(false)
+        .Titled("VISITA TÉC.")
+        .RenderValueAs(o => Html.ActionLink(o.DS_TP_STATUS_VISITA_OS == "" || o.DS_TP_STATUS_VISITA_OS == null ? " " : o.DS_TP_STATUS_VISITA_OS, "EditarVisita", new { idKey = HttpUtility.HtmlDecode(o.idKey) }, new
+        {
+            @class =
+            o.ST_TP_STATUS_VISITA_OS == 0 ? "btn btn-info btn-sm btn-block" :
+            o.ST_TP_STATUS_VISITA_OS == 1 ? "btn btn-success btn-sm btn-block" :                  // Nova
+            o.ST_TP_STATUS_VISITA_OS == 2 ? "btn btn-success btn-sm btn-block" :                  // Aberta
+            o.ST_TP_STATUS_VISITA_OS == 3 ? "btn btn-primary btn-sm btn-block" :                  // Finalizada
+            o.ST_TP_STATUS_VISITA_OS == 4 ? "btn btn-primary btn-sm btn-block" :                  // Confirmada
+            o.ST_TP_STATUS_VISITA_OS == 5 ? "btn btn-warning btn-sm btn-block" :                  // Pausada
+            o.ST_TP_STATUS_VISITA_OS == 6 ? "btn btn-warning btn-sm btn-block" :                  // Pendente
+            o.ST_TP_STATUS_VISITA_OS == 7 ? "btn btn-danger btn-sm btn-block" :                   // Cancelada
+            o.ST_TP_STATUS_VISITA_OS == 8 ? "btn btn-warning btn-sm btn-block" :                  // Portaria
+            o.ST_TP_STATUS_VISITA_OS == 9 ? "btn btn-secondary btn-sm btn-block" :                // Integração
+            o.ST_TP_STATUS_VISITA_OS == 10 ? "btn btn-secondary btn-sm btn-block" :               // Treinamento
+            o.ST_TP_STATUS_VISITA_OS == 11 ? "btn btn-secondary btn-sm btn-block" : string.Empty   // Consultoria
+        }));
+
+    columns.Add()
+        .Encoded(false)
+        .Sanitized(false)
+        .Titled("&nbsp;")
+        .RenderValueAs(o => Html.ActionLink(o.DS_TP_STATUS_VISITA_OS_INICIAR == "" || o.DS_TP_STATUS_VISITA_OS_INICIAR == null ? " " : o.DS_TP_STATUS_VISITA_OS_INICIAR, "EditarVisita", new { idKey = HttpUtility.HtmlDecode(o.idKeyINICIAR) }, new
+        {
+            @class =
+            o.ST_TP_STATUS_VISITA_OS_INICIAR == 0 ? string.Empty :
+            o.ST_TP_STATUS_VISITA_OS_INICIAR == 1 ? string.Empty :                      // Nova
+            o.ST_TP_STATUS_VISITA_OS_INICIAR == 2 ? string.Empty :                      // Aberta
+            o.ST_TP_STATUS_VISITA_OS_INICIAR == 3 ? "btn btn-info btn-sm btn-block" :   // Finalizada
+            o.ST_TP_STATUS_VISITA_OS_INICIAR == 4 ? "btn btn-info btn-sm btn-block" :   // Confirmada
+            o.ST_TP_STATUS_VISITA_OS_INICIAR == 5 ? string.Empty :                      // Pausada
+            o.ST_TP_STATUS_VISITA_OS_INICIAR == 6 ? string.Empty :                      // Pendente
+            o.ST_TP_STATUS_VISITA_OS_INICIAR == 7 ? "btn btn-info btn-sm btn-block" :   // Cancelada
+            o.ST_TP_STATUS_VISITA_OS_INICIAR == 8 ? string.Empty :                      // Portaria
+            o.ST_TP_STATUS_VISITA_OS_INICIAR == 9 ? string.Empty :                      // Integração
+            o.ST_TP_STATUS_VISITA_OS_INICIAR == 10 ? string.Empty : string.Empty        // Treinamento
+        }));
+
+
+    columns.Add(foo => foo.NM_CLIENTE).Titled("NOME DO CLIENTE").Sortable(false).Filterable(false);
+    columns.Add(foo => foo.DS_REGIAO).Titled("REGIÃO").Sortable(false).Filterable(false);
+    columns.Add(foo => foo.DT_DATA_VISITA).Titled("ÚLTIMA VISITA").Sortable(false).Filterable(false);
+    columns.Add()
+        .Encoded(false)
+        .Sanitized(false)
+        .SetWidth(30)
+        .RenderValueAs(o => Html.ActionLink(" ", "EditarVisita", new { idKey = HttpUtility.HtmlDecode(o.idKey) }, new
+        {
+            @class =
+            o.ST_TP_STATUS_VISITA_OS == null ? string.Empty :
+            o.ST_TP_STATUS_VISITA_OS == 0 ? string.Empty : "fas fa-search fa-lg"
+        }));
+    //.RenderValueAs(o => Html.ActionLink(" ", "Editar", new { idKey = HttpUtility.HtmlDecode(o.idKey) }, new { @class = "fas fa-search fa-lg" }));
+    //columns.Add(foo => foo.CD_TECNICO_PRINCIPAL).Titled("Cod. TÉCNICO PRINCIPAL").Sortable(false).Filterable(false);
+    columns.Add().Encoded(false).Sanitized(false).Titled("TÉCNICO PRINCIPAL").RenderValueAs(foo => RenderCheckNmTecnico(foo.CD_TECNICO_PRINCIPAL, foo.NM_TECNICO_PRINCIPAL));
+    //columns.Add(foo => foo.NM_TECNICO_PRINCIPAL).Titled("TÉCNICO PRINCIPAL").Sortable(false).Filterable(false);
+    columns.Add(foo => foo.QT_PERIODO).Titled("PERÍODOS").Sortable(false).Filterable(false);
+    columns.Add(foo => foo.QT_PERIODO_REALIZADO_FORMATADO).Titled("REALIZADO").Sortable(false).Filterable(false);
+    columns.Add(foo => foo.PERCENTUAL).Titled("%").Sortable(false).Filterable(false);
+    columns.Add()
+        .Encoded(false)
+        .Sanitized(false)
+        .SetWidth(30)
+        .RenderValueAs(o => o.NR_ORDENACAO == 1 ? " " : "<a href='#' onclick='Subir(" + o.NR_ORDENACAO + ")' class='fas fa-angle-up fa-lg' data-toggle='tooltip' data-placement='top' title='Subir' > </a>");
+    columns.Add()
+        .Encoded(false)
+        .Sanitized(false)
+        .SetWidth(30)
+        .RenderValueAs(o => o.NR_ORDENACAO == Model.Count() ? " " : "<a href='#' onclick='Descer(" + o.NR_ORDENACAO + ")' class='fas fa-angle-down fa-lg' data-toggle='tooltip' data-placement='top' title='Descer'> </a>");
+    columns.Add()
+        .Encoded(false)
+        .Sanitized(false)
+        .SetWidth(30)
+        .RenderValueAs(o => o.NR_ORDENACAO == 1 ? " " : "<a href='#' onclick='Primeiro(" + o.NR_ORDENACAO + ")' class='fas fa-angle-double-up fa-lg' data-toggle='tooltip' data-placement='top' title='Primeiro'> </a>");
+    columns.Add()
+        .Encoded(false)
+        .Sanitized(false)
+        .SetWidth(30)
+        .RenderValueAs(o => o.NR_ORDENACAO == Model.Count() ? " " : "<a href='#' onclick='Ultimo(" + o.NR_ORDENACAO + ")' class='fas fa-angle-double-down fa-lg' data-toggle='tooltip' data-placement='top' title='Último'> </a>");
+})
+</div>

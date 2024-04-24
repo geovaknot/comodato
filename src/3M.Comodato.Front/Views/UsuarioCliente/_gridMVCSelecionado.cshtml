@@ -1,0 +1,21 @@
+﻿@model IEnumerable<_3M.Comodato.Front.Models.ListaUsuarioClienteSelecinado>
+
+@using GridMvc.Html
+
+<div class="table table-hover">
+    @Html.Grid(Model).Columns(columns =>
+{
+    columns.Add(foo => foo.usuario.cnmNome).Titled("USUÁRIO").Sortable(false).Filterable(false);
+    columns.Add()
+        .Encoded(false)
+        .Sanitized(false)
+        .SetWidth(30)
+        .RenderValueAs(o => "<a href='#' onclick='ExcluirConfirmar(" + o.nidUsuarioCliente + ")' class='fas fa-trash-alt fa-lg'> </a>");
+    //columns.Add()
+    //    .Encoded(false)
+    //    .Sanitized(false)
+    //    .SetWidth(30)
+    //    .RenderValueAs(o => Html.ActionLink(" ", "Editar", new { idKey = HttpUtility.HtmlDecode(o.idKey) }, new { @class = "fas fa-pencil-alt fa-lg" }));
+})
+</div>
+

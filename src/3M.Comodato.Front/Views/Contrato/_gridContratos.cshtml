@@ -1,0 +1,31 @@
+﻿@model IEnumerable<_3M.Comodato.Front.Models.Contrato>
+@using GridMvc.Html
+
+<div class="table table-hover">
+    @Html.Grid(Model).Columns(columns =>
+{
+    columns.Add(c => c.nnrContrato).Titled("NR. CONTRATO").Sortable(true).Filterable(false);
+    columns.Add(c => c.ddtEmissao).Titled("DT. EMISSÃO").Sortable(true).Filterable(false);
+    columns.Add(c => c.ddtRecebimento).Titled("DT. RECEBIMENTO").Sortable(true).Filterable(false);
+    columns.Add(c => c.ddtOk).Titled("DT. OK").Sortable(true).Filterable(false);
+    columns.Add(c=>c.cdsContratoTipo).RenderValueAs(c => string.IsNullOrEmpty(c.cdsContratoTipo) ? "CONTRATO" : c.cdsContratoTipo).Titled("MODELO CONTRATO").Sortable(true).Filterable(false);
+    columns.Add(c => c.dsStatus).Titled("STATUS").Sortable(true).Filterable(false);
+
+    columns.Add()
+                .Encoded(false)
+                .Sanitized(false)
+                .SetWidth(30)
+                .RenderValueAs(o => Html.ActionLink(" ", "Imprimir", new { idKey = HttpUtility.HtmlDecode( o.idKey) }, new {  target = "_blank", @class = "fas fa-print fa-lg" }));
+
+    columns.Add()
+                .Encoded(false)
+                .Sanitized(false)
+                .SetWidth(30)
+                .RenderValueAs(o => Html.ActionLink(" ", "Editar", new { idKey = HttpUtility.HtmlDecode(o.idKey) }, new { @class = "fas fa-pencil-alt fa-lg" }));
+    columns.Add()
+                .Encoded(false)
+                .Sanitized(false)
+                .SetWidth(30)
+                .RenderValueAs(o => Html.ActionLink(" ", "Excluir", new { idKey = HttpUtility.HtmlDecode(o.idKey) }, new { @class = "fas fa-trash-alt fa-lg" }));
+}).WithPaging(10)
+</div>

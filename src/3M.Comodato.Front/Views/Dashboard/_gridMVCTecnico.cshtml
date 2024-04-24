@@ -1,0 +1,30 @@
+﻿@model IEnumerable<_3M.Comodato.Front.Models.ListaTecnico>
+@using GridMvc.Html
+
+<div class="table table-hover">
+    @Html.Grid(Model).Columns(columns =>
+{
+    //columns.Add(foo => foo.tecnico.CD_TECNICO).Titled("CÓDIGO").Sortable(false).Filterable(false);
+    //columns.Add(foo => foo.tecnico.NM_TECNICO).Titled("TÉCNICO").Sortable(false).Filterable(false);
+    columns.Add(foo => foo.tecnico.NM_REDUZIDO).Titled("TÉCNICO").Sortable(false).Filterable(false);
+    columns.Add(foo => foo.tecnico.EN_ESTADO).Titled("UF").Sortable(false).Filterable(false).Css("text-center");
+    columns.Add(foo => foo.CARGA).Titled("KAT ANUAL").Sortable(false).Filterable(false).Css("text-center");
+    columns.Add(foo => foo.PERCENTUAL).Titled("%").Sortable(false).Filterable(false).Css("text-center");
+    columns.Add(foo => foo.VISITAS).Titled("KAT REALIZADO").Sortable(false).Filterable(false).Css("text-center");
+    columns.Add(foo => foo.AGORA).Encoded(false).Sanitized(false).RenderValueAs(p => RenderCustomCSS(p.ST_TP_STATUS_VISITA_OS, p.AGORA)).Titled("AGORA").Sortable(false).Filterable(false);
+}).Named("tableMVCTecnico")
+
+</div>
+
+@helper RenderCustomCSS(Int64? Valor, string Conteudo)
+{
+    if (Valor == 1 || Valor == 2)
+    {
+        <span class="alert-success">@Conteudo</span>
+    }
+    else if (Valor == 8 || Valor == 9 || Valor == 10)
+    {
+        <span class="alert-secondary">@Conteudo</span>
+    }
+}
+

@@ -1,0 +1,119 @@
+﻿@model _3M.Comodato.Front.Models.AtivoCliente
+
+@{
+    ViewBag.Title = "Equipamento X Cliente";
+}
+
+<i class="fas fa-cubes fa-3x fa-pull-left"></i>
+<h3>Equipamento X Cliente (Excluir)</h3>
+
+<h5>Confirma exclusão deste registro?</h5>
+<div class="well">
+
+    @using (Html.BeginForm())
+    {
+        <div class="form-horizontal">
+            <hr />
+            @Html.HiddenFor(model => model.ID_ATIVO_CLIENTE)
+
+            <div class="form-group">
+                <label class="control-label font-weight-bold">Cliente</label>
+                <br />
+                @Html.DisplayFor(model => model.cliente.NM_CLIENTE)
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-8">
+                    <label class="control-label font-weight-bold">Nr. do Ativo</label>
+                    <br />
+                    @Html.DisplayFor(model => model.ativoFixo.modelo.DS_MODELO)
+                </div>
+
+                <div class="form-group col-4">
+                    <label class="control-label font-weight-bold">Tipo de Serviço</label>
+                    <br />
+                    @Html.DisplayFor(model => model.tipo.DS_TIPO)
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-3">
+                    <label class="control-label font-weight-bold">Data da Nota Fiscal</label>
+                    <br />
+                    @Html.DisplayFor(model => model.DT_NOTAFISCAL)
+                </div>
+
+                <div class="form-group col-2">
+                    <label class="control-label font-weight-bold">Nr. Nota</label>
+                    <br />
+                    @Html.DisplayFor(model => model.NR_NOTAFISCAL)
+                </div>
+
+                <div class="form-group col-4">
+                    <label class="control-label font-weight-bold">Razão do Comodato</label>
+                    <br />
+                    @Html.DisplayFor(model => model.razaoComodato.DS_RAZAO_COMODATO)
+                </div>
+
+                <div class="form-group col-3">
+                    <label class="control-label font-weight-bold">Data de Devolução</label>
+                    <br />
+                    @Html.DisplayFor(model => model.DT_DEVOLUCAO)
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-4">
+                    <label class="control-label font-weight-bold">Destino</label>
+                    <br />
+                    @Html.DisplayFor(model => model.motivoDevolucao.DS_MOTIVO_DEVOLUCAO)
+                </div>
+
+                <div class="form-group col-3">
+                    <label class="control-label font-weight-bold">Valor do Aluguel</label>
+                    <br />
+                    @Html.DisplayFor(model => model.VL_ALUGUEL)
+                </div>
+
+                <div class="form-group col-2">
+                    <label class="control-label font-weight-bold">Termo Pagto.</label>
+                    <br />
+                    @Html.DisplayFor(model => model.TX_TERMOPGTO)
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label font-weight-bold">Observações</label>
+                <br />
+                @Html.DisplayFor(model => model.TX_OBS)
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Excluir" class="btn btn-primary btn-sm" />
+                @Html.ActionLink("Voltar", "Index", new { area = "" }, new { @class = "btn btn-primary btn-sm" })
+            </div>
+
+        </div>
+    }
+
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript" src="~/Scripts/Comodato/AtivoCliente.js"></script>
+    <script type="text/javascript" src="~/Scripts/Comodato/Util.js"></script>
+
+    <script type="text/javascript">
+     @Model.JavaScriptToRun
+
+        function MensagemSucesso() {
+            var mensagem = '@_3M.Comodato.Utility.ControlesUtility.Constantes.MensagemExclusaoSucesso';
+
+            AlertaRedirect("Aviso", mensagem, "window.location = '../AtivoCliente';");
+        };
+    </script>
+}
+
+
+

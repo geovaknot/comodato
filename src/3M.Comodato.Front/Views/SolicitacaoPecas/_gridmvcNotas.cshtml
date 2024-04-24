@@ -1,0 +1,20 @@
+﻿@model IEnumerable<_3M.Comodato.Front.Models.PEDIDO_BPCS_NF>
+
+@using GridMvc.Html
+
+<div class="table table-hover">
+    @Html.Grid(Model).Columns(columns =>
+{
+    //columns.Add(foo => foo.DT_OCORRENCIA).Titled("DATA/HORA").Sortable(false).Filterable(false);
+    //columns.Add(foo => foo.usuario.cnmNome).Titled("USUÁRIO").Sortable(false).Filterable(false);
+    columns.Add(foo => foo.ID_PEDIDO).Titled("Nr Pedido").Sortable(false).Filterable(false);
+    columns.Add(foo => foo.ID_ITEM_PEDIDO).Titled("Nr Item").Sortable(false).Filterable(false);
+    columns.Add(foo => foo.NR_LINHA).Titled("Nr Linha").Sortable(false).Filterable(false);
+    columns.Add(foo => foo.CD_PECA).Titled("Cd Peça").Sortable(false).Filterable(false);
+    columns.Add(foo => foo.NR_NF).Titled("Nr NF").Sortable(false).Filterable(false);
+    columns.Add(foo => foo.NR_CONTROL).Titled("Nr Controle").Sortable(false).Filterable(false);
+
+    columns.Add(foo => foo.NR_SESM).Titled("Nr SESM").Sortable(false).Filterable(false);
+})
+</div>
+

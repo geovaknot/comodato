@@ -1,0 +1,21 @@
+﻿@model IEnumerable<_3M.Comodato.Front.Models.ListaHistoricoValores>
+
+@using GridMvc.Html
+
+<div class="table table-hover">
+    @Html.Grid(Model).Columns(columns =>
+{
+    columns.Add(foo => foo.ANO).Titled("ANO").Sortable(false).Filterable(false);
+    columns.Add(foo => foo.MES).Titled("MÊS").Sortable(false).Filterable(false);
+    columns.Add(foo => foo.VENDAS_2650).Titled("VENDAS 2650").Sortable(false).Filterable(false).Format("{0:C2}").Css("text-center");
+    columns.Add(foo => foo.VENDAS_2690).Titled("VENDAS 2690").Sortable(false).Filterable(false).Format("{0:C2}").Css("text-center");
+    columns.Add(foo => foo.VENDAS_TOTAL).Titled("TOTAL").Sortable(false).Filterable(false).Format("{0:C2}").Css("text-center");
+    columns.Add(foo => foo.DEPRECIACAO_2650).Titled("DEPRECIAÇÃO 2650").Sortable(false).Filterable(false).Format("{0:C2}").Css("text-center");
+    columns.Add(foo => foo.DEPRECIACAO_2690).Titled("DEPRECIAÇÃO 2690").Sortable(false).Filterable(false).Format("{0:C2}").Css("text-center");
+    columns.Add(foo => foo.DEPRECIACAO_TOTAL).Titled("TOTAL").Sortable(false).Filterable(false).Format("{0:C2}").Css("text-center");
+    columns.Add(foo => foo.MANUTENCAO_2650).Titled("MANUTENÇÃO 2650").Sortable(false).Filterable(false).Format("{0:C2}").Css("text-center");
+    columns.Add(foo => foo.MANUTENCAO_2690).Titled("MANUTENÇÃO 2690").Sortable(false).Filterable(false).Format("{0:C2}").Css("text-center");
+    columns.Add(foo => foo.MANUTENCAO_TOTAL).Titled("TOTAL").Sortable(false).Filterable(false).Format("{0:C2}").Css("text-center");
+}).Named("tableMVCHistoricoValores").SetRowCssClasses(foo => foo.TOTAL ? "bg-warning font-weight-bold" : string.Empty)
+
+</div>

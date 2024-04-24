@@ -1,0 +1,99 @@
+﻿@model _3M.Comodato.Front.Models.SoliticacaoAtendimento
+@*@using System;*@
+
+<div class="modal fade" id="SolicitacaoAtendimento" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-dark">
+                <h5 class="modal-title text-white" id="exampleModalLongTitle">
+                    Nova Solicitação de Atendimento
+                </h5>
+            </div>
+
+            @Html.HiddenFor(m => m.CodigoSolicitacao)
+
+            <div class="modal-body">
+                <div class="form-horizontal container-fluid">
+                    <div class="form-control">
+                        <div class="form-row">
+                            <div class="form-group  col-md-12">
+                                <label id="labelNumeroSoclititacao" class="control-label" style="font-weight: bold;"></label>
+                                <input type="hidden" id="hidCodigoSolicitacao" />
+                                <input type="hidden" id="hboolNovaSolicitacao" value="true" />
+                                @Html.Hidden("DataHoje", DateTime.Today.ToString("dd/MM/yyyy"))
+
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-sm-12 col-md-9 col-lg-9">
+                                <label id="labelResponsavel" class="control-label">Nome Solicitante</label>
+                                @Html.TextBoxFor(model => model.UsuarioSolicitante, new { @class = "form-control col-md-12" })
+                                <label id="validaSolicitanteObrigatorio" class="control-label text-danger" style="display: none;">Conteúdo obrigatório!</label>
+                            </div>
+                            <div class="form-group col-sm-12 col-md-3 col-lg-3">
+                                <label id="labelDataSolicitacao" class="control-label">Data da Solicitação</label>
+                                @Html.TextBoxFor(model => model.DataSolicitacao, new { @class = "form-control col-md-12", @readonly = "readonly" })
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-sm-12 col-md-9 col-lg-2">
+                                <label id="labelPeriodo" class="control-label">Períodos</label>
+                                <input id="txtPeriodo" type="text" class="form-control col-md-7" readonly />
+                            </div>
+
+                            <div class="form-group col-sm-12 col-md-9 col-lg-2">
+                                <label id="labelPeriodo" class="control-label">Qtd. Realizados</label>
+                                <input id="txtPeriodoRealizado" type="text" class="form-control col-md-7" readonly />
+                            </div>
+
+                            <div class="form-group col-sm-12 col-md-7 col-lg-5">
+                                <label id="labelRegistroAtivo3M" class="control-label">Registro Ativo 3M</label>
+                                <div class="form-inline">
+                                    <select id="ddlAtivos" class="form-control col-8" style="width:100%;"></select>
+                                    <label id="validaAtivoObrigatorio" class="control-label text-danger" style="display: none;">Conteúdo obrigatório!</label>
+                                </div>
+                            </div>
+
+                            <div class="form-group  col-sm-12 col-md-5 col-lg-3">
+                                <label id="labelResponsavel" class="control-label">Tipo da Solicitação</label>
+                                @Html.DropDownListFor(m => m.TipoAtendimento, (SelectList)ViewBag.ListaTipoAtendimento, new { @class = "valid form-control col-12" })
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-sm-12 col-md-6 col-lg-6">
+                                <label id="labelSituacaoAtual" class="control-label">Situação Atual</label>
+                                @Html.DropDownListFor(m => m.StatusSolicitacao, (SelectList)ViewBag.ListaStatusAtendimento, new { @class = "valid form-control col-12" })
+                            </div>
+
+                            @if (ViewBag.VisaoTecnico || ViewBag.VisaoAdmin)
+                            {
+                                <div class="form-group col-sm-12 col-md-5 col-lg-5">
+                                    <label id="labelNumeroOS" class="control-label">O.S. de Atendimento</label>
+                                    @Html.TextBoxFor(model => model.ID_OS, new { @class = "form-control col-md-12" })
+                                    <label id="validaOSObrigatorio" class="control-label text-danger" style="display: none;">Conteúdo obrigatório!</label>
+                                </div>
+                            }
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group  col-md-12">
+                                <div class="form-group justify-content-md-center ">
+                                    Observações: Descreva abaixo em detalhes o motivo da solicitação e outros detalhes necessários para este atendimento.
+                                </div>
+                                @Html.TextAreaFor(model => model.Observacao, new { @class = "form-control  col-md-12", @rows = "2" })
+                                @Html.ValidationMessageFor(model => model.Observacao, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnEnviarSolicitacao">Salvar</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>

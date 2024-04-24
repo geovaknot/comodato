@@ -1,0 +1,659 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=10">
+
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+
+    <title>@ViewBag.Title - 3M.Comodato</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @*Para usar o GRID.MVC*@
+    <link href="@Url.Content("~/Content/Gridmvc.css")" rel="stylesheet" type="text/css" />
+    @*<link href="@Url.Content("~/Content/Comodato/Modal.css")" rel="stylesheet" type="text/css" />*@
+</head>
+
+
+
+<body class="bodyBackGround">
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <nav class="navbar navbar-expand-md navbar-dark fixed-top" style="background-color:#a00808;">
+
+                <div class="row" style="width: 100% !important">
+                    <div class="col-xl-2" style="max-width: 11.66% !important">
+                        <a class="navbar-brand" href="~/Home">
+                            <img src="~/Images/3M Logo.png" class="img-thumbnail" style="height: 35px" />
+                            Comodato
+                        </a>
+                    </div>
+
+
+                    <button class="navbar-toggler responsiveMenu" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    @if (Session["_CurrentUser"] != null)
+                    {
+                        <!--Barra de Menus e Usuário Logado-->
+                        <div class="col-xl-10" style="font-size:13px; max-width: 83.33% !important;">
+                            <div class="collapse navbar-collapse" id="navbarCollapse">
+                                <ul class="navbar-nav mr-auto">
+                                    @if (_3M.Comodato.Utility.ControlesUtility.Seguranca.VerificarAcesso("menuCadastro") == true)
+                                    {
+                                        <li class="nav-item dropdown active">
+                                            <a class="nav-link dropdown-toggle" href="#" id="navCadastro" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Cadastro</a>
+                                            <div class="dropdown-menu" aria-labelledby="navCadastro">
+                                                @if (_3M.Comodato.Utility.ControlesUtility.Seguranca.VerificarAcesso("menuAtivo") == true)
+                                                {
+                                                    @Html.ActionLink("Ativo", "Index", "Ativo", new { area = "" }, new { @class = "dropdown-item" })
+                                                }
+
+                                                @if (_3M.Comodato.Utility.ControlesUtility.Seguranca.VerificarAcesso("menuCliente") == true)
+                                                {
+                                                    @Html.ActionLink("Cliente", "Index", "Cliente", new { area = "" }, new { @class = "dropdown-item" })
+                                                }
+
+                                                @if (_3M.Comodato.Utility.ControlesUtility.Seguranca.VerificarAcesso("menuUsuarioCliente") == true)
+                                                {
+                                                    @Html.ActionLink("Cliente X Usuário", "Index", "UsuarioCliente", new { area = "" }, new { @class = "dropdown-item" })
+                                                }
+
+                                                @if (_3M.Comodato.Utility.ControlesUtility.Seguranca.VerificarAcesso("menuConsumivel") == true)
+                                                {
+                                                    @Html.ActionLink("Consumível", "Index", "Consumivel", new { area = "" }, new { @class = "dropdown-item" })
+                                                }
+
+                                                @if (_3M.Comodato.Utility.ControlesUtility.Seguranca.VerificarAcesso("menuContato") == true)
+                                                {
+                                                    @Html.ActionLink("Contato", "Index", "Contato", new { area = "" }, new { @class = "dropdown-item" })
+                                                }
+
+                                                @if (_3M.Comodato.Utility.ControlesUtility.Seguranca.VerificarAcesso("menuContrato") == true)
+                                                {
+                                                    @Html.ActionLink("Contrato", "Index", "Contrato", new { area = "" }, new { @class = "dropdown-item" })
+                                                }
+
+                                                @if (_3M.Comodato.Utility.ControlesUtility.Seguranca.VerificarAcesso("menuEquipamentoXCliente") == true)
+                                                {
+                                                    @Html.ActionLink("Equipamento X Cliente", "Index", "AtivoCliente", new { area = "" }, new { @class = "dropdown-item" })
+                                                }
+
+                                                @if (_3M.Comodato.Utility.ControlesUtility.Seguranca.VerificarAcesso("menuEstoqueCadastro") == true)
+                                                {
+                                                    @Html.ActionLink("Unidade de Estoque", "Index", "Estoque", new { area = "" }, new { @class = "dropdown-item" })
+                                                }
+
+                                                @if (_3M.Comodato.Utility.ControlesUtility.Seguranca.VerificarAcesso("menuUsuarioXWFGrupo") == true)
+                                                {
+                                                    @Html.ActionLink("Usuário x Grupo WorkFlow", "Index", "UsuarioXWFGrupo", new { area = "" }, new { @class = "dropdown-item" })
+                                                }
+
+                                                @if (_3M.Comodato.Utility.ControlesUtility.Seguranca.VerificarAcesso("menuTecnico") == true)
+                                                {
+                                                    @Html.ActionLink("Técnico", "Index", "Tecnico", new { area = "" }, new { @class = "dropdown-item" })
+                                                }
+
+                                                @if (_3M.Comodato.Utility.ControlesUtility.Seguranca.VerificarAcesso("menuVendedor") == true)
+                                                {
+                                                    @Html.ActionLink("Vendedor", "Index", "Vendedor", new { area = "" }, new { @class = "dropdown-item" })
+                                                }
+
+                                                @if (_3M.Comodato.Utility.ControlesUtility.Seguranca.VerificarAcesso("menuAnaliseSatisfacao") == true)
+                                                {
+                                                    @Html.ActionLink("Pesquisa de Satisfação", "Index", "AnaliseSatisfacao", new { area = "" }, new { @class = "dropdown-item" })
+                                                }
+                                                @if (_3M.Comodato.Utility.ControlesUtility.Seguranca.VerificarAcesso("menuSegmento") == true)
+                                                {
+                                                    @Html.ActionLink("Segmento", "Index", "Segmento", new { area = "" }, new { @class = "dropdown-item" })
+                                                }
+
+                                            </div>
+                                        </li>
+                                    }
+
+                                    @if (_3M.Comodato.Utility.ControlesUtility.Seguranca.VerificarAcesso("menuTabelaApoio") == true)
+                                    {
+                                        <li class="nav-item dropdown active">
+                                            <a class="nav-link dropdown-toggle" href="#" id="navTabelasApoio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tabelas de Apoio</a>
+                                            <div class="dropdown-menu" aria-labelledby="navTabelasApoio">
+                                                @if (_3M.Comodato.Utility.ControlesUtility.Seguranca.VerificarAcesso("menuEmpresa") == true)
+                                                {
+                                                    @Html.ActionLink("Empresa", "Index", "Empresa", new { area = "" }, new { @class = "dropdown-item" })
+                                                }
+
+                                                @if (_3M.Comodato.Utility.ControlesUtility.Seguranca.VerificarAcesso("menuExecutivo") == true)
+                                                {
+                                                    @Html.ActionLink("Executivo", "Index", "Executivo", new { area = "" }, new { @class = "dropdown-item" })
+                                                }
+
+                                                @if (_3M.Comodato.Utility.ControlesUtility.Seguranca.VerificarAcesso("menuFatorPonderacao") == true)
+                                                {
+                                                    @Html.ActionLink("Fator de Ponderação", "Index", "FatorPonderacao", new { area = "" }, new { @class = "dropdown-item" })
+                                                }
+
+                                                @if (_3M.Comodato.Utility.ControlesUtility.Seguranca.VerificarAcesso("menuGrupo") == true)
+                                                {
+                                                    @Html.ActionLink("Grupo", "Index", "Grupo", new { area = "" }, new { @class = "dropdown-item" })
+                                                }
+
+                                                @if (_3M.Comodato.Utility.ControlesUtility.Seguranca.VerificarAcesso("menuGrupoModelo") == true)
+                                                {
+                                                    @Html.ActionLink("Grupo de Modelo", "Index", "GrupoModelo", new { area = "" }, new { @class = "dropdown-item" })
+                                                }
+
+                                                @if (_3M.Comodato.Utility.ControlesUtility.Seguranca.VerificarAcesso("menuLinhaProduto") == true)
+                                                {
+                                                    @Html.ActionLink("Linha de Produto", "Index", "LinhaProduto", new { area = "" }, new { @class = "dropdown-item" })
+                                                }
+
+                                                @if (_3M.Comodato.Utility.ControlesUtility.Seguranca.VerificarAcesso("menuModelo") == true)
+                                                {
+                                                    @Html.ActionLink("Modelo", "Index", "Modelo", new { area = "" }, new { @class = "dropdown-item" })
+                                                }
+
+                                                @if (_3M.Comodato.Utility.ControlesUtility.Seguranca.VerificarAcesso("menuPeca") == true)
+                                                {
+                                                    @Html.ActionLink("Peça", "Index", "Peca", new { area = "" }, new { @class = "dropdown-item" })
+                                                }
+
+                                                @if (_3M.Comodato.Utility.ControlesUtility.Seguranca.VerificarAcesso("menuRazaoComodato") == true)
+                                                {
+                                                    @Html.ActionLink("Razão do Comodato", "Index", "RazaoComodato", new { area = "" }, new { @class = "dropdown-item" })
+                                                }
+
+                                                @if (_3M.Comodato.Utility.ControlesUtility.Seguranca.VerificarAcesso("menuSituacaoEquipamento") == true)
+                                                {
+                                                    @Html.ActionLink("Situação do Equipamento", "Index", "SituacaoAtivo", new { area = "" }, new { @class = "dropdown-item" })
+                                                }
+
+                                                @if (_3M.Comodato.Utility.ControlesUtility.Seguranca.VerificarAcesso("menuFuncao") == true)
+                                                {
+                                                    @Html.ActionLink("Função", "Index", "TBFuncao", new { area = "" }, new { @class = "dropdown-item" })
+                                                }
+
+                                                @if (_3M.Comodato.Utility.ControlesUtility.Seguranca.VerificarAcesso("menuStatusContrato") == true)
+                                                {
+                                                    @Html.ActionLink("Status do Contrato", "Index", "StatusContrato", new { area = "" }, new { @class = "dropdown-item" })
+                                                }
+
+                                                @if (_3M.Comodato.Utility.ControlesUtility.Seguranca.VerificarAcesso("menuStatusEquipamento") == true)
+                                                {
+                                                    @Html.ActionLink("Status do Equipamento", "Index", "StatusAtivo", new { area = "" }, new { @class = "dropdown-item" })
+                                                }
+
+                                                @if (_3M.Comodato.Utility.ControlesUtility.Seguranca.VerificarAcesso("menuTipo") == true)
+                                                {
+                                                    @Html.ActionLink("Tipo de Alocação", "Index", "Tipo", new { area = "" }, new { @class = "dropdown-item" })
+                                                }
+
+                                            </div>
+                                        </li>
+                                    }
+
+
+                                    @if (_3M.Comodato.Utility.ControlesUtility.Seguranca.VerificarAcesso("menuAtendimento") == true)
+                                    {
+                                        <li class="nav-item dropdown active">
+                                            <a class="nav-link dropdown-toggle" href="#" id="navAtendimento" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Atendimento</a>
+                                            <div class="dropdown-menu" aria-labelledby="navAtendimento">
+
+                                                @{
+                                                    var PerfilTecnico = _3M.Comodato.Utility.ControlesUtility.Seguranca.VerificaUsuarioPerfisTecnicos(Convert.ToInt64(((_3M.Comodato.Entity.UsuarioPerfilEntity)Session["_CurrentUser"]).usuario.nidUsuario));
+
+                                                    var menuOS = "O.S. - Prev., Corret. e Instal.";
+                                                    var menuVisita = "Visitas - Integr., Reun. e Treinam.";
+
+                                                    if (!PerfilTecnico)
+                                                    {
+                                                        menuOS = "Histórico de Ordem de Serviço";
+                                                        menuVisita = "Histórico de Visita";
+                                                    }
+                                                }
+
+                                                @if (_3M.Comodato.Utility.ControlesUtility.Seguranca.VerificarAcesso("menuAgendaAtendimento") == true)
+                                                {
+                                                    @Html.ActionLink(menuOS, "Index", "OsPadrao", new { area = "" }, new { @class = "dropdown-item", @style = "color: blue" })
+                                                }
+
+                                                <div class="dropdown-divider"></div>
+
+                                                @if (_3M.Comodato.Utility.ControlesUtility.Seguranca.VerificarAcesso("menuAgendaAtendimento") == true)
+                                                {
+                                                    @Html.ActionLink(menuVisita, "Index", "VisitaPadrao", new { area = "" }, new { @class = "dropdown-item" })
+                                                }
+
+                                                @if (_3M.Comodato.Utility.ControlesUtility.Seguranca.VerificarAcesso("menuTecnicoXCliente") == true)
+                                                {
+                                                    @Html.ActionLink("Técnico x Cliente - Escala de técnicos para atendimento", "Index", "TecnicoXCliente", new { area = "" }, new { @class = "dropdown-item" })
+                                                }
+
+                                                <div class="dropdown-divider"></div>
+
+                                                @if (_3M.Comodato.Utility.ControlesUtility.Seguranca.VerificarAcesso("menuKAT") == true)
+                                                {
+                                                    @Html.ActionLink("KAT", "Index", "KAT", new { area = "" }, new { @class = "dropdown-item" })
+                                                }
+                                            </div>
+                                        </li>
+                                    }
+
+                                    @if (_3M.Comodato.Utility.ControlesUtility.Seguranca.VerificarAcesso("menuEstoque") == true)
+                                    {
+                                        <li class="nav-item dropdown active">
+                                            <a class="nav-link dropdown-toggle" href="#" id="navEstoque" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Estoque</a>
+                                            <div class="dropdown-menu" aria-labelledby="navEstoque">
+
+                                                @if (_3M.Comodato.Utility.ControlesUtility.Seguranca.VerificarAcesso("menuConsultaEstoque") == true)
+                                                {
+                                                    @Html.ActionLink("Consulta Estoque", "Index", "EstoqueIntermediario", new { area = "" }, new { @class = "dropdown-item" })
+                                                }
+
+                                                @if (_3M.Comodato.Utility.ControlesUtility.Seguranca.VerificarAcesso("menuMovimPecas") == true)
+                                                {
+                                                    @Html.ActionLink("Movimentação de Peças", "Index", "MovimPecas", new { area = "" }, new { @class = "dropdown-item" })
+                                                }
+
+                                                <div class="dropdown-divider"></div>
+
+                                                @if (_3M.Comodato.Utility.ControlesUtility.Seguranca.VerificarAcesso("menuPlanoZero") == true)
+                                                {
+                                                    @Html.ActionLink("Plano Zero", "Index", "PlanoZero", new { area = "" }, new { @class = "dropdown-item" })
+                                                }
+
+                                                <div class="dropdown-divider"></div>
+
+                                                @if (_3M.Comodato.Utility.ControlesUtility.Seguranca.VerificarAcesso("menuSolicitacaoPecas") == true)
+                                                {
+                                                    @Html.ActionLink("Solicitação de Peças", "Index", "SolicitacaoPecas", new { area = "" }, new { @class = "dropdown-item" })
+                                                }
+
+                                                @if (_3M.Comodato.Utility.ControlesUtility.Seguranca.VerificarAcesso("menuAprovaSolPecas") == true)
+                                                {
+                                                    @Html.ActionLink("Aprova Solicitação de Peças", "AprovaSolicitacaoPecas", "SolicitacaoPecas", new { area = "" }, new { @class = "dropdown-item" })
+                                                }
+
+                                                @if (_3M.Comodato.Utility.ControlesUtility.Seguranca.VerificarAcesso("menuConfRecebimPecas") == true)
+                                                {
+                                                    @Html.ActionLink("Confirma Recebimento de Peças", "ConfirmaRecebimentoPecas", "SolicitacaoPecas", new { area = "" }, new { @class = "dropdown-item" })
+                                                }
+
+                                                @if (_3M.Comodato.Utility.ControlesUtility.Seguranca.VerificarAcesso("menuEnviaBPCS") == true)
+                                                {
+                                                    @Html.ActionLink("Enviar peças ao BPCS", "EnviaSolicitacaodePecaBCPS", "SolicitacaoPecas", new { area = "" }, new { @class = "dropdown-item" })
+                                                }
+
+                                            </div>
+                                        </li>
+                                    }
+
+
+
+                                    @if (_3M.Comodato.Utility.ControlesUtility.Seguranca.VerificarAcesso("menuWorkflow") == true)
+                                    {
+
+                                        <li class="nav-item dropdown active">
+                                            <a class="nav-link dropdown-toggle" href="#" id="navWorkflow" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Workflow</a>
+                                            <div class="dropdown-menu" aria-labelledby="navWorkflow">
+                                                @Html.ActionLink("Acompanhamento", "Index", "Workflow", new { area = "" }, new { @class = "dropdown-item" })
+                                                @Html.ActionLink("TMA", "Index", "MonitoramentoWF", new { area = "" }, new { @class = "dropdown-item" })
+                                                @Html.ActionLink("Solicitação Envio", "PedidoEnvio", "Workflow", new { area = "" }, new { @class = "dropdown-item" })
+                                                @Html.ActionLink("Solicitação Devolução", "PedidoDevolucao", "Workflow", new { area = "" }, new { @class = "dropdown-item" })
+
+                                            </div>
+
+                                        </li>
+                                    }
+                                    @if (_3M.Comodato.Utility.ControlesUtility.Seguranca.VerificarAcesso("menuReclamacao") == true)
+                                    {
+
+                                        <li class="nav-item dropdown active">
+                                            <a class="nav-link dropdown-toggle" href="#" id="navRR" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Relatorio Reclamação</a>
+                                            <div class="dropdown-menu" aria-labelledby="navRR">
+                                                @Html.ActionLink("Acompanhamento Relatório Reclamação", "Index", "RelatorioReclamacao", new { area = "" }, new { @class = "dropdown-item" })
+
+                                            </div>
+
+                                        </li>
+                                    }
+
+                                    @if (_3M.Comodato.Utility.ControlesUtility.Seguranca.VerificarAcesso("menuTreinamento") == true)
+                                    {
+
+                                        <li class="nav-item dropdown active">
+                                            <a class="nav-link dropdown-toggle" href="#" id="navRR" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Treinamento</a>
+                                            <div class="dropdown-menu" aria-labelledby="navRR">
+                                                @Html.ActionLink("Vídeos treinamento EAD", "Index", "TreinamentosEAD", new { area = "" }, new { @class = "dropdown-item" })
+
+                                            </div>
+
+                                        </li>
+                                    }
+
+
+
+
+
+
+                                    @if (_3M.Comodato.Utility.ControlesUtility.Seguranca.VerificarAcesso("menuRelatorios") == true)
+                                    {
+                                        <li class="nav-item dropdown active">
+                                            <a class="nav-link dropdown-toggle" href="#" id="navRelatorio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Relatórios</a>
+                                            <div class="dropdown-menu" style="height: auto;max-height: 450px;overflow-x: hidden;" aria-labelledby="navRelatorio">
+
+                                                @if (_3M.Comodato.Utility.ControlesUtility.Seguranca.VerificarAcesso("menuRelAgenda") == true)
+                                                {
+                                                    @Html.ActionLink("Agenda de Atendimento - OS", "Index", "CarteiraAtendimento", new { area = "" }, new { @class = "dropdown-item" })
+                                                }
+
+                                                @if (_3M.Comodato.Utility.ControlesUtility.Seguranca.VerificarAcesso("menuRelAgendaVisita") == true)
+                                                {
+                                                    @Html.ActionLink("Agenda de Atendimento - Visita", "Index", "CarteiraAtendimentoVisita", new { area = "" }, new { @class = "dropdown-item" })
+                                                }
+
+                                                @if (_3M.Comodato.Utility.ControlesUtility.Seguranca.VerificarAcesso("menuGeralManutencao") == true)
+                                                {
+                                                    @Html.ActionLink("Geral de Manutenção", "Index", "GeralManutencao", new { area = "" }, new { @class = "dropdown-item" })
+                                                }
+
+                                                @if (_3M.Comodato.Utility.ControlesUtility.Seguranca.VerificarAcesso("menuManutencao") == true)
+                                                {
+                                                    @Html.ActionLink("Manutenção", "Index", "Manutencao", new { area = "" }, new { @class = "dropdown-item" })
+                                                }
+
+                                                @if (_3M.Comodato.Utility.ControlesUtility.Seguranca.VerificarAcesso("KatTecnico") == true)
+                                                {
+                                                    @Html.ActionLink("Kat por Tecnico OS", "Index", "KatTecnico", new { area = "" }, new { @class = "dropdown-item" })
+                                                }
+
+                                                @if (_3M.Comodato.Utility.ControlesUtility.Seguranca.VerificarAcesso("KatTecnicoVisita") == true)
+                                                {
+                                                    @Html.ActionLink("Kat por Tecnico Visita", "Index", "KatTecnicoVisita", new { area = "" }, new { @class = "dropdown-item" })
+                                                }
+
+
+
+                                                <div class="dropdown-divider"></div>
+
+                                                @if (_3M.Comodato.Utility.ControlesUtility.Seguranca.VerificarAcesso("menuEstoqueIntermediario") == true)
+                                                {
+                                                    @Html.ActionLink("Estoque Intermediário", "Relatorio", "EstoqueIntermediario", new { area = "" }, new { @class = "dropdown-item" })
+                                                }
+
+                                                @if (_3M.Comodato.Utility.ControlesUtility.Seguranca.VerificarAcesso("menuPedidos") == true)
+                                                {
+                                                    @Html.ActionLink("Pedidos de Peças", "Index", "Pedidos", new { area = "" }, new { @class = "dropdown-item" })
+                                                }
+
+                                                @if (_3M.Comodato.Utility.ControlesUtility.Seguranca.VerificarAcesso("menuSumarizados") == true)
+                                                {
+                                                    @Html.ActionLink("Pedidos Sumarizados", "Index", "Sumarizados", new { area = "" }, new { @class = "dropdown-item" })
+                                                }
+
+                                                @if (_3M.Comodato.Utility.ControlesUtility.Seguranca.VerificarAcesso("menuPecas") == true)
+                                                {
+                                                    @Html.ActionLink("Peças", "Index", "RelatorioPecas", new { area = "" }, new { @class = "dropdown-item" })
+                                                }
+
+                                                <div class="dropdown-divider"></div>
+
+                                                @if (_3M.Comodato.Utility.ControlesUtility.Seguranca.VerificarAcesso("menuEquipamentosDevolvidos") == true)
+                                                {
+                                                    @Html.ActionLink("Equipamentos Devolvidos", "Index", "Devolvidos", new { area = "" }, new { @class = "dropdown-item" })
+                                                }
+
+                                                @if (_3M.Comodato.Utility.ControlesUtility.Seguranca.VerificarAcesso("menuLocados") == true)
+                                                {
+                                                    @Html.ActionLink("Equipamentos Locados", "Index", "Locados", new { area = "" }, new { @class = "dropdown-item" })
+                                                }
+
+                                                @if (_3M.Comodato.Utility.ControlesUtility.Seguranca.VerificarAcesso("menuInventarios") == true)
+                                                {
+                                                    @Html.ActionLink("Inventário", "Index", "Inventarios", new { area = "" }, new { @class = "dropdown-item" })
+                                                }
+
+                                                @if (_3M.Comodato.Utility.ControlesUtility.Seguranca.VerificarAcesso("menuDistribuidor") == true)
+                                                {
+                                                    @Html.ActionLink("Locações por DI", "Index", "Distribuidor", new { area = "" }, new { @class = "dropdown-item" })
+                                                }
+
+                                                <div class="dropdown-divider"></div>
+
+                                                @if (_3M.Comodato.Utility.ControlesUtility.Seguranca.VerificarAcesso("menuAnaliseConsumo") == true)
+                                                {
+                                                    @Html.ActionLink("Análise de Consumo", "Index", "AnaliseConsumo", new { area = "" }, new { @class = "dropdown-item" })
+                                                }
+
+                                                @if (_3M.Comodato.Utility.ControlesUtility.Seguranca.VerificarAcesso("menuAcompanhamentos") == true)
+                                                {
+                                                    @Html.ActionLink("Análise de Vendas - Acomp. Preço", "Index", "Acompanhamentos", new { area = "" }, new { @class = "dropdown-item" })
+                                                }
+
+                                                @if (_3M.Comodato.Utility.ControlesUtility.Seguranca.VerificarAcesso("menuCompletos") == true)
+                                                {
+                                                    @Html.ActionLink("Análise de Vendas - Completo", "Index", "Completos", new { area = "" }, new { @class = "dropdown-item" })
+                                                }
+
+                                                @if (_3M.Comodato.Utility.ControlesUtility.Seguranca.VerificarAcesso("menuResumos") == true)
+                                                {
+                                                    @Html.ActionLink("Análise de Vendas - Resumo", "Index", "Resumos", new { area = "" }, new { @class = "dropdown-item" })
+                                                }
+
+                                                @if (_3M.Comodato.Utility.ControlesUtility.Seguranca.VerificarAcesso("menuRetornoEquipamento5a") == true)
+                                                {
+                                                    @Html.ActionLink("Retorno de Equipamento - 5a", "Index", "Recolhidos", new { area = "" }, new { @class = "dropdown-item" })
+                                                }
+
+                                                @if (_3M.Comodato.Utility.ControlesUtility.Seguranca.VerificarAcesso("menuConsolidadoVendas") == true)
+                                                {
+                                                    @Html.ActionLink("Consolidado Vendas", "Index", "ConsolidadoVendas", new { area = "" }, new { @class = "dropdown-item" })
+                                                }
+                                            </div>
+                                        </li>
+                                    }
+
+                                    @if (_3M.Comodato.Utility.ControlesUtility.Seguranca.VerificarAcesso("menuDashboard") == true)
+                                    {
+                                        <li class="nav-item dropdown active">
+                                            <a class="nav-link dropdown-toggle" href="#" id="navDashboard" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dashboard</a>
+                                            <div class="dropdown-menu" aria-labelledby="navDashboard">
+                                                @Html.ActionLink("Área Técnica", "AreaTecnica", "Dashboard", new { area = "" }, new { @class = "dropdown-item" })
+                                                @Html.ActionLink("Negócios", "Negocios", "Dashboard", new { area = "" }, new { @class = "dropdown-item" })
+
+                                                @Html.ActionLink("Planejamento", "Planejamento", "Dashboard", new { area = "" }, new { @class = "dropdown-item" })
+
+                                                @Html.ActionLink("Vendas", "Vendas", "Dashboard", new { area = "" }, new { @class = "dropdown-item" })
+                                            </div>
+                                        </li>
+                                    }
+
+                                    @if (_3M.Comodato.Utility.ControlesUtility.Seguranca.VerificarAcesso("menuSeguranca") == true)
+                                    {
+                                        <li class="nav-item dropdown active">
+                                            <a class="nav-link dropdown-toggle" href="#" id="navSeguranca" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Segurança</a>
+                                            <div class="dropdown-menu" aria-labelledby="navSeguranca">
+                                                @if (_3M.Comodato.Utility.ControlesUtility.Seguranca.VerificarAcesso("menuSEGFuncao") == true)
+                                                {
+                                                    @Html.ActionLink("Função", "Index", "Funcao", new { area = "" }, new { @class = "dropdown-item" })
+                                                }
+
+                                                @if (_3M.Comodato.Utility.ControlesUtility.Seguranca.VerificarAcesso("menuSEGParametros") == true)
+                                                {
+                                                    @Html.ActionLink("Parâmetros", "Index", "Parametro", new { area = "" }, new { @class = "dropdown-item" })
+                                                }
+
+                                                @if (_3M.Comodato.Utility.ControlesUtility.Seguranca.VerificarAcesso("menuSEGPerfil") == true)
+                                                {
+                                                    @Html.ActionLink("Perfil", "Index", "Perfil", new { area = "" }, new { @class = "dropdown-item" })
+                                                }
+
+                                                @if (_3M.Comodato.Utility.ControlesUtility.Seguranca.VerificarAcesso("menuSEGPerfilFuncao") == true)
+                                                {
+                                                    @Html.ActionLink("Perfil X Função", "Editar", "PerfilXFuncao", new { area = "" }, new { @class = "dropdown-item" })
+                                                }
+
+                                                @if (_3M.Comodato.Utility.ControlesUtility.Seguranca.VerificarAcesso("menuSEGUsuario") == true)
+                                                {
+                                                    @Html.ActionLink("Usuário", "Index", "Usuario", new { area = "" }, new { @class = "dropdown-item" })
+                                                }
+
+                                                @if (_3M.Comodato.Utility.ControlesUtility.Seguranca.VerificarAcesso("menuSEGTeste") == true)
+                                                {
+                                                    @Html.ActionLink("Teste Desenvolvedor", "Index", "Teste", new { area = "" }, new { @class = "dropdown-item" })
+                                                }
+                                            </div>
+                                        </li>
+                                    }
+
+
+
+                                </ul>
+
+                                <form class="form-inline mt-2 mt-md-0">
+                                    <ul class="navbar-nav mr-auto">
+                                        <li class="nav-item dropdown active">
+                                            <a class="nav-link dropdown-toggle" href="#" id="navUsuario" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                @(((_3M.Comodato.Entity.UsuarioPerfilEntity)Session["_CurrentUser"]).usuario.cnmNome) (@(((_3M.Comodato.Entity.UsuarioPerfilEntity)Session["_CurrentUser"]).perfil.cdsPerfil))
+                                            </a>
+                                            <div class="dropdown-menu" aria-labelledby="navUsuario">
+                                                @Html.ActionLink("Logoff", "LogOff", "Usuario", new { area = "" }, new { @class = "dropdown-item" })
+                                                @if (((_3M.Comodato.Entity.UsuarioPerfilEntity)Session["_CurrentUser"]).bidPermitirTrocarSenha == true)
+                                                {
+                                                    @Html.ActionLink("Trocar senha", "TrocarSenha", "Usuario", new { area = "" }, new { @class = "dropdown-item" })
+                                                }
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </form>
+
+                            </div>
+                        </div>
+
+                        <!--Fim Barra de Menus e Usuário Logado-->
+                    }
+                    else
+                    {
+                        <div class="collapse navbar-collapse" id="navbarCollapse">
+                            <ul class="navbar-nav mr-auto"></ul>
+                        </div>
+                        <div id="EscondeDivLogin">
+                            @Html.ActionLink("Login", "Login", "Usuario", new { area = "" }, new { @class = "control-label text-white" })
+                        </div>
+
+                    }
+                </div>
+
+
+            </nav>
+
+        </div>
+    </div>
+    <div class="container body-content">
+        <div style="height: 15px"></div>
+        @RenderBody()
+
+
+        <div id="loader" style="display: none">
+            <div class="loading">
+                <img src="@Url.Content("~/Images/loading-2.gif")" />
+                <br />
+                <span>Carregando...</span>
+            </div>
+            <div class="loading_background"></div>
+        </div>
+
+    </div>
+
+    <style type="text/css">
+        .loading {
+            /*display: none;*/
+            position: fixed;
+            top: 360px;
+            left: 50%;
+            margin-top: -50px;
+            margin-left: -100px;
+            vertical-align: middle;
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+            background-color: white;
+            border: 1px solid #a3a2a2;
+            height: 165px;
+            width: 160px;
+            z-index: 999999;
+        }
+
+        .loading_background {
+            position: fixed;
+            top: 0px;
+            left: 0px;
+            height: 100vh;
+            width: 100vw;
+            background-color: #949494;
+            opacity: 0.30;
+            z-index: 1030;
+        }
+    </style>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    @*Para usar o GRID.MVC*@
+    <script src="@Url.Content("~/Scripts/gridmvc.js")" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        //Para utilização de filtros em páginas com postback
+        $('.dropdown-item').click(function () {
+            if (localStorage.getItem("action") != null) {
+                localStorage.removeItem("action");
+                localStorage.removeItem("jsonData");
+                localStorage.removeItem("container");
+            }
+
+            LimparFiltroSolicitacaoPeca();
+            LimparScrollWorkflow();
+
+        });
+
+        // Para manter o browser na mesma posição horizontal de rolagem (scroll) após postback
+        jQuery(document).ready(function () {
+            //if (localStorage['page'] == document.URL) {
+            var page = 'page_' + document.location.hostname + document.location.pathname;
+            var scrollTop = 'scrollTop_' + document.location.hostname + document.location.pathname;
+
+            if (localStorage[page] == document.location.protocol + "//" + document.location.hostname + document.location.pathname) {
+                $(document).scrollTop(localStorage[scrollTop]);
+            }
+            //localStorage.removeItem('action');
+        });
+
+        jQuery(document).scroll(function () {
+            //localStorage['page'] = document.URL;
+            var page = 'page_' + document.location.hostname + document.location.pathname;
+            var scrollTop = 'scrollTop_' + document.location.hostname + document.location.pathname;
+
+            localStorage[page] = document.location.protocol + "//" + document.location.hostname + document.location.pathname;
+            localStorage[scrollTop] = $(document).scrollTop();
+        });
+
+        function LimparFiltroSolicitacaoPeca() {
+            localStorage.removeItem('SolicitacaoPecas_CD_CLIENTE');
+            localStorage.removeItem('SolicitacaoPecas_CD_TECNICO');
+            localStorage.removeItem('SolicitacaoPecas_CD_PEDIDO');
+            localStorage.removeItem('SolicitacaoPecas_DT_CRIACAO_INICIO');
+            localStorage.removeItem('SolicitacaoPecas_DT_CRIACAO_FIM');
+            localStorage.removeItem('SolicitacaoPecas_ID_STATUS_PEDIDO');
+        };
+
+        function LimparScrollWorkflow() {
+            var scrollTop = 'scrollTop_' + document.location.hostname + document.location.pathname;
+
+            localStorage.removeItem(scrollTop);
+        }
+    </script>
+</body>
+</html>

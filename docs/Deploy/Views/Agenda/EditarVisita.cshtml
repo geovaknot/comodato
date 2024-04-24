@@ -1,0 +1,318 @@
+﻿@model _3M.Comodato.Front.Models.VisitaTecnica
+
+@using GridMvc.Html
+@using Newtonsoft.Json
+
+@{
+    ViewBag.Title = "Visita Técnica";
+    //var session = new JsonConvert().SerializeObject(Session["_CurrentUser"])
+    var perfil = (_3M.Comodato.Entity.UsuarioPerfilEntity)Session["_CurrentUser"];
+}
+
+<i class="fas fa-cubes fa-3x fa-pull-left"></i>
+<h3>Visita Técnica</h3>
+
+<div class="well">
+
+    @using (Html.BeginForm())
+    {
+        <div class="form-horizontal">
+            <hr />
+            @Html.HiddenFor(model => model.idKey)
+            @Html.HiddenFor(model => model.agenda.ID_AGENDA)
+            @Html.HiddenFor(model => model.ID_VISITA)
+            @Html.HiddenFor(model => model.OS.ID_OS)
+            @Html.HiddenFor(model => model.cliente.CD_CLIENTE)
+            @Html.HiddenFor(model => model.tecnico.CD_TECNICO)
+            @Html.HiddenFor(model => model.tpStatusVisitaOSAtual.ST_TP_STATUS_VISITA_OS)
+            @Html.HiddenFor(model => model.ExisteOSAberta)
+            @Html.HiddenFor(model => model.tipoOrigemPagina)
+
+            <div class="card-group">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="form-row">
+                            <div class="form-group col-md-6 col-sm-12">
+                                <label class="control-label">Técnico</label>
+                                @Html.EditorFor(model => model.tecnico.NM_TECNICO, new { htmlAttributes = new { @class = "form-control col-12", @readonly = "readonly" } })
+                            </div>
+
+                            <div class="form-group col-md-6 col-sm-12">
+                                <label class="control-label">Empresa</label>
+                                @Html.EditorFor(model => model.tecnico.empresa.NM_Empresa, new { htmlAttributes = new { @class = "form-control col-12", @readonly = "readonly" } })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label">Cliente</label>
+                            @Html.EditorFor(model => model.cliente.NM_CLIENTE, new { htmlAttributes = new { @class = "form-control col-12", @readonly = "readonly" } })
+                        </div>
+
+                        <div class="form-group">
+                            <label class="control-label">Cliente Responsável</label>
+                            @Html.EditorFor(model => model.DS_NOME_RESPONSAVEL, new { htmlAttributes = new { @class = "form-control col-12" } })
+                            @Html.ValidationMessageFor(model => Model.DS_NOME_RESPONSAVEL, "", new { @class = "text-danger" })
+                        </div>
+
+                        @if (perfil.perfil.ccdPerfil != 8)
+                        {
+                            <div class="form-group">
+                                <button class="btn btn-primary btn-sm" type="button" id="btnGravarSuperior">Gravar</button>
+                            </div>
+                        }
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="form-row">
+                            <div class="form-group col-md-5 col-sm-12">
+                                <label class="control-label">Visita</label>
+                                @Html.EditorFor(model => model.tpStatusVisitaOSAtual.DS_TP_STATUS_VISITA_OS, new { htmlAttributes = new { @class = "form-control col-12", @readonly = "readonly" } })
+                            </div>
+
+                            @if (perfil.perfil.ccdPerfil != 8)
+                            {
+                                <div class="form-group col-md-5 col-sm-12">
+                                    <label class="control-label">&nbsp;</label>
+                                    @Html.DropDownListFor(model => model.tpStatusVisitaOS.ST_TP_STATUS_VISITA_OS, new SelectList(Model.tiposStatusVisitaOS, "ST_TP_STATUS_VISITA_OS", "DS_TP_STATUS_VISITA_OS"), new { @class = "valid form-control col-12" })
+                                    <label id="validaTpStatusVisitaOS" class="control-label text-danger" style="display: none;">Conteúdo obrigatório!</label>
+                                </div>
+
+
+                                <div class="form-group col-md-2 col-sm-12 text-center">
+                                    <br />
+                                    <button class="btn btn-primary btn-sm" type="button" id="btnAcao">Ação</button>
+                                </div>
+                            }
+                        </div>
+
+                        @if (perfil.perfil.ccdPerfil != 8)
+                        {
+                            <div class="form-row">
+                                <div class="form-group col-6 col-md-4 col-sm-5">
+                                    <label class="control-label">Data Início</label>
+                                    <div id="DT_DATA_VISITA-container">
+                                        <div class="input-group date">
+                                            @Html.TextBoxFor(model => model.DT_DATA_VISITA, "{0:dd/MM/yyyy}", new { @class = "form-control col-12", @readonly = "readonly" })
+                                        </div>
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.DT_DATA_VISITA, "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="form-group col-4 col-md-3">
+                                    <label class="control-label">Hora</label>
+                                    @Html.EditorFor(model => model.HR_INICIO, new { htmlAttributes = new { @class = "form-control col-12", @readonly = "readonly" } })
+                                </div>
+                            </div>
+                        }
+
+                        @if (perfil.perfil.ccdPerfil != 8)
+                        {
+                            <div class="form-row">
+                                <div class="form-group col-6 col-md-4 col-sm-5">
+                                    <label class="control-label">Data Fim</label>
+                                    <div id="DT_DATA_VISITA_FIM-container">
+                                        <div class="input-group date">
+                                            @Html.TextBoxFor(model => model.DT_DATA_VISITA_FIM, "{0:dd/MM/yyyy}", new { @class = "form-control col-12", @readonly = "readonly" })
+                                        </div>
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.DT_DATA_VISITA_FIM, "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="form-group col-3">
+                                    <label class="control-label">Hora</label>
+                                    @Html.EditorFor(model => model.HR_FIM, new { htmlAttributes = new { @class = "form-control col-12", @readonly = "readonly" } })
+                                </div>
+
+                                <div class="form-group col-3">
+                                    <label class="control-label">Total</label>
+                                    @Html.EditorFor(model => model.HR_TOTAL, new { htmlAttributes = new { @class = "form-control col-12", @readonly = "readonly" } })
+                                </div>
+
+                                <div class="form-group col-1 col-md-2 text-center">
+                                    <br />
+                                    <button class="btn btn-primary btn-sm" type="button" id="btnHistorico" data-toggle="modal" data-target="#HistoricoModal">
+                                        <i class="fas fa-history fa-lg" data-toggle='tooltip' data-placement='top' title='Visualizar Histórico da Visita Técnica'></i>
+                                    </button>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            <br />
+
+            <div class="card-group">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="form-row">
+                            <div class="form-group col-6">
+                                <h5>Equipamentos no cliente</h5>
+                            </div>
+                            <div class="form-group col-6 text-right">
+                                <h5>
+                                    @Model.qtdeAtivosCliente
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="pre-scrollable">
+                            <div class="table table-hover">
+                                @if (perfil.perfil.ccdPerfil != 8)
+                                {
+                                    @Html.Grid(Model.listaAtivoCliente).Columns(columns =>
+                                    {
+                                        columns.Add(foo => foo.cdsPrograma).Titled("PROGRAMA").Sortable(false).Filterable(false);
+                                        columns.Add(foo => foo.DS_ATIVO_FIXO).Titled("ATIVO").Sortable(false).Filterable(false);
+                                        columns.Add(foo => foo.DT_ULTIMA_MANUTENCAO).Titled("ÚLTIMA MANUTENÇÃO").Sortable(false).Filterable(false).Format("{0:dd/MM/yyyy HH:mm}");
+                                    })
+                                }
+                                else
+                                {
+                                    @Html.Grid(Model.listaAtivoCliente).Columns(columns =>
+                                    {
+                                        columns.Add(foo => foo.cdsPrograma).Titled("PROGRAMA").Sortable(false).Filterable(false);
+                                        columns.Add(foo => foo.DS_ATIVO_FIXO).Titled("ATIVO").Sortable(false).Filterable(false);
+                                        //columns.Add(foo => foo.DT_ULTIMA_MANUTENCAO).Titled("ÚLTIMA MANUTENÇÃO").Sortable(false).Filterable(false).Format("{0:dd/MM/yyyy HH:mm}");
+                                    })
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card">
+                    @if (perfil.perfil.ccdPerfil != 8)
+                    {
+                        <div class="card-header">
+                            <div class="form-row">
+                                <div class="form-group col-9">
+                                    <h5>OS desta visita</h5>
+                                </div>
+
+                                @if ((ViewBag.Perfil == 1 || ViewBag.Perfil == 2 || ViewBag.Perfil == 3 || ViewBag.Perfil == 5 || ViewBag.Perfil == 6) && Model.qtdeAtivosCliente > 0)
+                                {
+                                    <div class="form-group col-3 text-center">
+                                        <button class="btn btn-primary btn-sm" type="button" id="btnNovaOS">Nova OS</button>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+
+                        <div class="card-body">
+                            <div class="pre-scrollable">
+                                <div class="table table-hover">
+                                    @Html.Grid(Model.listaOS).Columns(columns =>
+                                    {
+                                        columns.Add(foo => foo.ID_OS_Formatado).Titled("#OS").Sortable(false).Filterable(false);
+                                        columns.Add(foo => foo.ativoFixo.modelo.DS_MODELO).Titled("ATIVO").Sortable(false).Filterable(false);
+                                        columns.Add(foo => foo.DT_ULTIMA_MANUTENCAO).Titled("ÚLTIMA MANUTENÇÃO").Sortable(false).Filterable(false).Format("{0:dd/MM/yyyy HH:mm}");
+                                        columns.Add()
+                                            .Encoded(false)
+                                            .Sanitized(false)
+                                            .Titled("&nbsp;")
+                                            .SetWidth(20)
+                                            .RenderValueAs(o => Html.ActionLink(o.tpStatusVisitaOS.DS_TP_STATUS_VISITA_OS == "" ? " " : o.tpStatusVisitaOS.DS_TP_STATUS_VISITA_OS, "EditarOS", new { idKey = HttpUtility.HtmlDecode(o.idKey) }, new
+                                            {
+                                                @class =
+                                                o.tpStatusVisitaOS.ST_TP_STATUS_VISITA_OS == 0 ? "btn btn-info btn-sm btn-block" :
+                                                o.tpStatusVisitaOS.ST_TP_STATUS_VISITA_OS == 1 ? "btn btn-success btn-sm btn-block" :               // Nova
+                                                o.tpStatusVisitaOS.ST_TP_STATUS_VISITA_OS == 2 ? "btn btn-success btn-sm btn-block" :               // Aberta
+                                                o.tpStatusVisitaOS.ST_TP_STATUS_VISITA_OS == 4 ? "btn btn-primary btn-sm btn-block" :               // Finalizada
+                                                o.tpStatusVisitaOS.ST_TP_STATUS_VISITA_OS == 7 ? "btn btn-primary btn-sm btn-block" :               // Confirmada
+                                                o.tpStatusVisitaOS.ST_TP_STATUS_VISITA_OS == 3 ? "btn btn-warning btn-sm btn-block" :               // Pausada
+                                                o.tpStatusVisitaOS.ST_TP_STATUS_VISITA_OS == 5 ? "btn btn-warning btn-sm btn-block" :               // Pendente
+                                                o.tpStatusVisitaOS.ST_TP_STATUS_VISITA_OS == 6 ? "btn btn-danger btn-sm btn-block" : string.Empty   // Cancelada
+                                            }));
+                                    })
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="card-header">
+                            <div class="form-row">
+                                <div class="form-group col-9">
+                                    <h5>Peças trocadas nesta visita</h5>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-body">
+                            <div class="pre-scrollable">
+                                <div class="table table-hover">
+                                    @Html.Grid(Model.listaPecas).Columns(columns =>
+                                    {
+                                        columns.Add(foo => foo.CD_PECA).Titled("CÓDIGO").Sortable(false).Filterable(false);
+                                        columns.Add(foo => foo.DS_PECA).Titled("DESCRIÇÃO").Sortable(false).Filterable(false);
+                                        columns.Add(foo => foo.QTD_ESTOQUE).Titled("QTDE").Sortable(false).Filterable(false);
+                                    })
+                                </div>
+                            </div>
+                        </div>}
+                </div>
+            </div>
+            <br />
+
+            <div class="form-group">
+                Observações
+                @Html.EditorFor(model => model.DS_OBSERVACAO, new { htmlAttributes = new { @class = "form-control col-12", @rows = 3 } })
+                @Html.ValidationMessageFor(model => model.DS_OBSERVACAO, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                @if (perfil.perfil.ccdPerfil != 8)
+                {
+                    <button class="btn btn-primary btn-sm" type="button" id="btnGravarInferior">Gravar</button>
+                }
+
+                @if (Model.tipoOrigemPagina == "Agenda")
+                {
+                    @Html.ActionLink("Voltar", "Index", new { area = "" }, new { @class = "btn btn-primary btn-sm" })
+                }
+                else if (Model.tipoOrigemPagina == "HistoricoVisita")
+                {
+                    @Html.ActionLink("Voltar", "../HistoricoVisita/Index", new { area = "" }, new { @class = "btn btn-primary btn-sm" })
+                }
+                else
+                {
+                    @Html.ActionLink("Voltar", "ConsultaConfirmaVisita", new { area = "" }, new { @class = "btn btn-primary btn-sm" })
+                }
+
+            </div>
+        </div>
+
+        @Html.Partial("_modalHistoricoVisita")
+    }
+
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        var URLObterListaHistoricoVisita = "@Url.Action("ObterListaLogStatusVisitaJson", "Agenda")";
+        var URLAPI = "@_3M.Comodato.Utility.ControlesUtility.Parametro.ObterValorParametro(_3M.Comodato.Utility.ControlesUtility.Constantes.URLAPI)";
+        var nidUsuario = @Convert.ToInt64(((_3M.Comodato.Entity.UsuarioPerfilEntity)Session["_CurrentUser"]).usuario.nidUsuario);
+
+        var statusNova = @Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.TpStatusVisita.Nova);
+        var statusAberta = @Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.TpStatusVisita.Aberta);
+        var statusFinalizada = @Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.TpStatusVisita.Finalizada);
+        var statusConfirmada = @Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.TpStatusVisita.Confirmada);
+        var statusPausada = @Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.TpStatusVisita.Pausada);
+        var statusPendente = @Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.TpStatusVisita.Pendente);
+        var statusCancelada = @Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.TpStatusVisita.Cancelada);
+        var statusPortaria = @Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.TpStatusVisita.Portaria);
+        var statusIntegracao = @Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.TpStatusVisita.Integracao);
+        var statusTreinamento = @Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.TpStatusVisita.Treinamento);
+        var statusConsultoria = @Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.TpStatusVisita.Consultoria);
+        var MensagemGravacaoSucesso = "@_3M.Comodato.Utility.ControlesUtility.Constantes.MensagemGravacaoSucesso";
+
+    </script>
+
+    <script type="text/javascript" src="~/Scripts/Comodato/Util.js"></script>
+    <script type="text/javascript" src="~/Scripts/Comodato/Visita.js"></script>
+}
+

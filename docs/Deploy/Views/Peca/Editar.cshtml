@@ -1,0 +1,111 @@
+﻿@model _3M.Comodato.Front.Models.Peca
+
+@{
+    ViewBag.Title = "Peça";
+}
+
+<i class="fas fa-cubes fa-3x fa-pull-left"></i>
+<h3>Peça (Editar)</h3>
+
+<div class="well">
+
+    @using (Html.BeginForm())
+    {
+        <div class="form-horizontal">
+            <hr />
+            @Html.HiddenFor(model => model.CancelarVerificarCodigo)
+
+            <div class="form-row">
+                <div class="form-group col-4">
+                    <label class="control-label">Código</label>
+                    @Html.EditorFor(model => model.CD_PECA, new { htmlAttributes = new { @class = "form-control col-12", @readonly = "readonly" } })
+                    @Html.ValidationMessageFor(model => Model.CD_PECA, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group col-3">
+                    <label class="control-label">Tipo</label>
+                    @*@Html.DropDownListFor(model => model.TP_PECA, new SelectList(Model.tiposPecas, "value", "key"), new { @class = "valid form-control col-12" })*@
+                    <br />
+                    @Html.HiddenFor(model => model.TP_PECA)
+                    <label class="font-weight-bold">@Html.DisplayFor(model => model.cdsTP_PECA)</label>
+                </div>
+            </div>
+
+            <div class="form-group ">
+                <label class="control-label">Descrição</label>
+                @Html.EditorFor(model => model.DS_PECA, new { htmlAttributes = new { @class = "form-control col-12" } })
+                @Html.ValidationMessageFor(model => Model.DS_PECA, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-2">
+                    <label class="control-label">Unidade</label>
+                    @Html.EditorFor(model => model.TX_UNIDADE, new { htmlAttributes = new { @class = "form-control col-12" } })
+                    @Html.ValidationMessageFor(model => Model.TX_UNIDADE, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group col-4">
+                    <label class="control-label">Valor</label>
+                    @Html.EditorFor(model => model.VL_PECA, new { htmlAttributes = new { @class = "form-control col-12" } })
+                    @Html.ValidationMessageFor(model => Model.VL_PECA, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group col-3">
+                    <label class="control-label">Qtde. Minima</label>
+                    @Html.EditorFor(model => model.QTD_MINIMA, new { htmlAttributes = new { @class = "form-control col-12" } })
+                    @Html.ValidationMessageFor(model => Model.QTD_MINIMA, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group col-3">
+                    <label class="control-label">Qtde. Estoque</label>
+                    @Html.EditorFor(model => model.QTD_ESTOQUE, new { htmlAttributes = new { @class = "form-control col-12" } })
+                    @Html.ValidationMessageFor(model => Model.QTD_ESTOQUE, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group col-2">
+                    <label class="control-label">Condição (Ativo)</label>
+                    @Html.DropDownListFor(model => model.FL_ATIVO_PECA, new SelectList(Model.SimNao, "value", "key"), new { @class = "valid form-control col-12" })
+                </div>
+            </div>
+
+            @if (!string.IsNullOrEmpty(ViewBag.Mensagem))
+            {
+                <div class="form-group">
+                    <label class="text-danger">@ViewBag.Mensagem</label>
+                </div>
+            }
+        </div>
+
+        <div class="form-group">
+            @*@Html.ActionLink("BPCS", "ImportarBPCS", new { CD_PECA = @Model.CD_PECA }, new { @class = "btn btn-info btn-sm" })*@
+            <input type="submit" value="Gravar" class="btn btn-primary btn-sm" />
+            @Html.ActionLink("Voltar", "Index", new { area = "" }, new { @class = "btn btn-primary btn-sm" })
+        </div>
+
+    }
+
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        var URLVerificarCodigo = "@Url.Action("VerificarCodigoJson", "Peca")";
+        var URLEditar = "@Url.Action("Editar", "Peca")";
+    </script>
+
+    <script type="text/javascript" src="~/Scripts/Comodato/Peca.js"></script>
+    <script type="text/javascript" src="~/Scripts/Comodato/Util.js"></script>
+
+    <script type="text/javascript">
+     @Model.JavaScriptToRun
+
+        function MensagemSucesso() {
+            var mensagem = '@_3M.Comodato.Utility.ControlesUtility.Constantes.MensagemGravacaoSucesso';
+
+            AlertaRedirect("Aviso", mensagem, "window.location = '../Peca';");
+        };
+    </script>
+}
+
+
+

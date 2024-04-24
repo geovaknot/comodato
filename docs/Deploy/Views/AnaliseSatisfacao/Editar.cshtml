@@ -1,0 +1,120 @@
+﻿@model _3M.Comodato.Front.Models.SatisfacaoPesquisa
+
+@{
+    ViewBag.Title = "Pesquisa de Satisfação";
+}
+<i class="fas fa-cubes fa-3x fa-pull-left"></i>
+<h3>
+    Pesquisa de Satisfação (Editar)
+</h3>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+
+        <div class="form-row">
+            <div class="form-group col-md-10 col-sm-10">
+                <label id="labelTitulo">Título da Pesquisa</label>
+                @Html.EditorFor(model => model.Titulo, new { htmlAttributes = new { @class = "form-control col-12" } })
+                @Html.ValidationMessageFor(model => model.Titulo, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group col-md-2 col-sm-2">
+                <label id="labelTitulo">Data de Criação</label>
+                @Html.TextBoxFor(model => model.DataCriacao, new { @class = "form-control col-12", @readonly = "readonly" })
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-8">
+                <label id="labelResponsavel">Responsável pela Pesquisa</label>
+                @Html.DropDownListFor(model => model.nidUsuarioResponsavel, ViewBag.ListaUsuarios as IEnumerable<SelectListItem>, new { @class = "form-control col-12", @style = "width: 100%" })
+                @Html.ValidationMessageFor(model => model.nidUsuarioResponsavel, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group col-md-2">
+                <label id="labelTipoPesquisa">Tipo da Pesquisa</label>
+                @Html.DropDownListFor(model => model.CodigoTipoPesquisa, new SelectList(_3M.Comodato.Utility.ControlesUtility.Dicionarios.TipoPesquisaSatisfacao().ToList(), "key", "value"), new { @class = "form-control col-12", @style = "width: 100%" })
+                @Html.ValidationMessageFor(model => model.CodigoTipoPesquisa, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group col-md-2">
+                <label id="labelStatusPesquisa">Status da Pesquisa</label>
+                @Html.DropDownListFor(model => model.StatusPesquisa, new SelectList(_3M.Comodato.Utility.ControlesUtility.Dicionarios.SituacaoPesquisa().ToList(), "key", "value"), new { @class = "form-control col-12", @style = "width: 100%" })
+                @Html.ValidationMessageFor(model => model.StatusPesquisa, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group  col-md-12">
+                <label class="control-label">Descrição da Pesquisa</label>
+                @Html.EditorFor(model => model.DescricaoPesquisa, new { htmlAttributes = new { @class = "form-control col-12", @rows = "2" } })
+                @Html.ValidationMessageFor(model => model.DescricaoPesquisa, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="form-row">
+            <div class="form-group  col-md-12">
+                <label class="control-label">Pergunta 1 para o Cliente</label>
+                @Html.EditorFor(model => model.PerguntaPesquisa1, new { htmlAttributes = new { @class = "form-control  col-12", @rows = "2" } })
+                @Html.ValidationMessageFor(model => model.PerguntaPesquisa1, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group  col-md-12">
+                <label class="control-label">Pergunta 2 para o Cliente</label>
+                @Html.EditorFor(model => model.PerguntaPesquisa2, new { htmlAttributes = new { @class = "form-control  col-12", @rows = "2" } })
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group  col-md-12">
+                <label class="control-label">Pergunta 3 para o Cliente</label>
+                @Html.EditorFor(model => model.PerguntaPesquisa3, new { htmlAttributes = new { @class = "form-control  col-12", @rows = "2" } })
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group  col-md-12">
+                <label class="control-label">Pergunta 4 para o Cliente</label>
+                @Html.EditorFor(model => model.PerguntaPesquisa4, new { htmlAttributes = new { @class = "form-control  col-12", @rows = "2" } })
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group  col-md-12">
+                <label class="control-label">Pergunta 5 para o Cliente</label>
+                @Html.EditorFor(model => model.PerguntaPesquisa5, new { htmlAttributes = new { @class = "form-control  col-12", @rows = "2" } })
+            </div>
+        </div>
+
+
+        @if (!string.IsNullOrEmpty(ViewBag.Mensagem))
+        {
+            <div class="form-group  col-md-12">
+                <label class="text-danger">@ViewBag.Mensagem</label>
+            </div>
+        }
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Gravar" class="btn btn-primary btn-sm" />
+        @Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-primary btn-sm" })
+    </div>
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript" src="~/Scripts/Comodato/Util.js"></script>
+
+    <script type="text/javascript">
+
+     @Model.JavaScriptToRun
+        $().ready(function () {
+            $('select').select2({ placeholder: "Selecione..." });
+        });
+
+        function MensagemSucesso() {
+            var mensagem = '@_3M.Comodato.Utility.ControlesUtility.Constantes.MensagemGravacaoSucesso';
+            AlertaRedirect("Aviso", mensagem, "window.location = '../AnaliseSatisfacao';");
+        }
+    </script>
+}

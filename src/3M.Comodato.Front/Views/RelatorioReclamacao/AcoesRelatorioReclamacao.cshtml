@@ -1,0 +1,117 @@
+﻿@model _3M.Comodato.Front.Models.RRAcompanhamentoReclamacao
+
+
+<div class="well">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal container-fluid">
+            <hr />
+            @*@Html.HiddenFor(model => model.ID_RELATORIO_RECLAMACAO)
+
+                @Html.HiddenFor(model => model.Vl_Mao_Obra)
+                @Html.HiddenFor(model => model.PerfilAnalista)*@
+
+            <div class="card">
+                <div class="card-header">
+                    <label class="control-label">Informações Adicionais</label>
+                </div>
+                <div class="card-body">
+                    <div class="form-row">
+                        <div class="form-group col-md-6 col-sm-6">
+                            <label class="control-label">Fornecedor:</label>
+                            @Html.TextBoxFor(model => model.NM_Fornecedor, Model.usuarioAnalistaTecnico ? (object)new { @class = "form-control col-md-12" } : (object)new { @class = "form-control col-md-12", @readonly = "readonly" })
+
+                        </div>
+
+                        <div class="form-group col-md-6 col-sm-6">
+                            <label class="control-label">Peça:</label>
+                            @Html.TextBoxFor(model => model.Peca, new { @class = "form-control col-md-12", @readonly = "readonly" })
+                            @Html.HiddenFor(model => model.Peca)
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-4 col-md-2 col-sm-12">
+                            <label class="control-label">Horas:</label>
+                            <div>
+                                @Html.TextBoxFor(model => model.VL_Hora_Atendimento, Model.usuarioAnalistaTecnico ? (object)new { @class = "form-control col-md-12" } : (object)new { @class = "form-control col-md-12", @readonly = "readonly" })
+                                @Html.HiddenFor(model => model.VL_Hora_Atendimento)
+                            </div>
+                        </div>
+                        <div class="form-group col-4 col-md-2">
+                            <label class="control-label">Minutos:</label>
+                            <div>
+                                @Html.TextBoxFor(model => model.VL_Minuto_Atendimento, Model.usuarioAnalistaTecnico ? (object)new { @class = "form-control col-md-12" } : (object)new { @class = "form-control col-md-12", @readonly = "readonly" })
+                                @Html.HiddenFor(model => model.VL_Minuto_Atendimento)
+                            </div>
+                        </div>
+                     
+
+                        <div class="form-group col-md-2 col-sm-12">
+                            <label class="control-label">Custo Peca:</label>
+                            @Html.TextBoxFor(model => model.Custo_Peca, Model.usuarioAnalistaTecnico ? (object)new { @class = "form-control col-md-12" } : (object)new { @class = "form-control col-md-12", @readonly = "readonly" })
+                            @Html.HiddenFor(model => model.Custo_Peca)
+                        </div>
+                        <div class="form-group col-md-2 col-sm-12">
+                            <label class="control-label">Valor Mão de Obra:</label>
+                            @Html.TextBoxFor(model => model.Vl_Mao_Obra, Model.usuarioAnalistaTecnico ? (object)new { @class = "form-control col-md-12" } : (object)new { @class = "form-control col-md-12", @readonly = "readonly" })
+                            @Html.HiddenFor(model => model.Vl_Mao_Obra)
+                        </div>
+                        <div class="form-group col-md-2 col-sm-12">
+                            <label class="control-label">Custo Total:</label>
+                            @Html.TextBoxFor(model => model.Custo_Total, new { @class = "form-control col-md-12", @readonly = "readonly" })
+                            @Html.HiddenFor(model => model.Custo_Total)
+                        </div>
+
+
+                    </div>  
+
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <label class="control-label">Dados Reclamação</label>
+                </div>
+                <div class="card-body">
+
+                    <div class="form-group col-sm-12 col-md-3 col-lg-3 col-xl-12" id="Motivo">
+                        <label class="control-label">Motivo da Reclamação:</label>
+
+                        @Html.TextBoxFor(model => model.DS_MOTIVO, new { @class = "form-control col-md-12", @readonly = "readonly" })
+
+                    </div>
+
+                    <div class="form-group col-sm-12 col-md-3 col-lg-3 col-xl-12" id="observacao">
+                        <label class="control-label">Observação:</label>
+
+                        @Html.TextBoxFor(model => model.DS_Descricao, new { @class = "form-control col-md-12", @readonly = "readonly" })
+
+                    </div>
+
+                    <div class="form-group col-sm-12 col-md-3 col-lg-3 col-xl-12" id="imagem">
+                        <label class="control-label">Evidência do Problema relatado pelo Técnico:</label>
+                        <br />
+
+                        <img id="imgFoto" style="height: auto; width: auto; max-height: 400px" src="data:image/@Model.DS_TIPO_FOTO;base64,@Model.DS_ARQUIVO_FOTO" />
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Model.JavaScriptToRun
+
+    <script type="text/javascript">
+
+
+
+    </script>
+
+}

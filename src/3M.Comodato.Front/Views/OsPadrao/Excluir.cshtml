@@ -1,0 +1,62 @@
+﻿@model _3M.Comodato.Front.Models.OsPadrao
+
+@{
+    ViewBag.Title = "Agenda de Atendimento - Ordem de Serviço";
+}
+
+<i class="fas fa-cubes fa-3x fa-pull-left"></i>
+<h3>Agenda de Atendimento - Ordem de Serviço (Excluir)</h3>
+
+<h5>Confirma exclusão deste registro?</h5>
+<div>
+    <hr />
+    <div class="form-group">
+        <div class="col-5">
+            <label class="control-label font-weight-bold">Status</label>
+            <br />
+            @Html.DisplayFor(model => model.TpStatusOS.DS_STATUS_OS)
+        </div>
+
+        <div class="col-5">
+            <label class="control-label font-weight-bold">Data da Visita</label>
+            <br />
+            @Html.DisplayFor(model => model.DT_DATA_OS)
+        </div>
+
+        <div class="col-12">
+            <label class="control-label font-weight-bold">Cliente</label>
+            <br />
+            @Html.DisplayFor(model => model.cliente.NM_CLIENTE)
+        </div>
+    </div>
+
+    @using (Html.BeginForm())
+    {
+        <div class="form-actions no-color">
+            <input type="submit" value="Excluir" class="btn btn-primary btn-sm" />
+            @Html.ActionLink("Voltar", "Index", new { area = "" }, new { @class = "btn btn-primary btn-sm" })
+        </div>
+    }
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript" src="~/Scripts/Comodato/Util.js"></script>
+
+    <script type="text/javascript">
+     @Model.JavaScriptToRun
+
+        function MensagemInformativa() {
+            var mensagem = 'Só é permitido excluir <strong>OS</strong> com status <strong>AGUARDANDO INICIO, ABERTA ou FINALIZADA</strong>!';
+            AlertaRedirect("Aviso", mensagem, "window.location = '../OsPadrao';");
+        };
+
+        function MensagemSucesso() {
+            var mensagem = '@_3M.Comodato.Utility.ControlesUtility.Constantes.MensagemExclusaoSucesso';
+            AlertaRedirect("Aviso", mensagem, "window.location = '../OsPadrao';");
+        };
+    </script>
+}
+
+
+

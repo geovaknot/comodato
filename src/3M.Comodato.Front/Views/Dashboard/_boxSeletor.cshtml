@@ -1,0 +1,30 @@
+﻿@model _3M.Comodato.Front.Models.Dashboard
+
+<div class="jumbotron px-1 pt-1 pb-0 border border-secondary rounded-0 mb-0" style="background-color: #ebeaea">
+    <div class="lead pb-2">
+        <div class="row justify-content-between mr-1 ml-1">
+            <img src="~/Images/3M Logo.png" class="img-thumbnail" style="height: 35px" />
+            Gestão de Comodato
+            <div>
+                @*@if (Model.tipoDashboard == "V")
+                {
+                    <button id="btnMinhasVendas" class="btn btn-primary btn-sm" type="button">
+                        <i class="fas fa-star"></i>
+                    </button>
+                }*@
+                <button id="btnAutoRefresh" class="btn btn-primary btn-sm" type="button">
+                    <i class="fas fa-sync-alt"></i>
+                </button>
+            </div>
+            @*<button id="btnAutoRefresh"class="btn btn-secondary btn-sm" data-toggle="tooltip" data-placement="top" title="Auto-refresh">
+            <i class="fas fa-sync-alt"></i>
+        </button>*@
+        </div>
+
+        @Html.DropDownListFor(model => model.tipoDashboard, new SelectList(Model.tiposDashboard, "value", "key"), new { @class = "valid form-control col-12" })
+    </div>
+    <div>
+        @Html.ActionLink("Acesso ao sistema", "Index", "Home", new { area = "" }, new { @class = "badge badge-primary" })
+    </div>
+</div>
+

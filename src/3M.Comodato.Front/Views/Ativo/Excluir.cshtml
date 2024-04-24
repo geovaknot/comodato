@@ -1,0 +1,140 @@
+﻿@model _3M.Comodato.Front.Models.Ativo
+
+@{
+    ViewBag.Title = "Ativo";
+}
+
+<i class="fas fa-cubes fa-3x fa-pull-left"></i>
+<h3>Ativo (Inativar)</h3>
+
+<h5>Confirma inativação deste registro?</h5>
+<div>
+    <hr />
+
+    <div class="form-row">
+        <div class="form-group col-3">
+            <label class="control-label font-weight-bold">Nr. Ativo</label>
+            <br />
+            @Html.DisplayFor(model => model.CD_ATIVO_FIXO)
+        </div>
+
+        <div class="form-group col-2">
+            <label class="control-label font-weight-bold">Ano</label>
+            <br />
+            @Html.DisplayFor(model => model.TX_ANO_MAQUINA)
+        </div>
+
+        <div class="form-group col-7">
+            <label class="control-label font-weight-bold">Linha de Produto</label>
+            <br />
+            @Html.DisplayFor(model => model.linhaProduto.DS_LINHA_PRODUTO)
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-3">
+            <label class="control-label font-weight-bold">Data de Inclusão</label>
+            <br />
+            @Html.DisplayFor(model => model.DT_INCLUSAO)
+        </div>
+
+        <div class="form-group col-9">
+            <label class="control-label font-weight-bold">Modelo</label>
+            <br />
+            @Html.DisplayFor(model => model.modelo.DS_MODELO)
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label font-weight-bold">Posição</label>
+        <br />
+        @Html.DisplayFor(model => model.TX_TIPO)
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-3">
+            <label class="control-label font-weight-bold">Data de Inventário</label>
+            <br />
+            @Html.DisplayFor(model => model.DT_INVENTARIO)
+        </div>
+
+        <div class="form-group col-3">
+            <label class="control-label font-weight-bold">Situação</label>
+            <br />
+            @Html.DisplayFor(model => model.situacaoAtivo.DS_SITUACAO_ATIVO)
+        </div>
+
+        <div class="form-group col-3">
+            <label class="control-label font-weight-bold">Status</label>
+            <br />
+            @Html.DisplayFor(model => model.statusAtivo.DS_STATUS_ATIVO)
+        </div>
+    </div>
+
+    <div class="card">
+        <h5 class="card-header">
+            Detalhes do Ativo
+        </h5>
+        <div class="card-body">
+            <div class="form-row">
+                <div class="form-group col-4">
+                    <label class="control-label font-weight-bold">Data de Início da Depreciação</label>
+                    <br />
+                    @Html.DisplayFor(model => model.depreciacao.DT_INICIO_DEPREC)
+                </div>
+
+                <div class="form-group col-4">
+                    <label class="control-label font-weight-bold">Total de Meses de Depreciação</label>
+                    <br />
+                    @Html.DisplayFor(model => model.depreciacao.NR_MESES)
+                </div>
+
+                <div class="form-group col-4">
+                    <label class="control-label font-weight-bold">Valor da Depreciação no Último Mês</label>
+                    <br />
+                    @Html.DisplayFor(model => model.depreciacao.VL_DEPREC_ULT_MES)
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-4">
+                    <label class="control-label font-weight-bold">Valor Total do Ativo Fixo</label>
+                    <br />
+                    @Html.DisplayFor(model => model.depreciacao.VL_CUSTO_ATIVO)
+                </div>
+
+                <div class="form-group col-4">
+                    <label class="control-label font-weight-bold">Valor Residual do Ativo Fixo</label>
+                    <br />
+                    @Html.DisplayFor(model => model.depreciacao.VL_DEPREC_TOTAL)
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+
+    @using (Html.BeginForm())
+    {
+        <div class="form-actions no-color">
+            <input type="submit" value="Inativar" class="btn btn-primary btn-sm" />
+            @Html.ActionLink("Voltar", "Index", new { area = "" }, new { @class = "btn btn-primary btn-sm" })
+        </div>
+    }
+</div>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+
+        <script type="text/javascript" src="~/Scripts/Comodato/Ativo.js"></script>
+        <script type="text/javascript" src="~/Scripts/Comodato/Util.js"></script>
+
+        <script type="text/javascript">
+     @Model.JavaScriptToRun
+
+        function MensagemSucesso() {
+            var mensagem = '@_3M.Comodato.Utility.ControlesUtility.Constantes.MensagemInativacaoSucesso';
+
+            AlertaRedirect("Aviso", mensagem, "window.location = '../Ativo';");
+        };
+        </script>
+    }

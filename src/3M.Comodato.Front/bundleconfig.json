@@ -1,0 +1,14 @@
+[
+  {
+    "outputFileName": "Scripts/gridmvc.min.js",
+    "inputFiles": [
+      "Scripts/gridmvc.js"
+    ]
+  },
+  {
+    "outputFileName": "Content/bootstrap.min.css",
+    "inputFiles": [
+      "Content/bootstrap.css"
+    ]
+  }
+]

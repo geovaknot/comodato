@@ -1,0 +1,71 @@
+﻿@model _3M.Comodato.Front.Models.Usuario
+
+@{
+    ViewBag.Title = "Usuário";
+}
+
+<i class="fas fa-cubes fa-3x fa-pull-left"></i>
+<h3>Usuário (Excluir)</h3>
+
+<h5>Confirma exclusão deste registro?</h5>
+<div>
+    <hr />
+
+    <div class="form-group">
+        <div class="col-12">
+            <label class="control-label font-weight-bold">Nome</label>
+            <br />
+            @Html.DisplayFor(model => model.cnmNome)
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-12">
+            <label class="control-label font-weight-bold">Login</label>
+            <br />
+            @Html.DisplayFor(model => model.cdsLogin)
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-12">
+            <label class="control-label font-weight-bold">Email</label>
+            <br />
+            @Html.DisplayFor(model => model.cdsEmail)
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-12">
+            <label class="control-label font-weight-bold">Ativo</label>
+            <br />
+            @Html.DisplayFor(model => model.bidAtivo)
+        </div>
+    </div>
+
+    <div class="alert alert-info" role="alert">
+        <strong>AVISO:</strong> Caso o usuário não possa ser excluído, o sistema irá <strong>INATIVÁ-LO</strong> automaticamente
+    </div>
+
+    @using (Html.BeginForm())
+    {
+        <div class="form-actions no-color">
+            <input type="submit" value="Excluir" class="btn btn-primary btn-sm" />
+            @Html.ActionLink("Voltar", "Index", new { area = "" }, new { @class = "btn btn-primary btn-sm" })
+        </div>
+    }
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript" src="~/Scripts/Comodato/Util.js"></script>
+
+    <script type="text/javascript">
+     @Model.JavaScriptToRun
+
+        function MensagemSucesso() {
+            var mensagem = '@_3M.Comodato.Utility.ControlesUtility.Constantes.MensagemExclusaoSucesso';
+
+            AlertaRedirect("Aviso", mensagem, "window.location = '../Usuario';");
+        };
+    </script>
+}

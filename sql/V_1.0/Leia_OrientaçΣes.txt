@@ -1,0 +1,5 @@
+1-Os scripts das pastas VisitaPadrao_Rodar_Primeiro e OSPadrao_Rodar_Primeiro
+devem ser rodados na base antes de qualquer outro.
+2-Executar os scripts da pasta AposScriptsOSPadraoVisitaPadrao
+3-CargaDeDados
+4-Procedures

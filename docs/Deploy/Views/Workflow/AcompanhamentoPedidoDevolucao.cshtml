@@ -1,0 +1,317 @@
+﻿@model _3M.Comodato.Front.Models.WfPedidoDevolucaoEquipamento
+
+<div class="well">
+    @using (Html.BeginForm())
+    {
+        @Html.HiddenFor(model => model.ST_STATUS_PEDIDO)
+
+        <input type="hidden" id="hidCD_GRUPO_RESPONS" value="@Model.CD_GRUPO_RESPONS" />
+        <input type="hidden" id="hidID_USUARIO_RESPONS" value="@Model.ID_USUARIO_RESPONS" />
+
+        <div class="form-horizontal">
+            <div class="form-row">
+                <div class="form-group col-sm-2 col-md-1 col-lg-1 col-xl-1 bg-secondary text-white text-center border border-white" id="ST_STATUS_PEDIDO_Rascunho">
+                    <label class="control-label">@Model.acompanhamentoPedidoDevolucao.DS_STATUS_NOME_REDUZ_Rascunho</label>
+                </div>
+
+                @*<div class="form-group col-sm-2 col-md-1 col-lg-1 col-xl-1 bg-secondary text-white text-center border border-white" id="ST_STATUS_PEDIDO_PendenteAnexar">
+                    <label class="control-label">@Model.acompanhamentoPedidoDevolucao.DS_STATUS_NOME_REDUZ_PendenteAnexar</label>
+                </div>*@
+
+                <div class="form-group col-sm-2 col-md-1 col-lg-1 col-xl-1 bg-secondary text-white text-center border border-white" id="ST_STATUS_PEDIDO_AnaliseLogistica">
+                    <label class="control-label">@Model.acompanhamentoPedidoDevolucao.DS_STATUS_NOME_REDUZ_AnaliseLogistica</label>
+                </div>
+
+                <div class="form-group col-sm-2 col-md-1 col-lg-1 col-xl-1 bg-secondary text-white text-center border border-white" id="ST_STATUS_PEDIDO_Solicitado">
+                    <label class="control-label">@Model.acompanhamentoPedidoDevolucao.DS_STATUS_NOME_REDUZ_Solicitado</label>
+                </div>
+
+                <div class="form-group col-sm-2 col-md-1 col-lg-1 col-xl-1 bg-secondary text-white text-center border border-white" id="ST_STATUS_PEDIDO_PendenciaCliente">
+                    <label class="control-label">@Model.acompanhamentoPedidoDevolucao.DS_STATUS_NOME_REDUZ_PendenciaCliente</label>
+                </div>
+
+                <div class="form-group col-sm-2 col-md-1 col-lg-1 col-xl-1 bg-secondary text-white text-center border border-white" id="ST_STATUS_PEDIDO_RetiradaAgendada">
+                    <label class="control-label">@Model.acompanhamentoPedidoDevolucao.DS_STATUS_NOME_REDUZ_RetiradaAgendada</label>
+                </div>
+
+                <div class="form-group col-sm-2 col-md-1 col-lg-1 col-xl-1 bg-secondary text-white text-center border border-white" id="ST_STATUS_PEDIDO_Coletado">
+                    <label class="control-label">@Model.acompanhamentoPedidoDevolucao.DS_STATUS_NOME_REDUZ_Coletado</label>
+                </div>
+
+                <div class="form-group col-sm-2 col-md-1 col-lg-1 col-xl-1 bg-secondary text-white text-center border border-white" id="ST_STATUS_PEDIDO_AguardandoProgTMS">
+                    <label class="control-label">@Model.acompanhamentoPedidoDevolucao.DS_STATUS_NOME_REDUZ_AguardandoProgTMS</label>
+                </div>
+
+                <div class="form-group col-sm-2 col-md-1 col-lg-1 col-xl-1 bg-secondary text-white text-center border border-white" id="ST_STATUS_PEDIDO_DevolucaoConcluida">
+                    <label class="control-label">@Model.acompanhamentoPedidoDevolucao.DS_STATUS_NOME_REDUZ_DevolucaoConcluida</label>
+                </div>
+
+                <div class="form-group col-sm-2 col-md-1 col-lg-1 col-xl-1 bg-secondary text-white text-center border border-white" id="ST_STATUS_PEDIDO_DevolvidoPlanejam">
+                    <label class="control-label">@Model.acompanhamentoPedidoDevolucao.DS_STATUS_NOME_REDUZ_DevolvidoPlanejam</label>
+                </div>
+
+                <div class="form-group col-sm-2 col-md-1 col-lg-1 col-xl-1">
+                    <label class="control-label">&nbsp;</label>
+                </div>
+
+                <div class="form-group col-sm-2 col-md-1 col-lg-1 col-xl-1 bg-secondary text-white text-center border border-white" id="ST_STATUS_PEDIDO_Cancelado">
+                    <label class="control-label">@Model.acompanhamentoPedidoDevolucao.DS_STATUS_NOME_REDUZ_Cancelado</label>
+                </div>
+            </div>
+
+            @Html.Partial("_AcoesHistoricosDevolucao")
+        </div>
+
+    }
+</div>
+
+@Html.Partial("PedidoDevolucao")
+
+<div class="form-group mt-3">
+    @Html.ActionLink("Voltar", "Index", new { area = "" }, new { @class = "btn btn-primary btn-sm" })
+</div>
+
+
+<style>
+    .pre-scrollable {
+        max-height: 222px;
+    }
+</style>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript" src="~/Scripts/Comodato/Util.js"></script>
+    <script type="text/javascript" src="~/Scripts/Comodato/WorkflowPedidoDevolucao.js"></script>
+    <script type="text/javascript" src="~/Scripts/Comodato/WorkflowAcompanhamentoPedidoDevolucao.js"></script>
+
+    @Model.JavaScriptToRun
+
+    <script type="text/javascript">
+        var actionListarEquipamentos = '@Url.Action("PopularGridEquipamentosDevolucao", "Workflow")';
+        var URLObterListaMensagem = "@Url.Action("ObterListaMensagemJson", "Workflow")";
+
+        var URLAPI = "@_3M.Comodato.Utility.ControlesUtility.Parametro.ObterValorParametro(_3M.Comodato.Utility.ControlesUtility.Constantes.URLAPI)";
+        var URLSite = "@_3M.Comodato.Utility.ControlesUtility.Parametro.ObterValorParametro(_3M.Comodato.Utility.ControlesUtility.Constantes.URLSite)";
+        var URL_UPLOAD = '@Url.Action("Upload")';
+        var nidUsuario = @Convert.ToInt64(((_3M.Comodato.Entity.UsuarioPerfilEntity)Session["_CurrentUser"]).usuario.nidUsuario);
+        var cnmNome = "@(((_3M.Comodato.Entity.UsuarioPerfilEntity)Session["_CurrentUser"]).usuario.cnmNome)";
+
+        var idWFDevolucao = @Model.ID_WF_PEDIDO_EQUIP;
+
+        var MensagemGravacaoSucesso = "@_3M.Comodato.Utility.ControlesUtility.Constantes.MensagemGravacaoSucesso";
+
+        var Rascunho = @Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.WorkflowPedidoDevolucao.Rascunho);
+        var PendenteAnexar = @Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.WorkflowPedidoDevolucao.PendenteAnexar);
+        var AnaliseLogistica = @Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.WorkflowPedidoDevolucao.AnaliseLogistica);
+        var Solicitado = @Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.WorkflowPedidoDevolucao.Solicitado);
+        var RetiradaAgendada = @Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.WorkflowPedidoDevolucao.RetiradaAgendada);
+        var Coletado = @Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.WorkflowPedidoDevolucao.Coletado);
+        var AguardandoProgTMS = @Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.WorkflowPedidoDevolucao.AguardandoProgTMS);
+        var DevolucaoConcluida = @Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.WorkflowPedidoDevolucao.DevolucaoConcluida);
+        var DevolvidoPlanejam = @Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.WorkflowPedidoDevolucao.DevolvidoPlanejam);
+        var PendenciaCliente = @Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.WorkflowPedidoDevolucao.PendenciaCliente);
+        var Cancelado = @Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.WorkflowPedidoDevolucao.Cancelado);
+
+        // variaveis da partial PedidoDevolucao
+        //var URLAPI = "@_3M.Comodato.Utility.ControlesUtility.Parametro.ObterValorParametro(_3M.Comodato.Utility.ControlesUtility.Constantes.URLAPI)";
+        //var actionListarEquipamentos = '@Url.Action("PopularGridEquipamentosDevolucao", "Workflow")';
+        //var nidUsuario = @Convert.ToInt64(((_3M.Comodato.Entity.UsuarioPerfilEntity)Session["_CurrentUser"]).usuario.nidUsuario);
+        var codigoStatusRascunho = @Convert.ToInt32(_3M.Comodato.Utility.ControlesUtility.Enumeradores.WorkflowPedidoDevolucao.Rascunho);
+        var codigoStatusPendenteAnexar = @Convert.ToInt32(_3M.Comodato.Utility.ControlesUtility.Enumeradores.WorkflowPedidoDevolucao.PendenteAnexar);
+        var codigoStatusEnvio = @Convert.ToInt32(_3M.Comodato.Utility.ControlesUtility.Enumeradores.WorkflowPedidoDevolucao.AnaliseLogistica);
+
+        function MensagemSucesso() {
+            var mensagem = '@_3M.Comodato.Utility.ControlesUtility.Constantes.MensagemGravacaoSucesso';
+            AlertaRedirect("Aviso", mensagem, "window.location = '@Url.Action("Index", "Workflow")';");
+        };
+
+        function CarregarSituacaoStatus() {
+            var ST_STATUS_PEDIDO = $('#ST_STATUS_PEDIDO').val();
+            var CSSAtivo = "form-group col-sm-2 col-md-1 col-lg-1 col-xl-1 bg-primary text-white text-center  border border-white";
+            var CSSPercorrido = "form-group col-sm-2 col-md-1 col-lg-1 col-xl-1 bg-info text-white text-center  border border-white";
+            //var CSSInativo = "form-group col-sm-2 col-md-1 col-lg-1 col-xl-1 bg-secondary text-white text-center border border-white";
+
+            if (ST_STATUS_PEDIDO == @Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.WorkflowPedidoDevolucao.Rascunho)) {
+                $('#ST_STATUS_PEDIDO_Rascunho').removeClass();
+                $('#ST_STATUS_PEDIDO_Rascunho').addClass(CSSAtivo);
+            }
+            else if (ST_STATUS_PEDIDO == @Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.WorkflowPedidoDevolucao.PendenteAnexar)) {
+                $('#ST_STATUS_PEDIDO_Rascunho').removeClass();
+                $('#ST_STATUS_PEDIDO_Rascunho').addClass(CSSPercorrido);
+
+                $('#ST_STATUS_PEDIDO_PendenteAnexar').removeClass();
+                $('#ST_STATUS_PEDIDO_PendenteAnexar').addClass(CSSAtivo);
+            }
+            else if (ST_STATUS_PEDIDO == @Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.WorkflowPedidoDevolucao.AnaliseLogistica)) {
+                $('#ST_STATUS_PEDIDO_Rascunho').removeClass();
+                $('#ST_STATUS_PEDIDO_Rascunho').addClass(CSSPercorrido);
+
+                $('#ST_STATUS_PEDIDO_PendenteAnexar').removeClass();
+                $('#ST_STATUS_PEDIDO_PendenteAnexar').addClass(CSSPercorrido);
+
+                $('#ST_STATUS_PEDIDO_AnaliseLogistica').removeClass();
+                $('#ST_STATUS_PEDIDO_AnaliseLogistica').addClass(CSSAtivo);
+            }
+            else if (ST_STATUS_PEDIDO == @Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.WorkflowPedidoDevolucao.Solicitado)) {
+                $('#ST_STATUS_PEDIDO_Rascunho').removeClass();
+                $('#ST_STATUS_PEDIDO_Rascunho').addClass(CSSPercorrido);
+
+                $('#ST_STATUS_PEDIDO_PendenteAnexar').removeClass();
+                $('#ST_STATUS_PEDIDO_PendenteAnexar').addClass(CSSPercorrido);
+
+                $('#ST_STATUS_PEDIDO_AnaliseLogistica').removeClass();
+                $('#ST_STATUS_PEDIDO_AnaliseLogistica').addClass(CSSPercorrido);
+
+                $('#ST_STATUS_PEDIDO_Solicitado').removeClass();
+                $('#ST_STATUS_PEDIDO_Solicitado').addClass(CSSAtivo);
+            }
+            else if (ST_STATUS_PEDIDO == @Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.WorkflowPedidoDevolucao.PendenciaCliente)) {
+                $('#ST_STATUS_PEDIDO_Rascunho').removeClass();
+                $('#ST_STATUS_PEDIDO_Rascunho').addClass(CSSPercorrido);
+
+                $('#ST_STATUS_PEDIDO_PendenteAnexar').removeClass();
+                $('#ST_STATUS_PEDIDO_PendenteAnexar').addClass(CSSPercorrido);
+
+                $('#ST_STATUS_PEDIDO_AnaliseLogistica').removeClass();
+                $('#ST_STATUS_PEDIDO_AnaliseLogistica').addClass(CSSPercorrido);
+
+                $('#ST_STATUS_PEDIDO_Solicitado').removeClass();
+                $('#ST_STATUS_PEDIDO_Solicitado').addClass(CSSPercorrido);
+
+                $('#ST_STATUS_PEDIDO_PendenciaCliente').removeClass();
+                $('#ST_STATUS_PEDIDO_PendenciaCliente').addClass(CSSAtivo);
+            }
+            else if (ST_STATUS_PEDIDO == @Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.WorkflowPedidoDevolucao.RetiradaAgendada)) {
+                $('#ST_STATUS_PEDIDO_Rascunho').removeClass();
+                $('#ST_STATUS_PEDIDO_Rascunho').addClass(CSSPercorrido);
+
+                $('#ST_STATUS_PEDIDO_PendenteAnexar').removeClass();
+                $('#ST_STATUS_PEDIDO_PendenteAnexar').addClass(CSSPercorrido);
+
+                $('#ST_STATUS_PEDIDO_AnaliseLogistica').removeClass();
+                $('#ST_STATUS_PEDIDO_AnaliseLogistica').addClass(CSSPercorrido);
+
+                $('#ST_STATUS_PEDIDO_Solicitado').removeClass();
+                $('#ST_STATUS_PEDIDO_Solicitado').addClass(CSSPercorrido);
+
+                $('#ST_STATUS_PEDIDO_PendenciaCliente').removeClass();
+                $('#ST_STATUS_PEDIDO_PendenciaCliente').addClass(CSSPercorrido);
+
+                $('#ST_STATUS_PEDIDO_RetiradaAgendada').removeClass();
+                $('#ST_STATUS_PEDIDO_RetiradaAgendada').addClass(CSSAtivo);
+            }
+            else if (ST_STATUS_PEDIDO == @Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.WorkflowPedidoDevolucao.Coletado)) {
+                $('#ST_STATUS_PEDIDO_Rascunho').removeClass();
+                $('#ST_STATUS_PEDIDO_Rascunho').addClass(CSSPercorrido);
+
+                $('#ST_STATUS_PEDIDO_PendenteAnexar').removeClass();
+                $('#ST_STATUS_PEDIDO_PendenteAnexar').addClass(CSSPercorrido);
+
+                $('#ST_STATUS_PEDIDO_AnaliseLogistica').removeClass();
+                $('#ST_STATUS_PEDIDO_AnaliseLogistica').addClass(CSSPercorrido);
+
+                $('#ST_STATUS_PEDIDO_Solicitado').removeClass();
+                $('#ST_STATUS_PEDIDO_Solicitado').addClass(CSSPercorrido);
+
+                $('#ST_STATUS_PEDIDO_PendenciaCliente').removeClass();
+                $('#ST_STATUS_PEDIDO_PendenciaCliente').addClass(CSSPercorrido);
+
+                $('#ST_STATUS_PEDIDO_RetiradaAgendada').removeClass();
+                $('#ST_STATUS_PEDIDO_RetiradaAgendada').addClass(CSSPercorrido);
+
+                $('#ST_STATUS_PEDIDO_Coletado').removeClass();
+                $('#ST_STATUS_PEDIDO_Coletado').addClass(CSSAtivo);
+            }
+            else if (ST_STATUS_PEDIDO == @Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.WorkflowPedidoDevolucao.AguardandoProgTMS)) {
+                $('#ST_STATUS_PEDIDO_Rascunho').removeClass();
+                $('#ST_STATUS_PEDIDO_Rascunho').addClass(CSSPercorrido);
+
+                $('#ST_STATUS_PEDIDO_PendenteAnexar').removeClass();
+                $('#ST_STATUS_PEDIDO_PendenteAnexar').addClass(CSSPercorrido);
+
+                $('#ST_STATUS_PEDIDO_AnaliseLogistica').removeClass();
+                $('#ST_STATUS_PEDIDO_AnaliseLogistica').addClass(CSSPercorrido);
+
+                $('#ST_STATUS_PEDIDO_Solicitado').removeClass();
+                $('#ST_STATUS_PEDIDO_Solicitado').addClass(CSSPercorrido);
+
+                $('#ST_STATUS_PEDIDO_PendenciaCliente').removeClass();
+                $('#ST_STATUS_PEDIDO_PendenciaCliente').addClass(CSSPercorrido);
+
+                $('#ST_STATUS_PEDIDO_RetiradaAgendada').removeClass();
+                $('#ST_STATUS_PEDIDO_RetiradaAgendada').addClass(CSSPercorrido);
+
+                $('#ST_STATUS_PEDIDO_Coletado').removeClass();
+                $('#ST_STATUS_PEDIDO_Coletado').addClass(CSSPercorrido);
+
+                $('#ST_STATUS_PEDIDO_AguardandoProgTMS').removeClass();
+                $('#ST_STATUS_PEDIDO_AguardandoProgTMS').addClass(CSSAtivo);
+            }
+            else if (ST_STATUS_PEDIDO == @Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.WorkflowPedidoDevolucao.DevolucaoConcluida)) {
+                $('#ST_STATUS_PEDIDO_Rascunho').removeClass();
+                $('#ST_STATUS_PEDIDO_Rascunho').addClass(CSSPercorrido);
+
+                $('#ST_STATUS_PEDIDO_PendenteAnexar').removeClass();
+                $('#ST_STATUS_PEDIDO_PendenteAnexar').addClass(CSSPercorrido);
+
+                $('#ST_STATUS_PEDIDO_AnaliseLogistica').removeClass();
+                $('#ST_STATUS_PEDIDO_AnaliseLogistica').addClass(CSSPercorrido);
+
+                $('#ST_STATUS_PEDIDO_Solicitado').removeClass();
+                $('#ST_STATUS_PEDIDO_Solicitado').addClass(CSSPercorrido);
+
+                $('#ST_STATUS_PEDIDO_PendenciaCliente').removeClass();
+                $('#ST_STATUS_PEDIDO_PendenciaCliente').addClass(CSSPercorrido);
+
+                $('#ST_STATUS_PEDIDO_RetiradaAgendada').removeClass();
+                $('#ST_STATUS_PEDIDO_RetiradaAgendada').addClass(CSSPercorrido);
+
+                $('#ST_STATUS_PEDIDO_Coletado').removeClass();
+                $('#ST_STATUS_PEDIDO_Coletado').addClass(CSSPercorrido);
+
+                $('#ST_STATUS_PEDIDO_AguardandoProgTMS').removeClass();
+                $('#ST_STATUS_PEDIDO_AguardandoProgTMS').addClass(CSSPercorrido);
+
+                $('#ST_STATUS_PEDIDO_DevolucaoConcluida').removeClass();
+                $('#ST_STATUS_PEDIDO_DevolucaoConcluida').addClass(CSSAtivo);
+            }
+            else if (ST_STATUS_PEDIDO == @Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.WorkflowPedidoDevolucao.DevolvidoPlanejam)) {
+                $('#ST_STATUS_PEDIDO_Rascunho').removeClass();
+                $('#ST_STATUS_PEDIDO_Rascunho').addClass(CSSPercorrido);
+
+                $('#ST_STATUS_PEDIDO_PendenteAnexar').removeClass();
+                $('#ST_STATUS_PEDIDO_PendenteAnexar').addClass(CSSPercorrido);
+
+                $('#ST_STATUS_PEDIDO_AnaliseLogistica').removeClass();
+                $('#ST_STATUS_PEDIDO_AnaliseLogistica').addClass(CSSPercorrido);
+
+                $('#ST_STATUS_PEDIDO_Solicitado').removeClass();
+                $('#ST_STATUS_PEDIDO_Solicitado').addClass(CSSPercorrido);
+
+                $('#ST_STATUS_PEDIDO_PendenciaCliente').removeClass();
+                $('#ST_STATUS_PEDIDO_PendenciaCliente').addClass(CSSPercorrido);
+
+                $('#ST_STATUS_PEDIDO_RetiradaAgendada').removeClass();
+                $('#ST_STATUS_PEDIDO_RetiradaAgendada').addClass(CSSPercorrido);
+
+                $('#ST_STATUS_PEDIDO_Coletado').removeClass();
+                $('#ST_STATUS_PEDIDO_Coletado').addClass(CSSPercorrido);
+
+                $('#ST_STATUS_PEDIDO_AguardandoProgTMS').removeClass();
+                $('#ST_STATUS_PEDIDO_AguardandoProgTMS').addClass(CSSPercorrido);
+
+                $('#ST_STATUS_PEDIDO_DevolucaoConcluida').removeClass();
+                $('#ST_STATUS_PEDIDO_DevolucaoConcluida').addClass(CSSPercorrido);
+
+                $('#ST_STATUS_PEDIDO_DevolvidoPlanejam').removeClass();
+                $('#ST_STATUS_PEDIDO_DevolvidoPlanejam').addClass(CSSAtivo);
+            }
+            else if (ST_STATUS_PEDIDO == @Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.WorkflowPedidoDevolucao.Cancelado)) {
+                $('#DS_STATUS_NOME_REDUZ_Cancelado').removeClass();
+                $('#DS_STATUS_NOME_REDUZ_Cancelado').addClass(CSSAtivo);
+            }
+        }
+    </script>
+
+}
+

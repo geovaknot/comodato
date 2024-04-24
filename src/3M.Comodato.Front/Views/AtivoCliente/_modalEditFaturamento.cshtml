@@ -1,0 +1,59 @@
+﻿@model _3M.Comodato.Front.Models.DadosFaturamento
+
+<!-- Modal -->
+<div class="modal fade" id="EditFaturamento" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-dark">
+                <h5 class="modal-title text-white" id="exampleModalLongTitle">Dados Faturamento</h5>
+                @*<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>*@
+            </div>
+            <div class="modal-body">
+                <div class="form-horizontal">
+                    @Html.HiddenFor(model => model.ID)
+
+                    <div class="form-group">
+                        <label class="control-label">Material</label>
+                        @Html.DropDownListFor(model => model.CD_Material, new SelectList(ViewBag.CodigoMat), "Selecione...", new { @class = "js-example-basic-single", @style = "width: 100%" })
+
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label">Departamento de venda</label>
+                        @Html.DropDownListFor(model => model.DepartamentoVenda, new SelectList(ViewBag.CodigoMat), "Selecione...", new { @class = "js-example-basic-single", @style = "width: 100%" })
+                    </div>
+
+                    <div class="form-row">
+
+                        <div class="form-group col-sm-12 col-md-4 col-lg-4">
+                            <label class="control-label">Valor do aluguel após 3 anos</label>
+                            @Html.EditorFor(model => model.AluguelApos3anos, new { htmlAttributes = new { @class = "form-control col-12" } })
+                        </div>
+
+                        <div class="form-group col-sm-12 col-md-4 col-lg-4">
+                            <label class="control-label">Data último faturamento</label>
+                            <div class="input-group date">
+                                @Html.EditorFor(model => model.DT_UltimoFaturamento, new { htmlAttributes = new { @class = "form-control col-12" } })
+                                @*@Html.TextBoxFor(x => x.dadosFaturamento.DT_UltimoFaturamento, "{0:dd/MM/yyyy}", new { @class = "form-control col-6", @id = "dtUltimoFat" })*@
+                                <div class="input-group-addon calendario">
+                                    <i class="far fa-calendar-alt fa-2x" style="background: #d9d6d6; padding: 3px 3px 3px 3px"></i>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnSalvarPedidoPecaTecnicoModal">Salvar</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+                            @*<button type="button" class="btn btn-primary">Save changes</button>*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>

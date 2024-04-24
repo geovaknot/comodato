@@ -1,0 +1,58 @@
+SELECT
+	TB0.txt_codigo AS [COD_BPCS],
+	TB1.int_id_cliente as [Id Cliente],
+	TB1.txt_cnpj_cpf as [CPF/CNPJ],
+	TB1.txt_razao_social as [Razão Social],
+	TB1.txt_cod_departamento as [Dpto],
+	(select
+		concat(u.txt_login, ' - ', u.txt_nome)
+	from
+		tb_usuario u
+	where
+		u.int_id_usuario = TB1.int_id_usuario) as [Aprovador Vendedor],
+	--tb1.dta_cadastro as [Dt Cad. Vendedor],
+	--tb2.dta_cadastro as [Data Ocorrência],
+	--tb3.txt_nome [Status],
+ case
+		tb3.int_id_status when 3 then CONCAT(tb4.txt_login, ' - ', tb4.txt_nome)
+		else ''
+	end as [Aprovador Juridico],
+	case
+		tb3.int_id_status when 6 then CONCAT(tb4.txt_login, ' - ', tb4.txt_nome)
+		else ''
+	end as [Aprovador Crédito Cobrança],
+	case
+		tb3.int_id_status when 9 then CONCAT(tb4.txt_login, ' - ', tb4.txt_nome)
+		else ''
+	end as [Aprovador BU],
+	case
+		tb3.int_id_status when 12 then CONCAT(tb4.txt_login, ' - ', tb4.txt_nome)
+		else ''
+	end as [Aprovador Distribuidor Comporativo],
+	case
+		tb3.int_id_status when 15 then CONCAT(tb4.txt_login, ' - ', tb4.txt_nome)
+		else ''
+	end as [Aprovador CRC],
+	case
+		tb3.int_id_status when 18 then CONCAT(tb4.txt_login, ' - ', tb4.txt_nome)
+		else ''
+	end as [Aprovador Anvisa]
+	--			end--,
+	--CONCAT(tb4.txt_login,' - ',tb4.txt_nome) as USUARIO  
+	FROM [dbo].[tb_cliente] AS TB1
+JOIN [dbo].[tb_cliente_bpcs] AS tb0 ON
+	tb0.int_id_cliente = TB1.int_id_cliente
+join [dbo].[tb_status_log] AS tb2 on
+	tb2.int_id_referencia = tb1.int_id_cliente
+LEFT join [dbo].[tb_status_cliente] AS tb3 on
+	tb3.int_id_status = tb2.int_id_status
+left join [dbo].[tb_usuario] as tb4 on
+	tb2.int_id_usuario = tb4.int_id_usuario
+where
+	TB3.INT_ID_STATUS in (3, 6, 9, 12, 15, 18)
+	AND TB2.dta_cadastro >= '2000-01-01'
+	and tb2.txt_tipo = 'C'
+	and tb1.bit_ativo = 1
+	and tb1.int_id_status = 21
+order by
+	2

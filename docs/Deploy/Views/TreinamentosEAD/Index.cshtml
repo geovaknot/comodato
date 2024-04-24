@@ -1,0 +1,256 @@
+﻿@model _3M.Comodato.Front.Models.TreinamentoEAD
+@{
+    /**/
+
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="Content/bootstrap.css" rel="stylesheet" />
+@Styles.Render("~/Content/css")
+@Scripts.Render("~/bundles/modernizr")
+
+<br />
+<h2>Treinamentos EAD - Comodato</h2>
+
+@Html.HiddenFor(model => model.Visualizar)
+@Html.HiddenFor(model => model.Administracao)
+@Html.HiddenFor(model => model.Administracao2)
+@Html.HiddenFor(model => model.Administracao3)
+@Html.HiddenFor(model => model.AppMobile)
+@Html.HiddenFor(model => model.Clientes)
+@Html.HiddenFor(model => model.ControleEstoque)
+@Html.HiddenFor(model => model.Dashboard)
+@Html.HiddenFor(model => model.EquipeTecnica)
+@Html.HiddenFor(model => model.Equipetecnica3M)
+@Html.HiddenFor(model => model.UtilizacaoRelatorios)
+@Html.HiddenFor(model => model.WorkflowDevolucao)
+@Html.HiddenFor(model => model.WorkflowEnvio)
+
+<div style="max-height:30px;">
+    <div id="t1" class="ead-div" style="display:none;">
+
+        <div class="col-8" style="float:left; margin:10pt;">
+            <span style="font-size:22pt;  "><b>Administração do Sistema Comodato (parte 1)</b></span>
+            </ br>
+            <span style="font-size:16pt; font-style:normal; color:darkgrey;"><b>Apresentação da administração do sistema Comodato</b></span>
+        </div>
+        <div style="margin-top:3px;margin-left:17px; width:160px; height:130px; float:left;" class="col-3">
+            <video id="vid1" controls autoplay style=" width:300px; height:168px;">   
+                <source src="@($"{Model.caminho}{"Po 3M Admin Parte1_min.mp4"}" )" type="video/mp4">
+                
+                Seu Browser não suporta este recurso de vídeo.
+            </video>
+        </div>
+    </div>
+    <div id="t2" class="ead-div" style="display:none;">
+        <div class="col-8" style="float:left; margin:10pt;">
+            <span style="font-size:22pt;  "><b>Administração do Sistema Comodato (parte 2)</b></span>
+            </ br>
+            <span style="font-size:16pt; font-style:normal; color:darkgrey;"><b>Apresentação da administração do sistema Comodato</b></span>
+        </div>
+        <div style="margin-top:3px;margin-left:17px; width:160px; height:130px; float:left;" class="col-3">
+            <video id="vid2" controls autoplay style=" width:300px; height:168px;">
+                @*<source src="C:\WS_WAYON\3M.COMODATO.WEB\3M.Comodato.Front\EAD\PO_3M_Appmobile.mp4" type="video/mp4">*@
+                <source src="@($"{Model.caminho}{"Po 3M Admin Parte2_min.mp4"}" )" type="video/mp4">
+                Seu Browser não suporta este recurso de vídeo.
+            </video>
+        </div>
+    </div>
+    <div id="t3" class="ead-div" style="display:none;">
+        <div class="col-8" style="float:left; margin:10pt;">
+            <span style="font-size:22pt;  "><b>Administração do Sistema Comodato (parte 3)</b></span>
+            </ br>
+            <span style="font-size:16pt; font-style:normal; color:darkgrey;"><b>Apresentação da administração do sistema Comodato</b></span>
+        </div>
+        <div style="margin-top:3px;margin-left:17px; width:160px; height:130px; float:left;" class="col-3">
+            <video id="vid3"  controls autoplay style=" width:300px; height:168px;">
+                <source src="@($"{Model.caminho}{"Po 3M Admin Parte3_min.mp4"}" )" type="video/mp4">
+                Seu Browser não suporta este recurso de vídeo.
+            </video>
+        </div>
+    </div>
+    <div id="t4" class="ead-div" style="display:none;">
+        <div class="col-8" style="float:left; margin:10pt;">
+            <span style="font-size:22pt;  "><b>Controle de Estoque</b></span>
+            </ br>
+            <span style="font-size:16pt; font-style:normal; color:darkgrey;"><b>Apresentação de funcionalidades de controle de estoque</b></span>
+        </div>
+        <div style="margin-top:3px;margin-left:17px; width:160px; height:130px; float:left;" class="col-3">
+            <video id="vid4" controls autoplay style=" width:300px; height:168px;">
+                <source src="@($"{Model.caminho}{"Po 3M Controleestoque_min.mp4"}" )" type="video/mp4">
+                Seu Browser não suporta este recurso de vídeo.
+            </video>
+        </div>
+    </div>
+    <div id="t5" class="ead-div" style="display:none;">
+        <div class="col-8" style="float:left; margin:10pt;">
+            <span style="font-size:22pt;  "><b>DashBoards </b></span>
+            </ br>
+            <span style="font-size:16pt; font-style:normal; color:darkgrey;"><b>Apresentação de utilização dos Dashboards</b></span>
+        </div>
+        <div style="margin-top:3px;margin-left:17px; width:160px; height:130px; float:left;" class="col-3">
+            <video id="vid5" autoplay style=" width:300px; height:168px;">
+                <source src="@($"{Model.caminho}{"Po 3M Dashboards_min.mp4"}" )"type="video/mp4">
+                Seu Browser não suporta este recurso de vídeo.
+            </video>
+        </div>
+    </div>
+    <div id="t6" class="ead-div" style="display:none;">
+        <div class="col-8" style="float:left; margin:10pt;">
+            <span style="font-size:22pt;  "><b>Workflow de Envio de equipamentos</b></span>
+            </ br>
+            <span style="font-size:16pt; font-style:normal; color:darkgrey;"><b>Funcionalidades de Workflow de envio de equipamentos</b></span>
+        </div>
+        <div style="margin-top:3px;margin-left:17px; width:160px; height:130px; float:left;" class="col-3">
+            <video id="vid6" controls autoplay style=" width:300px; height:168px;">
+                <source src="@($"{Model.caminho}{"PO 3M Wf Envio_min.mp4"}" )" type="video/mp4">
+                Seu Browser não suporta este recurso de vídeo.
+            </video>
+        </div>
+    </div>
+    <div id="t7" class="ead-div" style="display:none;">
+        <div class="col-8" style="float:left; margin:10pt;">
+            <span style="font-size:22pt;  "><b>Workflow de Devolução de equipamentos</b></span>
+            </ br>
+            <span style="font-size:16pt; font-style:normal; color:darkgrey;"><b>Funcionalidades de Workflow de devolução de equipamentos</b></span>
+        </div>
+        <div style="margin-top:3px;margin-left:17px; width:160px; height:130px; float:left;" class="col-3">
+            <video id="vid7" controls autoplay style=" width:300px; height:168px;">
+                <source src="@($"{Model.caminho}{"Po 3M Wf Devolucao_min.mp4"}" )" type="video/mp4">
+                Seu Browser não suporta este recurso de vídeo.
+            </video>
+        </div>
+    </div>
+    <div id="t8" class="ead-div" style="display:none;">
+        <div class="col-8" style="float:left; margin:10pt;">
+            <span style="font-size:22pt;  "><b>Aplicativo Mobile Comodato 3M</b></span>
+            </ br>
+            <span style="font-size:16pt; font-style:normal; color:darkgrey;"><b>Utilização do Aplicativo para celulares</b></span>
+        </div>
+        <div style="margin-top:3px;margin-left:17px; width:160px; height:130px; float:left;" class="col-3">
+            <video id="vid8" controls autoplay style=" width:300px; height:168px;">
+                <source src="@($"{Model.caminho}{"PO_3M Appmobile-1.mp4"}" )" type="video/mp4">
+                Seu Browser não suporta este recurso de vídeo.
+            </video>
+        </div>
+    </div>
+    <div id="t9" class="ead-div" style="display:none;">
+        <div class="col-8" style="float:left; margin:10pt;">
+            <span style="font-size:22pt;  "><b>Recursos disponíveis para Clientes Comodato 3M</b></span>
+            </ br>
+            <span style="font-size:16pt; font-style:normal; color:darkgrey;"><b>Apresentação da utilização do sistema Comodato 3M, para clientes 3M</b></span>
+        </div>
+        <div style="margin-top:3px;margin-left:17px; width:160px; height:130px; float:left;" class="col-3">
+            <video id="vid9" controls autoplay style=" width:300px; height:168px;">
+                <source src="@($"{Model.caminho}{"PO_3M Cliente-1.mp4"}" )" type="video/mp4">
+                Seu Browser não suporta este recurso de vídeo.
+            </video>
+        </div>
+    </div>
+    <div id="t10" class="ead-div" style="display:none;">
+        <div class="col-8" style="float:left; margin:10pt;">
+            <span style="font-size:22pt;  "><b>Utilização de relatórios</b></span>
+            </ br>
+            <span style="font-size:16pt; font-style:normal; color:darkgrey;"><b>Como utilizar os relatorios 3M</b></span>
+        </div>
+        <div style="margin-top:3px;margin-left:17px; width:160px; height:130px; float:left;" class="col-3">
+            <video id="vid10" controls autoplay style=" width:300px; height:168px;">
+                <source src="@($"{Model.caminho}{"PO_3M Relatorios.mp4"}" )" type="video/mp4">
+                Seu Browser não suporta este recurso de vídeo.
+            </video>
+        </div>
+    </div>
+    <div id="t11" class="ead-div" style="display:none;">
+        <div class="col-8" style="float:left; margin:10pt;">
+            <span style="font-size:22pt;  "><b>Treinamento para Equipe Tecnica </b></span>
+            </ br>
+            <span style="font-size:16pt; font-style:normal; color:darkgrey;"><b>Apresentação do sistema para equipes tecnias</b></span>
+        </div>
+        <div style="margin-top:3px;margin-left:17px; width:160px; height:130px; float:left;" class="col-3">
+            <video id="vid11" controls autoplay style=" width:300px; height:168px;">
+                <source src="@($"{Model.caminho}{"PO_3M Equipetecnica-1.mp4"}" )"type="video/mp4">
+                Seu Browser não suporta este recurso de vídeo.
+            </video>
+        </div>
+    </div>
+    <div id="t12" class="ead-div" style="display:none;">
+        <div class="col-8" style="float:left; margin:10pt;">
+            <span style="font-size:22pt;  "><b>Treinamento para Equipes internas 3M</b></span>
+            </ br>
+            <span style="font-size:16pt; font-style:normal; color:darkgrey;"><b>Apresentação do sistema Comodato para equipe de planejamento e assistencia tecnica 3M</b></span>
+        </div>
+        <div style="margin-top:3px;margin-left:17px; width:160px; height:130px; float:left; " class="col-3">
+            <video id="vid12" controls autoplay style=" width:300px; height:168px;">
+                <source src="@($"{Model.caminho}{"PO_3M_EquipeAssistPlanejamento.mp4"}" )" type="video/mp4">
+                Seu Browser não suporta este recurso de vídeo.
+            </video>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script src="~/Scripts/jquery-3.3.1.js"></script>
+    <script type="text/javascript">
+
+
+        $(function () {
+
+           
+            if ($('#Administracao').val() == 'True')
+                $("#t1").show();
+
+            if ($('#Administracao2').val() == 'True')
+                $("#t2").show();
+
+            if ($('#Administracao3').val() == 'True')
+                $("#t3").show();
+
+            if ($('#ControleEstoque').val() == 'True') {
+               
+                $("#t4").show();
+            }
+
+            if ($('#Dashboard').val() == 'True')
+                $("#t5").show();
+
+            if ($('#WorkflowEnvio').val() == 'True')
+                $("#t6").show();
+
+            if ($('#WorkflowDevolucao').val() == 'True')
+                $("#t7").show();
+
+            if ($('#AppMobile').val() == 'True')
+                $("#t8").show();
+
+            if ($('#Clientes').val() == 'True')
+                $("#t9").show();
+
+            if ($('#UtilizacaoRelatorios').val() == 'True')
+                $("#t10").show();
+
+            if ($('#EquipeTecnica').val() == 'True')
+                $("#t11").show();
+
+            if ($('#Equipetecnica3M').val() == 'True')
+                $("#t12").show();
+
+            IniciaVideo();
+        });
+
+
+        function IniciaVideo() {
+            document.getElementById("vid1").pause();
+            document.getElementById("vid2").pause();
+            document.getElementById("vid3").pause();
+            document.getElementById("vid4").pause();
+            document.getElementById("vid5").pause();
+            document.getElementById("vid6").pause();
+            document.getElementById("vid7").pause();
+            document.getElementById("vid8").pause();
+            document.getElementById("vid9").pause();
+            document.getElementById("vid10").pause();
+            document.getElementById("vid11").pause();
+            document.getElementById("vid12").pause();
+   
+        }
+    </script>
+}

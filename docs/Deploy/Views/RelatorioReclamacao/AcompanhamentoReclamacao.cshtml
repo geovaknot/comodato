@@ -1,0 +1,223 @@
+﻿@model _3M.Comodato.Front.Models.RRAcompanhamentoReclamacao
+
+<div class="well">
+    @using (Html.BeginForm())
+    {
+        @Html.HiddenFor(model => model.ST_STATUS_RR)
+        @Html.HiddenFor(model => model.ID_USUARIO_RESPONS)
+
+        <input type="hidden" id="hidCD_GRUPO_RESPONS" value="@Model.CD_GRUPO_RESPONS" />
+        @*<input type="hidden" id="hidID_USUARIO_RESPONS" value="@Model.ID_USUARIO_RESPONS" />*@
+
+        <div class="form-horizontal">
+            <div class="form-row">
+                <div class="form-group col-sm-2 col-md-1 col-lg-1 col-xl-1 bg-secondary text-white text-center border border-white" id="ST_STATUS_RR_Novo">
+                    <label class="control-label">@Model.acompanhamentoReclamacao.DS_STATUS_NOME_REDUZ_Novo</label>
+                </div>
+
+                <div class="form-group col-sm-2 col-md-1 col-lg-1 col-xl-1 bg-secondary text-white text-center border border-white" id="ST_STATUS_RR_TecRegional">
+                    <label class="control-label">@Model.acompanhamentoReclamacao.DS_STATUS_NOME_REDUZ_TecRegional</label>
+                </div>
+
+                <div class="form-group col-sm-2 col-md-1 col-lg-1 col-xl-1 bg-secondary text-white text-center border border-white" id="ST_STATUS_RR_AnaliseTecnica">
+                    <label class="control-label">@Model.acompanhamentoReclamacao.DS_STATUS_NOME_REDUZ_AnaliseTecnica </label>
+                </div>
+
+                <div class="form-group col-sm-2 col-md-1 col-lg-1 col-xl-1 bg-secondary text-white text-center border border-white" id="ST_STATUS_RR_EmCompras">
+                    <label class="control-label">@Model.acompanhamentoReclamacao.DS_STATUS_NOME_REDUZ_EmCompras</label>
+                </div>
+
+                <div class="form-group col-sm-2 col-md-1 col-lg-1 col-xl-1 bg-secondary text-white text-center border border-white" id="ST_STATUS_RR_EnviadoTecnicoCampo">
+                    <label class="control-label" style="font-size:14px">@Model.acompanhamentoReclamacao.DS_STATUS_NOME_REDUZ_EnviadoTecnicoCampo</label>
+                </div>
+                <div class="form-group col-sm-2 col-md-1 col-lg-1 col-xl-1">
+                    <label class="control-label">&nbsp;</label>
+                </div>
+                <div class="form-group col-sm-2 col-md-1 col-lg-1 col-xl-1">
+                    <label class="control-label">&nbsp;</label>
+                </div>
+
+                <div class="form-group col-sm-2 col-md-1 col-lg-1 col-xl-1">
+                    <label class="control-label">&nbsp;</label>
+                </div>
+
+                <div class="form-group col-sm-2 col-md-1 col-lg-1 col-xl-1">
+                    <label class="control-label">&nbsp;</label>
+                </div>
+
+                <div class="form-group col-sm-2 col-md-1 col-lg-1 col-xl-1">
+                    <label class="control-label">&nbsp;</label>
+                </div>
+
+                <div class="form-group col-sm-2 col-md-1 col-lg-1 col-xl-1 bg-secondary text-white text-center border border-white" id="ST_STATUS_RR_Finalizado">
+                    <label class="control-label">@Model.acompanhamentoReclamacao.DS_STATUS_NOME_REDUZ_Finalizado</label>
+                </div>
+
+                <div class="form-group col-sm-2 col-md-1 col-lg-1 col-xl-1 bg-secondary text-white text-center border border-white" id="ST_STATUS_RR_Reprovado">
+                    <label class="control-label">@Model.acompanhamentoReclamacao.DS_STATUS_NOME_REDUZ_Reprovado</label>
+                </div>
+            </div>
+
+            @Html.Partial("_AcoesHistoricosReclamacao", Model)
+        </div>
+
+    }
+</div>
+
+@Html.Partial("AcoesRelatorioReclamacao" , Model)
+
+<div class="form-group mt-3">
+    @Html.ActionLink("Voltar", "Index", new { area = "" }, new { @class = "btn btn-primary btn-sm" })
+</div>
+
+
+<style>
+    .pre-scrollable {
+        max-height: 350px;
+    }
+</style>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript" src="~/Scripts/Comodato/Util.js"></script>
+    <script type="text/javascript" src="~/Scripts/Comodato/RRAcompanhamento.js"></script>
+    <script type="text/javascript" src="~/Scripts/moment.min.js"></script>
+    @*<script type="text/javascript" src="~/Scripts/Comodato/WorkflowAcompanhamentoPedidoEnvio.js"></script>*@
+
+    @Model.JavaScriptToRun
+
+    <script type="text/javascript">
+        //var actionListarAcessorios = '@Url.Action("PopularGridAcessorioModeloEnvio", "Workflow")';
+        var URLObterListaMensagem = "@Url.Action("ObterListaMensagemJson", "RelatorioReclamacao")";
+
+        var URLAPI = "@_3M.Comodato.Utility.ControlesUtility.Parametro.ObterValorParametro(_3M.Comodato.Utility.ControlesUtility.Constantes.URLAPI)";
+        var URLSite = "@_3M.Comodato.Utility.ControlesUtility.Parametro.ObterValorParametro(_3M.Comodato.Utility.ControlesUtility.Constantes.URLSite)";
+        var nidUsuario = @Convert.ToInt64(((_3M.Comodato.Entity.UsuarioPerfilEntity)Session["_CurrentUser"]).usuario.nidUsuario);
+        var cnmNome = "@(((_3M.Comodato.Entity.UsuarioPerfilEntity)Session["_CurrentUser"]).usuario.cnmNome)";
+         var URLCriptografarChave = "@Url.Action("CriptografarChaveJson")";
+        var MensagemGravacaoSucesso = "@_3M.Comodato.Utility.ControlesUtility.Constantes.MensagemGravacaoSucesso";
+
+        var Novo = @Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.AcompanamentoRR.Novo);
+        var TecnicoRegional = @Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.AcompanamentoRR.TecRegional);
+        var AnaliseTecnica = @Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.AcompanamentoRR.AnaliseTecnica);
+        var EmCompras = @Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.AcompanamentoRR.EmCompras);
+        var EnviadoTecnicoCampo = @Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.AcompanamentoRR.EnviadoTecnicoCampo);
+        var Finalizado = @Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.AcompanamentoRR.Finalizado);
+        var Reprovado = @Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.AcompanamentoRR.Reprovado);
+
+        // variaveis da partial ....
+
+        var codigoStatusNovo = @Convert.ToInt32(_3M.Comodato.Utility.ControlesUtility.Enumeradores.AcompanamentoRR.Novo);
+        var codigoStatusTecnicoRegional = @Convert.ToInt32(_3M.Comodato.Utility.ControlesUtility.Enumeradores.AcompanamentoRR.TecRegional);
+        var codigoStatusAnaliseTecnica = @Convert.ToInt32(_3M.Comodato.Utility.ControlesUtility.Enumeradores.AcompanamentoRR.AnaliseTecnica);
+
+        var codigoStatusEmCompras = @Convert.ToInt32(_3M.Comodato.Utility.ControlesUtility.Enumeradores.AcompanamentoRR.EmCompras);
+        var codigoStatusEnviadoTecnicoCampo = @Convert.ToInt32(_3M.Comodato.Utility.ControlesUtility.Enumeradores.AcompanamentoRR.EnviadoTecnicoCampo);
+        var codigoStatusFinalizado = @Convert.ToInt32(_3M.Comodato.Utility.ControlesUtility.Enumeradores.AcompanamentoRR.Finalizado);
+        var codigoStatusReprovado = @Convert.ToInt32(_3M.Comodato.Utility.ControlesUtility.Enumeradores.AcompanamentoRR.Reprovado);
+                     
+        function MensagemSucesso() {
+            var mensagem = '@_3M.Comodato.Utility.ControlesUtility.Constantes.MensagemGravacaoSucesso';
+            AlertaRedirect("Aviso", mensagem, "window.location = '@Url.Action("Index", "RelatorioReclamacao")';");
+        };
+
+        function CarregarSituacaoStatus() {
+            var ST_STATUS_RR = $('#ST_STATUS_RR').val();
+            var CSSAtivo = "form-group col-sm-2 col-md-1 col-lg-1 col-xl-1 bg-primary text-white text-center  border border-white";
+            var CSSPercorrido = "form-group col-sm-2 col-md-1 col-lg-1 col-xl-1 bg-info text-white text-center  border border-white";
+
+            var CSSAtivo2 = "form-group col-sm-2 col-md-2 col-lg-2 col-xl-2 bg-primary text-white text-center  border border-white";
+            var CSSPercorrido2 = "form-group col-sm-2 col-md-2 col-lg-2 col-xl-2 bg-info text-white text-center  border border-white";
+            //var CSSInativo = "form-group col-sm-2 col-md-1 col-lg-1 col-xl-1 bg-secondary text-white text-center border border-white";
+
+            if (ST_STATUS_RR == @Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.AcompanamentoRR.Novo)) {
+                $('#ST_STATUS_RR_Novo').removeClass();
+                $('ST_STATUS_RR_Novo').addClass(CSSAtivo);
+            }
+            else if (ST_STATUS_RR == @Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.AcompanamentoRR.TecRegional)) {
+                $('#ST_STATUS_RR_Novo').removeClass();
+                $('#ST_STATUS_RR_Novo').addClass(CSSPercorrido);
+
+                $('#ST_STATUS_RR_TecRegional').removeClass();
+                $('#ST_STATUS_RR_TecRegional').addClass(CSSAtivo);
+            }
+            else if (ST_STATUS_RR == @Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.AcompanamentoRR.AnaliseTecnica)) {
+                $('#ST_STATUS_RR_Novo').removeClass();
+                $('#ST_STATUS_RR_Novo').addClass(CSSPercorrido);
+
+                $('#ST_STATUS_RR_TecRegional').removeClass();
+                $('#ST_STATUS_RR_TecRegional').addClass(CSSPercorrido);
+
+                $('#ST_STATUS_RR_AnaliseTecnica').removeClass();
+                $('#ST_STATUS_RR_AnaliseTecnica').addClass(CSSAtivo);
+
+                //Validar se coloca o Reprovado Aqui como Ativo
+            }
+            else if (ST_STATUS_RR == @Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.AcompanamentoRR.EmCompras)) {
+                $('#ST_STATUS_RR_Novo').removeClass();
+                $('#ST_STATUS_RR_Novo').addClass(CSSPercorrido);
+
+                $('#ST_STATUS_RR_TecRegional').removeClass();
+                $('#ST_STATUS_RR_TecRegional').addClass(CSSPercorrido);
+
+                $('#ST_STATUS_RR_AnaliseTecnica').removeClass();
+                $('#ST_STATUS_RR_AnaliseTecnica').addClass(CSSPercorrido);
+                
+                $('#ST_STATUS_RR_EmCompras').removeClass();
+                $('#ST_STATUS_RR_EmCompras').addClass(CSSAtivo);
+
+            }
+            else if (ST_STATUS_RR == @Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.AcompanamentoRR.Finalizado)) {
+
+                $('#ST_STATUS_RR_Novo').removeClass();
+                $('#ST_STATUS_RR_Novo').addClass(CSSPercorrido);
+
+                $('#ST_STATUS_RR_TecRegional').removeClass();
+                $('#ST_STATUS_RR_TecRegional').addClass(CSSPercorrido);
+
+                $('#ST_STATUS_RR_AnaliseTecnica').removeClass();
+                $('#ST_STATUS_RR_AnaliseTecnica').addClass(CSSPercorrido);
+
+                $('#ST_STATUS_RR_EmCompras').removeClass();
+                $('#ST_STATUS_RR_EmCompras').addClass(CSSPercorrido);
+
+                $('#ST_STATUS_RR_Finalizado').removeClass();
+                $('#ST_STATUS_RR_Finalizado').addClass(CSSAtivo);
+            }
+            else if (ST_STATUS_RR == @Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.AcompanamentoRR.EnviadoTecnicoCampo)) {
+                $('#ST_STATUS_RR_Novo').removeClass();
+                $('#ST_STATUS_RR_Novo').addClass(CSSPercorrido);
+
+                $('#ST_STATUS_RR_TecRegional').removeClass();
+                $('#ST_STATUS_RR_TecRegional').addClass(CSSPercorrido);
+
+                $('#ST_STATUS_RR_AnaliseTecnica').removeClass();
+                $('#ST_STATUS_RR_AnaliseTecnica').addClass(CSSPercorrido);
+
+                $('#ST_STATUS_RR_EmCompras').removeClass();
+                $('#ST_STATUS_RR_EmCompras').addClass(CSSPercorrido);
+
+                $('#ST_STATUS_RR_EnviadoTecnicoCampo').removeClass();
+                $('#ST_STATUS_RR_EnviadoTecnicoCampo').addClass(CSSAtivo);
+            }
+            else if (ST_STATUS_RR == @Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.AcompanamentoRR.Reprovado)) {
+                $('#ST_STATUS_RR_Novo').removeClass();
+                $('#ST_STATUS_RR_Novo').addClass(CSSPercorrido);
+
+                $('#ST_STATUS_RR_TecRegional').removeClass();
+                $('#ST_STATUS_RR_TecRegional').addClass(CSSPercorrido);
+
+                $('#ST_STATUS_RR_AnaliseTecnica').removeClass();
+                $('#ST_STATUS_RR_AnaliseTecnica').addClass(CSSPercorrido);
+
+                $('#ST_STATUS_RR_EmCompras').removeClass();
+                $('#ST_STATUS_RR_EmCompras').addClass(CSSPercorrido);
+
+                $('#ST_STATUS_RR_Reprovado').removeClass();
+                $('#ST_STATUS_RR_Reprovado').addClass(CSSAtivo);
+            }
+
+        }
+    </script>
+
+}

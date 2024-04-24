@@ -1,0 +1,35 @@
+﻿@model IEnumerable<_3M.Comodato.Front.Models.Estoque>
+@using GridMvc.Html
+
+@{
+    ViewBag.Title = "Unidade de Estoque";
+}
+
+<i class="fas fa-cubes fa-3x fa-pull-left"></i>
+<h3>Unidade de Estoque</h3>
+
+<p>
+    <a class="btn btn-primary btn-sm" href="Estoque/Incluir">Novo registro <i class="far fa-sticky-note"></i></a>
+</p>
+<div class="table table-hover">
+        @Html.Grid(Model).Columns(columns =>
+             {
+                 columns.Add(c => c.ccdEstoque).Titled("CÓDIGO").Sortable(true).Filterable(true);
+                 columns.Add(c => c.cdsEstoque).Titled("ESTOQUE").Sortable(true).Filterable(true);
+                 columns.Add(c => c.cdsTipoEstoque).Titled("TIPO ESTOQUE").Sortable(true).Filterable(true);
+                 columns.Add(c => c.ccdTecnico).Titled("TÉCNICO").Sortable(true).Filterable(true);
+                 columns.Add(c => c.Tecnico.NM_TECNICO).Titled("USUÁRIO RESPONSÁVEL").Sortable(true).Filterable(true);
+                 columns.Add()
+                                 .Encoded(false)
+                                 .Sanitized(false)
+                                 .SetWidth(30)
+                                 .RenderValueAs(o => Html.ActionLink(" ", "Editar", new { idKey = HttpUtility.HtmlDecode(o.idKey) }, new { @class = "fas fa-pencil-alt fa-lg" }));
+             }).WithPaging(10)
+    </div>
+
+
+@section Scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+
+}

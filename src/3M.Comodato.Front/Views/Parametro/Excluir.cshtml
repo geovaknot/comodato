@@ -1,0 +1,75 @@
+﻿@model _3M.Comodato.Front.Models.Parametro
+
+@{
+    ViewBag.Title = "Parâmetro";
+}
+
+<i class="fas fa-cubes fa-3x fa-pull-left"></i>
+<h3>Parâmetro (Excluir)</h3>
+
+<h5>Confirma exclusão deste registro?</h5>
+<div>
+    <hr />
+
+    @*<div class="form-group">
+            <div class="col-12">
+                <label class="control-label font-weight-bold">Código</label>
+                <br />
+                @Html.DisplayFor(model => model.nidPerfil)
+            </div>
+        </div>*@
+
+    <div class="form-group">
+        <div class="col-8">
+            <label class="control-label font-weight-bold">Código</label>
+            <br />
+            @Html.DisplayFor(model => model.ccdParametro)
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-12">
+            <label class="control-label font-weight-bold">Descrição</label>
+            <br />
+            @Html.DisplayFor(model => model.cdsParametro)
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-12">
+            <label class="control-label font-weight-bold">Valores</label>
+            <br />
+            @Html.DisplayFor(model => model.cvlParametro)
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-12">
+            <label class="control-label font-weight-bold">Tipo de Parâmetro</label>
+            <br />
+            @Html.DisplayFor(model => model.flgTipoParametro)
+        </div>
+    </div>
+
+    @using (Html.BeginForm())
+    {
+        <div class="form-actions no-color">
+            <input type="submit" value="Excluir" class="btn btn-primary btn-sm" />
+            @Html.ActionLink("Voltar", "Index", new { area = "" }, new { @class = "btn btn-primary btn-sm" })
+        </div>
+    }
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript" src="~/Scripts/Comodato/Util.js"></script>
+
+    <script type="text/javascript">
+     @Model.JavaScriptToRun
+
+        function MensagemSucesso() {
+            var mensagem = '@_3M.Comodato.Utility.ControlesUtility.Constantes.MensagemGravacaoSucesso';
+
+            AlertaRedirect("Aviso", mensagem, "window.location = '../Parametro';");
+        };
+    </script>
+}

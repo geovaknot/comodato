@@ -1,0 +1,134 @@
+﻿@model _3M.Comodato.Front.Models.Contato
+
+@{
+    ViewBag.Title = "Contato";
+}
+
+<i class="fas fa-cubes fa-3x fa-pull-left"></i>
+<h3>Contato (Inativar)</h3>
+
+<h5>Confirma inativação deste registro?</h5>
+<div>
+    <hr />
+    @Html.HiddenFor(model => model.nidContato)
+
+    <div class="form-group">
+        <label class="control-label font-weight-bold">Nome</label>
+        <br />
+        @Html.DisplayFor(model => model.cnmContato)
+    </div>
+
+    <div class="form-group">
+        <label class="control-label font-weight-bold">Apelido</label>
+        <br />
+        @Html.DisplayFor(model => model.cnmApelido)
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-4">
+            <label class="control-label font-weight-bold">Tipo de Contato</label>
+            <br />
+            @Html.DisplayFor(model => model.tipoContato.cdsTipoContato)
+        </div>
+
+        <div class="form-group col-8">
+            <label class="control-label font-weight-bold">E-mail</label>
+            <br />
+            @Html.DisplayFor(model => model.cdsEmail)
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label font-weight-bold">Empresa</label>
+        <br />
+        @Html.DisplayFor(model => model.empresa.NM_Empresa)
+    </div>
+
+    <div class="form-group">
+        <label class="control-label font-weight-bold">Cliente</label>
+        <br />
+        @Html.DisplayFor(model => model.cliente.NM_CLIENTE)
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-2">
+            <label class="control-label font-weight-bold">DDD</label>
+            <br />
+            @Html.DisplayFor(model => model.cdsDDDTelefoneCel)
+        </div>
+
+        <div class="form-group col-4">
+            <label class="control-label font-weight-bold">Celular</label>
+            <br />
+            @Html.DisplayFor(model => model.cdsTelefoneCel)
+        </div>
+
+        <div class="form-group col-2">
+            <label class="control-label font-weight-bold">DDD</label>
+            <br />
+            @Html.DisplayFor(model => model.cdsDDDTelefone2)
+        </div>
+
+        <div class="form-group col-4">
+            <label class="control-label font-weight-bold">Telefone</label>
+            <br />
+            @Html.DisplayFor(model => model.cdsTelefone2)
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label font-weight-bold">Observações</label>
+        <br />
+        @Html.DisplayFor(model => model.cdsObservacoes)
+    </div>
+
+    <div class="form-group">
+        <label class="control-label font-weight-bold">Cargo</label>
+        <br />
+        @Html.DisplayFor(model => model.cdsCargo)
+    </div>
+
+    <div class="form-group ">
+        <label class="control-label font-weight-bold">Condição (Ativo)</label>
+        <br />
+        @Html.DisplayFor(model => model.bidAtivo)
+    </div>
+
+    @if (!string.IsNullOrEmpty(ViewBag.Mensagem))
+    {
+        <div class="form-group">
+            <label class="text-danger">@ViewBag.Mensagem</label>
+        </div>
+    }
+
+</div>
+
+@using (Html.BeginForm())
+{
+    <div class="form-group">
+        <input type="submit" value="Inativar" class="btn btn-primary btn-sm" />
+        @Html.ActionLink("Voltar", "Index", new { area = "" }, new { @class = "btn btn-primary btn-sm" })
+    </div>
+
+}
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript" src="~/Scripts/Comodato/Util.js"></script>
+
+    <script type="text/javascript">
+     @Model.JavaScriptToRun
+
+        function MensagemSucesso() {
+            var mensagem = '@_3M.Comodato.Utility.ControlesUtility.Constantes.MensagemInativacaoSucesso';
+
+            AlertaRedirect("Aviso", mensagem, "window.location = '../Contato';");
+        };
+    </script>
+}
+
+
+
+

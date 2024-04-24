@@ -1,0 +1,218 @@
+﻿@model IEnumerable<_3M.Comodato.Front.Models.ListaPedidoPecas>
+
+@using GridMvc.Html
+
+
+
+@*<div class="form-group row">
+        <label class="col-sm-10 col-form-label text-right font-weight-bold">VLR. TOTAL PEÇAS SOLICITADAS</label>
+        <div class="col-sm-2">
+            <input type="text" readonly class="form-control-plaintext font-weight-bold" id="VL_TOTAL_PECA_SOLICITADAS" value="@ViewBag.VL_TOTAL_PECA_SOLICITADA">
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-sm-10 col-form-label text-right font-weight-bold">VALOR DE PEÇAS APROVADAS</label>
+        <div class="col-sm-2">
+            <input type="text" readonly class="form-control-plaintext font-weight-bold" id="VL_TOTAL_PECA" value="@ViewBag.VL_TOTAL_PECA">
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <label class="col-sm-10 col-form-label text-right font-weight-bold">VALOR DE PEÇAS CANCELADAS</label>
+        <div class="col-sm-2">
+            <input type="text" readonly class="form-control-plaintext font-weight-bold" id="VL_TOTAL_PECA_CANCELADAS" value="@ViewBag.VL_TOTAL_PECA_CANCELADAS">
+        </div>
+    </div>*@
+
+@if (ViewBag.ExibirValorPeca == true)
+{
+    <div class="form-group row">
+        <label onclick="CalcularRestante()" style="cursor: pointer;" id="CalcularRestante" class="col-sm-10 col-form-label text-right font-weight-bold">CALCULAR VALOR DE PEÇAS A APROVAR</label>
+        <div class="col-sm-2">
+            <input type="text" readonly class="form-control-plaintext font-weight-bold" id="VL_TOTAL_PECA_Restante">
+        </div>
+    </div>
+}
+
+@helper RenderCheck(Int64 ID_LOTE_APROVACAO, string DS_ST_STATUS_ITEM, Int64 NR_LINHA, string CD_PECA, bool permiteSelecionar, string tipoChecagem, Int64 ID_ITEM_PEDIDO)
+{
+    if (tipoChecagem == "checkbox")
+    {
+        if (permiteSelecionar == false)
+        {
+            <span></span>
+        }
+        else if (permiteSelecionar == true)
+        {
+            string nrLinha = "checkLote_" + NR_LINHA.ToString();
+            <input type='checkbox' name='checkLote' id='@nrLinha' value='@ID_ITEM_PEDIDO' />
+        }
+        else if (DS_ST_STATUS_ITEM == "Cancelado")
+        {
+            <span></span>
+        }
+
+    }
+
+    if (tipoChecagem == "editar")
+    {
+        if (ID_LOTE_APROVACAO > 0 && permiteSelecionar == true && (DS_ST_STATUS_ITEM == "Aprovado" || DS_ST_STATUS_ITEM == "Recebido com Pendência"))
+        {
+            <a style="cursor: pointer" onclick='InformarDadosBPCS(@ID_ITEM_PEDIDO)' class='fas fa-pencil-alt fa-lg'></a>
+        }
+        else if (permiteSelecionar == false)
+        {
+            <a style="cursor: pointer" onclick='InformarDadosBPCS(@ID_ITEM_PEDIDO)' class='fas fa-pencil-alt fa-lg'></a>
+        }
+    }
+
+}
+
+@helper RenderCheck2(string DS_DIR_FOTO)
+{
+    if (String.IsNullOrEmpty(DS_DIR_FOTO))
+    {
+        <span></span>
+    }
+    else
+    {
+        <a href='#' onclick="MostrarFotoPeca('@DS_DIR_FOTO')" class='fas fa-file fa-lg' title="Mostrar a foto da peça."></a>
+    }
+}
+
+
+<div class="table table-hover">
+    @Html.Grid(Model).Columns(columns =>
+{
+
+    //Fazer if para qdo tecnico3M ou tec ext nao mostrar essa primeira coluna
+
+    if (ViewBag.ExibirColunaLote == true)
+    {
+
+        columns.Add().Titled(
+                "<a href='javascript:void' onclick='checkAndUncheckAll(event)' class='fas fa-check-square fa-lg' title='Marcar todos'></a>"// +
+                                                                                                                                           //"<a href='javascript:void' onclick='uncheckAll(event)' class='fa fa-minus fa-lg' title='Desmarcar todos' style='color:red'></a>"
+                                                                                                                                           //"<button class='btn btn-primary btn-sm fas fa-check fa-lg' type='button' OnClick='btnMarcarTodos' id='btnMarcarTodos'></button>" +
+                                                                                                                                           //                        "<button class='btn btn-primary btn-sm fa fa-minus fa-lg' type='button' OnClick='btnDesmarcarTodos' id='btnDesmarcarTodos'></button>"
+            )
+                .Encoded(false)
+                .Sanitized(false)
+                .SetWidth(5)
+                //.RenderValueAs(foo => foo.pedidoPeca.ID_LOTE_APROVACAO > 0 ? "<font size='1' color='gray'>[" + foo.pedidoPeca.ID_LOTE_APROVACAO.ToString() + "]</font>" :
+                //(foo.pedidoPeca.DS_ST_STATUS_ITEM == "Cancelado" || foo.pedidoPeca.DS_ST_STATUS_ITEM == "Recebido" ? "" :
+                //(foo.permiteSelecionar == true) ? "<input type='checkbox' name='checkLote' id='checkLote_" +  foo.pedidoPeca.NR_LINHA + "' value='" + foo.peca.CD_PECA + "' />" :
+                //""));
+                .RenderValueAs(foo => RenderCheck(foo.pedidoPeca.ID_LOTE_APROVACAO, foo.pedidoPeca.DS_ST_STATUS_ITEM, foo.pedidoPeca.NR_LINHA, foo.peca.CD_PECA, foo.permiteSelecionar, "checkbox", foo.pedidoPeca.ID_ITEM_PEDIDO));
+
+    }
+
+
+    columns.Add(o => o.peca.CD_PECA, true).Titled("codigo");
+    columns.Add(foo => foo.peca.DS_PECA).Titled("PEÇA<br/>&nbsp;").Sortable(false).Filterable(false);
+
+    //if (ViewBag.ExibirEstoque3M == false)
+    //{
+    //    columns.Add(foo => foo.peca.CD_PECA).Titled("CÓDIGO 3M<br/>&nbsp;").Sortable(false).Filterable(false);
+    //}
+
+    ////columns.Add(foo => foo.peca.TX_UNIDADE).Titled("UN<br/>&nbsp;").Sortable(false).Filterable(false);
+    ////columns.Add(foo => foo.planoZero.ccdCriticidadeAbc).Titled("CRITIC<br/>&nbsp;").Sortable(false).Filterable(false);
+
+    //if (ViewBag.ExibirCriticidade == true)
+    //{
+    //    columns.Add(foo => foo.planoZero.ccdCriticidadeAbc).Titled("CR<br/>&nbsp;").Sortable(false).Filterable(false);
+    //}
+
+    //columns.Add(foo => foo.estoqueMovimentacao.DT_MOVIMENTACAO).Titled("ÚLTIMA<br/>UTILIZAÇÃO").Sortable(false).Filterable(false);
+
+    columns.Add(foo => foo.estoquePeca.QT_PECA_ATUAL).Titled("QTDE.<br/>EST.TEC.").Sortable(false).Filterable(false).Css("text-align: center");
+
+    columns.Add(foo => foo.pedidoPeca.Estoque_Tec_Aprov).Titled("EST.TEC.<br/>APR.").Sortable(false).Filterable(false).Css("text-align: center");
+
+
+    //20.08.2018 - F4.6.3 - I
+    if (ViewBag.ExibirEstoque3M1 == true)
+    {
+        columns.Add().Titled("QTDE.<br/>EST.3M1").Sortable(false).Filterable(false).Encoded(false).Sanitized(false).RenderValueAs(
+            foo => Convert.ToInt32("0" + foo.pedidoPeca.QTD_SOLICITADA) > Convert.ToInt32("0" + foo.estoquePeca3M.QT_PECA) ?
+            "<span class='text-danger font-weight-bold font-italic'>" + foo.estoquePeca3M.QT_PECA_ATUAL + "</span>"
+            : foo.estoquePeca3M.QT_PECA_ATUAL);
+    }
+    //20.08.2018 - F4.6.3 - F
+
+    if (ViewBag.ExibirEstoque3M2 == true)
+    {
+
+        columns.Add().Titled("QTDE.<br/>EST.REC.").Sortable(false).Filterable(false).Encoded(false).Sanitized(false).RenderValueAs(
+            foo => Convert.ToInt32(foo.pedidoPeca.QTD_SOLICITADA) > Convert.ToInt32(foo.estoquePeca3M2.QT_PECA) ?
+            "<span class='text-danger font-weight-bold font-italic'>" + foo.estoquePeca3M2.QT_PECA_ATUAL.ToString() + "</span>"
+            : foo.estoquePeca3M2.QT_PECA_ATUAL);
+    }
+
+    if (ViewBag.ExibirQtdSugeridaPZ == true)
+    {
+        columns.Add(foo => foo.planoZero.qtPecaModelo).Titled("QTDE.<br/>EST.PZ").Sortable(false).Filterable(false);
+    }
+
+    //columns.Add(foo => foo.planoZero.nqtPecaModelo).Titled("QTDE.<br/>SUGERIDA<br/>PLANO ZERO").Sortable(false).Filterable(false);
+    //columns.Add(foo => foo.pedidoPeca.QTD_SOLICITADA).Titled("QTDE.<br/>PED.").Sortable(false).Filterable(false);
+
+    columns.Add().Titled("QTDE.<br/>PED.").Sortable(false).Filterable(false).Encoded(false).Sanitized(false).RenderValueAs(
+                        foo => Convert.ToDecimal(foo.pedidoPeca.QTD_SOLICITADA) > Convert.ToDecimal(foo.planoZero.qtPecaModelo) ?
+                        "<span class='text-danger font-weight-bold font-italic'>" + foo.pedidoPeca.QTD_SOLICITADA.ToString() + "</span>"
+                        : foo.pedidoPeca.QTD_SOLICITADA);
+
+    //columns.Add(foo => foo.pedidoPeca.QTD_APROVADA).Titled("QTDE.<br/>APR.").Sortable(false).Filterable(false);
+
+    columns.Add().Titled("QTDE.<br/>APR.").Sortable(false).Filterable(false).Encoded(false).Sanitized(false).RenderValueAs(
+                        foo => Convert.ToDecimal(foo.pedidoPeca.QTD_APROVADA) > Convert.ToDecimal(foo.pedidoPeca.QTD_SOLICITADA) ?
+                        "<span class='text-danger font-weight-bold font-italic'>" + foo.pedidoPeca.QTD_APROVADA.ToString() + "</span>"
+                        : foo.pedidoPeca.QTD_APROVADA);
+
+    columns.Add().Titled("EST. <br/>").Sortable(false).Filterable(false).Encoded(false).Sanitized(false).RenderValueAs(
+            foo =>
+            "<span class='text-danger font-weight-bold font-italic'>" + foo.CD_ESTOQUE.ToString() + "</span>"
+            );
+
+    columns.Add(foo => foo.pedidoPeca.VL_TOTAL_PECA_SOLICITADA).Titled("VLT TOT<br> SOLIC.").Sortable(false).Filterable(false);
+
+    //columns.Add(foo => foo.pedidoPeca.VL_TOTAL_PECA).Titled("VLT TOT<br> APR").Sortable(false).Filterable(false);
+
+    columns.Add(foo => foo.pedidoPeca.DS_ST_STATUS_ITEM).Titled("STATUS<br/>&nbsp;").Sortable(false).Filterable(false);
+
+    //foo => foo.permiteEditar == false
+    //if (ViewBag.Tecnico3M == "S")
+    //{
+
+    //columns.Add()
+    //                        .Encoded(false)
+    //                        .Sanitized(false)
+    //                        .SetWidth(5)
+    //                    //.RenderValueAs(o => o.statusPedido.ID_STATUS_PEDIDO != 1 ? " " : "<a href='#' onclick='ExcluirPeca(" + o.pedidoPeca.ID_ITEM_PEDIDO + ")' class='fas fa-trash-alt fa-lg'> </a>");
+    //                    .RenderValueAs(foo => "<a onclick='InformarDadosBPCS(" + foo.pedidoPeca.ID_ITEM_PEDIDO + "," + "&#34;" + foo.CD_ESTOQUE  +"&#34;" + "," + "&#34;" + foo.peca.CD_PECA + "&#34;" +
+    //                                            "," + "&#34;" + foo.pedidoPeca.QTD_SOLICITADA + "&#34;" + "," + "&#34;" + foo.pedidoPeca.QTD_APROVADA_3M1 + "&#34;" +
+    //                                            "," + "&#34;" + foo.pedidoPeca.QTD_APROVADA_3M2 + "&#34;" + ")' class='fas fa-pencil-alt fa-lg'> </a>");
+    //foo => foo.permiteEditar == false
+    //SL00035389
+    if (ViewBag.ExibirExcluirPeca == true)
+    {
+        columns.Add()
+                            .Encoded(false)
+                            .Sanitized(false)
+                            .SetWidth(5)
+                        //.RenderValueAs(o => o.statusPedido.ID_STATUS_PEDIDO != 1 ? " " : "<a href='#' onclick='ExcluirPeca(" + o.pedidoPeca.ID_ITEM_PEDIDO + ")' class='fas fa-trash-alt fa-lg'> </a>");
+                        .RenderValueAs(foo => foo.permiteExcluir == false ? " " : "<a href='#' onclick='ExcluirPeca(" + foo.pedidoPeca.ID_ITEM_PEDIDO + ")' class='fas fa-trash-alt fa-lg'> </a>");
+    }
+
+    columns.Add()
+                        .Encoded(false)
+                        .Sanitized(false)
+                        .SetWidth(5)
+                    //.RenderValueAs(o => o.statusPedido.ID_STATUS_PEDIDO != 1 ? " " : "<a href='#' onclick='ExcluirPeca(" + o.pedidoPeca.ID_ITEM_PEDIDO + ")' class='fas fa-trash-alt fa-lg'> </a>");
+                    .RenderValueAs(foo => RenderCheck2(foo.pedidoPeca.DS_DIR_FOTO));
+
+
+}).SetRowCssClasses(foo => foo.cssRegraGRIDAplicar).Named("gridPecas")
+</div>

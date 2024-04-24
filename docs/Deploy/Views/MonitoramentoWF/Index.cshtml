@@ -1,0 +1,65 @@
+﻿@model _3M.Comodato.Front.Models.MonitoramentoWF
+
+@using GridMvc.Html
+
+@{
+    ViewBag.Title = "Tempo Médio de Atendimento de Workflow";
+}
+
+<i class="fas fa-print fa-3x fa-pull-left"></i>
+<h3>Tempo Médio de Atendimento de Workflow</h3>
+
+<div class="well">
+    <hr />
+
+    @using (Html.BeginForm())
+    {
+        <div class="form-horizontal">
+            <div class="form-row">
+
+                <div class="form-group">
+                    <label class="control-label">Período</label>
+                    <div id="DT_DATAS-container">
+                        @*<div class="input-group date">*@
+                        <div class="input-daterange input-group">
+                            @Html.TextBoxFor(model => model.DT_INICIAL, "{0:dd/MM/yyyy}", new { @class = "form-control col-12" })
+                            <span class="input-group-addon">&nbsp;até&nbsp;</span>
+                            @Html.TextBoxFor(model => model.DT_FINAL, "{0:dd/MM/yyyy}", new { @class = "form-control col-12" })
+                        </div>
+                    </div>
+                </div>
+                &nbsp;&nbsp;&nbsp;
+                <div class="form-group">
+                    <label class="control-label">Tipo Pedido:</label>
+                    <div class="form-group">
+                        @Html.DropDownListFor(model => model.TipoPedido, Model.ListaStatus, new { @class = "js-select-basic-single col-md-12" })
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            <button class="btn btn-primary btn-sm" type="button" id="btnConsultar">Consultar</button>
+            <button class="btn btn-primary btn-sm" type="button" id="btnImprimir">Imprimir</button>
+        </div>
+    }
+</div>
+
+<div id="gridMvc"></div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript" src="~/Scripts/Comodato/Util.js"></script>
+    <script type="text/javascript" src="~/Scripts/Comodato/MonitoramentoWF.js"></script>
+
+    <script>
+        var URLObterLista = "@Url.Action("ObterLista", "MonitoramentoWF")";
+        @*var URLImprimir = "@Url.Action("Imprimir", "Devolvidos")";*@
+        var URLAPI = "@_3M.Comodato.Utility.ControlesUtility.Parametro.ObterValorParametro(_3M.Comodato.Utility.ControlesUtility.Constantes.URLAPI)";
+        var URLSite = "@_3M.Comodato.Utility.ControlesUtility.Parametro.ObterValorParametro(_3M.Comodato.Utility.ControlesUtility.Constantes.URLSite)";
+        var URLCriptografarChave = "@Url.Action("CriptografarChaveJson")";
+
+        var nidUsuario = @Convert.ToInt64(((_3M.Comodato.Entity.UsuarioPerfilEntity)Session["_CurrentUser"]).usuario.nidUsuario);
+    </script>
+}

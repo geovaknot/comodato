@@ -1,0 +1,98 @@
+﻿@model IEnumerable<_3M.Comodato.Front.Models.RelatorioKAT>
+
+
+@using GridMvc.Html
+
+@{
+    ViewBag.Title = "KAT";
+}
+
+<i class="fas fa-cubes fa-3x fa-pull-left"></i>
+<h3>KAT</h3>
+
+<p>
+    <button class="btn btn-primary btn-sm" type="button" id="btnGeraRelatorioKAT">
+        Sincronizar consulta do KAT <i class="fas fa-sync"></i>
+    </button>
+    <button class="btn btn-primary btn-sm" type="button" id="btnImprimir">Imprimir</button>
+</p>
+
+<div class="table table-hover">
+    @Html.Grid(Model).Columns(columns =>
+
+{
+    columns.Add(foo => foo.cliente.CD_CLIENTE).Titled("CÓDIGO").Sortable(true).Filterable(true);
+    columns.Add(foo => foo.cliente.NM_CLIENTE).Titled("CLIENTE").Sortable(true).Filterable(true);
+    columns.Add(foo => foo.VENDAS).Titled("VENDAS").Sortable(true).Filterable(true).Format("{0:N2}");
+    columns.Add(foo => foo.GM).Titled("GM").Sortable(true).Filterable(true).Format("{0:N2}");
+    columns.Add(foo => foo.GM_GRUPO_EMP).Titled("GM GRUPO<br/>EMPR.").Sortable(true).Filterable(true);
+    columns.Add(foo => foo.CRITICIDADE_AMB).Titled("CRITIC.<br/>AMB.").Sortable(true).Filterable(true);
+    columns.Add(foo => foo.QTD_ATIVOS).Titled("ATIVOS").Sortable(true).Filterable(true);
+    columns.Add(foo => foo.NOTA_QTD_ATIVOS).Titled("NOTA QTD<br/>ATIVOS").Sortable(true).Filterable(true);
+    columns.Add(foo => foo.COMPLEXIDADE_EQUIP).Titled("COMPL.<br/>EQUIP.").Sortable(true).Filterable(true);
+    columns.Add(foo => foo.SCORE).Titled("SCORE").Sortable(true).Filterable(true);
+    columns.Add(foo => foo.CLASSIFICACAO).Titled("KAT").Sortable(true).Filterable(true);
+    columns.Add(foo => foo.PERIODOS).Titled("PERÍODOS").Sortable(true).Filterable(true);
+}).WithPaging(10)
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript" src="~/Scripts/Comodato/Util.js"></script>
+
+    <script>
+        var URLAPI = "@_3M.Comodato.Utility.ControlesUtility.Parametro.ObterValorParametro(_3M.Comodato.Utility.ControlesUtility.Constantes.URLAPI)";
+        var URLSite = "@_3M.Comodato.Utility.ControlesUtility.Parametro.ObterValorParametro(_3M.Comodato.Utility.ControlesUtility.Constantes.URLSite)";
+        var token = "@Convert.ToString(((_3M.Comodato.Entity.UsuarioPerfilEntity)Session["_CurrentUser"]).token)";
+    </script>
+
+    <script type="text/javascript">
+
+        $("#btnGeraRelatorioKAT").click(function () {
+            btnConfirmarRelatorio();
+        });
+
+        function btnConfirmarRelatorio() {
+            ConfirmarSimNao('Aviso', 'A sincronização da consulta do KAT para TODOS os clientes pode demorar alguns minutos... Deseja prosseguir com a sincronização?', 'GerarRealtorioKAT()')
+        }
+
+        function GerarRealtorioKAT() {
+            var URL = URLAPI + "ClienteAPI/GerarRelatorioKAT";
+
+            $.ajax({
+                type: 'POST',
+                url: URL,
+                dataType: "json",
+                cache: false,
+                async: true,
+                contentType: "application/json",
+                //headers: { "Authorization": "Basic " + localStorage.token },
+                //data: null,
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+                    $("#loader").css("display", "block");
+                },
+                complete: function () {
+                    $("#loader").css("display", "none");
+                },
+                success: function (res) {
+                    if (res.retorno != null) {
+                        AlertaRedirect("AVISO", JSON.parse(res.retorno), "window.location = '" + URLSite + "/KAT';");
+                    }
+                },
+                error: function (res) {
+                    //atualizarPagina();
+                    $("#loader").css("display", "none");
+                    Alerta("ERRO", JSON.parse(res.responseText).Message);
+                }
+
+            });
+
+        }
+
+        $('#btnImprimir').click(function () {
+            window.open(URLSite + '/RelatorioKAT.aspx', '_blank');
+        });
+
+    </script>
+}

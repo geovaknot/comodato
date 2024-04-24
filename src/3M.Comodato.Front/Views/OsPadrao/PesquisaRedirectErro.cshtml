@@ -1,0 +1,78 @@
+﻿
+@using GridMvc.Html
+
+@{
+    
+}
+
+<style>
+    body {
+        text-align: center;
+        padding-top: 50px
+    }
+
+    .estrelas input[type=radio] {
+        display: none;
+    }
+
+    .estrelas label i.fa {
+        font-size: 2.5em
+    }
+
+        .estrelas label i.fa:before {
+            content: '\f005';
+            color: #FC0;
+        }
+
+    .estrelas input[type=radio]:checked ~ label i.fa:before {
+        color: #CCC;
+    }
+</style>
+
+<body class="bodylogin">
+    <div class="container">
+        <div class="well">
+
+            
+            <div class="card mb-md-5 mx-auto" style="max-width: 25rem; background-color:rgba(225, 223, 223, 0.85); border-radius:5pt; margin-top:150px; ">
+
+                <div class="card-header">
+                    <div class="row" style="width:25rem; height:5pt; background-color:#bc3535; margin-top:-10pt; margin-left:-21px;"></div>
+                    <h3 style="color:#6a5f5f; margin-top:3pt;">Já existe avaliação para esta O.S!!</h3>
+                </div>
+                <div class="card-body">
+                        
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+
+        <script>
+        var URLSITE = "@_3M.Comodato.Utility.ControlesUtility.Parametro.ObterValorParametro(_3M.Comodato.Utility.ControlesUtility.Constantes.URLSite)";
+
+        @*var nidUsuario = @Convert.ToInt64(((_3M.Comodato.Entity.UsuarioPerfilEntity)Session["_CurrentUser"]).usuario.nidUsuario);
+        var nidPerfil  = @Convert.ToInt64(((_3M.Comodato.Entity.UsuarioPerfilEntity)Session["_CurrentUser"]).perfil.nidPerfil);*@
+
+        var MensagemGravacaoSucesso = "@_3M.Comodato.Utility.ControlesUtility.Constantes.MensagemGravacaoSucesso";
+        var MensagemExclusaoSucesso = "@_3M.Comodato.Utility.ControlesUtility.Constantes.MensagemExclusaoSucesso";
+        var totalClientes = 0;
+        @*var token = @Convert.ToString(((_3M.Comodato.Entity.UsuarioPerfilEntity)Session["_CurrentUser"]).token);*@
+        </script>
+
+
+        <link rel="stylesheet" href="@Url.Content("~/Content/rateYo/v2.3.2/jquery.rateyo.min.css")">
+        <script type="text/javascript" src="@Url.Content("~/Scripts/rateYo/v2.3.2/jquery.rateyo.min.js")"></script>
+        <script type="text/javascript" src="~/Scripts/Comodato/Util.js"></script>
+        <script type="text/javascript" src="~/Scripts/xjsapi/clienteapi.js"></script>
+        <script type="text/javascript" src="~/Scripts/Comodato/VisitaConsultaAvaliacao.js"></script>
+
+    }
+</body>
+
+
+

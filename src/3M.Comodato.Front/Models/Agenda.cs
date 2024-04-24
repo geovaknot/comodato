@@ -1,0 +1,147 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.ComponentModel.DataAnnotations;
+using _3M.Comodato.Entity;
+
+namespace _3M.Comodato.Front.Models
+{
+    public class Agenda : BaseModel
+    {
+        private ClienteEntity _Cliente = null;
+        private TecnicoEntity _Tecnico = null;
+
+        public List<Cliente> clientes { get; set; }
+        public List<Tecnico> tecnicos { get; set; }
+
+        public ClienteEntity cliente
+        {
+            get
+            {
+                if (_Cliente == null) _Cliente = new ClienteEntity();
+                return _Cliente;
+            }
+            set
+            {
+                if (_Cliente == null) _Cliente = new ClienteEntity();
+                _Cliente = value;
+            }
+        }
+
+        public TecnicoEntity tecnico
+        {
+            get
+            {
+                if (_Tecnico == null) _Tecnico = new TecnicoEntity();
+                return _Tecnico;
+            }
+            set
+            {
+                if (_Tecnico == null) _Tecnico = new TecnicoEntity();
+                _Tecnico = value;
+            }
+        }
+
+    }
+
+    public class AgendaAtendimento : Agenda
+    {
+        private TpStatusVisitaOSEntity _TpStatusVisitaOSEntity = null;
+        private RegiaoEntity _RegiaoEntity = null;
+        //private OSEntity _OSEntity = null;
+
+        public List<TpStatusVisitaOS> tiposStatusVisitaOS { get; set; }
+
+        public TpStatusVisitaOSEntity tpStatusVisitaOS
+        {
+            get
+            {
+                if (_TpStatusVisitaOSEntity == null) _TpStatusVisitaOSEntity = new TpStatusVisitaOSEntity();
+                return _TpStatusVisitaOSEntity;
+            }
+            set
+            {
+                if (_TpStatusVisitaOSEntity == null) _TpStatusVisitaOSEntity = new TpStatusVisitaOSEntity();
+                _TpStatusVisitaOSEntity = value;
+            }
+        }
+
+        public List<RegiaoEntity> regioes { get; set; }
+
+        public RegiaoEntity regiao
+        {
+            get
+            {
+                if (_RegiaoEntity == null) _RegiaoEntity = new RegiaoEntity();
+                return _RegiaoEntity;
+            }
+            set
+            {
+                if (_RegiaoEntity == null) _RegiaoEntity = new RegiaoEntity();
+                _RegiaoEntity = value;
+            }
+        }
+
+    }
+
+    public class ListaAgendaAtendimento : BaseModel
+    {
+        public Int64 ID_VISITA { get; set; }
+        public int? ST_TP_STATUS_VISITA_OS { get; set; }
+        //public Int64? ID_OS { get; set; }
+        public string DS_TP_STATUS_VISITA_OS { get; set; }
+        public Int64 ID_AGENDA { get; set; }
+        public Int64 CD_CLIENTE { get; set; }
+        public string NM_CLIENTE { get; set; }
+        public string EN_CIDADE { get; set; }
+        public string EN_ESTADO { get; set; }
+        public string CD_REGIAO { get; set; }
+        public string DS_REGIAO { get; set; }
+        public string DT_DESATIVACAO { get; set; }
+        public string DT_DATA_VISITA { get; set; }
+        public string CD_TECNICO_PRINCIPAL { get; set; }
+        public string NM_TECNICO_PRINCIPAL { get; set; }
+        public int QT_PERIODO { get; set; }
+        public int NR_ORDENACAO { get; set; }
+        public TimeSpan TempoGastoTOTAL { get; set; }
+        public decimal QT_PERIODO_REALIZADO { get; set; }
+        public string QT_PERIODO_REALIZADO_FORMATADO { get; set; }
+        public string PERCENTUAL { get; set; }
+
+        public string idKeyINICIAR { get; set; }    // Chave para ser usada quando a visita estiver FINALIZADA ou CONFIRMADA para poder INICIAR uma nova visita
+
+        public int? ST_TP_STATUS_VISITA_OS_INICIAR { get; set; }
+        public string DS_TP_STATUS_VISITA_OS_INICIAR { get; set; }
+
+        public List<ListaLogStatusOS> listaLogStatusOs { get; set; }
+        public List<LogStatusVisita> listaLogStatusVisita { get; set; }
+    }
+
+    public class ListaLogStatusOS : LogStatusOS
+    {
+        private TecnicoEntity _Tecnico = null;
+
+        //public Int64 ID_OS { get; set; }
+        //public string CD_TECNICO { get; set; }
+        //public DateTime DT_DATA_LOG_OS { get; set; }
+        //public int ST_TP_STATUS_VISITA_OS { get; set; }
+        //public string DS_TP_STATUS_VISITA_OS { get; set; }
+        //public TimeSpan TempoGasto { get; set; }
+        //public TimeSpan TempoGastoTOTAL { get; set; }
+
+        public TecnicoEntity tecnico
+        {
+            get
+            {
+                if (_Tecnico == null) _Tecnico = new TecnicoEntity();
+                return _Tecnico;
+            }
+            set
+            {
+                if (_Tecnico == null) _Tecnico = new TecnicoEntity();
+                _Tecnico = value;
+            }
+        }
+    }
+}

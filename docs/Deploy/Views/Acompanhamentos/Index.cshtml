@@ -1,0 +1,48 @@
+﻿@model _3M.Comodato.Front.Models.Acompanhamentos
+
+@using GridMvc.Html
+
+@{
+    ViewBag.Title = "Acompanhamento de Preços";
+}
+
+<i class="fas fa-print fa-3x fa-pull-left"></i>
+<h3>Acompanhamento de Preços</h3>
+
+<div class="well">
+    <hr />
+
+    @using (Html.BeginForm())
+    {
+        <div class="form-horizontal">
+            <div class="form-row">
+                <div class="form-group col-12">
+                    <label class="control-label">Cliente</label>
+                    @Html.DropDownListFor(model => model.cliente.CD_CLIENTE, new SelectList(Model.clientes, "CD_CLIENTE", "NM_CLIENTE"), new { @class = "js-example-basic-single", @style = "width: 100% !important;", multiple = "multiple" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <button class="btn btn-primary btn-sm" type="button" id="btnImprimir">Imprimir</button>
+            <button class="btn btn-primary btn-sm" type="button" id="btnLimpar">Limpar</button>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript" src="~/Scripts/Comodato/Util.js"></script>
+    <script type="text/javascript" src="~/Scripts/Comodato/Acompanhamentos.js"></script>
+
+    <script>
+        var URLAPI = "@_3M.Comodato.Utility.ControlesUtility.Parametro.ObterValorParametro(_3M.Comodato.Utility.ControlesUtility.Constantes.URLAPI)";
+        var URLSite = "@_3M.Comodato.Utility.ControlesUtility.Parametro.ObterValorParametro(_3M.Comodato.Utility.ControlesUtility.Constantes.URLSite)";
+        var URLCriptografarChave = "@Url.Action("CriptografarChaveJson")";
+
+        var URLObterLista = "@Url.Action("ObterListaAcompanhamentos", "Acompanhamentos")";
+        @*var URLImprimir = "@Url.Action("Imprimir", "Acompanhamentos")";*@
+        var nidUsuario = @Convert.ToInt64(((_3M.Comodato.Entity.UsuarioPerfilEntity)Session["_CurrentUser"]).usuario.nidUsuario);
+    </script>
+}
+

@@ -1,0 +1,70 @@
+﻿@{
+    ViewBag.Title = "Agenda de Atendimentos";
+}
+
+<i class="fas fa-print fa-3x fa-pull-left"></i>
+<h3>Agenda de Atendimento</h3>
+
+@*<style>
+        /* Override para manter o padrão de cor do placeholder 'select' */
+        .select2-container--default .select2-selection--single .select2-selection__placeholder {
+            color: #000000;
+        }
+    </style>*@
+
+<div class="well">
+    <hr />
+
+    <div class="form-horizontal">
+        <div class="form-row">
+            <div class="form-group col-12">
+                <label class="control-label">Técnico</label>
+                <select id="ddlTecnico" class="js-select-basic-single col-md-12" multiple="multiple" style="width: 100% !important;"></select>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-horizontal">
+        <div class="form-row">
+            <div class="form-group col-4">
+                <label class="control-label">Status</label>
+                <select id="ddlStatus" class="js-select-basic-single col-md-12" multiple="multiple" style="width: 100%"></select>
+            </div>
+
+            <div class="form-group col-4">
+                <label class="control-label">Ordenar</label>
+                <select id="ddlCampoOrdem" class="js-select-basic-single col-md-12" style="width: 100%">
+                    <option value=""></option>
+                    <option value="R">% Realizado</option>
+                    <option value="T">Por Técnico</option>
+                    <option value="C">Por Cliente</option>
+                    <option value="A">Por agenda de atendimento</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <button class="btn btn-primary btn-sm" type="button" id="btnImprimir">Imprimir</button>
+        <button class="btn btn-primary btn-sm" type="button" id="btnLimpar">Limpar</button>
+    </div>
+
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript" src="~/Scripts/Comodato/Util.js"></script>
+    <script type="text/javascript" src="~/Scripts/Comodato/CarteiraAtendimento.js"></script>
+
+    <script>
+        var URLAPI = "@_3M.Comodato.Utility.ControlesUtility.Parametro.ObterValorParametro(_3M.Comodato.Utility.ControlesUtility.Constantes.URLAPI)";
+        var URLSite = "@_3M.Comodato.Utility.ControlesUtility.Parametro.ObterValorParametro(_3M.Comodato.Utility.ControlesUtility.Constantes.URLSite)";
+        var URLCriptografarChave = "@Url.Action("CriptografarChaveJson")";
+
+        var nidUsuario = @Convert.ToInt64(((_3M.Comodato.Entity.UsuarioPerfilEntity)Session["_CurrentUser"]).usuario.nidUsuario);
+        var nidPerfil = @Convert.ToInt64(((_3M.Comodato.Entity.UsuarioPerfilEntity)Session["_CurrentUser"]).perfil.nidPerfil);
+        var perfilCliente = @Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.Perfil.Cliente);
+        @*var actionRelatorio = "@Url.Action("Imprimir", "CarteiraAtendimento")";*@
+    </script>
+}
+

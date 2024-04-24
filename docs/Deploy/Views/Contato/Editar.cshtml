@@ -1,0 +1,134 @@
+﻿@model _3M.Comodato.Front.Models.Contato
+
+@{
+    ViewBag.Title = "Contato";
+}
+
+<i class="fas fa-cubes fa-3x fa-pull-left"></i>
+<h3>Contato (Editar)</h3>
+
+<div class="well">
+
+    @using (Html.BeginForm())
+    {
+    <div class="form-horizontal">
+        <hr />
+        @Html.HiddenFor(model => model.nidContato)
+
+        <div class="form-group">
+            <label class="control-label">Nome</label>
+            @Html.EditorFor(model => model.cnmContato, new { htmlAttributes = new { @class = "form-control col-12" } })
+            @Html.ValidationMessageFor(model => Model.cnmContato, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            <label class="control-label">Apelido</label>
+            @Html.EditorFor(model => model.cnmApelido, new { htmlAttributes = new { @class = "form-control col-12" } })
+            @Html.ValidationMessageFor(model => Model.cnmApelido, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-4">
+                <label class="control-label">Tipo de Contato</label>
+                @Html.DropDownListFor(model => model.tipoContato.nidTipoContato, new SelectList(Model.tiposContatos, "nidTipoContato", "cdsTipoContato"), new { @class = "valid form-control col-12" })
+            </div>
+
+            <div class="form-group col-8">
+                <label class="control-label">E-mail</label>
+                @Html.EditorFor(model => model.cdsEmail, new { htmlAttributes = new { @class = "form-control col-12" } })
+                @Html.ValidationMessageFor(model => Model.cdsEmail, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div id="empresa">
+            <div class="form-group">
+                <label class="control-label">Empresa</label>
+                @Html.DropDownListFor(model => model.empresa.CD_Empresa, new SelectList(Model.empresas, "CD_Empresa", "NM_Empresa"), new { @class = "js-example-basic-single", @style = "width: 100%" })
+            </div>
+        </div>
+
+        <div id="cliente">
+            <div class="form-group">
+                <label class="control-label">Cliente</label>
+                @Html.DropDownListFor(model => model.cliente.CD_CLIENTE, new SelectList(Model.clientes, "CD_CLIENTE", "NM_CLIENTE"), new { @class = "js-example-basic-single", @style = "width: 100%" })
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-2">
+                <label class="control-label">DDD</label>
+                @Html.EditorFor(model => model.cdsDDDTelefoneCel, new { htmlAttributes = new { @class = "form-control col-12" } })
+                @Html.ValidationMessageFor(model => Model.cdsDDDTelefoneCel, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group col-4">
+                <label class="control-label">Celular</label>
+                @Html.EditorFor(model => model.cdsTelefoneCel, new { htmlAttributes = new { @class = "form-control col-12" } })
+                @Html.ValidationMessageFor(model => Model.cdsTelefoneCel, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group col-2">
+                <label class="control-label">DDD</label>
+                @Html.EditorFor(model => model.cdsDDDTelefone2, new { htmlAttributes = new { @class = "form-control col-12" } })
+                @Html.ValidationMessageFor(model => Model.cdsDDDTelefone2, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group col-4">
+                <label class="control-label">Telefone</label>
+                @Html.EditorFor(model => model.cdsTelefone2, new { htmlAttributes = new { @class = "form-control col-12" } })
+                @Html.ValidationMessageFor(model => Model.cdsTelefone2, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label">Observações</label>
+            @Html.EditorFor(model => model.cdsObservacoes, new { htmlAttributes = new { @class = "form-control col-12", @rows = 4 } })
+        </div>
+
+        <div class="form-group">
+            <label class="control-label">Cargo</label>
+            @Html.EditorFor(model => model.cdsCargo, new { htmlAttributes = new { @class = "form-control col-12" } })
+        </div>
+
+        <div class="form-group">
+            <label class="control-label">Condição (Ativo)</label>
+            @Html.EditorFor(model => model.bidAtivo, new { htmlAttributes = new { @class = "" } })
+        </div>
+
+        @if (!string.IsNullOrEmpty(ViewBag.Mensagem))
+        {
+            <div class="form-group">
+                <label class="text-danger">@ViewBag.Mensagem</label>
+            </div>
+        }
+
+    </div>
+
+        <div class="form-group">
+            <input type="submit" value="Gravar" class="btn btn-primary btn-sm" />
+            @Html.ActionLink("Voltar", "Index", new { area = "" }, new { @class = "btn btn-primary btn-sm" })
+        </div>
+
+    }
+
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript" src="~/Scripts/Comodato/Contato.js"></script>
+    <script type="text/javascript" src="~/Scripts/Comodato/Util.js"></script>
+
+    <script type="text/javascript">
+     @Model.JavaScriptToRun
+
+        function MensagemSucesso() {
+            var mensagem = '@_3M.Comodato.Utility.ControlesUtility.Constantes.MensagemGravacaoSucesso';
+
+            AlertaRedirect("Aviso", mensagem, "window.location = '../Contato';");
+        };
+    </script>
+}
+
+
+

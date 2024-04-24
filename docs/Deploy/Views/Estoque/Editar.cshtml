@@ -1,0 +1,107 @@
+﻿@model _3M.Comodato.Front.Models.Estoque
+
+@{
+    ViewBag.Title = "Unidade de Editar";
+}
+
+<i class="fas fa-cubes fa-3x fa-pull-left"></i>
+<h3>Unidade de Estoque (Editar)</h3>
+
+<div class="well">
+    @using (Html.BeginForm("Editar","Estoque", FormMethod.Post, new { id="formUnidadeEstoque"} ))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <hr />
+            @Html.HiddenFor(model => model.idKey)
+            <div class="form-row">
+                <div class="form-group col-8">
+                    <label class="control-label">Nome</label>
+                    @Html.EditorFor(model => model.ccdEstoque, new { htmlAttributes = new { @class = "form-control col-md-12" } })
+                    @Html.ValidationMessageFor(model => model.ccdEstoque, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group col-4">
+                    <label class="control-label">Ativo</label>
+                    @Html.DropDownListFor(model => model.cdsAtivo, ViewBag.ListaStatus as IEnumerable<SelectListItem>, new { @class = "form-control col-md-12" })
+                    @Html.ValidationMessageFor(model => model.cdsAtivo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            <div class="form-row">
+                <div class="form-group col-4">
+                    <label class="control-label">Tipo</label>
+                    @Html.DropDownListFor(model => model.cdsTipoEstoque, ViewBag.ListaTipoEstoque as IEnumerable<SelectListItem>, new { @class = "form-control col-md-12" })
+                    @Html.ValidationMessageFor(model => model.cdsTipoEstoque, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group col-8">
+                    <label class="control-label">Responsável</label>
+                    @Html.DropDownListFor(model => model.nidUsuarioResponsavel, ViewBag.ListaResponsavel as IEnumerable<SelectListItem>, new { @class = "form-control col-md-12 js-example-basic-single" })
+                    @Html.HiddenFor(model => model.nidUsuarioResponsavel)
+                    @Html.ValidationMessageFor(model => model.nidUsuarioResponsavel, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-row" id="rowCliente">
+                <div class="form-group col-12">
+                    <label class="control-label">Cliente</label>
+                    @Html.DropDownListFor(model => model.CD_CLIENTE, ViewBag.ListaClientes as IEnumerable<SelectListItem>, new { @class = "form-control col-md-12" })
+                    @Html.HiddenFor(model => model.CD_CLIENTE)
+                    <label id="validaCliente" class="control-label text-danger" style="display: none;">Conteúdo obrigatório!</label>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-12">
+                    <label class="control-label">Descrição</label>
+                    @Html.EditorFor(model => model.cdsEstoque, new { htmlAttributes = new { @class = "form-control col-md-12" } })
+                    @Html.ValidationMessageFor(model => model.cdsEstoque, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" id="btnGravar" value="Gravar" class="btn btn-primary btn-sm" />
+                @Html.ActionLink("Voltar", "Index", new { area = "" }, new { @class = "btn btn-primary btn-sm" })
+            </div>
+        </div>
+    }
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        var URLAPI = "@_3M.Comodato.Utility.ControlesUtility.Parametro.ObterValorParametro(_3M.Comodato.Utility.ControlesUtility.Constantes.URLAPI)";
+        var nidUsuario = @Convert.ToInt64(((_3M.Comodato.Entity.UsuarioPerfilEntity)Session["_CurrentUser"]).usuario.nidUsuario);
+        var nidPerfil = @Convert.ToInt64(((_3M.Comodato.Entity.UsuarioPerfilEntity)Session["_CurrentUser"]).perfil.nidPerfil);
+        var perfilCliente = @Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.Perfil.Cliente);
+    </script>
+
+    <script src="~/Scripts/Comodato/Util.js" type="text/javascript"></script>
+    <script src="~/Scripts/Comodato/Estoque.js" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        @Model.JavaScriptToRun
+        function MensagemSucesso() {
+            var MensagemSucesso = '@_3M.Comodato.Utility.ControlesUtility.Constantes.MensagemGravacaoSucesso';
+            AlertaRedirect("Aviso", MensagemSucesso, "window.location = '../Estoque';");
+        }
+
+        function MensagemErroValidacao() {
+            var MensagemErro = 'Já existe um Estoque desse tipo Cadastrado para o Responsável escolhido!';
+            Alerta("ERRO", MensagemErro);
+        }
+
+        $('#btnGravar').click(function (e) {
+            e.preventDefault();
+            OcultarCampo($('#validaCliente'));
+            if ($('#cdsTipoEstoque').val() == 'CLI') {
+                var codigoCliente = $('select#CD_CLIENTE').val();
+                if (codigoCliente == '' || codigoCliente == '0' || codigoCliente == 0) {
+                    ExibirCampo($('#validaCliente'));
+                    return false;
+                }
+            }
+            $('#formUnidadeEstoque').submit();
+        });
+    </script>
+}

@@ -1,0 +1,42 @@
+﻿@model IEnumerable<_3M.Comodato.Front.Models.Empresa>
+
+@using GridMvc.Html
+
+@{
+    ViewBag.Title = "Empresa";
+}
+
+<i class="fas fa-cubes fa-3x fa-pull-left"></i>
+<h3>Empresa</h3>
+
+<p>
+    <a class="btn btn-primary btn-sm" href="Empresa/Incluir">Novo registro <i class="far fa-sticky-note"></i></a>
+</p>
+
+<div class="table table-hover">
+    @Html.Grid(Model).Columns(columns =>
+{
+    columns.Add(foo => foo.CD_Empresa).Titled("CÓDIGO").Sortable(true).Filterable(true);
+    //columns.Add(foo => foo.IIComp).Titled("IICOMP").Sortable(true).Filterable(true);
+    columns.Add(foo => foo.NM_Empresa).Titled("EMPRESA").Sortable(true).Filterable(true);
+    columns.Add(foo => foo.NR_Cnpj).Titled("CNPJ").Sortable(true).Filterable(true);
+    //columns.Add(foo => foo.EN_Endereco).Titled("ENDEREÇO").Sortable(true).Filterable(true);
+    //columns.Add(foo => foo.EN_Bairro).Titled("BAIRRO").Sortable(true).Filterable(true);
+    columns.Add(foo => foo.EN_Cidade).Titled("CIDADE").Sortable(true).Filterable(true);
+    //columns.Add(foo => foo.EN_Estado).Titled("ESTADO").Sortable(true).Filterable(true);
+    //columns.Add(foo => foo.EN_Cep).Titled("CEP").Sortable(true).Filterable(true);
+    //columns.Add(foo => foo.TX_Telefone).Titled("TELEFONE").Sortable(true).Filterable(true);
+    //columns.Add(foo => foo.TX_Fax).Titled("FAX").Sortable(true).Filterable(true);
+    columns.Add(foo => foo.cdsFL_Tipo_Empresa).Titled("TIPO").Sortable(true).Filterable(true);
+    columns.Add()
+                    .Encoded(false)
+                    .Sanitized(false)
+                    .SetWidth(30)
+                    .RenderValueAs(o => Html.ActionLink(" ", "Editar", new { idKey = HttpUtility.HtmlDecode(o.idKey) }, new { @class = "fas fa-pencil-alt fa-lg" }));
+    columns.Add()
+                    .Encoded(false)
+                    .Sanitized(false)
+                    .SetWidth(30)
+                    .RenderValueAs(o => Html.ActionLink(" ", "Excluir", new { idKey = HttpUtility.HtmlDecode(o.idKey) }, new { @class = "fas fa-trash-alt fa-lg" }));
+}).WithPaging(10)
+</div>

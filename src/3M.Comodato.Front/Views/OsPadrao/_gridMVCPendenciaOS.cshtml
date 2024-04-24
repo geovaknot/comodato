@@ -1,0 +1,41 @@
+﻿@model IEnumerable<_3M.Comodato.Front.Models.ListaPendenciaOS>
+
+@using GridMvc.Html
+
+@{ 
+    var perfil = (_3M.Comodato.Entity.UsuarioPerfilEntity)Session["_CurrentUser"];
+    int PERFIL_CLIENTE = 8;
+    var SIM = "S";
+}
+
+<div class="table table-hover">
+    @Html.Grid(Model).Columns(columns =>
+{
+    columns.Add(foo => foo.PENDENCIA_OS).Titled("OS").Sortable(false).Filterable(false);
+    columns.Add(foo => foo.DS_STATUS_PENDENCIA).Titled("STATUS").Sortable(false).Filterable(false);
+    columns.Add(foo => foo.peca.DS_PECA).Titled("PEÇA").Sortable(false).Filterable(false);
+    columns.Add(foo => foo.peca.TX_UNIDADE).Titled("UN").Sortable(false).Filterable(false);
+    columns.Add(foo => foo.QT_PECA).Titled("QTDE").Sortable(false).Filterable(false);
+    columns.Add(foo => foo.DS_TP_ESTOQUE_CLI_TEC).Titled("ENTREGA").Sortable(false).Filterable(false);
+    columns.Add(foo => foo.DS_DESCRICAO).Titled("OBSERVAÇÃO").Sortable(false).Filterable(false);
+
+    if (perfil.perfil.ccdPerfil != PERFIL_CLIENTE && ViewBag.Visualizar == false)
+    {
+        columns.Add()
+            .Encoded(false)
+            .Sanitized(false)
+            .SetWidth(30)
+            .RenderValueAs(o => "<a href='#' onclick='EditarPendenciaOS(" + o.ID_PENDENCIA_OS + ")' class='fas fa-pencil-alt fa-lg'> </a>");
+
+        if (ViewBag.Tecnico3M == "S")
+        {
+            columns.Add()
+                .Encoded(false)
+                .Sanitized(false)
+                .SetWidth(30)
+                .RenderValueAs(o => o.ST_STATUS_PENDENCIA == "2" ? " " : "<a href='#' onclick='ExcluirPendenciaOS(" + o.ID_PENDENCIA_OS + ")' class='fas fa-sync-alt fa-lg'> </a>");
+        }
+    }
+})
+</div>
+

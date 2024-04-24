@@ -1,0 +1,1 @@
+alter table tb_pedido_ap_dados add NR_REMESSA numeric(3) null

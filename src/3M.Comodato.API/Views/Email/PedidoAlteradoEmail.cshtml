@@ -1,0 +1,24 @@
+﻿@model _3M.Comodato.Entity.WfPedidoEquipEntity
+
+@{
+    ViewBag.Title = "PedidoAlteradoMail";
+    Layout = "~/Views/Shared/_Email.cshtml";
+    var URLSite = _3M.Comodato.Utility.ControlesUtility.Parametro.ObterValorParametro(_3M.Comodato.Utility.ControlesUtility.Constantes.URLSite);
+
+}
+
+<p>Houve uma modificação de Status em seu pedido <strong>@Model.CD_WF_PEDIDO_EQUIP</strong>!</p>
+<p>Segue dados do pedido:</p>
+<p>
+    Cliente: @Model.NM_CLIENTE - Solicitante: @Model.NM_USU_SOLICITANTE<br />
+    Pedido: <strong>@Model.CD_WF_PEDIDO_EQUIP</strong><br />
+    Título: @Model.DS_TITULO<br />
+    Data do pedido: @Model.DT_PEDIDO.ToString("dd/MM/yyyy")<br />
+    Novo status do pedido: @Model.DS_STATUS_PEDIDO<br />
+    Modelo: <strong>@Model.DS_MODELO</strong>
+</p>
+
+<p>Por favor, clique no link abaixo ou copie seu conteúdo para o Navegado WEB:</p>
+<p>
+    <a href="@URLSite">@URLSite</a>
+</p>

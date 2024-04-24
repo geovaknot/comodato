@@ -1,0 +1,44 @@
+﻿@model IEnumerable<_3M.Comodato.Entity.MonitoramentoWFEntity>
+@using GridMvc.Html
+@{
+    
+    ViewBag.Title = "TMA";
+}
+
+
+@Html.Grid(Model).Columns(columns =>
+{
+    columns.Add(o => o.TIPO).RenderValueAs(p=> RenderTipo(p.TIPO)).Titled("Tipo").Sortable(true).Filterable(true).Encoded(false).Sanitized(false);
+    columns.Add(o => o.STATUS).Titled("Status").Sortable(true).Filterable(true);
+    columns.Add(o => o.GRUPO).Titled("Grupo").Sortable(true).Filterable(true);
+    columns.Add(o => o.RESPONSAVEL).Titled("Responsável").Sortable(true).Filterable(true);
+    columns.Add(o => o.TEMPO_MEDIO).Encoded(false).Sanitized(false).RenderValueAs(p => TempoMedio(p.TEMPO_MEDIO)).Titled("Tempo Médio (hrs)");
+    columns.Add(o => o.QT_FLUXOS).Titled("Atendimentos");
+}).Sortable(true).WithPaging(50)
+
+
+@helper TempoMedio(decimal Tempo)
+{
+        if (Tempo > 1)
+        {
+            <span>@Tempo.ToString("N2")</span>
+        }
+        else
+        {
+            <span>< 1</span>
+        }
+}
+
+@helper RenderTipo(string tipo)
+{ 
+    if(tipo == "E")
+    {
+        <span>Envio</span>
+           @*@("Envio")*@
+    }
+    else
+    {
+        <span>Devolução</span>
+           @*@("Devolução")*@
+    }
+}

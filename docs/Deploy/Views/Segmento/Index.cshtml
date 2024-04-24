@@ -1,0 +1,39 @@
+﻿@model IEnumerable<_3M.Comodato.Front.Models.Segmento>
+
+@using GridMvc.Html
+
+@{
+    ViewBag.Title = "Segmento";
+}
+
+<i class="fas fa-cubes fa-3x fa-pull-left"></i>
+<h3>Segmento</h3>
+
+<p>
+    <a class="btn btn-primary btn-sm" href="Segmento/Incluir">Novo registro <i class="far fa-sticky-note"></i></a>
+</p>
+
+<div class="table table-hover">
+    @Html.Grid(Model).Columns(columns =>
+{
+columns.Add(foo => foo.ds_segmentomin).Titled("CÓD. SEGMENTO").Sortable(true).Filterable(true);
+columns.Add(foo => foo.ds_segmento).Titled("SEGMENTO").Sortable(true).Filterable(true);
+columns.Add(foo => foo.nm_criticidade).Titled("CRITICIDADE").Sortable(true).Filterable(true);
+columns.Add(foo => foo.ds_descricao).Titled("DESCRIÇÃO").Sortable(true).Filterable(true);//.SetWidth(100);
+columns.Add()
+            .Encoded(false)
+            .Sanitized(false)
+            .SetWidth(30)
+            .RenderValueAs(o => Html.ActionLink(" ", "Editar", new { idKey = HttpUtility.HtmlDecode(o.idKey) }, new { @class = "fas fa-pencil-alt fa-lg" }));
+
+
+columns.Add()
+            .Encoded(false)
+            .Sanitized(false)
+            .SetWidth(30)
+            .RenderValueAs(o =>
+
+            (_3M.Comodato.Utility.ControlesUtility.Parametro.ObterValorParametro(_3M.Comodato.Utility.ControlesUtility.Constantes.CodigoSegmentoDistribuidor) != o.ds_segmentomin && _3M.Comodato.Utility.ControlesUtility.Parametro.ObterValorParametro(_3M.Comodato.Utility.ControlesUtility.Constantes.CodigoSegmentoRealocarExcluir) != o.ds_segmentomin) ?
+            $"<a href='Segmento/Excluir?idKey={o.idKey}' class='fas fa-trash-alt fa-lg'></a>": "");
+}).WithPaging(10)
+</div>

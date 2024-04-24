@@ -1,0 +1,265 @@
+﻿@model _3M.Comodato.Front.Models.Ativo
+
+@{
+    ViewBag.Title = "Ativo";
+}
+
+<i class="fas fa-cubes fa-3x fa-pull-left"></i>
+<h3>Ativo (Incluir)</h3>
+
+<div class="well">
+    @using (Html.BeginForm())
+    {
+        <div class="form-horizontal">
+            <hr />
+            @Html.HiddenFor(model => model.CancelarVerificarCodigo)
+            @Html.HiddenFor(model => model.TP_ACAO)
+
+            <div class="form-row">
+                <div class="form-group col-3">
+                    <label class="control-label">Nr. Ativo</label>
+                    @Html.EditorFor(model => model.CD_ATIVO_FIXO, new { htmlAttributes = new { @class = "form-control col-12", @style = "text-transform:uppercase;" } })
+                    @Html.ValidationMessageFor(model => Model.CD_ATIVO_FIXO, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group col-2">
+                    <label class="control-label">Ano</label>
+                    @Html.EditorFor(model => model.TX_ANO_MAQUINA, new { htmlAttributes = new { @class = "form-control col-12" } })
+                    @Html.ValidationMessageFor(model => Model.TX_ANO_MAQUINA, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group col-7">
+                    <label class="control-label">Linha de Produto</label>
+                    @Html.DropDownListFor(model => model.linhaProduto.CD_LINHA_PRODUTO, new SelectList(Model.linhasProdutos, "CD_LINHA_PRODUTO", "DS_LINHA_PRODUTO"), new { @class = "valid form-control col-12" })
+                    <label id="validaCD_LINHA_PRODUTO" class="control-label text-danger" style="display: none;">Conteúdo obrigatório!</label>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-12">
+                    <label class="control-label">Modelo</label>
+                    @Html.DropDownListFor(model => model.modelo.CD_MODELO, new SelectList(Model.modelos, "CD_MODELO", "DS_MODELO"), new { @class = "js-example-basic-single", @style = "width: 100%" })
+                    <label id="validaCD_MODELO" class="control-label text-danger" style="display: none;">Conteúdo obrigatório!</label>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-4">
+                    <label class="control-label">Data de Inclusão</label>
+                    <div id="DT_INCLUSAO-container">
+                        <div class="input-group date">
+                            @Html.TextBoxFor(model => model.DT_INCLUSAO, "{0:dd/MM/yyyy}", new { @class = "form-control col-12" })
+                            <div class="input-group-addon">
+                                <i class="far fa-calendar-alt fa-2x" style="background: #d9d6d6; padding: 3px 3px 3px 3px"></i>
+                            </div>
+                        </div>
+                    </div>
+                    @Html.ValidationMessageFor(model => Model.DT_INCLUSAO, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group col-4">
+                    <label class="control-label">Qtd.Dias Garantia</label>
+                    @Html.EditorFor(model => model.QTD_DIAS_GARANTIA, new { htmlAttributes = new { @class = "form-control col-12", @readonly = "readonly" } })
+                    @Html.ValidationMessageFor(model => Model.QTD_DIAS_GARANTIA, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group col-4">
+                    <label class="control-label">Data Fim Garantia</label>
+                    <div id="DT_FIM_GARANTIA-container">
+                        <div class="input-group date">
+                            @Html.TextBoxFor(model => model.DT_FIM_GARANTIA, "{0:dd/MM/yyyy}", new { @class = "form-control col-12" })
+                            <div class="input-group-addon">
+                                <i class="far fa-calendar-alt fa-2x" style="background: #d9d6d6; padding: 3px 3px 3px 3px"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            @*
+                DATA: 19/03/2019
+                AUTOR: PAULO HENRIQUE MENDES
+                DESCRIÇÃO: MUDANÇA DO FORMULÁRIO PARA ADEQUAR A REFORMA E SUBSTITUIR A NOMECLATURA MANUTENÇÃO
+            *@
+            <div class="card">
+                <h5 class="card-header">
+                    Reforma
+                </h5>
+                <div class="card-body">
+                    <div class="form-row">
+                        <div class="form-group col-4">
+                            <label class="control-label">Data de Reforma</label>
+                            <div id="DT_MANUTENCAO-container">
+                                <div class="input-group date">
+                                    @Html.TextBoxFor(model => model.DT_MANUTENCAO, "{0:dd/MM/yyyy}", new { @class = "form-control col-12" })
+                                    <div class="input-group-addon">
+                                        <i class="far fa-calendar-alt fa-2x" style="background: #d9d6d6; padding: 3px 3px 3px 3px"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-4">
+                            <label class="control-label">Qtd.Dias Reforma</label>
+                            @Html.EditorFor(model => model.QTD_DIAS_MANUTENCAO, new { htmlAttributes = new { @class = "form-control col-12", @readonly = "readonly" } })
+                            @Html.ValidationMessageFor(model => Model.QTD_DIAS_MANUTENCAO, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group col-4">
+                            <label class="control-label">Data Fim Garantia Reforma</label>
+                            <div id="DT_FIM_MANUTENCAO-container">
+                                <div class="input-group date">
+                                    @Html.TextBoxFor(model => model.DT_FIM_MANUTENCAO, "{0:dd/MM/yyyy}", new { @class = "form-control col-12" })
+                                    <div class="input-group-addon">
+                                        <i class="far fa-calendar-alt fa-2x" style="background: #d9d6d6; padding: 3px 3px 3px 3px"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-12">
+                            <label class="control-label">Motivo da Reforma</label>
+                            @Html.TextAreaFor(model => model.DS_MOTIVO, new { @class = "form-control col-12", @rows = "3" })
+                            @Html.ValidationMessageFor(model => Model.DS_MOTIVO, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-12">
+                            <label class="control-label">Posição</label>
+                            @Html.EditorFor(model => model.TX_TIPO, new { htmlAttributes = new { @class = "form-control col-12" } })
+                            @Html.ValidationMessageFor(model => Model.TX_TIPO, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h5 class="card-header">
+                    Inventário
+                </h5>
+                <div class="card-body">
+                    <div class="form-row">
+                        <div class="form-group col-3">
+                            <label class="control-label">Data de Inventário</label>
+                            <div id="DT_INVENTARIO-container">
+                                <div class="input-group date">
+                                    @Html.TextBoxFor(model => model.DT_INVENTARIO, "{0:dd/MM/yyyy}", new { @class = "form-control col-12" })
+                                    <div class="input-group-addon">
+                                        <i class="far fa-calendar-alt fa-2x" style="background: #d9d6d6; padding: 3px 3px 3px 3px"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            @Html.ValidationMessageFor(model => Model.DT_INVENTARIO, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group col-3">
+                            <label class="control-label">Situação</label>
+                            @Html.DropDownListFor(model => model.situacaoAtivo.CD_SITUACAO_ATIVO, new SelectList(Model.situacoesAtivos, "CD_SITUACAO_ATIVO", "DS_SITUACAO_ATIVO"), new { @class = "valid form-control col-12" })
+                            <label id="validaSituacao" class="control-label text-danger" style="display: none;">Conteúdo obrigatório!</label>
+                        </div>
+
+                        <div class="form-group col-3">
+                            <label class="control-label">Status</label>
+                            @Html.DropDownListFor(model => model.statusAtivo.CD_STATUS_ATIVO, new SelectList(Model.statusAtivos, "CD_STATUS_ATIVO", "DS_STATUS_ATIVO"), new { @class = "valid form-control col-12" })
+                            <label id="validaStatus" class="control-label text-danger" style="display: none;">Conteúdo obrigatório!</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <br />
+            <div class="card">
+                <h5 class="card-header">
+                    Detalhes do Ativo
+                </h5>
+                <div class="card-body">
+                    <div class="form-row">
+                        <div class="form-group col-4">
+                            <label class="control-label">Data de Início da Depreciação</label>
+                            <div id="DT_INICIO_DEPREC-container">
+                                <div class="input-group date">
+                                    @Html.TextBoxFor(model => model.depreciacao.DT_INICIO_DEPREC, "{0:dd/MM/yyyy}", new { @class = "form-control col-12", @readonly = "readonly" })
+                                    <div class="input-group-addon">
+                                        <i class="far fa-calendar-alt fa-2x" style="background: #d9d6d6; padding: 3px 3px 3px 3px"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            @Html.ValidationMessageFor(model => Model.depreciacao.DT_INICIO_DEPREC, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group col-4">
+                            <label class="control-label">Total de Meses de Depreciação</label>
+                            @Html.EditorFor(model => model.depreciacao.NR_MESES, new { htmlAttributes = new { @class = "form-control col-12", @readonly = "readonly" } })
+                            @Html.ValidationMessageFor(model => Model.depreciacao.NR_MESES, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group col-4">
+                            <label class="control-label">Valor da Depreciação no Último Mês (R$)</label>
+                            @Html.EditorFor(model => model.depreciacao.VL_DEPREC_ULT_MES, new { htmlAttributes = new { @class = "form-control col-12", @readonly = "readonly" } })
+                            @Html.ValidationMessageFor(model => Model.depreciacao.VL_DEPREC_ULT_MES, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-4">
+                            <label class="control-label">Valor Total do Ativo Fixo (R$)</label>
+                            @Html.EditorFor(model => model.depreciacao.VL_CUSTO_ATIVO, new { htmlAttributes = new { @class = "form-control col-12", @readonly = "readonly" } })
+                            @Html.ValidationMessageFor(model => Model.depreciacao.VL_CUSTO_ATIVO, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group col-4">
+                            <label class="control-label">Valor Residual do Ativo Fixo (R$)</label>
+                            @Html.EditorFor(model => model.depreciacao.VL_DEPREC_TOTAL, new { htmlAttributes = new { @class = "form-control col-12", @readonly = "readonly" } })
+                            @Html.ValidationMessageFor(model => Model.depreciacao.VL_DEPREC_TOTAL, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <br />
+            <div class="form-group">
+                <input type="submit" id="btnGravarContinuar" value="Gravar e continuar" class="btn btn-primary btn-sm" />
+                <input type="submit" id="btnGravarSair" value="Gravar e sair" class="btn btn-primary btn-sm" />
+                @Html.ActionLink("Voltar", "Index", new { area = "" }, new { @class = "btn btn-primary btn-sm" })
+            </div>
+
+        </div>
+    }
+
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+<script>
+    var URLVerificarCodigo = "@Url.Action("VerificarCodigoJson", "Ativo")";
+    var URLEditar = "@Url.Action("Editar", "Ativo")";
+    var URLAlterarData = "@Url.Action("AlterarData", "Ativo")";
+    var URLAlterarDias = "@Url.Action("AlterarDias", "Ativo")";
+    var diasGarantia = "@_3M.Comodato.Utility.ControlesUtility.Parametro.ObterValorParametro("QtdDiasGarantia")";
+    var diasManutencao = "@_3M.Comodato.Utility.ControlesUtility.Parametro.ObterValorParametro("QtdDiasManutencao")";
+</script>
+
+    <script type="text/javascript" src="~/Scripts/Comodato/Ativo.js"></script>
+    <script type="text/javascript" src="~/Scripts/Comodato/Util.js"></script>
+
+    <script type="text/javascript">
+     @Model.JavaScriptToRun
+
+        function MensagemSucesso() {
+            var mensagem = '@_3M.Comodato.Utility.ControlesUtility.Constantes.MensagemGravacaoSucesso';
+
+            AlertaRedirect("Aviso", mensagem, "window.location = '../Ativo';");
+        };
+
+        function MensagemSucessoContinuar() {
+            var mensagem = '@_3M.Comodato.Utility.ControlesUtility.Constantes.MensagemGravacaoSucesso';
+
+            $("#CD_ATIVO_FIXO").val('');
+            Alerta("Aviso", mensagem);
+        };
+    </script>
+}

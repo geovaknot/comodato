@@ -1,0 +1,1 @@
+alter table tb_pedido add TP_Especial varchar(1) default 'N'

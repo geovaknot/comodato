@@ -1,0 +1,42 @@
+﻿@model IEnumerable<_3M.Comodato.Front.Models.RelatorioReclamacaoItem>
+@using _3M.Comodato.Utility;
+@using GridMvc.Html
+
+<div class="table table-hover">
+
+
+    @Html.Grid(Model).Columns(columns =>
+{
+
+    columns.Add(foo => foo.ID_RELATORIO_RECLAMACAO).Titled("CÓD.RR");//.Titled("CÓD relatorio Reclamacao");
+    columns.Add(foo => foo.ID_OS).Titled("Nro. OS");//.Titled("ID OS);
+
+    columns.Add(foo => foo.DataCadastro).Titled("Registro").Format("{0:dd/MM/yyyy}");//.Titled("DATA CADASTRO")
+    columns.Add(foo => foo.TecSolicitante).Titled("Téc.Solicitante");
+    columns.Add(foo => foo.Cliente).Titled("Cliente");//.Titled("Cliente");
+    columns.Add(foo => foo.Ativo).Titled("Ativo");//.Titled("Ativo");
+    columns.Add(foo => foo.Peca).Titled("Peca");//.Titled("PecaO");
+    // columns.Add(foo => foo.Fornecedor).Titled("Fornecedor");
+    columns.Add(foo => foo.TipoAtendimento).Titled("TipoAtendimento");
+    columns.Add(foo => foo.TipoReclamacaoRR).Titled("TipoReclamacaoRR");
+
+    //columns.Add(foo => foo.VL_Hora_Atendimento).Titled("TEMPO ATENDIMENTO");
+    columns.Add(foo => foo.Status).Titled("Status");
+
+    columns.Add()
+                        .Encoded(false)
+                        .Sanitized(false)
+                        .SetWidth(30)
+                        .RenderValueAs(o => Html.ActionLink(" ", "AcompanhamentoReclamacao", new { idKey = HttpUtility.HtmlDecode(o.idKey) }, new { @class = "fas fa-pencil-alt fa-lg" }));
+
+    columns.Add()
+    .Encoded(false)
+    .Sanitized(false)
+    .SetWidth(30)
+    .RenderValueAs(o =>
+    o.Acesso.HasFlag(_3M.Comodato.Front.Models.AcessoReclamacao.Edicao) && (o.ST_STATUS_RR == (int)ControlesUtility.Enumeradores.RRStatusRelatorio.Novo)
+    ? $"<b><a href=\"#\" onclick=\"ConfirmarSimNao('Aviso', 'Confirma a exclusão do item?' , 'RemoverPedido({o.ID_RELATORIO_RECLAMACAO.ToString()});' ); return false;\" class='fas fa-trash-alt fa-lg' data-toggle='tooltip' data-placement='top' title='Excluir'></a></b>":"");
+
+}).Sortable(true).Filterable(true).SetLanguage("pt-BR")
+</div>
+

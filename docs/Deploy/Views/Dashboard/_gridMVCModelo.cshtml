@@ -1,0 +1,18 @@
+﻿@model IEnumerable<_3M.Comodato.Front.Models.ListaModelo>
+
+@using GridMvc.Html
+
+<div class="table table-hover">
+    @Html.Grid(Model).Columns(columns =>
+{
+    columns.Add(foo => foo.modelo.CD_MODELO).Titled("CÓDIGO").Sortable(false).Filterable(false);
+    columns.Add(foo => foo.modelo.DS_MODELO).Titled("MODELO").Sortable(false).Filterable(false);
+    columns.Add(foo => foo.ATIVOS).Titled("ATIVOS").Sortable(false).Filterable(false);
+    //columns.Add()
+    //    .Encoded(false)
+    //    .Sanitized(false)
+    //    .SetWidth(30)
+    //    .RenderValueAs(o => o.NR_ORDENACAO == 1 ? " " : "<a href='#' onclick='Subir(" + o.NR_ORDENACAO + ")' class='fas fa-angle-up fa-lg' data-toggle='tooltip' data-placement='top' title='Subir' > </a>");
+})
+</div>
+

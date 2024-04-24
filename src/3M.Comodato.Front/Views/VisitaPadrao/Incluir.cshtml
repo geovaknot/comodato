@@ -1,0 +1,220 @@
+﻿@model _3M.Comodato.Front.Models.VisitaPadrao
+
+@using GridMvc.Html
+
+
+@{
+    ViewBag.Title = "Agenda de Atendimento - Visita";
+    var perfil = (_3M.Comodato.Entity.UsuarioPerfilEntity)Session["_CurrentUser"];
+    int PERFIL_CLIENTE = 8;
+    var UsuarioTecnico = _3M.Comodato.Utility.ControlesUtility.Seguranca.VerificaUsuarioPerfisTecnicos(Convert.ToInt64(((_3M.Comodato.Entity.UsuarioPerfilEntity)Session["_CurrentUser"]).usuario.nidUsuario));
+}
+
+<i class="fas fa-cubes fa-3x fa-pull-left"></i>
+<h3>Agenda de Atendimento - Visita</h3>
+
+<div class="well">
+
+    @using (Html.BeginForm())
+    {
+    <div class="form-horizontal">
+        <hr />
+        @Html.HiddenFor(model => model.idKey)
+
+        <div class="card-group">
+            <div class="card">
+                <div class="card-body">
+                    <div class="form-row">
+                        <div class="form-group col-md-6 col-sm-12">
+                            <label class="control-label">Técnico</label>
+                            @if (UsuarioTecnico)
+                            {
+                                @Html.DropDownListFor(model => model.tecnico.CD_TECNICO, new SelectList(Model.tecnicos, "CD_TECNICO", "NM_TECNICO"), new { @class = "js-example-basic-single form-control col-12", @style = "width: 100%" })
+                            }
+                            else
+                            {
+                                @Html.DropDownListFor(model => model.tecnico.CD_TECNICO, new SelectList(Model.tecnicos, "CD_TECNICO", "NM_TECNICO"), "Selecione...", new { @class = "js-example-basic-single form-control col-12", @style = "width: 100%" })
+                            }
+                            @Html.EditorFor(model => model.CodigoTecnico, new { htmlAttributes = new { @class = "form-control col-12", @readonly = "readonly" } })
+                        </div>
+                        <div class="form-group col-md-6 col-sm-12">
+                            <label class="control-label">Empresa</label>
+                            @Html.EditorFor(model => model.tecnico.empresa.NM_Empresa, new { htmlAttributes = new { @class = "form-control col-12", @readonly = "readonly" } })
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-12 col-sm-12">
+                            <label class="control-label">Cliente</label>
+                            @Html.DropDownListFor(model => model.cliente.CD_CLIENTE, new SelectList(Model.clientes, "CD_CLIENTE", "NM_CLIENTE"), "Selecione...", new { @class = "js-example-basic-single form-control col-12", @style = "width: 100%" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <div class="form-row">
+                        <div class="form-group col-md-6 col-sm-12">
+                            <label class="control-label">Motivo da Visita</label>
+                            @if (perfil.perfil.ccdPerfil != PERFIL_CLIENTE)
+                            {
+                                @Html.DropDownListFor(model => model.TpMotivoVisita.CD_MOTIVO_VISITA, new SelectList(Model.tiposMotivoVisitaPadrao, "CD_MOTIVO_VISITA", "DS_MOTIVO_VISITA"), "Selecione...", new { @class = "valid form-control col-12" })
+                            }
+                            else
+                            {
+                                @Html.DropDownListFor(model => model.TpMotivoVisita.CD_MOTIVO_VISITA, new SelectList(Model.tiposMotivoVisitaPadrao, "CD_MOTIVO_VISITA", "DS_MOTIVO_VISITA"), "Selecione...", new { @class = "valid form-control col-12", @readonly = "readonly" })
+                            }
+                            <label id="validaTpStatusVisitaOS" class="control-label text-danger" style="display: none;">Conteúdo obrigatório!</label>
+                        </div>
+                    </div>
+
+                    @if (perfil.perfil.ccdPerfil != PERFIL_CLIENTE)
+                    {
+                        <div class="form-row align-items-end">
+                            <div class="form-group mb-2 col-6 col-md-4 col-sm-5">
+                                <label class="control-label">Data Visita</label>
+                                <div id="DT_DATA_VISITA-container">
+                                    <div class="input-daterange input-group">
+                                        @Html.TextBoxFor(model => model.DT_DATA_VISITA, "{0:dd/MM/yyyy}", new { @class = "form-control col-12", autocomplete = "off" })
+                                    </div>
+                                </div>
+                                @Html.ValidationMessageFor(model => model.DT_DATA_VISITA, "", new { @class = "text-danger" })
+                            </div>
+                            <div>
+                                <a href="#" onclick='IniciarVisita()' id="btnIniciar" class="btn btn-secondary m-2">
+                                    <span><span class="fas fa-clock fa-lg"></span> Iniciar</span>
+                                </a>
+                                <a href="#" onclick='PararVisita()' id="btnParar" class="btn btn-secondary m-2">
+                                    <span><span class="fas fa-clock fa-lg"></span> Parar</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-4 col-md-3">
+                                <label class="control-label">Hora Início</label>
+                                @Html.EditorFor(model => model.HR_INICIO, new { htmlAttributes = new { @class = "form-control col-12 text-center", type = "time" } })
+                            </div>
+
+                            <div class="form-group col-3">
+                                <label class="control-label">Hora Término</label>
+                                @Html.EditorFor(model => model.HR_FIM, new { htmlAttributes = new { @class = "form-control col-12 text-center", type = "time" } })
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-5">
+                                <label class="control-label">Duração do Atendimento</label>
+                                @Html.EditorFor(model => model.HR_TOTAL, new { htmlAttributes = new { @class = "form-control col-7 text-center font-weight-bold", @readonly = "readonly" } })
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <br />
+
+        <div class="card-group">
+
+            <div class="card">
+                @if (perfil.perfil.ccdPerfil == PERFIL_CLIENTE)
+                {
+                    <div class="card-header">
+                        <div class="form-row">
+                            <div class="form-group col-9">
+                                <h5>Peças trocadas nesta visita</h5>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="pre-scrollable">
+                            <div class="table table-hover">
+                                @Html.Grid(Model.listaPecas).Columns(columns =>
+                                {
+                                    columns.Add(foo => foo.CD_PECA).Titled("CÓDIGO").Sortable(false).Filterable(false);
+                                    columns.Add(foo => foo.DS_PECA).Titled("DESCRIÇÃO").Sortable(false).Filterable(false);
+                                    columns.Add(foo => foo.QTD_ESTOQUE).Titled("QTDE").Sortable(false).Filterable(false);
+                                })
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        <br />
+
+        <div class="form-group">
+            <label class="control-label">Acompanhamento Visita</label>
+            @Html.EditorFor(model => model.DS_RESPONSAVEL, new { htmlAttributes = new { @class = "form-control col-12", @rows = 1 } })
+            @Html.ValidationMessageFor(model => model.DS_RESPONSAVEL, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            <label class="control-label">Email</label>
+            @Html.EditorFor(model => model.EMAIL, new { htmlAttributes = new { @class = "form-control col-12", @rows = 1 } })
+            @Html.ValidationMessageFor(model => model.EMAIL, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            Observações
+            @Html.EditorFor(model => model.DS_OBSERVACAO, new { htmlAttributes = new { @class = "form-control col-12", @rows = 3 } })
+            @Html.ValidationMessageFor(model => model.DS_OBSERVACAO, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @if (perfil.perfil.ccdPerfil != PERFIL_CLIENTE)
+            {
+                <input type="submit" value="Gravar" id="btnGravar" class="btn btn-primary btn-sm" />
+            }
+
+            @Html.ActionLink("Voltar", "Index", new { area = "" }, new { @class = "btn btn-primary btn-sm" })
+        </div>
+    </div>
+
+        @Html.Partial("_modalHistoricoVisita")
+    }
+
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        var nomeEmpresa = '@Model.tecnicos';
+        var URLAPI = "@_3M.Comodato.Utility.ControlesUtility.Parametro.ObterValorParametro(_3M.Comodato.Utility.ControlesUtility.Constantes.URLAPI)";   
+        var URLPermiteIncluirVisitaSalvar = "@Url.Action("ValidarPermiteIncluirVisitaSalvar", "VisitaPadrao")";
+        var nidUsuario = @Convert.ToInt64(((_3M.Comodato.Entity.UsuarioPerfilEntity)Session["_CurrentUser"]).usuario.nidUsuario);  
+        var nidPerfil = @Convert.ToInt64(((_3M.Comodato.Entity.UsuarioPerfilEntity)Session["_CurrentUser"]).perfil.nidPerfil);
+        var perfilCliente = @Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.Perfil.Cliente);
+        var UsuarioTecnico = '@_3M.Comodato.Utility.ControlesUtility.Seguranca.VerificaUsuarioPerfisTecnicos(Convert.ToInt64(((_3M.Comodato.Entity.UsuarioPerfilEntity)Session["_CurrentUser"]).usuario.nidUsuario))';
+        var perfilLiderEmpresaTecnica = @Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.Perfil.LiderEmpresaTecnica);
+
+        var statusIniciar = @Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.TpStatusVisitaPadrao.Iniciar);
+        var statusAberta = @Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.TpStatusVisitaPadrao.Aberta);
+        var statusFinalizada = @Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.TpStatusVisitaPadrao.Finalizada);
+        var statusCancelada = @Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.TpStatusVisitaPadrao.Cancelada);
+        var MensagemGravacaoSucesso = "@_3M.Comodato.Utility.ControlesUtility.Constantes.MensagemGravacaoSucesso";
+        var MansagemExisteOSouVisita = "@_3M.Comodato.Utility.ControlesUtility.Constantes.MensagemOSVisitaExistente";
+        var token = "@Convert.ToString(((_3M.Comodato.Entity.UsuarioPerfilEntity)Session["_CurrentUser"]).token)";
+    </script>
+
+    <script type="text/javascript" src="~/Scripts/Comodato/Util.js"></script>
+    <script type="text/javascript" src="~/Scripts/Comodato/Visita.js"></script>
+
+    <script type="text/javascript">
+     @Model.JavaScriptToRun
+
+        function MensagemSucesso() {
+            var mensagem = '@_3M.Comodato.Utility.ControlesUtility.Constantes.MensagemGravacaoSucesso';
+
+            AlertaRedirect("Aviso", mensagem, "window.location = '../VisitaPadrao';");
+        };
+        function MensagemJaExiste() {
+            var mensagem = '@_3M.Comodato.Utility.ControlesUtility.Constantes.MensagemOSVisitaExistente';
+
+            AlertaRedirect("Aviso", mensagem);
+        };
+    </script>
+}
+

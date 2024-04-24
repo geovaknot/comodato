@@ -1,0 +1,315 @@
+﻿@model _3M.Comodato.Front.Models.PreenchimentoSolicitacaoPecas
+
+@using GridMvc.Html
+
+@{
+    ViewBag.Title = "Solicitação de Peças";
+}
+
+<i class="fas fa-cubes fa-3x fa-pull-left"></i>
+<div class="form-group row h3">
+    @Html.EditorFor(model => model.TituloPagina, new { htmlAttributes = new { @class = "form-control-plaintext col-11", @readonly = "readonly" } })
+</div>
+
+<div class="well">
+    @using (Html.BeginForm())
+    {
+        <div class="form-horizontal">
+            <hr />
+            @Html.HiddenFor(model => model.ID_PEDIDO)
+            @Html.HiddenFor(model => model.tecnico.CD_TECNICO)
+            @Html.HiddenFor(model => model.TP_TIPO_PEDIDO)
+            @*@Html.HiddenFor(model => model.cliente.CD_CLIENTE)*@
+            @Html.HiddenFor(model => model.statusPedidoAtual.ID_STATUS_PEDIDO)
+            @Html.HiddenFor(model => model.tipoOrigemPagina)
+
+            <input id="estoqueAbaixoSolicitado" name="estoqueAbaixoSolicitado" type="hidden" value="N" />
+            <input id="pecaNaoEncontradaEstoque" name="pecaNaoEncontradaEstoque" type="hidden" value="N" />
+
+            <input id="URLParam" name="URLParam" type="hidden" value="@ViewBag.URLParam" />
+
+            <div class="card">
+                <div class="card-body">
+                    <div class="form-row">
+                        <div class="form-group col-md-6 col-sm-12">
+                            <label class="control-label">Técnico</label>
+                            @Html.EditorFor(model => model.tecnico.NM_TECNICO, new { htmlAttributes = new { @class = "form-control col-12", @readonly = "readonly" } })
+                        </div>
+
+                        <div class="form-group col-md-6 col-sm-12">
+                            <label class="control-label">Empresa</label>
+                            @Html.EditorFor(model => model.tecnico.empresa.NM_Empresa, new { htmlAttributes = new { @class = "form-control col-12", @readonly = "readonly" } })
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group col-md-2 col-sm-6">
+                            <label class="control-label">Pedido</label>
+                            @Html.EditorFor(model => model.CD_PEDIDO_Formatado, new { htmlAttributes = new { @class = "form-control col-12", @readonly = "readonly" } })
+                        </div>
+
+                        <div class="form-group col-md-3 col-sm-6">
+                            <label class="control-label">Data</label>
+                            @Html.EditorFor(model => model.DT_CRIACAO, new { htmlAttributes = new { @class = "form-control col-12", @readonly = "readonly" } })
+                        </div>
+
+                        <div class="form-group col-md-4 col-sm-6">
+                            <label class="control-label">Status do pedido</label>
+                            @Html.EditorFor(model => model.statusPedidoAtual.DS_STATUS_PEDIDO, new { htmlAttributes = new { @class = "form-control col-12", @readonly = "readonly" } })
+                        </div>
+
+                        <div class="form-group col-md-3 col-sm-6">
+                            <label class="control-label">Tipo</label>
+                            @Html.EditorFor(model => model.DS_TP_TIPO_PEDIDO, new { htmlAttributes = new { @class = "form-control col-12", @readonly = "readonly" } })
+                        </div>
+                    </div>
+
+                    @if (Model.TP_TIPO_PEDIDO == _3M.Comodato.Utility.ControlesUtility.Dicionarios.TipoPedido().ToArray()[2].Value)
+                    {
+                        <div class="form-row">
+                            <div class="form-group col-md-10 col-sm-12">
+                                <label class="control-label">Cliente</label>
+                                @Html.DropDownListFor(model => model.cliente.CD_CLIENTE, new SelectList(Model.clientes, "CD_CLIENTE", "NM_CLIENTE"), "Selecione...", new { @class = "js-example-basic-single", @style = "width: 100% " })
+                                <label id="validaCDCLIENTE" class="control-label text-danger" style="display: none;">Conteúdo obrigatório!</label>
+                            </div>
+                            @if (Model.TP_TIPO_PEDIDO == _3M.Comodato.Utility.ControlesUtility.Dicionarios.TipoPedido().ToArray()[2].Value)
+                            {
+                                <div class="form-group col-md-2 col-sm-12">
+                                    <br />
+                                    <button class="btn btn-primary btn-sm" type="button" id="btnGravarCliente">Gravar Cliente</button>
+                                </div>
+                            }
+                        </div>
+                    }
+
+                    <div class="form-row">
+
+
+
+                        <div class="form-group col-md-2 col-sm-6">
+                            <br />
+                            @if (Model.tipoOrigemPagina == "Solicitacao")
+                            {
+
+                                if (ViewBag.PermitirLoteDownload != "S" && ViewBag.PermitirLoteDownload != "S")
+                                {
+                                    <button class="btn btn-primary btn-sm" type="button" id="btnNovaPeca">Nova Peça</button>
+                                }
+                            }
+
+                            @if (ViewBag.PermitirAnexar == "S" || ViewBag.PermitirLoteDownload == "S")
+                            {
+                                <button class="btn btn-primary btn-sm" type="button" id="btnImprimir">Imprimir</button>
+                            }
+
+                        </div>
+
+
+                        @if (ViewBag.PermitirLoteDownload == "S" || ViewBag.PermitirAnexar == "S")
+                        {
+                            <br />
+                            <div class="form-group col-md-2 col-sm-6">
+                                <label class="control-label">Lote de Aprovação</label>
+                                @Html.DropDownListFor(model => model.listaLotes, new SelectList(Model.listaLotes, "DS_ARQUIVO", "ID_LOTE_APROVACAO"), "Todos", new { @class = "valid form-control col-12" })
+                            </div>
+                        }
+                        @if (ViewBag.PermitirAnexar == "S")
+                        {
+                            @*<div class="form-row" id="anexo" style="display:none">
+                                <div class="card-body">
+                                    <div class="form-row">*@
+                            <div id="anexo" class="form-group col-md-4 col-sm-6" style="display:none">
+                                @*col-xl-12*@
+                                <label class="control-label">Nota Fiscal(pdf)</label>
+                                @*<div class="col-md-8" >*@
+                                @Html.HiddenFor(model => model.DS_ARQUIVO)
+
+                                <div class="input-group">
+                                    <div class="custom-file">
+                                        <input style="z-index:-1" type="file" id="file" class="custom-file-input" onchange="SelecionarArquivo(this, $('#labelFile'), $('#fileUpload'));">
+                                        <label class="custom-file-label" id="labelFile" for="file">Selecionar Arquivo</label>
+                                    </div>
+
+                                    <div>
+                                        <a href="#" id="fileUpload" title="Enviar Anexo" style="visibility:hidden;"><i class="fas fa-2x fa-upload"></i></a> &nbsp;
+                                        @Html.ActionLink(" ", "DownloadFile", new { pastaConstante = "PastaNFLoteUpload", fileName = Model.DS_ARQUIVO }, new { @id = "lnkDownload", @class = "fas fa-2x fa-file", @title = "Baixar Anexo" })
+                                    </div>
+                                </div>
+                                @*</div>*@
+                            </div>
+                            @*</div>
+                                    </div>
+                                </div>*@
+                        }
+                        else
+                        {
+                            @*<div class="form-row" id="anexo" style="display:none">
+                                <div class="card-body">
+                                    <div class="form-row">*@
+                            <div class="form-group col-md-2 col-sm-6" id="anexo" style="display:none">
+                                <label class="control-label">Nota Fiscal(pdf)</label>
+                                <div>
+                                    @Html.ActionLink(" ", "DownloadFile", new { pastaConstante = "PastaNFLoteUpload", fileName = Model.DS_ARQUIVO }, new { @id = "lnkDownload", @class = "fas fa-2x fa-file", @title = "Baixar Anexo" })
+                                </div>
+                            </div>
+                            @*</div>
+                                    </div>
+                                </div>*@
+                        }
+
+
+                        <div class="form-group col-md-2 col-sm-6">
+                            @*col-xl-3 col-lg-3 col-md-2 col-sm-4">*@
+                            <label class="control-label">Ação</label>
+                            @Html.DropDownListFor(model => model.statusPedido.ID_STATUS_PEDIDO, new SelectList(Model.statusPedidos, "ID_STATUS_PEDIDO", "DS_STATUS_PEDIDO"), new { @class = "valid form-control col-12" })
+                            <label id="validaIDSTATUSPEDIDO" class="control-label text-danger" style="display: none;">Conteúdo obrigatório!</label>
+                        </div>
+
+                        <div class="form-group col-md-2 col-sm-6">
+                            @*col-xl-1 col-lg-1 col-md-2 col-sm-3*@
+                            <br />
+                            <button class="btn btn-primary btn-sm" type="button" id="btnAcao">Iniciar Ação</button>
+                        </div>
+
+
+
+
+
+                    </div>
+                </div>
+            </div>
+            <br />
+
+            @*<div class="pre-scrollable">*@
+            <div id="gridmvcPedidoItem">
+            </div>
+            @*</div>*@
+            <br />
+
+            <div class="form-group">
+                <label class="control-label" style="color:green;"><input type="checkbox" id="chkEmergencia" value="">&nbsp; EMERGÊNCIA &nbsp;<i class="fas fa-exclamation-triangle" style="color:green;"></i></label>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">Observações do pedido</label>
+                @Html.EditorFor(model => model.TX_OBS, new { htmlAttributes = new { @class = "form-control col-12", @rows = 3 } })
+                <label id="validaTXOBS" class="control-label text-danger" style="display: none;">Conteúdo obrigatório!</label>
+            </div>
+
+            <div class="form-group">
+                <button class="btn btn-primary btn-sm" type="button" id="btnGravar">Registrar OBS</button>
+                @*<button class="btn btn-primary btn-sm" type="button" id="btnVoltar" onclick="window.history.back();">Voltar</button>*@
+                @if (Model.tipoOrigemPagina == "Solicitacao")
+                {
+                    @Html.ActionLink("Voltar", "Index", new { area = "" }, new { @class = "btn btn-primary btn-sm" })
+                }
+                else if (Model.tipoOrigemPagina == "Aprovacao")
+                {
+                    @Html.ActionLink("Voltar", "AprovaSolicitacaoPecas", new { area = "" }, new { @class = "btn btn-primary btn-sm" })
+                }
+                else if (Model.tipoOrigemPagina == "Confirmacao")
+                {
+                    @Html.ActionLink("Voltar", "ConfirmaRecebimentoPecas", new { area = "" }, new { @class = "btn btn-primary btn-sm" })
+                }
+
+            </div>
+
+            <div class="pre-scrollable">
+                <div id="gridmvcMensagem">
+                </div>
+            </div>
+
+        </div>
+
+        if (Model.TP_TIPO_PEDIDO == _3M.Comodato.Utility.ControlesUtility.Dicionarios.TipoPedido().ToArray()[0].Value)
+        {
+            @Html.Partial("_modalPedidoPecaTecnico")
+        }
+        else if (Model.TP_TIPO_PEDIDO == _3M.Comodato.Utility.ControlesUtility.Dicionarios.TipoPedido().ToArray()[1].Value)
+        {
+            @Html.Partial("_modalPedidoPecaAvulso")
+        }
+        else if (Model.TP_TIPO_PEDIDO == _3M.Comodato.Utility.ControlesUtility.Dicionarios.TipoPedido().ToArray()[2].Value)
+        {
+            @Html.Partial("_modalPedidoPecaCliente")
+        }
+    }
+
+</div>
+
+<style type="text/css">
+    .table th {
+        background-color: #e9ecef;
+    }
+</style>
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        $("#loader").css("display", "block");
+
+        var URLObterListaMensagem = "@Url.Action("ObterListaMensagemJson", "SolicitacaoPecas")";
+        var URLObterListaPedidoItem = "@Url.Action("ObterListaPedidoItemJson", "SolicitacaoPecas")";
+
+        var URL_UPLOAD = '@Url.Action("Upload")';
+        var URL_DOWNLOAD = '@Url.Action("DownloadFile")';
+
+        var UsuarioTecnico = '@_3M.Comodato.Utility.ControlesUtility.Seguranca.VerificaUsuarioPerfisTecnicos(Convert.ToInt64(((_3M.Comodato.Entity.UsuarioPerfilEntity)Session["_CurrentUser"]).usuario.nidUsuario))';
+
+        var URLAPI = "@_3M.Comodato.Utility.ControlesUtility.Parametro.ObterValorParametro(_3M.Comodato.Utility.ControlesUtility.Constantes.URLAPI)";
+        var URLSite = "@_3M.Comodato.Utility.ControlesUtility.Parametro.ObterValorParametro(_3M.Comodato.Utility.ControlesUtility.Constantes.URLSite)";
+        var nidUsuario = @Convert.ToInt64(((_3M.Comodato.Entity.UsuarioPerfilEntity)Session["_CurrentUser"]).usuario.nidUsuario);
+        var nidPerfil = @Convert.ToInt64(((_3M.Comodato.Entity.UsuarioPerfilEntity)Session["_CurrentUser"]).perfil.nidPerfil);
+        var perfilCliente = @Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.Perfil.Cliente);
+
+        var statusNovoRascunho = @Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.StatusPedido.NovoRascunho);
+        var statusSolicitado = @Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.StatusPedido.Solicitado);
+        var statusAprovado = @Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.StatusPedido.Aprovado);
+        var statusRecebido = @Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.StatusPedido.Recebido);
+        var statusPendente = @Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.StatusPedido.Pendente);
+        var statusRecebidoComPendencia = @Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.StatusPedido.RecebidoComPendencia);
+        var statusCancelado = @Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.StatusPedido.Cancelado);
+
+        var statusTipoPedidoTecnico = "@_3M.Comodato.Utility.ControlesUtility.Dicionarios.TipoPedido().ToArray()[0].Value";
+        var statusTipoPedidoAvulso = "@_3M.Comodato.Utility.ControlesUtility.Dicionarios.TipoPedido().ToArray()[1].Value";
+        var statusTipoPedidoCliente = "@_3M.Comodato.Utility.ControlesUtility.Dicionarios.TipoPedido().ToArray()[2].Value";
+
+        var statusAguardandoItem = "@_3M.Comodato.Utility.ControlesUtility.Dicionarios.StatusItem().ToArray()[0].Value";
+        var statusRecebidoItem = "@_3M.Comodato.Utility.ControlesUtility.Dicionarios.StatusItem().ToArray()[1].Value";
+
+        var perfilAdministrador3M = @Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.Perfil.Administrador3M);
+        var perfilTecnico3M = @Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.Perfil.Tecnico3M);
+        var perfilTecnicoEmpresaTerceira = @Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.Perfil.TecnicoEmpresaTerceira);
+        var perfilEquipeVendas = @Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.Perfil.EquipeVendas);
+        var perfilAssistênciaTecnica3M = @Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.Perfil.AssistênciaTecnica3M);
+        var perfilLiderEmpresaTecnica = @Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.Perfil.LiderEmpresaTecnica);
+        var perfilEquipeMKT = @Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.Perfil.EquipeMKT);
+        var perfilCliente = @Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.Perfil.Cliente);
+
+        var MensagemGravacaoSucesso = "@_3M.Comodato.Utility.ControlesUtility.Constantes.MensagemGravacaoSucesso";
+        var MensagemExclusaoSucesso = "@_3M.Comodato.Utility.ControlesUtility.Constantes.MensagemExclusaoSucesso";
+
+        var URLCriptografarChave = "@Url.Action("CriptografarChaveJson")";
+    </script>
+
+    <script type="text/javascript" src="~/Scripts/Comodato/Util.js"></script>
+    <script type="text/javascript" src="~/Scripts/Comodato/SolicitacaoPecasDetalhe.js"></script>
+
+    @if (Model.TP_TIPO_PEDIDO == _3M.Comodato.Utility.ControlesUtility.Dicionarios.TipoPedido().ToArray()[0].Value)
+    {
+        <script type="text/javascript" src="~/Scripts/Comodato/SolicitacaoPecasTecnico.js"></script>
+    }
+    else if (Model.TP_TIPO_PEDIDO == _3M.Comodato.Utility.ControlesUtility.Dicionarios.TipoPedido().ToArray()[1].Value)
+    {
+        <script type="text/javascript" src="~/Scripts/Comodato/SolicitacaoPecasAvulso.js"></script>
+    }
+    else if (Model.TP_TIPO_PEDIDO == _3M.Comodato.Utility.ControlesUtility.Dicionarios.TipoPedido().ToArray()[2].Value)
+    {
+        <script type="text/javascript" src="~/Scripts/Comodato/SolicitacaoPecasCliente.js"></script>
+    }
+
+}
+

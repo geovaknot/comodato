@@ -1,0 +1,14 @@
+﻿@model IEnumerable<_3M.Comodato.Front.Models.DadosFaturamento>
+
+@using GridMvc.Html
+
+@{
+               
+    var perfil = (_3M.Comodato.Entity.UsuarioPerfilEntity)Session["_CurrentUser"];
+    int PERFIL_CLIENTE = 8;
+    var SIM = "S";
+}
+
+<div class="table table-hover">
+    <input type="button" value="Registrar" />
+</div>

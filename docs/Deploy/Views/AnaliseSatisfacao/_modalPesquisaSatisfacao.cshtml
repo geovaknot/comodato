@@ -1,0 +1,125 @@
+﻿@model _3M.Comodato.Front.Models.SatisfacaoResposta
+@using System;
+
+<div class="modal fade" id="PesquisaSatisfacaoModal" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header bg-dark">
+                <h5 class="modal-title text-white" id="exampleModalLongTitle">
+                    Responder Pesquisa de Satisfação
+                </h5>
+            </div>
+
+            @Html.HiddenFor(m => m.Pesquisa.IdPesquisa)
+            @Html.HiddenFor(m => m.Visita.ID_VISITA)
+
+            <div class="modal-body">
+                <div class="form-horizontal container-fluid">
+                    <div class="form-horizontal">
+                        <hr />
+                        <div class="form-row">
+                            <div class="form-group col-8">
+                                <label id="labelTitulo">Título da Pesquisa</label>
+                                @Html.TextBoxFor(model => model.Pesquisa.Titulo, new { @class = "form-control col-md-12", @readonly= "readonly" } )
+                                @Html.ValidationMessageFor(model => model.Pesquisa.Titulo, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="form-group col-4">
+                                <label id="labelTitulo">Data</label>
+                                @Html.TextBox("DataResposta", Model.DataResposta, new { @class = "form-control text-center col-md-12", @readonly = "readonly" })
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <label id="labelResponsavel">Responsável pela pesquisa</label>
+                                @Html.TextBoxFor(model => model.NomeRespondedor, new { @class = "form-control col-md-12" })
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="custom-control-inline col-md-12">
+                                <div class="form-group justify-content-md-center small">
+                                    Com o objetivo de melhoria continua em nossos atendimentos, referente a visita técnica realizada em @Model.Visita.DT_DATA_VISITA por @Model.Visita.tecnico.NM_TECNICO
+                                    @(String.IsNullOrEmpty(Model.Visita.DS_NOME_RESPONSAVEL) ? "" : " e com acompanhamento de " + Model.Visita.DS_NOME_RESPONSAVEL).
+                                    Por favor, classifique ao lado, sua satisfação com o atendimento e justifique abaixo.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="custom-control-inline col-12">
+                                <div id="ratingAvaliacaoQuestionario"></div>&nbsp;
+                                <div id="notaAvaliacaoQuestionario" class="font-weight-bold"></div>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group  col-md-12">
+                                @Html.Label("labelJustificativa", "Justificativa da classificação", new { @class = "control-label" })
+                                @Html.EditorFor(model => model.Justificativa, new { htmlAttributes = new { @class = "form-control  col-md-12", @rows = "2" } })
+                                @Html.ValidationMessageFor(model => model.Justificativa, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <hr />
+                        @if (!String.IsNullOrEmpty(Model.Pesquisa.PerguntaPesquisa1))
+                        {
+                            <div class="form-row">
+                                <div class="form-group  col-md-12">
+                                    @Html.LabelFor(model => model.Pesquisa.PerguntaPesquisa1, Model.Pesquisa.PerguntaPesquisa1, new { @class = "control-label" })
+                                    @Html.EditorFor(model => model.RespostaPesquisa1, new { htmlAttributes = new { @class = "form-control  col-md-12", @rows = "2" } })
+                                    @Html.ValidationMessageFor(model => model.RespostaPesquisa1, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        }
+
+                        @if (!String.IsNullOrEmpty(Model.Pesquisa.PerguntaPesquisa2))
+                        {
+                            <div class="form-row">
+                                <div class="form-group  col-md-12">
+                                    @Html.LabelFor(model => model.Pesquisa.PerguntaPesquisa2, Model.Pesquisa.PerguntaPesquisa2, new { @class = "control-label" })
+                                    @Html.EditorFor(model => model.RespostaPesquisa2, new { htmlAttributes = new { @class = "form-control  col-md-12", @rows = "2" } })
+                                    @Html.ValidationMessageFor(model => model.RespostaPesquisa2, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        }
+
+                        @if (!String.IsNullOrEmpty(Model.Pesquisa.PerguntaPesquisa3))
+                        {
+                            <div class="form-row">
+                                <div class="form-group  col-md-12">
+                                    @Html.LabelFor(model => model.Pesquisa.PerguntaPesquisa3, Model.Pesquisa.PerguntaPesquisa3, new { @class = "control-label" })
+                                    @Html.EditorFor(model => model.RespostaPesquisa3, new { htmlAttributes = new { @class = "form-control  col-md-12", @rows = "2" } })
+                                    @Html.ValidationMessageFor(model => model.RespostaPesquisa3, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        }
+
+                        @if (!String.IsNullOrEmpty(Model.Pesquisa.PerguntaPesquisa4))
+                        {
+                            <div class="form-row">
+                                <div class="form-group  col-md-12">
+                                    @Html.LabelFor(model => model.Pesquisa.PerguntaPesquisa4, Model.Pesquisa.PerguntaPesquisa4, new { @class = "control-label" })
+                                    @Html.EditorFor(model => model.RespostaPesquisa4, new { htmlAttributes = new { @class = "form-control  col-md-12", @rows = "2" } })
+                                    @Html.ValidationMessageFor(model => model.RespostaPesquisa4, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        }
+
+                        @if (!String.IsNullOrEmpty(Model.Pesquisa.PerguntaPesquisa5))
+                        {
+                            <div class="form-row">
+                                <div class="form-group  col-md-12">
+                                    @Html.LabelFor(model => model.Pesquisa.PerguntaPesquisa5, Model.Pesquisa.PerguntaPesquisa5, new { @class = "control-label" })
+                                    @Html.EditorFor(model => model.RespostaPesquisa5, new { htmlAttributes = new { @class = "form-control  col-md-12", @rows = "2" } })
+                                    @Html.ValidationMessageFor(model => model.RespostaPesquisa5, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnSalvarAnaliseSatisfacaoModal" onclick="SalvarPesquisaSatisfacao();">Confirmar Avaliação</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>

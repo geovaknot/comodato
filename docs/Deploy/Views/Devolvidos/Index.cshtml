@@ -1,0 +1,79 @@
+﻿@model _3M.Comodato.Front.Models.DevolvidosDetalhe
+
+@using GridMvc.Html
+
+@{
+    ViewBag.Title = "Equipamentos Devolvidos";
+}
+
+<i class="fas fa-print fa-3x fa-pull-left"></i>
+<h3>Equipamentos Devolvidos</h3>
+
+<div class="well">
+    <hr />
+
+    @using (Html.BeginForm())
+    {
+        <div class="form-horizontal">
+            <div class="form-row">
+
+                <div class="form-group">
+                    <label class="control-label">Período</label>
+                    <div id="DT_DATAS-container">
+                        @*<div class="input-group date">*@
+                        <div class="input-daterange input-group">
+                            @Html.TextBoxFor(model => model.DT_DEV_INICIAL, "{0:dd/MM/yyyy}", new { @class = "form-control col-12" })
+                            <span class="input-group-addon">&nbsp;até&nbsp;</span>
+                            @Html.TextBoxFor(model => model.DT_DEV_FINAL, "{0:dd/MM/yyyy}", new { @class = "form-control col-12" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-horizontal">
+            <div class="form-row">
+                <div class="form-group col-12">
+                    <label class="control-label">Cliente</label>
+                    @Html.DropDownListFor(model => model.cliente.CD_CLIENTE, new SelectList(Model.clientes, "CD_CLIENTE", "NM_CLIENTE"), new { @class = "js-example-basic-single", @style = "width: 100%" })
+                </div>
+
+                <div class="form-group col-12">
+                    <label class="control-label">Vendedor</label>
+                    @Html.DropDownListFor(model => model.vendedor.CD_VENDEDOR, new SelectList(Model.vendedores, "CD_VENDEDOR", "NM_VENDEDOR"), new { @class = "js-example-basic-single", @style = "width: 100%" })
+                </div>
+
+                <div class="form-group col-12">
+                    <label class="control-label">Grupo</label>
+                    @Html.DropDownListFor(model => model.grupo.CD_GRUPO, new SelectList(Model.grupos, "CD_GRUPO", "DS_GRUPO"), new { @class = "js-example-basic-single", @style = "width: 100%" })
+                </div>
+
+                <div class="form-group col-12">
+                    <label class="control-label">Motivo (Destino)</label>
+                    @Html.DropDownListFor(model => model.motivo.CD_MOTIVO_DEVOLUCAO, new SelectList(Model.motivos, "CD_MOTIVO_DEVOLUCAO", "DS_MOTIVO_DEVOLUCAO"), new { @class = "js-example-basic-single", @style = "width: 100%" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <button class="btn btn-primary btn-sm" type="button" id="btnImprimir">Imprimir</button>
+            <button class="btn btn-primary btn-sm" type="button" id="btnLimpar">Limpar</button>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript" src="~/Scripts/Comodato/Util.js"></script>
+    <script type="text/javascript" src="~/Scripts/Comodato/Devolvidos.js"></script>
+
+    <script>
+        var URLObterLista = "@Url.Action("ObterListaDevolvidos", "Devolvidos")";
+        @*var URLImprimir = "@Url.Action("Imprimir", "Devolvidos")";*@
+        var URLAPI = "@_3M.Comodato.Utility.ControlesUtility.Parametro.ObterValorParametro(_3M.Comodato.Utility.ControlesUtility.Constantes.URLAPI)";
+        var URLSite = "@_3M.Comodato.Utility.ControlesUtility.Parametro.ObterValorParametro(_3M.Comodato.Utility.ControlesUtility.Constantes.URLSite)";
+        var URLCriptografarChave = "@Url.Action("CriptografarChaveJson")";
+
+        var nidUsuario = @Convert.ToInt64(((_3M.Comodato.Entity.UsuarioPerfilEntity)Session["_CurrentUser"]).usuario.nidUsuario);
+    </script>
+}

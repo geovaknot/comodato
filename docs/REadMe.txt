@@ -1,0 +1,1 @@
+Nesta pasta serão colocadas as documentações de configuração de ambiente de desenvolvimento da aplicação. 
