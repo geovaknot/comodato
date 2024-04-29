@@ -29,8 +29,8 @@ namespace _3M.Comodato.Front
             if (!string.IsNullOrEmpty(parametros[2]))
                 entityFiltro.CD_WF_PEDIDO_EQUIP = parametros[2];
 
-            //if (!string.IsNullOrEmpty(parametros[3]))
-            //    entityFiltro.ID_USU_SOLICITANTE= Convert.ToInt64(parametros[3]);
+            if (!string.IsNullOrEmpty(parametros[3]))
+                entityFiltro.ID_USU_SOLICITANTE= Convert.ToInt64(parametros[3]);
 
             if (!string.IsNullOrEmpty(parametros[4]))
                 entityFiltro.TP_PEDIDO = parametros[4];
@@ -40,7 +40,7 @@ namespace _3M.Comodato.Front
 
             WfPedidoEquipData data = new WfPedidoEquipData();
 
-            var listaPedidos = (from d in data.ObterListaDevolucaoEntity(entityFiltro, dataInicio, dataFim, parametros[3])
+            var listaPedidos = (from d in data.ObterListaDevolucaoEntity(entityFiltro, dataInicio, dataFim)
                                 select ConverterParaPedidoEquipamentoPesquisaDevolucao(d)).ToList();
 
             if (listaPedidos.Count > 0)

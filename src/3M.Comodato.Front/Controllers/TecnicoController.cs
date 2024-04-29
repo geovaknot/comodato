@@ -227,16 +227,9 @@ namespace _3M.Comodato.Front.Controllers
                         tecnicoEntity.nidUsuarioAtualizacao = CurrentUser.usuario.nidUsuario;
                         tecnicoEntity.usuarioSupervisorTecnico.nidUsuario = tecnico.usuariosSupervisorTecnico.nidUsuario;
                         tecnicoEntity.CD_BCPS = tecnico.CD_BCPS;
+                        new TecnicoData().Inserir(ref tecnicoEntity);
 
-                        if (tecnico.FL_ATIVO == "" || tecnico.FL_ATIVO == null)
-                            tecnico.JavaScriptToRun = "MensagemErroAtivo()";
-                        else if (tecnico.FL_FERIAS == "" || tecnico.FL_FERIAS == null)
-                            tecnico.JavaScriptToRun = "MensagemErroFerias()";
-                        else
-                        {
-                            new TecnicoData().Inserir(ref tecnicoEntity);
-                            tecnico.JavaScriptToRun = "MensagemSucesso()";
-                        }
+                        tecnico.JavaScriptToRun = "MensagemSucesso()";
                         //return RedirectToAction("Index");
                     }
                 }
@@ -380,7 +373,7 @@ namespace _3M.Comodato.Front.Controllers
                     tecnicoEntity.CD_BCPS = tecnico.CD_BCPS;
                     new TecnicoData().Alterar(tecnicoEntity);
 
-                    if (tecnico.FL_ATIVO == "N" && !string.IsNullOrEmpty(tecnico.tecnicoTransferenciaCarteira.CD_TECNICO))
+                    if(tecnico.FL_ATIVO == "N" && !string.IsNullOrEmpty(tecnico.tecnicoTransferenciaCarteira.CD_TECNICO))
                     {
                         new TecnicoData().TransferirCarteira(CD_TECNICO_ORIGEM: tecnico.CD_TECNICO, CD_TECNICO_DESTINO: tecnico.tecnicoTransferenciaCarteira.CD_TECNICO, nidUsuarioAtualizacao: CurrentUser.usuario.nidUsuario);
                     }
@@ -429,12 +422,6 @@ namespace _3M.Comodato.Front.Controllers
                             new UsuarioData().Alterar(usuario);
                         }
                         
-                    }
-
-                    if (tecnico.FL_ATIVO == "N")
-                    {
-                        TecnicoClienteEntity tecnicoClienteEntity = new TecnicoClienteEntity();
-                        new TecnicoClienteData().ReordenarTodos(tecnico.CD_TECNICO, CurrentUser.usuario.nidUsuario);
                     }
 
                     tecnico.JavaScriptToRun = "MensagemSucesso()";

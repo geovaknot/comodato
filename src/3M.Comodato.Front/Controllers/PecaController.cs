@@ -275,8 +275,6 @@ namespace _3M.Comodato.Front.Controllers
                 }
                 Models.Peca peca2 = null;
                 Models.Peca peca3 = null;
-                Models.Peca pecaInativa = null;
-                Models.Peca pecaInativa1 = null;
                 if (ModelState.IsValid)
                 {
                     PecaEntity pecaEntity = new PecaEntity();
@@ -349,53 +347,11 @@ namespace _3M.Comodato.Front.Controllers
                             pecaRecuperada.nidUsuarioAtualizacao = pecaEntity.nidUsuarioAtualizacao;
                             pecaRecuperada.QTD_PlanoZero = Convert.ToDecimal(peca.QTD_PlanoZero);
 
-                            List<Models.Peca> pecasInativas = new List<Models.Peca>();
+                            new PecaData().Inserir(ref pecaRecuperada);
 
-                            DataTableReader dataTableReaderInativo1 = new PecaData().ObterListaNewInativa(pecaRecuperada).CreateDataReader();
+                            new PecaData().grava_PecaRecuperada(pecaEntity);
 
-                            if (dataTableReaderInativo1.HasRows)
-                            {
-                                if (dataTableReaderInativo1.Read())
-                                {
-                                    pecaInativa1 = new Models.Peca
-                                    {
-                                        CD_PECA = dataTableReaderInativo1["CD_PECA"].ToString(),
-                                        DS_PECA = dataTableReaderInativo1["DS_PECA"].ToString(),
-                                        TX_UNIDADE = dataTableReaderInativo1["TX_UNIDADE"].ToString(),
-                                        QTD_ESTOQUE = Convert.ToDecimal("0" + dataTableReaderInativo1["QTD_ESTOQUE"]).ToString("N3"),
-                                        QTD_ESTOQUE_GRID = Convert.ToDecimal("0" + dataTableReaderInativo1["QTD_ESTOQUE"].ToString()),
-                                        QTD_MINIMA = Convert.ToDecimal("0" + dataTableReaderInativo1["QTD_MINIMA"]).ToString("N3"),
-                                        VL_PECA = Convert.ToDecimal("0" + dataTableReaderInativo1["VL_PECA"]).ToString("N2"),
-                                        TP_PECA = dataTableReaderInativo1["TP_PECA"].ToString(),
-                                        cdsTP_PECA = ControlesUtility.Dicionarios.TipoPeca().Where(x => x.Value == dataTableReaderInativo1["TP_PECA"].ToString()).ToArray()[0].Key,
-                                        FL_ATIVO_PECA = dataTableReaderInativo1["FL_ATIVO_PECA"].ToString(),
-
-                                        tiposPecas = ControlesUtility.Dicionarios.TipoPeca(),
-                                        SimNao = ControlesUtility.Dicionarios.SimNao(),
-                                        CancelarVerificarCodigo = true,
-                                        CD_PECA_RECUPERADA = dataTableReaderInativo1["CD_PECA_RECUPERADA"].ToString(),
-                                        QTD_PlanoZero = Convert.ToDecimal("0" + dataTableReaderInativo1["QTD_PlanoZero"]).ToString("N3")
-                                    };
-                                    pecasInativas.Add(pecaInativa1);
-                                }
-                            }
-
-                            if (dataTableReaderInativo1 != null)
-                            {
-                                dataTableReaderInativo1.Dispose();
-                                dataTableReaderInativo1 = null;
-                            }
-
-                            if (pecasInativas.Count == 0)
-                            {
-                                new PecaData().Inserir(ref pecaRecuperada);
-
-                                new PecaData().grava_PecaRecuperada(pecaRecuperada);
-
-                                peca.JavaScriptToRun = "MensagemSucesso()";
-                            }
-                            else
-                                peca.JavaScriptToRun = "MensagemPecaInativa()";
+                            peca.JavaScriptToRun = "MensagemSucesso()";
                         }
                         else
                         {
@@ -536,54 +492,11 @@ namespace _3M.Comodato.Front.Controllers
                                 pecaEspecial.nidUsuarioAtualizacao = pecaEntity.nidUsuarioAtualizacao;
                                 pecaEspecial.QTD_PlanoZero = pecaEntity.QTD_PlanoZero;
 
-                                List<Models.Peca> pecasInativas = new List<Models.Peca>();
+                                new PecaData().Inserir(ref pecaEspecial);
 
-                                DataTableReader dataTableReaderInativo = new PecaData().ObterListaNewInativa(pecaEspecial).CreateDataReader();
+                                new PecaData().grava_PecaRecuperada(pecaEntity);
 
-                                if (dataTableReaderInativo.HasRows)
-                                {
-                                    if (dataTableReaderInativo.Read())
-                                    {
-                                        pecaInativa = new Models.Peca
-                                        {
-                                            CD_PECA = dataTableReaderInativo["CD_PECA"].ToString(),
-                                            DS_PECA = dataTableReaderInativo["DS_PECA"].ToString(),
-                                            TX_UNIDADE = dataTableReaderInativo["TX_UNIDADE"].ToString(),
-                                            QTD_ESTOQUE = Convert.ToDecimal("0" + dataTableReaderInativo["QTD_ESTOQUE"]).ToString("N3"),
-                                            QTD_ESTOQUE_GRID = Convert.ToDecimal("0" + dataTableReaderInativo["QTD_ESTOQUE"].ToString()),
-                                            QTD_MINIMA = Convert.ToDecimal("0" + dataTableReaderInativo["QTD_MINIMA"]).ToString("N3"),
-                                            VL_PECA = Convert.ToDecimal("0" + dataTableReaderInativo["VL_PECA"]).ToString("N2"),
-                                            TP_PECA = dataTableReaderInativo["TP_PECA"].ToString(),
-                                            cdsTP_PECA = ControlesUtility.Dicionarios.TipoPeca().Where(x => x.Value == dataTableReaderInativo["TP_PECA"].ToString()).ToArray()[0].Key,
-                                            FL_ATIVO_PECA = dataTableReaderInativo["FL_ATIVO_PECA"].ToString(),
-
-                                            tiposPecas = ControlesUtility.Dicionarios.TipoPeca(),
-                                            SimNao = ControlesUtility.Dicionarios.SimNao(),
-                                            CancelarVerificarCodigo = true,
-                                            CD_PECA_RECUPERADA = dataTableReaderInativo["CD_PECA_RECUPERADA"].ToString(),
-                                            QTD_PlanoZero = Convert.ToDecimal("0" + dataTableReaderInativo["QTD_PlanoZero"]).ToString("N3")
-                                        };
-                                        pecasInativas.Add(pecaInativa);
-                                    }
-                                }
-
-                                if (dataTableReaderInativo != null)
-                                {
-                                    dataTableReaderInativo.Dispose();
-                                    dataTableReaderInativo = null;
-                                }
-
-                                if (pecasInativas.Count == 0)
-                                {
-                                    new PecaData().Inserir(ref pecaEspecial);
-
-                                    new PecaData().grava_PecaRecuperada(pecaEntity);
-
-                                    peca.JavaScriptToRun = "MensagemSucesso()";
-                                }
-                                else
-                                    peca.JavaScriptToRun = "MensagemPecaInativa()";
-
+                                peca.JavaScriptToRun = "MensagemSucesso()";
                             }
                             else
                             {

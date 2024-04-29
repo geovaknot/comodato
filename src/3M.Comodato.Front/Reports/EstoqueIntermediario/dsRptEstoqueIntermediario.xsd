@@ -9,7 +9,7 @@
         <Tables>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="prcRptEstoqueIntermediarioTableAdapter" GeneratorDataComponentClassName="prcRptEstoqueIntermediarioTableAdapter" Name="prcRptEstoqueIntermediario" UserDataComponentName="prcRptEstoqueIntermediarioTableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="ConnectionString (Web.config)" DbObjectName="COMODATOQA.dbo.prcRptEstoqueIntermediario" DbObjectType="StoredProcedure" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+              <DbSource ConnectionRef="ConnectionString (Web.config)" DbObjectName="[3M.COMODATO].dbo.prcRptEstoqueIntermediario" DbObjectType="StoredProcedure" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
                 <SelectCommand>
                   <DbCommand CommandType="StoredProcedure" ModifiedByUser="false">
                     <CommandText>dbo.prcRptEstoqueIntermediario</CommandText>
@@ -31,11 +31,6 @@
               <Mapping SourceColumn="DS_PECA" DataSetColumn="DS_PECA" />
               <Mapping SourceColumn="QTD_ALOCADA" DataSetColumn="QTD_ALOCADA" />
               <Mapping SourceColumn="VL_TOTAL" DataSetColumn="VL_TOTAL" />
-              <Mapping SourceColumn="TP_ESTOQUE_TEC_3M" DataSetColumn="TP_ESTOQUE_TEC_3M" />
-              <Mapping SourceColumn="CD_TECNICO" DataSetColumn="CD_TECNICO" />
-              <Mapping SourceColumn="NM_TECNICO" DataSetColumn="NM_TECNICO" />
-              <Mapping SourceColumn="CD_CLIENTE" DataSetColumn="CD_CLIENTE" />
-              <Mapping SourceColumn="NM_CLIENTE" DataSetColumn="NM_CLIENTE" />
             </Mappings>
             <Sources />
           </TableAdapter>
@@ -47,7 +42,7 @@
   <xs:element name="dsRptEstoqueIntermediario" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="dsRptEstoqueIntermediario" msprop:Generator_UserDSName="dsRptEstoqueIntermediario">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="prcRptEstoqueIntermediario" msprop:Generator_TableClassName="prcRptEstoqueIntermediarioDataTable" msprop:Generator_TableVarName="tableprcRptEstoqueIntermediario" msprop:Generator_RowChangedName="prcRptEstoqueIntermediarioRowChanged" msprop:Generator_TablePropName="prcRptEstoqueIntermediario" msprop:Generator_RowDeletingName="prcRptEstoqueIntermediarioRowDeleting" msprop:Generator_RowChangingName="prcRptEstoqueIntermediarioRowChanging" msprop:Generator_RowEvHandlerName="prcRptEstoqueIntermediarioRowChangeEventHandler" msprop:Generator_RowDeletedName="prcRptEstoqueIntermediarioRowDeleted" msprop:Generator_RowClassName="prcRptEstoqueIntermediarioRow" msprop:Generator_UserTableName="prcRptEstoqueIntermediario" msprop:Generator_RowEvArgName="prcRptEstoqueIntermediarioRowChangeEvent">
+        <xs:element name="prcRptEstoqueIntermediario" msprop:Generator_TableClassName="prcRptEstoqueIntermediarioDataTable" msprop:Generator_TableVarName="tableprcRptEstoqueIntermediario" msprop:Generator_TablePropName="prcRptEstoqueIntermediario" msprop:Generator_RowDeletingName="prcRptEstoqueIntermediarioRowDeleting" msprop:Generator_RowChangingName="prcRptEstoqueIntermediarioRowChanging" msprop:Generator_RowEvHandlerName="prcRptEstoqueIntermediarioRowChangeEventHandler" msprop:Generator_RowDeletedName="prcRptEstoqueIntermediarioRowDeleted" msprop:Generator_UserTableName="prcRptEstoqueIntermediario" msprop:Generator_RowChangedName="prcRptEstoqueIntermediarioRowChanged" msprop:Generator_RowEvArgName="prcRptEstoqueIntermediarioRowChangeEvent" msprop:Generator_RowClassName="prcRptEstoqueIntermediarioRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="CD_ESTOQUE" msprop:Generator_ColumnVarNameInTable="columnCD_ESTOQUE" msprop:Generator_ColumnPropNameInRow="CD_ESTOQUE" msprop:Generator_ColumnPropNameInTable="CD_ESTOQUEColumn" msprop:Generator_UserColumnName="CD_ESTOQUE">
@@ -80,35 +75,6 @@
               </xs:element>
               <xs:element name="QTD_ALOCADA" msprop:Generator_ColumnVarNameInTable="columnQTD_ALOCADA" msprop:Generator_ColumnPropNameInRow="QTD_ALOCADA" msprop:Generator_ColumnPropNameInTable="QTD_ALOCADAColumn" msprop:Generator_UserColumnName="QTD_ALOCADA" type="xs:decimal" />
               <xs:element name="VL_TOTAL" msdata:ReadOnly="true" msprop:Generator_ColumnVarNameInTable="columnVL_TOTAL" msprop:Generator_ColumnPropNameInRow="VL_TOTAL" msprop:Generator_ColumnPropNameInTable="VL_TOTALColumn" msprop:Generator_UserColumnName="VL_TOTAL" type="xs:decimal" minOccurs="0" />
-              <xs:element name="TP_ESTOQUE_TEC_3M" msprop:Generator_ColumnVarNameInTable="columnTP_ESTOQUE_TEC_3M" msprop:Generator_ColumnPropNameInRow="TP_ESTOQUE_TEC_3M" msprop:Generator_ColumnPropNameInTable="TP_ESTOQUE_TEC_3MColumn" msprop:Generator_UserColumnName="TP_ESTOQUE_TEC_3M" minOccurs="0">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="3" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="CD_TECNICO" msprop:Generator_ColumnVarNameInTable="columnCD_TECNICO" msprop:Generator_ColumnPropNameInRow="CD_TECNICO" msprop:Generator_ColumnPropNameInTable="CD_TECNICOColumn" msprop:Generator_UserColumnName="CD_TECNICO" minOccurs="0">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="6" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="NM_TECNICO" msprop:Generator_ColumnVarNameInTable="columnNM_TECNICO" msprop:Generator_ColumnPropNameInRow="NM_TECNICO" msprop:Generator_ColumnPropNameInTable="NM_TECNICOColumn" msprop:Generator_UserColumnName="NM_TECNICO" minOccurs="0">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="50" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
-              <xs:element name="CD_CLIENTE" msprop:Generator_ColumnVarNameInTable="columnCD_CLIENTE" msprop:Generator_ColumnPropNameInRow="CD_CLIENTE" msprop:Generator_ColumnPropNameInTable="CD_CLIENTEColumn" msprop:Generator_UserColumnName="CD_CLIENTE" type="xs:decimal" minOccurs="0" />
-              <xs:element name="NM_CLIENTE" msprop:Generator_ColumnVarNameInTable="columnNM_CLIENTE" msprop:Generator_ColumnPropNameInRow="NM_CLIENTE" msprop:Generator_ColumnPropNameInTable="NM_CLIENTEColumn" msprop:Generator_UserColumnName="NM_CLIENTE" minOccurs="0">
-                <xs:simpleType>
-                  <xs:restriction base="xs:string">
-                    <xs:maxLength value="50" />
-                  </xs:restriction>
-                </xs:simpleType>
-              </xs:element>
             </xs:sequence>
           </xs:complexType>
         </xs:element>

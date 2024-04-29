@@ -680,7 +680,7 @@ function uploadAnexo() {
                 //$('#labelFile').val('');
                 $('#DS_ARQUIVO').val('');
                 $('#labelFile').text('Selecionar Arquivo');
-                //possuianexo = true;
+
                 //Carregar novo anexo na tela
                 CarregarAnexos(pedidoEntity.ID_WF_PEDIDO_EQUIP);
             },
@@ -722,40 +722,6 @@ function CarregarAnexos(idWF) {
             }
 
             $("#anexos").html(anexos);
-        },
-        error: function (res) {
-            $("#loader").css("display", "none");
-            Alerta("ERRO", JSON.parse(res.responseText).Message);
-        }
-    });
-}
-
-function VerificaAnexos(idWF) {
-    var URL = URLAPI + "WorkflowAPI/VerificaAnexos?ID_WF_PEDIDO_EQUIP=" + idWF;
-    //var token = sessionStorage.getItem("token");
-    $.ajax({
-        type: 'POST',
-        url: URL,
-        dataType: "json",
-        cache: false,
-        async: false,
-        contentType: "application/json",
-        beforeSend: function (xhr) {
-            xhr.setRequestHeader('Authorization', 'Bearer ' + token);
-            $("#loader").css("display", "block");
-        },
-        complete: function () {
-            $("#loader").css("display", "none");
-        },
-        success: function (res) {
-            $("#loader").css("display", "none");
-
-            var anexos = res.Quantidade;
-
-            if (anexos > 0)
-                possuianexo = true;
-            else
-                possuianexo = false;
         },
         error: function (res) {
             $("#loader").css("display", "none");
@@ -1607,11 +1573,11 @@ function checarCamposObrigatorios() {
             return false;
         }
 
-        var qtdEquip = $('#QuantidadeEquipamento').val();
-        if (qtdEquip == "" || qtdEquip == null || qtdEquip == undefined) {
-            Alerta("Atenção", "Favor informar a quantidade de equipamentos");
-            return false;
-        }
+        //var qtdEquip = $('#QuantidadeEquipamento').val();
+        //if (qtdEquip != "" || qtdEquip != null || qtdEquip != undefined) {
+        //    Alerta("Atenção", "Favor informar a quantidade de equipamentos");
+        //    return false;
+        //}
     }
 
     if (categoria == 1) {
@@ -1700,33 +1666,6 @@ function checarCamposObrigatorios() {
         //    Alerta("Atenção", "Favor informar o número de caracteres por caixa");
         //    return false;
         //}
-    }
-
-    var limpeza = $("#CondicaoLimpeza option:selected").val();
-    if (limpeza == "" || limpeza == null || limpeza == undefined || limpeza == 0) {
-        Alerta("Atenção", "Favor informar a condição de limpeza");
-        return false;
-    }
-
-    var temp = $("#CondicaoTemperatura option:selected").val();
-    if (temp == "" || temp == null || temp == undefined || temp == 0) {
-        Alerta("Atenção", "Favor informar a condição da temperatura");
-        return false;
-    }
-
-    var umidade = $("#CondicaoUmidade option:selected").val();
-    if (umidade == "" || umidade == null || umidade == undefined || umidade == 0) {
-        Alerta("Atenção", "Favor informar a condição de umidade");
-        return false;
-    }
-
-    var idWF = $('#ID_WF_PEDIDO_EQUIP').val();
-    VerificaAnexos(idWF);
-
-    var arq = possuianexo;
-    if (arq == "" || arq == null || arq == undefined || arq == 0 || arq == false) {
-        Alerta("Atenção", "Favor adicionar pelo menos 1 anexo");
-        return false;
     }
 
     return true;

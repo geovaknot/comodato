@@ -43,30 +43,24 @@
                     @Html.DropDownListFor(model => model.tecnico.CD_TECNICO, new SelectList(Model.tecnicos, "CD_TECNICO", "NM_TECNICO"), new { @class = "js-example-basic-single", @style = "width: 100%" })
 
                     @*<label class="control-label">Vendedor</label>
-            @Html.DropDownListFor(model => model.vendedor.CD_VENDEDOR, new SelectList(Model.vendedores, "CD_VENDEDOR", "NM_VENDEDOR"), new { @class = "js-example-basic-single", @style = "width: 100%" })*@
+                        @Html.DropDownListFor(model => model.vendedor.CD_VENDEDOR, new SelectList(Model.vendedores, "CD_VENDEDOR", "NM_VENDEDOR"), new { @class = "js-example-basic-single", @style = "width: 100%" })*@
                 </div>
 
                 <div class="form-group col-12">
                     <label class="control-label">Grupo</label>
                     @Html.DropDownListFor(model => model.grupo.CD_GRUPO, new SelectList(Model.grupos, "CD_GRUPO", "DS_GRUPO"), new { @class = "js-example-basic-single", @style = "width: 100%" })
                 </div>
-
-                
-                <div class="form-group col-md-12">
-                    <label class="control-label">Outras opções de Exibição</label>
-                     @Html.DropDownList("selectModeloRelatorio", (SelectList)ViewBag.SelectModeloRelatorio, "Selecione...", new { @class = "form-control col-md-6", @style = "width: 100%" })
-                </div>
             </div>
         </div>
 
-        @*<div class="form-horizontal">
+        <div class="form-horizontal">
             <div class="form-row">
                 <div class="form-group col-md-12">
                     <label class="control-label">Outras opções de Exibição</label>
                     @Html.DropDownList("selectModeloRelatorio", (SelectList)ViewBag.SelectModeloRelatorio, "Selecione...", new { @class = "form-control col-md-6", @style = "width: 100%" })
                 </div>
             </div>
-        </div>*@
+        </div>
 
         <div class="form-group">
             <button class="btn btn-primary btn-sm" type="button" id="btnImprimir">Imprimir</button>

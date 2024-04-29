@@ -172,11 +172,6 @@ namespace _3M.Comodato.Front.Controllers
 
                         EmailIncluirAtivoCliente(ativoClienteEntity);
                     }
-                    else if(Mensagem == "Ativo com data de devolução em aberto já cadastrado!")
-                    {
-                        ativoCliente.JavaScriptToRun = "MensagemBloqueio()";
-                        ativoCliente.Mensagem = Mensagem;
-                    }
                     else
                     {
                         ativoCliente.JavaScriptToRun = "MensagemBloqueio()";

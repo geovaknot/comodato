@@ -266,9 +266,9 @@
 </div>
 
 @section Scripts {
-    @*@Scripts.Render("~/bundles/jquery")*@
-    @Scripts.Render("~/bundles/jqueryval")
-
+    @Scripts.Render("~/bundles/jquery")
+    <script type="text/javascript" src="~/Scripts/Comodato/Util.js"></script>
+    <script type="text/javascript" src="~/Scripts/Comodato/WorkflowPedidoDevolucao.js"></script>
 
     @Model.JavaScriptToRun
 
@@ -276,14 +276,12 @@
         var URLAPI = "@_3M.Comodato.Utility.ControlesUtility.Parametro.ObterValorParametro(_3M.Comodato.Utility.ControlesUtility.Constantes.URLAPI)";
         var URL_UPLOAD = '@Url.Action("Upload")';
         var actionListarEquipamentos = '@Url.Action("PopularGridEquipamentosDevolucao", "Workflow")';
-        var actionVerificarEquipamentos = '@Url.Action("VerificarGridEquipamentosDevolucao", "Workflow")';
         var nidUsuario = @Convert.ToInt64(((_3M.Comodato.Entity.UsuarioPerfilEntity)Session["_CurrentUser"]).usuario.nidUsuario);
         var codigoStatusRascunho = @Convert.ToInt32(_3M.Comodato.Utility.ControlesUtility.Enumeradores.WorkflowPedidoDevolucao.Rascunho);
         var codigoStatusPendenteAnexar = @Convert.ToInt32(_3M.Comodato.Utility.ControlesUtility.Enumeradores.WorkflowPedidoDevolucao.PendenteAnexar);
         var codigoStatusEnvio = @Convert.ToInt32(_3M.Comodato.Utility.ControlesUtility.Enumeradores.WorkflowPedidoDevolucao.AnaliseLogistica);
 
         var idWFDevolucao = @Model.ID_WF_PEDIDO_EQUIP;
-        var ativoCarregado = false;
 
         var URLObterListaMensagem = "@Url.Action("ObterListaMensagemJson", "Workflow")";
         var token = "@Convert.ToString(((_3M.Comodato.Entity.UsuarioPerfilEntity)Session["_CurrentUser"]).token)";
@@ -292,7 +290,4 @@
             AlertaRedirect("Aviso", mensagem, "window.location = '@Url.Action("Index", "Workflow")';");
         };
     </script>
-
-    <script type="text/javascript" src="~/Scripts/Comodato/Util.js"></script>
-    <script type="text/javascript" src="~/Scripts/Comodato/WorkflowPedidoDevolucao.js"></script>
 }

@@ -57,7 +57,6 @@ namespace _3M.Comodato.Front
             reportDS.Name = "DataSet1";
             reportDS.Value = pedidos;
 
-            
             if (pedidos.Rows.Count == 0)
             {
                 pnlMensagem.Visible = true;

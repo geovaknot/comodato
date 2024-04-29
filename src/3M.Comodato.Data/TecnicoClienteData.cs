@@ -243,30 +243,6 @@ namespace _3M.Comodato.Data
             }
         }
 
-        public void ReordenarTodos(string idTecnico, long nidUsuarioAtualizacao)
-        {
-            try
-            {
-                dbCommand = _db.GetStoredProcCommand("prcTecnicoClienteReordenar");
-
-                _db.AddInParameter(dbCommand, "@p_TP_ACAO", DbType.String, "RT");
-                _db.AddInParameter(dbCommand, "@p_CD_CLIENTE", DbType.Int32, 0);
-                _db.AddInParameter(dbCommand, "@p_CD_ORDEM", DbType.Int32, 0);
-                _db.AddInParameter(dbCommand, "@p_CD_TECNICO", DbType.String, idTecnico);
-                _db.AddInParameter(dbCommand, "@p_nidUsuarioAtualizacao", DbType.Int64, nidUsuarioAtualizacao);
-
-                _db.ExecuteNonQuery(dbCommand);
-            }
-            catch (SqlException ex)
-            {
-                throw ex;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
-
         public IList<TecnicoClienteSinc> ObterListaTecnicoClienteSinc(long idUsuario)
         {
             try

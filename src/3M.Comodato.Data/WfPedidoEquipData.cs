@@ -19,7 +19,7 @@ namespace _3M.Comodato.Data
             _db = DatabaseFactory.CreateDatabase("ConnectionString");
         }
 
-        public IEnumerable<WfPedidoEquipEntity> ObterListaEntity(WfPedidoEquipEntity entity, DateTime? periodoInicial, DateTime? periodoFinal, string NSolicitantes = null)
+        public IEnumerable<WfPedidoEquipEntity> ObterListaEntity(WfPedidoEquipEntity entity, DateTime? periodoInicial, DateTime? periodoFinal)
         {
             Func<DataRow, WfPedidoEquipEntity> Converter = new Func<DataRow, WfPedidoEquipEntity>((r) =>
             {
@@ -235,10 +235,10 @@ namespace _3M.Comodato.Data
                 return pedidoEquipamento;
             });
 
-                    DataTable dataTable = this.ObterLista(entity, periodoInicial, periodoFinal, NSolicitantes);
+                    DataTable dataTable = this.ObterLista(entity, periodoInicial, periodoFinal);
                     return (from r in dataTable.Rows.Cast<DataRow>() select Converter(r)).ToList();
         }
-        public IEnumerable<WfPedidoEquipDevolucaoEntity> ObterListaDevolucaoEntity(WfPedidoEquipDevolucaoEntity entity, DateTime? periodoInicial, DateTime? periodoFinal, string NSolicitantes = null)
+        public IEnumerable<WfPedidoEquipDevolucaoEntity> ObterListaDevolucaoEntity(WfPedidoEquipDevolucaoEntity entity, DateTime? periodoInicial, DateTime? periodoFinal)
         {
             Func<DataRow, WfPedidoEquipDevolucaoEntity> Converter = new Func<DataRow, WfPedidoEquipDevolucaoEntity>((r) =>
             {
@@ -465,7 +465,7 @@ namespace _3M.Comodato.Data
 
                 return pedidoEquipamento;
             });
-            DataTable dataTabledevolucao = this.ObterListaDevolucao(entity, periodoInicial, periodoFinal, NSolicitantes);
+            DataTable dataTabledevolucao = this.ObterListaDevolucao(entity, periodoInicial, periodoFinal);
             return (from r in dataTabledevolucao.Rows.Cast<DataRow>() select Converter(r)).ToList();
 
         }
@@ -509,7 +509,7 @@ namespace _3M.Comodato.Data
             }
         }
 
-        public DataTable ObterLista(WfPedidoEquipEntity entity, DateTime? periodoInicial = null, DateTime? periodoFinal = null, string NSolicitantes = null)
+        public DataTable ObterLista(WfPedidoEquipEntity entity, DateTime? periodoInicial = null, DateTime? periodoFinal = null)
         {
             DbConnection connection = null;
             DataTable dataTable = null;
@@ -581,12 +581,6 @@ namespace _3M.Comodato.Data
                     {
                         _db.AddInParameter(dbCommand, "@p_DT_PEDIDO_FIM", DbType.DateTime, periodoFinal);
                     }
-                    
-
-                    if (!string.IsNullOrEmpty(NSolicitantes))
-                    {
-                        _db.AddInParameter(dbCommand, "@p_NSolicitantes", DbType.String, NSolicitantes);
-                    }
 
                     #endregion
                 }
@@ -617,7 +611,7 @@ namespace _3M.Comodato.Data
             return dataTable;
         }
 
-        public DataTable ObterListaDevolucao(WfPedidoEquipDevolucaoEntity entity, DateTime? periodoInicial = null, DateTime? periodoFinal = null, string NSolicitantes = null)
+        public DataTable ObterListaDevolucao(WfPedidoEquipDevolucaoEntity entity, DateTime? periodoInicial = null, DateTime? periodoFinal = null)
         {
             DbConnection connection = null;
             DataTable dataTable = null;
@@ -688,11 +682,6 @@ namespace _3M.Comodato.Data
                     if (periodoInicial != null)
                     {
                         _db.AddInParameter(dbCommand, "@p_DT_PEDIDO_FIM", DbType.DateTime, periodoFinal);
-                    }
-
-                    if (!string.IsNullOrEmpty(NSolicitantes))
-                    {
-                        _db.AddInParameter(dbCommand, "@p_NSolicitantes", DbType.String, NSolicitantes);
                     }
 
                     #endregion

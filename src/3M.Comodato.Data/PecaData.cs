@@ -272,49 +272,6 @@ namespace _3M.Comodato.Data
             return dataTable;
         }
 
-        public DataTable ObterListaNewInativa(PecaEntity peca, string CD_TECNICO = null)
-        {
-
-            DbConnection connection = null;
-            DataSet dataSet = new DataSet();
-            DataTable dataTable = new DataTable();
-
-            try
-            {
-                dbCommand = _db.GetStoredProcCommand("prcPecaSelectNew");
-                dbCommand.CommandTimeout = 500000;
-
-                if (!string.IsNullOrEmpty(peca.CD_PECA))
-                    _db.AddInParameter(dbCommand, "@p_CD_PECA", DbType.String, peca.CD_PECA);
-
-                
-
-                connection = _db.CreateConnection();
-                dbCommand.Connection = connection;
-                connection.Open();
-
-                dataSet = _db.ExecuteDataSet(dbCommand);
-                dataTable = dataSet.Tables[0];
-                //connection.Close();
-            }
-            catch (System.Data.SqlClient.SqlException ex)
-            {
-                throw ex;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            finally
-            {
-                if (connection.State == ConnectionState.Open)
-                {
-                    connection.Close();
-                }
-            }
-            return dataTable;
-        }
-
         public DataTable ObterListaBPCS(PecaEntity peca)
         {
 

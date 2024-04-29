@@ -14,9 +14,7 @@
     columns.Add(foo => foo.TipoPedido).Titled("TIPO");//.Titled("TIPO PEDIDO");
 
     columns.Add(foo => foo.Cliente).Titled("CLIENTE");
-    columns.Add(foo => foo.Solicitante).Titled("Solicitante");
     columns.Add(foo => foo.Modelo).Titled("MODELO");
-
 
     columns.Add()
         .Encoded(false)
@@ -29,7 +27,7 @@
         .Encoded(false)
         .Sanitized(false)
         .SetWidth(30)
-        .RenderValueAs(o =>
+        .RenderValueAs(o => 
             o.Acesso.HasFlag(_3M.Comodato.Front.Models.Acesso.Edicao) && (o.CodigoStatusPedido == (int)ControlesUtility.Enumeradores.WorkflowPedidoEnvio.Rascunho || o.CodigoStatusPedido == (int)ControlesUtility.Enumeradores.WorkflowPedidoDevolucao.Rascunho)
                     ? $"<b><a href=\"#\" onclick=\"ConfirmarSimNao('Aviso', 'Confirma a exclusão do item?', 'RemoverPedido({o.ID_WF_PEDIDO_EQUIP.ToString()});'); return false;\" class='fas fa-trash-alt fa-lg' data-toggle='tooltip' data-placement='top' title='Excluir'></a></b>":"");
 

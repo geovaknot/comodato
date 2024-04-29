@@ -216,9 +216,10 @@
 
 
 @section Scripts {
-    @*@Scripts.Render("~/bundles/jquery")*@
-    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jquery")
 
+    <script type="text/javascript" src="~/Scripts/Comodato/AtivoCliente.js"></script>
+    <script type="text/javascript" src="~/Scripts/Comodato/Util.js"></script>
 
     <script type="text/javascript">
         var URLAPI = "@_3M.Comodato.Utility.ControlesUtility.Parametro.ObterValorParametro(_3M.Comodato.Utility.ControlesUtility.Constantes.URLAPI)";
@@ -229,23 +230,15 @@
         var URLAlterarData = "@Url.Action("AlterarData", "Ativo")";
         var diasManutencao = "@_3M.Comodato.Utility.ControlesUtility.Parametro.ObterValorParametro("QtdDiasManutencao")";
         var URLObterModeloJson = "@Url.Action("ObterModeloJson", "AtivoCliente")";
-        var URLRegistrarFaturamento = "@Url.Action("Incluir", "DadosFaturamento")";
-        var URLRegistrarFaturamento = "@Url.Action("Incluir", "DadosFaturamento")";
         var token = "@Convert.ToString(((_3M.Comodato.Entity.UsuarioPerfilEntity)Session["_CurrentUser"]).token)";
 
-    </script>
-
-    <script type="text/javascript" src="~/Scripts/Comodato/Util.js"></script>
-    <script type="text/javascript" src="~/Scripts/Comodato/AtivoCliente.js"></script>
-
-    <script>
     @Model.JavaScriptToRun
+
         function MensagemSucesso() {
             var mensagem = '@_3M.Comodato.Utility.ControlesUtility.Constantes.MensagemGravacaoSucesso';
 
             AlertaRedirect("Aviso", mensagem, "window.location = '../AtivoCliente';");
         };
-
         $('select#tipo_CD_TIPO').on('change', function () {
             $('input[type="hidden"]#tipo_CD_TIPO').val($('select#tipo_CD_TIPO option:selected').val());
         });
@@ -259,7 +252,7 @@
         };
 
         function MensagemBloqueio() {
-            var mensagem = '@_3M.Comodato.Utility.ControlesUtility.Constantes.MensagemErroAtivoXCliente';
+            var mensagem = '@Model.Mensagem';
             Alerta("Gravação cancelada", mensagem);
         }
 
@@ -277,8 +270,5 @@
         //})
 
     </script>
-
-
-
 }
 

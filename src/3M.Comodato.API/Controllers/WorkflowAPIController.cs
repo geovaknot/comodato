@@ -58,13 +58,11 @@ namespace _3M.Comodato.API.Controllers
                     data.Inserir(ref ativoTroca);
                 }
 
-                if (pedidoEntity.TP_PEDIDO == "D" && string.IsNullOrEmpty(pedidoEntity.CD_GRUPO_RESPONS) && (pedidoEntity.ST_STATUS_PEDIDO == 20 || pedidoEntity.ST_STATUS_PEDIDO == 21))
+                if(pedidoEntity.TP_PEDIDO == "D" && string.IsNullOrEmpty(pedidoEntity.CD_GRUPO_RESPONS) && (pedidoEntity.ST_STATUS_PEDIDO == 20 || pedidoEntity.ST_STATUS_PEDIDO == 21))
                 {
-                    //pedidoEntity.ST_STATUS_PEDIDO = 22;
+                    pedidoEntity.ST_STATUS_PEDIDO = 22;
                     pedidoEntity.CD_GRUPO_RESPONS = "LOJ1";
                 }
-
-
 
                 if(pedidoEntity.TP_PEDIDO == "E"  && !string.IsNullOrEmpty(pedidoEntity.CD_MODELO) && !string.IsNullOrEmpty(pedidoEntity.CD_LINHA) && !string.IsNullOrEmpty(pedidoEntity.TP_LOCACAO))
                 {
@@ -193,7 +191,7 @@ namespace _3M.Comodato.API.Controllers
                 pedidoEntity.CD_MODELO = pedidoEntity2.CD_MODELO;
                 pedidoEntity.CD_LINHA = pedidoEntity2.CD_LINHA;
                 pedidoEntity.TP_LOCACAO = pedidoEntity2.TP_LOCACAO;
-
+                
                 //Verifica quel grupo deste pedido
                 List<WfGrupoEntity> listaGrupos = new List<WfGrupoEntity>();
                 //string itemGrupo;
@@ -202,7 +200,7 @@ namespace _3M.Comodato.API.Controllers
 
                 // CONSULTA QUAL SERA O NOVO GRUPO DE ATUAÇÃO .........................
                 listaGrupos = wfUtil.IdentificaGrupo(pedidoEntity.ST_STATUS_PEDIDO, Convert.ToInt32(pedidoEntity.ID_CATEGORIA), pedidoEntity.TP_LOCACAO, pedidoEntity.CD_LINHA, pedidoEntity.CD_MODELO);
-                if (listaGrupos.Count > 0)
+                if (listaGrupos.Count>0)
                 {
                     pedidoEntity.CD_GRUPO_RESPONS = listaGrupos.First().CD_GRUPOWF;
 
@@ -727,48 +725,6 @@ namespace _3M.Comodato.API.Controllers
 
             JObject JO = new JObject();
             JO.Add("Dados", JsonConvert.SerializeObject(html, Formatting.None));
-            return Ok(JO);
-        }
-
-        /// <summary>
-        /// Consulta anexos
-        /// </summary>
-        /// <param name="idWF"></param>
-        /// <returns>DadosSQL</returns>
-        [HttpPost]
-        [Route("VerificaAnexos")]
-        public IHttpActionResult VerificaAnexos(int ID_WF_PEDIDO_EQUIP)
-        {
-            DataSet dataSet = new WfPedidoEquipData().CarregarAnexos(ID_WF_PEDIDO_EQUIP);
-            DataTable dataTable = dataSet.Tables[0];
-            DataTable dtTipo = dataSet.Tables[1];
-
-            int QuantidadeAnexos = 0;
-
-            if (dataTable.Rows.Count < 1)
-            {
-                JObject JOo = new JObject();
-                JOo.Add("Quantidade", QuantidadeAnexos);
-                return Ok(JOo);
-            }
-
-            try
-            {
-                
-                for (int i = 0; i < dataTable.Rows.Count; i++)
-                {
-                    QuantidadeAnexos += 1;
-                }
-                
-            }
-            catch (Exception ex)
-            {
-                LogUtility.LogarErro(ex);
-                return BadRequest(ex.Message);
-            }
-
-            JObject JO = new JObject();
-            JO.Add("Quantidade", QuantidadeAnexos);
             return Ok(JO);
         }
 

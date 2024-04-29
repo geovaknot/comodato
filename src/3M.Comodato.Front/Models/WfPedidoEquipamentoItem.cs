@@ -34,7 +34,6 @@ namespace _3M.Comodato.Front.Models
 
         public SelectList ListaTipoSolicitacao { get; set; }
         public string TipoSolicitacao { get; set; }
-        
     }
 
     public class WfPedidoEquipamentoItemDevolucao : BaseModel

@@ -12,8 +12,6 @@ namespace _3M.Comodato.Front.Controllers
 {
     public class SolicitacaoPecasController : BaseController
     {
-        private decimal VL_TOTAL_PECA_PEDIDOS = 0;
-
         [_3MAuthentication]
         public ActionResult Index()
         {
@@ -546,7 +544,6 @@ namespace _3M.Comodato.Front.Controllers
 
                 jsonResult.Add("Html", RenderRazorViewToString("~/Views/SolicitacaoPecas/_gridMVCAprovaSolicitacaoPecas.cshtml", listaSolicitacaoPecas));
                 jsonResult.Add("Status", "Success");
-                jsonResult.Add("VL_TOTAL_PECA_PEDIDOS", VL_TOTAL_PECA_PEDIDOS.ToString("N2"));
             }
             catch (Exception ex)
             {
@@ -612,8 +609,6 @@ namespace _3M.Comodato.Front.Controllers
 
                 if (dataTableReader.HasRows)
                 {
-                    VL_TOTAL_PECA_PEDIDOS = 0;
-
                     while (dataTableReader.Read())
                     {
                         try
@@ -656,14 +651,16 @@ namespace _3M.Comodato.Front.Controllers
 
                             listaSolicitacaoPecas.TP_Especial = dataTableReader["TP_Especial"].ToString();
 
-                            if (Convert.ToInt64(dataTableReader["ID_STATUS_PEDIDO"]) == Convert.ToInt64(ControlesUtility.Enumeradores.StatusPedido.NovoRascunho) ||
-                                Convert.ToInt64(dataTableReader["ID_STATUS_PEDIDO"]) == Convert.ToInt64(ControlesUtility.Enumeradores.StatusPedido.Solicitado))
+                            if (Convert.ToInt64(dataTableReader["ID_STATUS_PEDIDO"]) == Convert.ToInt64(ControlesUtility.Enumeradores.StatusPedido.Aprovado) ||
+                                Convert.ToInt64(dataTableReader["ID_STATUS_PEDIDO"]) == Convert.ToInt64(ControlesUtility.Enumeradores.StatusPedido.Cancelado) ||
+                                Convert.ToInt64(dataTableReader["ID_STATUS_PEDIDO"]) == Convert.ToInt64(ControlesUtility.Enumeradores.StatusPedido.Recebido) ||
+                                Convert.ToInt64(dataTableReader["ID_STATUS_PEDIDO"]) == Convert.ToInt64(ControlesUtility.Enumeradores.StatusPedido.RecebidoComPendencia))
                             {
-                                listaSolicitacaoPecas.ExibirExcluir = true;
+                                listaSolicitacaoPecas.ExibirExcluir = false;
                             }
                             else
                             {
-                                listaSolicitacaoPecas.ExibirExcluir = false;
+                                listaSolicitacaoPecas.ExibirExcluir = true;
                             }
 
                             if (tipoOrigemPagina == "Confirmacao")

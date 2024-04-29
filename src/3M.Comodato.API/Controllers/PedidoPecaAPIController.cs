@@ -1025,88 +1025,43 @@ namespace _3M.Comodato.API.Controllers
 
                     var ListatotaldeDados = new PedidoPecaData().ObterListaDadosPedidoTotal(PedidoId).ToList();
 
-
-
                     if (ListatotaldeDados?.Count == 0)
                         NumeroRemessa = 1;
                     else
                     {
-                        var dados = ListatotaldeDados.Last();
+                        var dados1 = ListatotaldeDados.Where(x => x.NR_REMESSA == 1).ToList();
+                        var dados2 = ListatotaldeDados.Where(x => x.NR_REMESSA == 2).ToList();
+                        var dados3 = ListatotaldeDados.Where(x => x.NR_REMESSA == 3).ToList();
+                        var dados4 = ListatotaldeDados.Where(x => x.NR_REMESSA == 4).ToList();
+                        var dados5 = ListatotaldeDados.Where(x => x.NR_REMESSA == 5).ToList();
+                        var dados6 = ListatotaldeDados.Where(x => x.NR_REMESSA == 6).ToList();
+                        var dados7 = ListatotaldeDados.Where(x => x.NR_REMESSA == 7).ToList();
+                        var dados8 = ListatotaldeDados.Where(x => x.NR_REMESSA == 8).ToList();
+                        var dados9 = ListatotaldeDados.Where(x => x.NR_REMESSA == 9).ToList();
+                        var dados10 = ListatotaldeDados.Where(x => x.NR_REMESSA == 10).ToList();
 
-                        var idPedido = dados.ID_PEDIDO.Value.ToString();
+                        if (dados1?.Count > 0)
+                            NumeroRemessa = NumeroRemessa + 1;
+                        if (dados2?.Count > 0)
+                            NumeroRemessa = NumeroRemessa + 1;
+                        if (dados3?.Count > 0)
+                            NumeroRemessa = NumeroRemessa + 1;
+                        if (dados4?.Count > 0)
+                            NumeroRemessa = NumeroRemessa + 1;
+                        if (dados5?.Count > 0)
+                            NumeroRemessa = NumeroRemessa + 1;
+                        if (dados6?.Count > 0)
+                            NumeroRemessa = NumeroRemessa + 1;
+                        if (dados7?.Count > 0)
+                            NumeroRemessa = NumeroRemessa + 1;
+                        if (dados8?.Count > 0)
+                            NumeroRemessa = NumeroRemessa + 1;
+                        if (dados9?.Count > 0)
+                            NumeroRemessa = NumeroRemessa + 1;
+                        if (dados10?.Count > 0)
+                            NumeroRemessa = NumeroRemessa + 1;
 
-                        if (idPedido.Length <= 5)
-                        {
-                            if (dados.NR_REMESSA >= 999)
-                            {
-                                throw new Exception("Não será possível fazer o envio dessa solicitação, pois excede a capacidade atual do sistema.");
-                            }
-                            else
-                            {
-                                NumeroRemessa = Convert.ToInt64(dados.NR_REMESSA) + 1;
-                            }
-                        }
-                        else if(idPedido.Length == 6)
-                        {
-                            if (dados.NR_REMESSA >= 99)
-                            {
-                                throw new Exception("Não será possível fazer o envio dessa solicitação, pois excede a capacidade atual do sistema.");
-                            }
-                            else
-                            {
-                                NumeroRemessa = Convert.ToInt64(dados.NR_REMESSA) + 1;
-                            }
-                        }
-                        else if (idPedido.Length == 7)
-                        {
-                            if (dados.NR_REMESSA >= 9)
-                            {
-                                throw new Exception("Não será possível fazer o envio dessa solicitação, pois excede a capacidade atual do sistema.");
-                            }
-                            else
-                            {
-                                NumeroRemessa = Convert.ToInt64(dados.NR_REMESSA) + 1;
-                            }
-                        }
-                        else
-                        {
-                            throw new Exception("O número de controle do BPCS ultrapassará o limite de 10 casas.");
-                        }
-                        
-                        
-                    //    var dados1 = ListatotaldeDados.Where(x => x.NR_REMESSA == 1).ToList();
-                    //    var dados2 = ListatotaldeDados.Where(x => x.NR_REMESSA == 2).ToList();
-                    //    var dados3 = ListatotaldeDados.Where(x => x.NR_REMESSA == 3).ToList();
-                    //    var dados4 = ListatotaldeDados.Where(x => x.NR_REMESSA == 4).ToList();
-                    //    var dados5 = ListatotaldeDados.Where(x => x.NR_REMESSA == 5).ToList();
-                    //    var dados6 = ListatotaldeDados.Where(x => x.NR_REMESSA == 6).ToList();
-                    //    var dados7 = ListatotaldeDados.Where(x => x.NR_REMESSA == 7).ToList();
-                    //    var dados8 = ListatotaldeDados.Where(x => x.NR_REMESSA == 8).ToList();
-                    //    var dados9 = ListatotaldeDados.Where(x => x.NR_REMESSA == 9).ToList();
-                    //    var dados10 = ListatotaldeDados.Where(x => x.NR_REMESSA == 10).ToList();
-
-                    //    if (dados1?.Count > 0)
-                    //        NumeroRemessa = NumeroRemessa + 1;
-                    //    if (dados2?.Count > 0)
-                    //        NumeroRemessa = NumeroRemessa + 1;
-                    //    if (dados3?.Count > 0)
-                    //        NumeroRemessa = NumeroRemessa + 1;
-                    //    if (dados4?.Count > 0)
-                    //        NumeroRemessa = NumeroRemessa + 1;
-                    //    if (dados5?.Count > 0)
-                    //        NumeroRemessa = NumeroRemessa + 1;
-                    //    if (dados6?.Count > 0)
-                    //        NumeroRemessa = NumeroRemessa + 1;
-                    //    if (dados7?.Count > 0)
-                    //        NumeroRemessa = NumeroRemessa + 1;
-                    //    if (dados8?.Count > 0)
-                    //        NumeroRemessa = NumeroRemessa + 1;
-                    //    if (dados9?.Count > 0)
-                    //        NumeroRemessa = NumeroRemessa + 1;
-                    //    if (dados10?.Count > 0)
-                    //        NumeroRemessa = NumeroRemessa + 1;
-
-                    //    NumeroRemessa++;
+                        NumeroRemessa++;
                     }
 
                     IList<PedidoPecaSinc> pecasPedidoSemItem = new PedidoPecaData().ObterListaPedidoPecaPedido(PedidoId);

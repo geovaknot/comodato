@@ -207,7 +207,7 @@ namespace _3M.Comodato.Data
             return (from r in dataTable.Rows.Cast<DataRow>() select Converter(r)).ToList();
         }
 
-        public DataTable ObterLista(WfPedidoEquipEntity entity, DateTime? periodoInicial, DateTime? periodoFinal, string NSolicitantes = null)
+        public DataTable ObterLista(WfPedidoEquipEntity entity, DateTime? periodoInicial, DateTime? periodoFinal)
         {
             DbConnection connection = null;
             DataTable dataTable = null;
@@ -264,10 +264,6 @@ namespace _3M.Comodato.Data
                         _db.AddInParameter(dbCommand, "@p_CD_ATIVO_FIXO_TROCA", DbType.String, entity.CD_ATIVO_FIXO_TROCA);
                     }
 
-                    if (!string.IsNullOrEmpty(NSolicitantes))
-                    {
-                        _db.AddInParameter(dbCommand, "@p_NSolicitantes", DbType.String, NSolicitantes);
-                    }
                     #endregion
                 }
 

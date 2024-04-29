@@ -121,7 +121,7 @@ namespace _3M.Comodato.API.Service
                     using (PrincipalContext principalContext = new PrincipalContext(contextType: ContextType.Domain, name: ADDomain, userName: ADUser, password: ADPassword))
                     {
                         // Erasmo - GSW - Testes - Para dar  ByPass na Senha , basta tratar ou pular este IF.
-                        if (principalContext.ValidateCredentials(login, senha, ContextOptions.Negotiate) == false)
+                        if (principalContext.ValidateCredentials(login, senha) == false)
                         {
                             //return Request.CreateResponse(HttpStatusCode.BadRequest, "Credenciais inválidas!");
                             return "Credenciais inválidas!";

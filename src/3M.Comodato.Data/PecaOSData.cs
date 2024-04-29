@@ -210,68 +210,75 @@ namespace _3M.Comodato.Data
                 throw ex;
             }
         }
-        
+
+
         public List<PecaOSSinc> ObterListaPecaOsEmail(Int64 ID_OS)
         {
-            DbConnection connection = null;
-            List<PecaOSSinc> listaOS = new List<PecaOSSinc>();
-
             try
             {
-                dbCommand = _db.GetStoredProcCommand("prcOSPadraoPecaEmailSelect");
+                List<PecaOSSinc> listaPecaOs = new List<PecaOSSinc>();
+                SqlDataReader SDR = null;
+                using (SqlConnection cnx = new SqlConnection(_db.ConnectionString))
+                {
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        cmd.CommandText =
+                                         " select po.*, o.DT_DATA_OS, pc.DS_PECA from tbPecaOS po " +
 
-                if (ID_OS > 0)
-                    _db.AddInParameter(dbCommand, "@p_ID_OS", DbType.Int32, ID_OS);
-                
-                connection = _db.CreateConnection();
-                dbCommand.Connection = connection;
+                                            "inner join tbOSPadrao o(nolock) on " +
 
-                if (connection.State == ConnectionState.Open)
-                    connection.Close();
+                                               " o.ID_OS = po.ID_OS " +
 
-                dbCommand.Connection.Open();
+                                            "inner join tb_tecnico t(nolock) ON " +
 
-                DataSet dataSet = _db.ExecuteDataSet(dbCommand);
-                listaOS = mapOS(dataSet.Tables[0]);
+                                                "t.cd_tecnico = o.cd_tecnico " +
+
+                                            "inner join tb_peca pc(nolock) ON " +
+
+                                                "pc.cd_peca = po.cd_peca " +
+
+                                            " WHERE(o.ID_OS = @ID_OS)";
+
+                        cmd.CommandType = CommandType.Text;
+
+                        cmd.Parameters.Clear();
+                        cmd.Parameters.Add("@ID_OS", SqlDbType.BigInt).Value = ID_OS;
+
+                        cmd.Connection = cnx;
+                        cnx.Open();
+                        SDR = cmd.ExecuteReader();
+                        while (SDR.Read())
+                        {
+                            PecaOSSinc pecaOS = new PecaOSSinc
+                            {
+                                ID_PECA_OS = Convert.ToInt64(SDR["ID_PECA_OS"].ToString()),
+                                ID_OS = Convert.ToInt64(SDR["ID_OS"].ToString()),
+                                CD_PECA = Convert.ToString(SDR["CD_PECA"] is DBNull ? "" : SDR["CD_PECA"].ToString()),
+                                DS_PECA = Convert.ToString(SDR["DS_PECA"] is DBNull ? "" : SDR["DS_PECA"].ToString()),
+                                QT_PECA = Convert.ToInt32(SDR["QT_PECA"] is DBNull ? 0 : SDR["QT_PECA"]),
+                                CD_TP_ESTOQUE_CLI_TEC = Convert.ToChar(SDR["CD_TP_ESTOQUE_CLI_TEC"] is DBNull ? " " : SDR["CD_TP_ESTOQUE_CLI_TEC"].ToString()),
+                                nidUsuarioAtualizacao = Convert.ToInt64(SDR["nidUsuarioAtualizacao"] is DBNull ? 0 : SDR["nidUsuarioAtualizacao"]),
+                                dtmDataHoraAtualizacao = Convert.ToDateTime(SDR["dtmDataHoraAtualizacao"] is DBNull ? "01/01/2000" : SDR["dtmDataHoraAtualizacao"]),
+                                DS_OBSERVACAO = SDR["DS_OBSERVACAO"].ToString() ?? "",
+                                TOKEN = Convert.ToInt64(SDR["TOKEN"].ToString()),
+                                DT_DATA_OS = Convert.ToDateTime(SDR["DT_DATA_OS"] is DBNull ? "01/01/2000" : SDR["DT_DATA_OS"])
+                            };
+
+                            listaPecaOs.Add(pecaOS);
+                        }
+                        cnx.Close();
+                        return listaPecaOs;
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
             }
             catch (Exception ex)
             {
                 throw ex;
             }
-            finally
-            {
-                if (connection.State == ConnectionState.Open)
-                    connection.Close();
-            }
-
-            return listaOS;
-        }
-
-
-        private List<PecaOSSinc> mapOS(DataTable dataTable)
-        {
-            List<PecaOSSinc> listaOS = new List<PecaOSSinc>();
-
-            foreach (DataRow SDR in dataTable.Rows)
-            {
-                PecaOSSinc pecaOS = new PecaOSSinc
-                {
-                    ID_PECA_OS = Convert.ToInt64(SDR["ID_PECA_OS"].ToString()),
-                    ID_OS = Convert.ToInt64(SDR["ID_OS"].ToString()),
-                    CD_PECA = Convert.ToString(SDR["CD_PECA"] is DBNull ? "" : SDR["CD_PECA"].ToString()),
-                    DS_PECA = Convert.ToString(SDR["DS_PECA"] is DBNull ? "" : SDR["DS_PECA"].ToString()),
-                    QT_PECA = Convert.ToInt32(SDR["QT_PECA"] is DBNull ? 0 : SDR["QT_PECA"]),
-                    CD_TP_ESTOQUE_CLI_TEC = Convert.ToChar(SDR["CD_TP_ESTOQUE_CLI_TEC"] is DBNull ? " " : SDR["CD_TP_ESTOQUE_CLI_TEC"].ToString()),
-                    nidUsuarioAtualizacao = Convert.ToInt64(SDR["nidUsuarioAtualizacao"] is DBNull ? 0 : SDR["nidUsuarioAtualizacao"]),
-                    dtmDataHoraAtualizacao = Convert.ToDateTime(SDR["dtmDataHoraAtualizacao"] is DBNull ? "01/01/2000" : SDR["dtmDataHoraAtualizacao"]),
-                    DS_OBSERVACAO = SDR["DS_OBSERVACAO"].ToString() ?? "",
-                    TOKEN = Convert.ToInt64(SDR["TOKEN"].ToString()),
-                    DT_DATA_OS = Convert.ToDateTime(SDR["DT_DATA_OS"] is DBNull ? "01/01/2000" : SDR["DT_DATA_OS"])
-                };
-                listaOS.Add(pecaOS);
-            }
-
-            return listaOS;
         }
 
 

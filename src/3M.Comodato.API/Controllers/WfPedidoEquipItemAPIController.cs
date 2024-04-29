@@ -5,7 +5,6 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -36,49 +35,6 @@ namespace _3M.Comodato.API.Controllers
             }
         }
 
-        [HttpPost]
-        [Route("VerificarGridEquipamentosDevolucao")]
-        public IHttpActionResult VerificarGridEquipamentosDevolucao(int codigoWorkflow)
-        {
-            WfPedidoEquipItemEntity filter = new WfPedidoEquipItemEntity();
-            filter.ID_WF_PEDIDO_EQUIP = codigoWorkflow;
-
-            WfPedidoEquipItemData data = new WfPedidoEquipItemData();
-            var listaData = data.ObterLista(filter);
-
-            
-            DataTable dataTable = listaData;
-
-            int QuantidadeAnexos = 0;
-
-            if (dataTable.Rows.Count < 1)
-            {
-                JObject JOo = new JObject();
-                JOo.Add("Qtd", QuantidadeAnexos);
-                return Ok(JOo);
-            }
-
-            try
-            {
-
-                for (int i = 0; i < dataTable.Rows.Count; i++)
-                {
-                    QuantidadeAnexos += 1;
-                }
-
-            }
-            catch (Exception ex)
-            {
-                LogUtility.LogarErro(ex);
-                return BadRequest(ex.Message);
-            }
-
-            JObject JO = new JObject();
-            JO.Add("Qtd", QuantidadeAnexos);
-            return Ok(JO);
-        }
-
-        
         [HttpPost]
         [Route("Remover")]
         public IHttpActionResult Remover(long id_wf_pedido_equip_item, long nidUsuario)
