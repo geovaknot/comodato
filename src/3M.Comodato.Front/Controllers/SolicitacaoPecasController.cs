@@ -654,7 +654,10 @@ namespace _3M.Comodato.Front.Controllers
                             if (Convert.ToInt64(dataTableReader["ID_STATUS_PEDIDO"]) == Convert.ToInt64(ControlesUtility.Enumeradores.StatusPedido.Aprovado) ||
                                 Convert.ToInt64(dataTableReader["ID_STATUS_PEDIDO"]) == Convert.ToInt64(ControlesUtility.Enumeradores.StatusPedido.Cancelado) ||
                                 Convert.ToInt64(dataTableReader["ID_STATUS_PEDIDO"]) == Convert.ToInt64(ControlesUtility.Enumeradores.StatusPedido.Recebido) ||
-                                Convert.ToInt64(dataTableReader["ID_STATUS_PEDIDO"]) == Convert.ToInt64(ControlesUtility.Enumeradores.StatusPedido.RecebidoComPendencia))
+                                Convert.ToInt64(dataTableReader["ID_STATUS_PEDIDO"]) == Convert.ToInt64(ControlesUtility.Enumeradores.StatusPedido.RecebidoComPendencia) ||
+                                Convert.ToInt64(dataTableReader["ID_STATUS_PEDIDO"]) == Convert.ToInt64(ControlesUtility.Enumeradores.StatusPedido.AguardandoEnvioBPCS) ||
+                                Convert.ToInt64(dataTableReader["ID_STATUS_PEDIDO"]) == Convert.ToInt64(ControlesUtility.Enumeradores.StatusPedido.EnviadoBPCS) ||
+                                Convert.ToInt64(dataTableReader["ID_STATUS_PEDIDO"]) == Convert.ToInt64(ControlesUtility.Enumeradores.StatusPedido.Pendente))
                             {
                                 listaSolicitacaoPecas.ExibirExcluir = false;
                             }
