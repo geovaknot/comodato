@@ -79,6 +79,12 @@ namespace _3M.Comodato.Front.Controllers
             model.ListaTipoSolicitacao = PopularTipoSolicitacao();
             model.VisaoPedidos = 1;
 
+            if (ControlesUtility.Enumeradores.Perfil.GerenteRegionaldeVendas.ToInt() == (int)CurrentUser.perfil.ccdPerfil)
+            {
+                model.VisaoPedidos = 2;
+            }
+
+
             return View(model);
         }
 
@@ -115,10 +121,11 @@ namespace _3M.Comodato.Front.Controllers
                     filtroEntity.DS_TITULO = filtro.TituloPedido;
                 }
 
-                if (!string.IsNullOrEmpty(filtro.Solicitante))
-                {
-                    filtroEntity.ID_USU_SOLICITANTE = Convert.ToInt64(filtro.Solicitante);
-                }
+                //if (!string.IsNullOrEmpty(filtro.Solicitante))
+                //{
+                //    if(workflowCarregarGridMVC != "S")
+                //        filtroEntity.ID_USU_SOLICITANTE = Convert.ToInt64(filtro.Solicitante);
+                //}
 
                 if (!string.IsNullOrEmpty(filtro.TipoPedido))
                 {
@@ -138,7 +145,7 @@ namespace _3M.Comodato.Front.Controllers
                 //filtroEntity.ID_USU_ULT_ATU = CurrentUser.usuario.nidUsuario;
                 WfPedidoEquipData data = new WfPedidoEquipData();
                 List<WfPedidoEquipEntity> listaEntityFinal = new List<WfPedidoEquipEntity>();
-                var listaEntity = data.ObterListaEntity(filtroEntity, Convert.ToDateTime(filtro.DataCadastroInicio), Convert.ToDateTime(filtro.DataCadastroFim));
+                var listaEntity = data.ObterListaEntity(filtroEntity, Convert.ToDateTime(filtro.DataCadastroInicio), Convert.ToDateTime(filtro.DataCadastroFim), filtro.Solicitante);
                 //listaSolicitacao = (from s in listaEntity
                 //                    select ConverterParaPedidoEquipamentoPesquisa(s)).ToList();
                 WfGrupoUsuEntity WfGrupoUEntity = new WfGrupoUsuEntity();
@@ -894,6 +901,8 @@ namespace _3M.Comodato.Front.Controllers
 
         }
 
+        
+
         public ActionResult AcompanhamentoPedidoDevolucao(string idKey)
         {
             WfPedidoDevolucaoEquipamento model = new WfPedidoDevolucaoEquipamento();
@@ -1212,8 +1221,11 @@ namespace _3M.Comodato.Front.Controllers
                 perfilFiltro.bidAtivo = true;
                 perfilFiltro.perfil = new PerfilEntity() { nidPerfil = (long)ControlesUtility.Enumeradores.Perfil.EquipeVendas };
 
+                UsuarioEntity usuarioLogado = new UsuarioEntity();
+                usuarioLogado.nidUsuario = CurrentUser.usuario.nidUsuario;
+
                 UsuarioPerfilData usuarioPerfilData = new UsuarioPerfilData();
-                DataTable dtUsuario = usuarioPerfilData.ObterLista(perfilFiltro);
+                DataTable dtUsuario = usuarioPerfilData.ObterLista(perfilFiltro, usuarioLogado);
                 var listaUsuarios = (from r in dtUsuario.Rows.Cast<DataRow>()
                                      select new Usuario()
                                      {

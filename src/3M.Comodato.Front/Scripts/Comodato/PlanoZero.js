@@ -584,4 +584,58 @@ $('#btnGerarPlanilha').click(function () {
     });
 });
 
+$('#btnGerarPlanoZero').click(function () {
+
+    ConfirmarSimNao('Aviso', 'Confirma a Geração do Plano Zero?', 'btnGerarPlanoZeroConfirmada()');
+
+});
+
+function btnGerarPlanoZeroConfirmada() {
+
+    var URL = URLAPI + "PlanoZeroAPI/GerarPlanoZero?idUsuario=" + nidUsuario;
+    //var token = sessionStorage.getItem("token");
+    $.ajax({
+        type: 'GET',
+        url: URL,
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+            $("#loader").css("display", "block");
+        },
+        complete: function () {
+            $("#loader").css("display", "none");
+        },
+        success: function (res) {
+            $("#loader").css("display", "none");
+            if (res == "existe") {
+                Alerta("Aviso", "O Plano Zero já está em processamento!");
+                setTimeout(function () {
+                    //$('#btnGerarPlanoZero').css("display", "none");
+                }, 1000);
+            }
+            else {
+                Alerta("Aviso", "Geração do Plano Zero solicitada com sucesso! Quando iniciar e finalizar, o sistema enviará e-mails informativos para os destinatários parametrizados!");
+                setTimeout(function () {
+                    //$('#btnGerarPlanoZero').css("display", "none");
+                    //location.reload();
+                }, 1000);
+            }
+            
+        },
+        error: function (res) {
+            $("#loader").css("display", "none");
+            Alerta("ERRO", res.responseJSON.Message);
+            console.log("teste: ", res.responseJSON.Message);
+        }
+    });
+
+
+    //$('#btnCancelarPlanoZero').click(function () {
+    //    console.log("Entrou")
+    //    ConfirmarSimNao('Aviso', 'Confirma o cancelamento do Plano Zero?', 'btnCancelarPlanoZeroConfirmada()');
+
+    //});
+
+    
+}
+
 

@@ -83,6 +83,48 @@ $('#btnLimpar').click(function () {
     localStorage.removeItem('SolicitacaoPecas_ID_STATUS_PEDIDO');
 });
 
+function CancelarPlanoZero() {
+    ConfirmarSimNao('Aviso', 'Confirma o cancelamento do Plano Zero?', 'btnCancelarPlanoZeroConfirmada()');
+}
+
+function btnCancelarPlanoZeroConfirmada() {
+
+    var URL = URLAPI + "PlanoZeroAPI/CancelarPlanoZero?idUsuario=" + nidUsuario;
+    //var token = sessionStorage.getItem("token");
+    $.ajax({
+        type: 'GET',
+        url: URL,
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+            $("#loader").css("display", "block");
+        },
+        complete: function () {
+            $("#loader").css("display", "none");
+        },
+        success: function (res) {
+            $("#loader").css("display", "none");
+            console.log("res", res);
+            if (res == "") {
+                carregarGridMVC();
+                Alerta("Aviso", res.STATUS);
+            }
+            else {
+                Alerta("Aviso", "Plano Zero cancelado com sucesso!");
+
+                setTimeout(function () {
+
+                    location.reload();
+                }, 9000);
+            }
+            
+        },
+        error: function (res) {
+            $("#loader").css("display", "none");
+            Alerta("ERRO", res.responseText);
+        }
+    });
+}
+
 $('#btnFiltrar').click(function () {
     //var CD_TECNICO = $("#tecnico_CD_TECNICO option:selected").val();
 
@@ -419,7 +461,7 @@ function carregarGridMVC() {
             $("#loader").css("display", "none");
             if (res.Status == "Success") {
                 $('#gridmvc').html(res.Html);
-                
+                $('#VL_TOTAL_PECA_PEDIDOS').text('Valor Total Pedidos: ' + res.VL_TOTAL_PECA_PEDIDOS);
             }
         },
         error: function (res) {

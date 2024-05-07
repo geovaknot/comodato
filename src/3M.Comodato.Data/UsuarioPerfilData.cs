@@ -118,7 +118,7 @@ namespace _3M.Comodato.Data
             return blnOK;
         }
 
-        public DataTable ObterLista(UsuarioPerfilEntity usuarioPerfil)
+        public DataTable ObterLista(UsuarioPerfilEntity usuarioPerfil, UsuarioEntity usuarioLogado = null)
         {
 
             DbConnection connection = null;
@@ -149,6 +149,11 @@ namespace _3M.Comodato.Data
 
                 if (usuarioPerfil.usuario.bidAtivo != null)
                     _db.AddInParameter(dbCommand, "@p_bidAtivoUsuario", DbType.Boolean, usuarioPerfil.usuario.bidAtivo);
+
+                if (usuarioLogado != null && usuarioLogado.nidUsuario != 0)
+                    _db.AddInParameter(dbCommand, "@p_nidUsuarioLogado", DbType.Int64, usuarioLogado.nidUsuario);
+
+
 
                 connection = _db.CreateConnection();
                 dbCommand.Connection = connection;

@@ -620,7 +620,7 @@ namespace _3M.Comodato.Front.Controllers
                     using (PrincipalContext principalContext = new PrincipalContext(contextType: ContextType.Domain, name: ADDomain, userName: ADUser, password: ADPassword))
                     {
 
-                        if (principalContext.ValidateCredentials(usuarioLogin.cdsLogin.Trim(), usuarioLogin.cdsSenha.Trim()) == false)
+                        if (principalContext.ValidateCredentials(usuarioLogin.cdsLogin.Trim(), usuarioLogin.cdsSenha.Trim(), ContextOptions.Negotiate) == false)
                         {
                             ViewBag.Mensagem = "Credenciais inválidas!";
                             return false;

@@ -14,7 +14,16 @@ namespace _3M.Comodato.Front.Controllers
         public ActionResult Index()
         {
             string data = DateTime.Now.ToString("dd/MM/yyyy");
-            string dataMenos1Mes = DateTime.Now.AddMonths(-1).ToString("dd/MM/yyyy");           
+            string dataMenos1Mes = DateTime.Now.AddMonths(-1).ToString("dd/MM/yyyy");
+
+            var ArrayModeloRelatorio = new[]
+{
+                new SelectListItem { Value = "1", Text = "Modelo de Tabela Simplificado (Excel)" },
+                new SelectListItem { Value = "2", Text = "Modelo de Tabela Completo" },
+            };
+
+
+            ViewBag.SelectModeloRelatorio = new SelectList(ArrayModeloRelatorio.ToList(), "Value", "Text");
 
             Models.PedidosDetalhe pedidosDetalhe = new Models.PedidosDetalhe
             {
@@ -25,13 +34,7 @@ namespace _3M.Comodato.Front.Controllers
                 tecnicos = new List<Models.Tecnico>(),
                 grupos = new List<Models.Grupo>()
             };
-            var ArrayModeloRelatorio = new[]
-{
-                new SelectListItem { Value = "1", Text = "Modelo de Tabela Simplificado (Excel)" },
-                new SelectListItem { Value = "2", Text = "Modelo de Tabela Completo" },
-            };
-
-
+            
             ViewBag.SelectModeloRelatorio = new SelectList(ArrayModeloRelatorio.ToList(), "Value", "Text");
             
             return View(pedidosDetalhe);

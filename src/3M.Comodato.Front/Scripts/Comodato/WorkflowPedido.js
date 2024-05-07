@@ -8,6 +8,12 @@
     $('#DataCadastroInicio').mask('00/00/0000');
     $('#DataCadastroFim').mask('00/00/0000');
     $('.js-select-basic-single').val(null).trigger('change');
+
+
+    if (ccdPerfil == perfilRegional) {
+        $('#VisaoPedidos').prop("disabled", true);
+
+    }
     carregarGridMVC();
 });
 
@@ -78,7 +84,7 @@ function carregarGridMVC() {
     var dataInicio = $('#DataCadastroInicio').val();
     var dataFinal = $('#DataCadastroFim').val();
     var codigoPedido = $('#CodigoPedido').val();
-    var codigoSolicitante = $('#Solicitante').val();
+    var codigoSolicitante = $('#Solicitante').val().toString(); 
     var tipoPedido = $('#TipoPedido').val();
     var status = $('#Status').val();
     var tipoSolicitacao = $('#TipoSolicitacao').val();
@@ -96,7 +102,10 @@ function carregarGridMVC() {
         filtro.CodigoPedido = codigoPedido;
 
     if (codigoSolicitante != null && codigoSolicitante != '')
-        filtro.Solicitante = codigoSolicitante;
+        filtro.Solicitante = codigoSolicitante.toString();
+    else if (ccdPerfil == perfilRegional) {
+        filtro.Solicitante = $("#Solicitante option").map(function () { return $(this).val(); }).get().toString();
+    }
 
     if (tipoPedido != null && tipoPedido != '')
         filtro.TipoPedido = tipoPedido;
@@ -179,7 +188,7 @@ $('#btnImprimir').click(function () {
     var dataInicio = $('#DataCadastroInicio').val();
     var dataFinal = $('#DataCadastroFim').val();
     var codigoPedido = $('#CodigoPedido').val();
-    var codigoSolicitante = $('#Solicitante').val();
+    var codigoSolicitante = $('#Solicitante').val().toString();
     var tipoPedido = $('#TipoPedido').val();
     var status = $('#Status').val();
 
@@ -192,8 +201,13 @@ $('#btnImprimir').click(function () {
     if (codigoPedido == 'null' || codigoPedido == null)
         codigoPedido = '';
 
-    if (codigoSolicitante == 'null' || codigoSolicitante == null)
-        codigoSolicitante = '';
+    if (codigoSolicitante == 'null' || codigoSolicitante == null || codigoSolicitante=="") {
+        if (ccdPerfil == perfilRegional)
+            codigoSolicitante = $("#Solicitante option").map(function () { return $(this).val(); }).get().toString();
+        else {
+            codigoSolicitante = '';
+        }
+    }
 
     if (tipoPedido == 'null' || tipoPedido == null)
         tipoPedido = '';

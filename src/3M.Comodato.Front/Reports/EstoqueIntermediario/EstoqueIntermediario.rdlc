@@ -31,7 +31,11 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=System.String.Concat("&lt;b&gt;Estoque: &lt;/b&gt;", Fields!CD_ESTOQUE.Value)</Value>
+                              <Value>=System.String.Concat("&lt;b&gt;Estoque: &lt;/b&gt;", Fields!CD_ESTOQUE.Value) + 
+" - " +  
+IIF(Fields!TP_ESTOQUE_TEC_3M.Value = "TEC", Fields!NM_TECNICO.Value,
+IIF(Fields!TP_ESTOQUE_TEC_3M.Value = "CLI", Fields!NM_CLIENTE.Value, Fields!DS_ESTOQUE.Value)
+)</Value>
                               <MarkupType>HTML</MarkupType>
                               <Style>
                                 <FontSize>9pt</FontSize>
@@ -748,10 +752,30 @@
           <DataField>VL_TOTAL</DataField>
           <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
+        <Field Name="TP_ESTOQUE_TEC_3M">
+          <DataField>TP_ESTOQUE_TEC_3M</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CD_TECNICO">
+          <DataField>CD_TECNICO</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="NM_TECNICO">
+          <DataField>NM_TECNICO</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CD_CLIENTE">
+          <DataField>CD_CLIENTE</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="NM_CLIENTE">
+          <DataField>NM_CLIENTE</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>dsRptEstoqueIntermediario</rd:DataSetName>
-        <rd:SchemaPath>C:\WS_WAYON\3M.COMODATO.WEB\3M.Comodato.Front\Reports\EstoqueIntermediario\dsRptEstoqueIntermediario.xsd</rd:SchemaPath>
+        <rd:SchemaPath>C:\BB_REPOSITORY\comodato\src\3M.Comodato.Front\Reports\EstoqueIntermediario\dsRptEstoqueIntermediario.xsd</rd:SchemaPath>
         <rd:TableName>prcRptEstoqueIntermediario</rd:TableName>
         <rd:TableAdapterFillMethod>Fill</rd:TableAdapterFillMethod>
         <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>

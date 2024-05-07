@@ -170,6 +170,7 @@ namespace _3M.Comodato.Front.Controllers
                         Models.ListaTecnicoXClienteEscala listaTecnicoXClienteEscala = new Models.ListaTecnicoXClienteEscala
                         {
                             CD_ORDEM = Convert.ToInt32(dataTableReader["CD_ORDEM"]),
+                            ID_ESCALA = dataTableReader["ID_ESCALA"].ToString(),
                             empresa = new EmpresaEntity
                             {
                                 CD_Empresa = Convert.ToInt64("0" + dataTableReader["CD_Empresa"]),

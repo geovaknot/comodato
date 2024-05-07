@@ -1298,7 +1298,7 @@ Mês</Value>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(Fields!KatAnoPorTecnico.Value)</Value>
+                                  <Value>=Sum(Fields!KatAno.Value)</Value>
                                   <Style>
                                     <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
@@ -1354,7 +1354,7 @@ Mês</Value>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(Fields!KatMesPorTecnico.Value)</Value>
+                                  <Value>=Sum(Fields!KatMes.Value)</Value>
                                   <Style>
                                     <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
@@ -1646,7 +1646,7 @@ Mês</Value>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(Fields!KatAnoPorTecnico.Value)</Value>
+                                  <Value>=Sum(Fields!KatAno.Value)</Value>
                                   <Style>
                                     <FontSize>9pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
@@ -1681,7 +1681,7 @@ Mês</Value>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=SUM(Fields!KatMesPorTecnico.Value)</Value>
+                                  <Value>=Sum(Fields!KatMes.Value)</Value>
                                   <Style>
                                     <FontSize>9pt</FontSize>
                                     <FontWeight>Bold</FontWeight>

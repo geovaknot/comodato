@@ -54,4 +54,9 @@ namespace _3M.Comodato.Entity
         public Int32 CD_ORDEM { get; set; }
     }
 
+    public class TecnicoClienteInativar : TecnicoClienteEntity
+    {
+        public Int64 ID_ESCALA { get; set; }
+    }
+
 }

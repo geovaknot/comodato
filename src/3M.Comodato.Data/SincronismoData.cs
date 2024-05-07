@@ -2585,12 +2585,7 @@ namespace _3M.Comodato.Data
                         cmd.Connection = cnx;
                         _id_os = Convert.ToInt64(cmd.ExecuteScalar());
                         
-                        if (itemOS.TpStatusOS.ST_STATUS_OS == 3)
-                        {
-                            EnviarEmailOS(itemOS, _id_os);
-                        }
                         
-
                         #region Grava Peca OS
 
                         if (listaPecaOS?.Count > 0)
@@ -2630,6 +2625,11 @@ namespace _3M.Comodato.Data
 
                         #endregion
 
+                        if (itemOS.TpStatusOS.ST_STATUS_OS == 3)
+                        {
+                            EnviarEmailOS(itemOS, _id_os);
+                        }
+
                         #region Grava Pendencia OS
 
                         if (listaPendenciaOS?.Count > 0)
@@ -2661,6 +2661,8 @@ namespace _3M.Comodato.Data
 
                         #endregion
 
+                        
+                        
                         //============== Grava Estoque_Movi -------------------------------------
                         //TODO: Edgar - Retirar
                         if (listaEstoqueMovi != null)

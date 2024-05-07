@@ -88,6 +88,7 @@
 
     <script type="text/javascript">
         var actionListarEquipamentos = '@Url.Action("PopularGridEquipamentosDevolucao", "Workflow")';
+        var actionVerificarEquipamentos = '@Url.Action("VerificarGridEquipamentosDevolucao", "Workflow")';
         var URLObterListaMensagem = "@Url.Action("ObterListaMensagemJson", "Workflow")";
 
         var URLAPI = "@_3M.Comodato.Utility.ControlesUtility.Parametro.ObterValorParametro(_3M.Comodato.Utility.ControlesUtility.Constantes.URLAPI)";
@@ -97,6 +98,8 @@
         var cnmNome = "@(((_3M.Comodato.Entity.UsuarioPerfilEntity)Session["_CurrentUser"]).usuario.cnmNome)";
 
         var idWFDevolucao = @Model.ID_WF_PEDIDO_EQUIP;
+
+        var ativoCarregado = true;
 
         var MensagemGravacaoSucesso = "@_3M.Comodato.Utility.ControlesUtility.Constantes.MensagemGravacaoSucesso";
 

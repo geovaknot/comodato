@@ -94,7 +94,7 @@ $('#btnImprimir').click(function () {
 });
 
 function carregarComboCliente() {
-    var URL = URLAPI + "ClienteAPI/ObterListaComboPorUsuarioPerfil?nidUsuario=" + nidUsuario;
+    var URL = URLAPI + "ClienteAPI/ObterListaComboPorUsuarioPerfilLocados?nidUsuario=" + nidUsuario;
     //var token = sessionStorage.getItem("token");
     $.ajax({
         type: 'GET',

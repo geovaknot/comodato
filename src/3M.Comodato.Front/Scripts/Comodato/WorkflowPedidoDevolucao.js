@@ -1,4 +1,5 @@
-﻿$().ready(function () {
+﻿
+$().ready(function () {
     LimparScrollWorkflow();
 
     $('#CD_CLIENTE').select2({
@@ -132,6 +133,9 @@ $('#btnSalvarRascunho').click(function () {
 $('#btnSalvarSubmeter').click(function () {
     var pedidoEntity = ObterObjetoPedido();
     var recarregarAcompanhamento = false;
+
+    VerificarGridEquipamentos();
+
 
     var checar = checarCamposObrigatorios();
 
@@ -382,6 +386,7 @@ function AdicionarEquipamento() {
         success: function (data) {
             $("#loader").css("display", "none");
             PopularGridEquipamentos();
+            
         },
         error: function (res) {
             $("#loader").css("display", "none");
@@ -575,6 +580,7 @@ function PopularGridEquipamentos() {
             if (data.Status == 'Success') {
                 $('#gridAtivoDevolucao').html(data.Html);
                 $('.grid-mvc').gridmvc();
+                
             }
         },
         error: function (res) {
@@ -584,6 +590,43 @@ function PopularGridEquipamentos() {
 
     });
 }
+
+
+function VerificarGridEquipamentos() {
+    var idWF = $('#ID_WF_PEDIDO_EQUIP').val();
+    var URL = URLAPI + '/WfPedidoEquipItemAPI/VerificarGridEquipamentosDevolucao?codigoWorkflow=' + idWF;
+    //var token = sessionStorage.getItem("token");
+    $.ajax({
+        type: 'POST',
+        url: URL,
+        dataType: "json",
+        cache: false,
+        async: false,
+        contentType: "application/json",
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+            $("#loader").css("display", "block");
+        },
+        complete: function () {
+            $("#loader").css("display", "none");
+        },
+        success: function (res) {
+            $("#loader").css("display", "none");
+
+            var anexos = res.Qtd;
+
+            if (anexos > 0)
+                ativoCarregado = true;
+            else
+                ativoCarregado = false;
+        },
+        error: function (res) {
+            $("#loader").css("display", "none");
+            Alerta("ERRO", JSON.parse(res.responseText).Message);
+        }
+    });
+}
+
 
 function ObterObjetoPedido() {
     var pedidoEntity = new Object();
@@ -687,55 +730,68 @@ $('#fileUpload').click(function () {
 function checarCamposObrigatorios() {
     var titulo = $('#DS_TITULO').val();
     if (titulo == "" || titulo == null || titulo == undefined) {
-        Alerta("Atenção", "Favor informar um título");
+        Alerta("Atenção", "Favor informar um título!");
         return false;
     }
 
     var solicitante = $('#ID_USU_SOLICITANTE').val();
     if (solicitante == "" || solicitante == null || solicitante == undefined) {
-        Alerta("Atenção", "Favor informar um Solicitante");
+        Alerta("Atenção", "Favor informar um Solicitante!");
         return false;
     }
 
     var cliente = $('#CD_CLIENTE option:selected').val();
     if (cliente == "" || cliente == null || cliente == undefined || cliente == 0) {
-        Alerta("Atenção", "Favor informar um cliente");
+        Alerta("Atenção", "Favor informar um cliente!");
         return false;
     }
 
     var contato = $('#DS_CONTATO_NOME').val();
     if (contato == "" || contato == null || contato == undefined) {
-        Alerta("Atenção", "Favor informar um contato");
+        Alerta("Atenção", "Favor informar um contato!");
         return false;
     }
 
     var email = $('#TX_EMAIL').val();
     if (email == "" || email == null || email == undefined) {
-        Alerta("Atenção", "Favor informar um e-mail de contato");
+        Alerta("Atenção", "Favor informar um e-mail de contato!");
         return false;
     }
 
     var tel = $('#TX_TELEFONE').val();
     if (tel == "" || tel == null || tel == undefined) {
-        Alerta("Atenção", "Favor informar um telefone de contato");
+        Alerta("Atenção", "Favor informar um telefone de contato!");
+        return false;
+    }
+
+    var valorNF = $('#ValorNotaFiscal3M').val();
+    if (valorNF == "" || valorNF == null || valorNF == undefined || valorNF == 0 || valorNF == "0,00") {
+        Alerta("Atenção", "Favor informar o valor da Nota Fiscal 3M!");
+        return false;
+    }
+
+    
+    var possuiAtivo = ativoCarregado;
+    if (possuiAtivo == "" || possuiAtivo == null || possuiAtivo == undefined || possuiAtivo == 0 || possuiAtivo == false) {
+        Alerta("Atenção", "Favor selecionar um equipamento!");
         return false;
     }
 
     var motivo = $("#MotivoDevolucao option:selected").val();
     if (motivo == "" || motivo == null || motivo == undefined || motivo == 0) {
-        Alerta("Atenção", "Favor informar o motivo da devolução");
+        Alerta("Atenção", "Favor informar o motivo da devolução!");
         return false;
     }
 
-    var nota = document.getElementsByName('PossuiNotaFiscal3M');
+    //var nota = document.getElementsByName('PossuiNotaFiscal3M');
 
-    if (nota[0].checked) { //Sim selecionado
-        var valor = $("#ValorNotaFiscal3M").val();
-        if (valor == "" || valor == null || valor == undefined || valor == 0) {
-            Alerta("Atenção", "Favor informar o valor da nota fiscal");
-            return false;
-        }
-    }
+    //if (nota[0].checked) { //Sim selecionado
+    //    var valor = $("#ValorNotaFiscal3M").val();
+    //    if (valor == "" || valor == null || valor == undefined || valor == 0) {
+    //        Alerta("Atenção", "Favor informar o valor da nota fiscal");
+    //        return false;
+    //    }
+    //}
 
     return true;
 }

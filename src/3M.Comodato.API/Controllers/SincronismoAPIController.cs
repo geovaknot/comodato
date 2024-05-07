@@ -247,14 +247,14 @@ namespace _3M.Comodato.API.Controllers
             }
         }
 
-        protected void EnviarEmailOS(OSPadraoEntity listOSPadrao)
+        public void EnviarEmailOS(OSPadraoEntity listOSPadrao, long? Id_Os)
         {
             //Método Modelo envio de email
             try
             {
                 //string emailsSolicitacaoPeca = ControlesUtility.Parametro.ObterValorParametro("emailsOSFinalizada");
 
-                
+                Id_Os = listOSPadrao.ID_OS;
                 if (listOSPadrao.TpStatusOS.ST_STATUS_OS == 3)
                 {
                     TecnicoEntity tecnicoEntity = new TecnicoEntity();
@@ -298,6 +298,197 @@ namespace _3M.Comodato.API.Controllers
                             _clienteEntity.CD_CLIENTE = Convert.ToInt64(dataTableReader["CD_CLIENTE"]);
                             _clienteEntity.TX_EMAIL = dataTableReader["TX_EMAIL"].ToString();
                             _clienteEntity.NM_CLIENTE = dataTableReader["NM_CLIENTE"].ToString();
+                            _clienteEntity.EN_CIDADE = dataTableReader["EN_CIDADE"].ToString();
+                            _clienteEntity.EmailsInfo = dataTableReader["EmailsInfo"].ToString();
+                        }
+                    }
+
+                    if (dataTableReader != null)
+                    {
+                        dataTableReader.Dispose();
+                        dataTableReader = null;
+                    }
+
+
+                    // Envia a requisição de troca de senha por e-mail
+
+
+
+                    MailSender mailSender = new MailSender();
+
+                    string mailTo = "";
+
+                    var pecasOS = new PecaOSData().ObterListaPecaOsEmail(listOSPadrao.ID_OS);
+
+                    if (listOSPadrao.Email == null || listOSPadrao.Email == "")
+                    {
+                        //if (tecnicoEntity.usuario.cdsEmail != "")
+                        //{
+                        //    mailTo += tecnicoEntity.usuario.cdsEmail + ";";
+                        //}
+                        if (_clienteEntity.TX_EMAIL != "")
+                        {
+                            mailTo += _clienteEntity.TX_EMAIL + ";";
+                        }
+                    }
+                    else if (listOSPadrao.Email != null && listOSPadrao.Email != "")
+                    {
+                        if (listOSPadrao.Email == tecnicoEntity.usuario.cdsEmail)
+                            mailTo += _clienteEntity.TX_EMAIL + ";";
+                        else
+                            mailTo += listOSPadrao.Email + ";";
+                    }
+
+
+
+                    string mailSubject = "3M.Comodato - Finalização de OS";
+                    string mailMessage = string.Empty;
+                    System.Net.Mail.Attachment Attachments = null;
+                    string mailCopy = null;
+
+                    var MensagemEmail = mailSender.GetConteudoHTML("EmailCorpo.html");
+                    string Conteudo = string.Empty;
+                    string URLSite = ControlesUtility.Parametro.ObterValorParametro(ControlesUtility.Constantes.URLSite);
+
+                    //URLSite += "/SolicitacaoPecas/Editar?idKey=" + ControlesUtility.Criptografia.Criptografar(tecnicoEntity.CD_TECNICO + "|" + pedidoEntity.ID_PEDIDO.ToString() + "|" + pedidoEntity.TP_TIPO_PEDIDO + "|Solicitação");
+                    URLSite += "/OsPadrao/Pesquisa?ID_OS=" + Id_Os;
+                    Conteudo += "<p>Uma OS acaba de ser <strong>Finalizada </strong>!</p>";
+                    Conteudo += "<p>Segue dados da OS:</p>";
+                    Conteudo += "Cliente: " + _clienteEntity.CD_CLIENTE + " - " + _clienteEntity.NM_CLIENTE + "<br/>";
+                    Conteudo += "Cidade: " + _clienteEntity.EN_CIDADE + "<br/>";
+                    Conteudo += "Técnico: " + tecnicoEntity.NM_TECNICO + " - " + tecnicoEntity.empresa.NM_Empresa + "<br/>";
+
+                    if (Id_Os != null && Id_Os != 0)
+                    {
+                        Conteudo += "OS: <strong>" + Convert.ToInt64(Id_Os) + "</strong><br/>";
+                    }
+                    else if (listOSPadrao.ID_OS != 0)
+                    {
+                        Conteudo += "OS: <strong>" + Convert.ToInt64(listOSPadrao.ID_OS) + "</strong><br/>";
+                    }
+
+                    Conteudo += "Data: " + Convert.ToDateTime(listOSPadrao.DT_DATA_OS).ToString("dd/MM/yyyy") + "<br/>";
+                    Conteudo += "Hora Inicio: " + listOSPadrao.HR_INICIO.ToString() + "<br/>";
+                    Conteudo += "Hora de Finalização: " + listOSPadrao.HR_FIM.ToString() + "<br/>";
+                    Conteudo += "Ativo Fixo: " + listOSPadrao.AtivoFixo.CD_ATIVO_FIXO + "-" + listOSPadrao.AtivoFixo.modelo.DS_MODELO + "<br/>";
+                    Conteudo += "Linha: " + listOSPadrao.NOME_LINHA + "<br/>";
+                    Conteudo += "Observação: " + listOSPadrao.DS_OBSERVACAO + "<br/>";
+                    if (listOSPadrao.DS_RESPONSAVEL != null)
+                    {
+                        Conteudo += "Acompanhante: " + listOSPadrao.DS_RESPONSAVEL.ToString() + "<br/>";
+                    }
+                    else
+                    {
+                        Conteudo += "Acompanhante: " + "" + "<br/>";
+                    }
+
+                    var manutencao = "";
+                    if (listOSPadrao.TpOS.CD_TIPO_OS == 1)
+                        manutencao = "Preventiva";
+                    if (listOSPadrao.TpOS.CD_TIPO_OS == 2)
+                        manutencao = "Corretiva";
+                    if (listOSPadrao.TpOS.CD_TIPO_OS == 3)
+                        manutencao = "Instalação";
+                    if (listOSPadrao.TpOS.CD_TIPO_OS == 4)
+                        manutencao = "Outros";
+                    Conteudo += "Tipo de Manutenção: " + manutencao + "<br/>";
+                    Conteudo += "Status da OS: Finalizada<br/><br/>";
+
+                    if (pecasOS?.Count > 0)
+                    {
+                        Conteudo += "<p><strong>Peças Utilizadas: </strong></p>";
+                        int contaPc = 0;
+                        foreach (var peca in pecasOS)
+                        {
+                            contaPc++;
+                            var estoque = peca.CD_TP_ESTOQUE_CLI_TEC == 'C' ? "Cliente" : "Intermediario";
+                            Conteudo += $" {contaPc}. {peca.DS_PECA} || Quantidade: {peca.QT_PECA} || Estoque: {estoque}<br/>";
+                        }
+                    }
+
+
+                    var button = mailSender.GetConteudoHTML("button.html");
+
+                    button.Replace("TEXTO_URL", "Avalie o Atendimento");
+                    button.Replace("URL", URLSite);
+
+                    Conteudo += button;
+                    //Conteudo += $"<a class='btn btn-danger m-1' href = '{URLSite}'>Avalie o Atendimento</a>";
+                    MensagemEmail.Replace("#Conteudo", Conteudo);
+                    mailMessage = MensagemEmail.ToString();
+
+                    mailSender.Send(mailTo, mailSubject, mailMessage, Attachments, mailCopy);
+
+                    if (_clienteEntity.EmailsInfo != null || _clienteEntity.EmailsInfo != "")
+                    {
+                        EnviarEmailOSInfo(listOSPadrao, Id_Os);
+                    }
+                }
+
+
+
+            }
+            catch (Exception ex)
+            {
+
+
+            }
+        }
+
+
+        public void EnviarEmailOSInfo(OSPadraoEntity listOSPadrao, long? Id_Os)
+        {
+            //Método Modelo envio de email
+            try
+            {
+                //string emailsSolicitacaoPeca = ControlesUtility.Parametro.ObterValorParametro("emailsOSFinalizada");
+
+
+                if (listOSPadrao.TpStatusOS.ST_STATUS_OS == 3)
+                {
+                    TecnicoEntity tecnicoEntity = new TecnicoEntity();
+                    tecnicoEntity.CD_TECNICO = listOSPadrao.Tecnico.CD_TECNICO;
+                    DataTableReader dataTableReader = new TecnicoData().ObterLista(tecnicoEntity).CreateDataReader();
+
+                    if (dataTableReader.HasRows)
+                    {
+                        if (dataTableReader.Read())
+                        {
+                            tecnicoEntity.NM_TECNICO = dataTableReader["NM_TECNICO"].ToString();
+                            tecnicoEntity.empresa.NM_Empresa = dataTableReader["NM_Empresa"].ToString();
+                            tecnicoEntity.empresa.NM_Empresa = dataTableReader["NM_Empresa"].ToString();
+                            tecnicoEntity.usuario.cdsEmail = "";
+                            tecnicoEntity.usuarioCoordenador.cdsEmail = "";
+                            if (dataTableReader["cdsEmail"] != DBNull.Value)
+                            {
+                                tecnicoEntity.usuario.cdsEmail = dataTableReader["cdsEmail"].ToString();
+                            }
+                            if (dataTableReader["cdsEmailCoordenador"] != DBNull.Value)
+                            {
+                                tecnicoEntity.usuarioCoordenador.cdsEmail = dataTableReader["cdsEmailCoordenador"].ToString();
+                            }
+                        }
+                    }
+
+                    if (dataTableReader != null)
+                    {
+                        dataTableReader.Dispose();
+                        dataTableReader = null;
+                    }
+
+                    ClienteEntity _clienteEntity = new ClienteEntity();
+                    _clienteEntity.CD_CLIENTE = listOSPadrao.Cliente.CD_CLIENTE;
+                    dataTableReader = new ClienteData().ObterLista(_clienteEntity).CreateDataReader();
+
+                    if (dataTableReader.HasRows)
+                    {
+                        if (dataTableReader.Read())
+                        {
+                            _clienteEntity.CD_CLIENTE = Convert.ToInt64(dataTableReader["CD_CLIENTE"]);
+                            _clienteEntity.TX_EMAIL = dataTableReader["TX_EMAIL"].ToString();
+                            _clienteEntity.NM_CLIENTE = dataTableReader["NM_CLIENTE"].ToString();
+                            _clienteEntity.EN_CIDADE = dataTableReader["EN_CIDADE"].ToString();
+                            _clienteEntity.EmailsInfo = dataTableReader["EmailsInfo"].ToString();
                         }
                     }
 
@@ -314,14 +505,9 @@ namespace _3M.Comodato.API.Controllers
 
                     string mailTo = "";
 
-                    if (tecnicoEntity.usuario.cdsEmail != "")
-                    {
-                        mailTo += tecnicoEntity.usuario.cdsEmail + ";";
-                    }
-                    if (_clienteEntity.TX_EMAIL != "")
-                    {
-                        mailTo += _clienteEntity.TX_EMAIL + ";";
-                    }
+                    var pecasOS = new PecaOSData().ObterListaPecaOsEmail(listOSPadrao.ID_OS);
+
+                    mailTo = _clienteEntity.EmailsInfo;
 
                     string mailSubject = "3M.Comodato - Finalização de OS";
                     string mailMessage = string.Empty;
@@ -336,28 +522,73 @@ namespace _3M.Comodato.API.Controllers
 
                     Conteudo += "<p>Uma OS acaba de ser <strong>Finalizada </strong>!</p>";
                     Conteudo += "<p>Segue dados da OS:</p>";
-                    Conteudo += "<p>Técnico: " + tecnicoEntity.NM_TECNICO + " - " + tecnicoEntity.empresa.NM_Empresa + "<br/>";
-                    if (listOSPadrao.ID_OS != 0)
+                    Conteudo += "Cliente: " + _clienteEntity.CD_CLIENTE + " - " + _clienteEntity.NM_CLIENTE + "<br/>";
+                    Conteudo += "Cidade: " + _clienteEntity.EN_CIDADE + "<br/>";
+                    Conteudo += "Técnico: " + tecnicoEntity.NM_TECNICO + " - " + tecnicoEntity.empresa.NM_Empresa + "<br/>";
+
+                    if (Id_Os != null && Id_Os != 0)
+                    {
+                        Conteudo += "OS: <strong>" + Convert.ToInt64(Id_Os) + "</strong><br/>";
+                    }
+                    else if (listOSPadrao.ID_OS != 0)
                     {
                         Conteudo += "OS: <strong>" + Convert.ToInt64(listOSPadrao.ID_OS) + "</strong><br/>";
                     }
-                    
+
                     Conteudo += "Data: " + Convert.ToDateTime(listOSPadrao.DT_DATA_OS).ToString("dd/MM/yyyy") + "<br/>";
-                    Conteudo += "Status da OS: Finalizada<br/>";
-                        
+                    Conteudo += "Hora Inicio: " + listOSPadrao.HR_INICIO.ToString() + "<br/>";
+                    Conteudo += "Hora de Finalização: " + listOSPadrao.HR_FIM.ToString() + "<br/>";
+                    Conteudo += "Ativo Fixo: " + listOSPadrao.AtivoFixo.CD_ATIVO_FIXO + "-" + listOSPadrao.AtivoFixo.modelo.DS_MODELO + "<br/>";
+                    Conteudo += "Linha: " + listOSPadrao.NOME_LINHA + "<br/>";
+                    Conteudo += "Observação: " + listOSPadrao.DS_OBSERVACAO + "<br/>";
+                    if (listOSPadrao.DS_RESPONSAVEL != null)
+                    {
+                        Conteudo += "Acompanhante: " + listOSPadrao.DS_RESPONSAVEL.ToString() + "<br/>";
+                    }
+                    else
+                    {
+                        Conteudo += "Acompanhante: " + "" + "<br/>";
+                    }
+
+                    var manutencao = "";
+                    if (listOSPadrao.TpOS.CD_TIPO_OS == 1)
+                        manutencao = "Preventiva";
+                    if (listOSPadrao.TpOS.CD_TIPO_OS == 2)
+                        manutencao = "Corretiva";
+                    if (listOSPadrao.TpOS.CD_TIPO_OS == 3)
+                        manutencao = "Instalação";
+                    if (listOSPadrao.TpOS.CD_TIPO_OS == 4)
+                        manutencao = "Outros";
+                    Conteudo += "Tipo de Manutenção: " + manutencao + "<br/>";
+                    Conteudo += "Status da OS: Finalizada<br/><br/>";
+
+                    if (pecasOS?.Count > 0)
+                    {
+                        Conteudo += "<p><strong>Peças Utilizadas: </strong></p>";
+                        int contaPc = 0;
+                        foreach (var peca in pecasOS)
+                        {
+                            contaPc++;
+                            var estoque = peca.CD_TP_ESTOQUE_CLI_TEC == 'C' ? "Cliente" : "Intermediario";
+                            Conteudo += $" {contaPc}. {peca.DS_PECA} || Quantidade: {peca.QT_PECA} || Estoque: {estoque}<br/>";
+                        }
+                    }
+
+                    //Conteudo += $"<a class='btn btn-danger m-1' href = '{URLSite}'>Avalie o Atendimento</a>";
                     MensagemEmail.Replace("#Conteudo", Conteudo);
                     mailMessage = MensagemEmail.ToString();
 
                     mailSender.Send(mailTo, mailSubject, mailMessage, Attachments, mailCopy);
-                }
-                
 
-                
+                }
+
+
+
             }
             catch (Exception ex)
             {
-                LogUtility.LogarErro(ex);
-                
+
+
             }
         }
 

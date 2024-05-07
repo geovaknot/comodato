@@ -863,11 +863,18 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
 -->
-    <EmbeddedResource Include="Reports\Recolhidos\ReportRecolhidos.rdlc" />
-    <EmbeddedResource Include="Reports\Sumarizados\ReportSumarizados.rdlc" />
-    <EmbeddedResource Include="Reports\WorkflowDevolucao\ReportPedidoEquipamentoDevolucao.rdlc">
+    <Content Include="Reports\Recolhidos\ReportRecolhidos.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
+    </Content>
+    <Content Include="Reports\Sumarizados\ReportSumarizados.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\WorkflowDevolucao\ReportPedidoEquipamentoDevolucao.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\Pedidos\ReportPedidosSimplificado.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\css\select2.css" />
@@ -2317,7 +2324,9 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Reports\Distribuidor\AtivosDI.rdlc" />
+    <Content Include="Reports\Distribuidor\AtivosDI.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Reports\Workflow\ReportPedidoEquipamento.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

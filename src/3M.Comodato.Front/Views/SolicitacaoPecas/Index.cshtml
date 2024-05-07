@@ -5,13 +5,19 @@
     var perfil = (_3M.Comodato.Entity.UsuarioPerfilEntity)Session["_CurrentUser"];
     var PerfilTecnico = _3M.Comodato.Utility.ControlesUtility.Seguranca.VerificaUsuarioPerfisTecnicos(Convert.ToInt64(((_3M.Comodato.Entity.UsuarioPerfilEntity)Session["_CurrentUser"]).usuario.nidUsuario));
     var PERFIL_ADMINISTRADOR_3M = 1;
-}
+    var paramHabilitaPlanoZero = @_3M.Comodato.Utility.ControlesUtility.Parametro.ObterValorParametro("Habilitar_botao_Gerar_Plano_Zero").AsBool();
+    var paramHabilitaCancelarPlanoZero = @_3M.Comodato.Utility.ControlesUtility.Parametro.ObterValorParametro("Habilitar_botao_Cancelar_Plano_Zero").AsBool();
+    var ExistePlanoZero = _3M.Comodato.Data.PlanoZeroData.VerificaPlanoZero();
+    //var Homologacao = @_3M.Comodato.Utility.ControlesUtility.Parametro.ObterValorParametro("Ambiente") == "Homologacao";
+    var Homologacao = System.Configuration.ConfigurationManager.AppSettings["Ambiente"] == "H";
+} 
+
 
 <i class="fas fa-cubes fa-3x fa-pull-left"></i>
 <h3>Pedidos de Reposição de Estoque/Solicitação de Peças</h3>
 
 <div class="well">
-
+    <input type="hidden" id="hidIdPlanoZero" value="" />
     @using (Html.BeginForm())
     {
         <div class="form-horizontal">
@@ -60,19 +66,19 @@
             </div>
 
             <div class="form-row">
-                @if (!PerfilTecnico)
+                @if (perfil.perfil.ccdPerfil == 1 & paramHabilitaPlanoZero & !ExistePlanoZero)
                 {
                     <div class="form-group col-sm-12 col-md-3">
-                        @if (perfil.perfil.ccdPerfil == PERFIL_ADMINISTRADOR_3M)
-                        {
-                            <button class="btn btn-primary btn-sm btn-block" type="button" id="btnGerarTodosPedidosTecnico">Gerar TODOS pedidos técnico</button>
-                        }
-                    </div>
-
-                    <div class="form-group col-sm-12 col-md-3">
-                        <button class="btn btn-primary btn-sm btn-block" type="button" id="btnNovoPedidoTecnico">Pedido Plano Zero</button>
+                        <button class="btn btn-primary btn-sm btn-block" type="button" id="btnGerarPlanoZero">Gerar Plano Zero</button>
                     </div>
                 }
+                @if (perfil.perfil.ccdPerfil == 1 & paramHabilitaCancelarPlanoZero & ExistePlanoZero & Homologacao)
+                {
+                    <div class="form-group col-sm-12 col-md-3">
+                        <button class="btn btn-primary btn-sm btn-block" type="button" onclick="CancelarPlanoZero();" id="btnCancelarPlanoZero">Cancelar Plano Zero</button>
+                    </div>
+                }
+
                 <div class="form-group col-sm-12 col-md-3">
                     <button class="btn btn-primary btn-sm btn-block" type="button" id="btnNovoPedidoCliente">Novo pedido p/ cliente</button>
                 </div>
@@ -120,7 +126,7 @@
 
         var MensagemExclusaoSucesso = "@_3M.Comodato.Utility.ControlesUtility.Constantes.MensagemExclusaoSucesso";
 
-        var totalClientes = 0;
+        var totalClientes = 0
         var carregarFiltroStatusPedido = true;
         var tipoOrigemPagina = "Solicitacao";
 
@@ -133,4 +139,5 @@
     <script type="text/javascript" src="~/Scripts/Comodato/UtilTecnico.js"></script>
     <script type="text/javascript" src="~/Scripts/Comodato/UtilCliente.js"></script>
     <script type="text/javascript" src="~/Scripts/Comodato/SolicitacaoPecas.js"></script>
+    <script type="text/javascript" src="~/Scripts/Comodato/PlanoZero.js"></script>
 }

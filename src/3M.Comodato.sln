@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29025.244
+# Visual Studio 15
+VisualStudioVersion = 15.0.34112.143
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "3M.Comodato.Front", "3M.Comodato.Front\3M.Comodato.Front.csproj", "{FEB62651-D7A7-475B-90B2-3862F81348E1}"
 EndProject
@@ -12,6 +12,11 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "3M.Comodato.Utility", "3M.Comodato.Utility\3M.Comodato.Utility.csproj", "{8C523804-297F-43EB-8722-F372DA8A8FEA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "3M.Comodato.API", "3M.Comodato.API\3M.Comodato.API.csproj", "{D8DC6B54-81F0-42FF-AD25-CCBDFB1CCF3B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ScriptsPlanoZero", "ScriptsPlanoZero", "{744801F8-676E-4E6F-825C-4870B201B31C}"
+	ProjectSection(SolutionItems) = preProject
+		CURSOR INSERE PLANOZERO CONTROLE.sql = CURSOR INSERE PLANOZERO CONTROLE.sql
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,26 +50,5 @@ Global
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {33FD9C37-2958-42D3-BCED-71E2AF1A1297}
-	EndGlobalSection
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 6
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://dev.azure.com/wayon
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = 3M.Comodato.API\\3M.Comodato.API.csproj
-		SccProjectName1 = 3M.Comodato.API
-		SccLocalPath1 = 3M.Comodato.API
-		SccProjectUniqueName2 = 3M.Comodato.Data\\3M.Comodato.Data.csproj
-		SccProjectName2 = 3M.Comodato.Data
-		SccLocalPath2 = 3M.Comodato.Data
-		SccProjectUniqueName3 = 3M.Comodato.Entity\\3M.Comodato.Entity.csproj
-		SccProjectName3 = 3M.Comodato.Entity
-		SccLocalPath3 = 3M.Comodato.Entity
-		SccProjectUniqueName4 = 3M.Comodato.Front\\3M.Comodato.Front.csproj
-		SccProjectName4 = 3M.Comodato.Front
-		SccLocalPath4 = 3M.Comodato.Front
-		SccProjectUniqueName5 = 3M.Comodato.Utility\\3M.Comodato.Utility.csproj
-		SccProjectName5 = 3M.Comodato.Utility
-		SccLocalPath5 = 3M.Comodato.Utility
 	EndGlobalSection
 EndGlobal

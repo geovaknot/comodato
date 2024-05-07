@@ -228,7 +228,11 @@ namespace _3M.Comodato.Utility
             public const string URLSite = "URLSite";
             public const string URLAPI = "URLAPI";
             public const string MensagemGravacaoSucesso = "Registro gravado com sucesso!";
+            public const string MensagemErroAtivoXCliente = "Ativo com data de devolução em aberto já cadastrado!";
+            public const string MensagemGravacaoErroAtivo = "Informe se o registro está Ativo ou Inativo";
+            public const string MensagemGravacaoErroFerias = "Preencha o campo Férias";
             public const string MensagemGravacaoSucessoQTDPlanoZero = "Informe a Quantidade Minima Plano Zero";
+            public const string MensagemPecaInativa = "O Campo: 'CD Peça Recuperada' precisa ser um Código de Peça ativa e do tipo Especial!"; 
             public const string MensagemOSVisitaExistente = "Já existe Ordem de serviço ou visita registrado nesse período!";
             public const string MensagemExclusaoSucesso = "Registro excluído com sucesso!";
             public const string MensagemInativacaoSucesso = "Registro inativado com sucesso!";
@@ -532,7 +536,6 @@ namespace _3M.Comodato.Utility
 
                 UsuarioPerfilEntity usuarioPerfilEntity = new UsuarioPerfilEntity();
                 UsuarioPerfilData usuarioPerfilData = new UsuarioPerfilData();
-
                 usuarioPerfilEntity.usuario.nidUsuario = usuario.nidUsuario;
                 //return usuarioPerfilData.VerificarAcesso(usuarioPerfilEntity);
 
@@ -708,9 +711,9 @@ namespace _3M.Comodato.Utility
             public static Dictionary<string, string> SimNao()
             {
                 var dictionary = new Dictionary<string, string>();
-                dictionary.Add("Selecione", null);
                 dictionary.Add("Sim", "S");
                 dictionary.Add("Não", "N");
+                dictionary.Add("Selecione", null);
 
                 return dictionary;
             }

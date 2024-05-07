@@ -70,6 +70,7 @@ namespace _3M.Comodato.Front.Models
         private TecnicoEntity _Tecnico = null;
 
         public int CD_ORDEM { get; set; }
+        public string ID_ESCALA { get; set; }
 
         public EmpresaEntity empresa
         {

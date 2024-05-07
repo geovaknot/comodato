@@ -57,6 +57,24 @@ namespace _3M.Comodato.API.Controllers
             return Request.CreateResponse(HttpStatusCode.OK);
         }
 
+        [HttpPost]
+        [Route("Inativar")]
+        public HttpResponseMessage Inativar(TecnicoClienteInativar tecnicoClienteInativar)
+        {
+            try
+            {
+                new TecnicoClienteData().Inativar(tecnicoClienteInativar);
+                new TecnicoClienteData().Reordenar(tecnicoClienteInativar, "R");
+            }
+            catch (Exception ex)
+            {
+                LogUtility.LogarErro(ex);
+                return Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
+            }
+
+            return Request.CreateResponse(HttpStatusCode.OK);
+        }
+
         /// <summary>
         /// Executa reordenação de TecnicoCliente via CD_ORDEM
         /// </summary>

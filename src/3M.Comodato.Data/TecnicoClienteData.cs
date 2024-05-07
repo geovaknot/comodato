@@ -80,6 +80,56 @@ namespace _3M.Comodato.Data
             }
         }
 
+        public void Inativar(TecnicoClienteInativar tecnicoClienteInativar)
+        {
+            try
+            {
+                dbCommand = _db.GetStoredProcCommand("prcTecnicoClienteInativar");
+
+                _db.AddInParameter(dbCommand, "@p_ID_ESCALA", DbType.Int64, tecnicoClienteInativar.ID_ESCALA);
+
+                if (tecnicoClienteInativar.nidUsuarioAtualizacao > 0)
+                    _db.AddInParameter(dbCommand, "@p_nidUsuarioAtualizacao", DbType.Int64, tecnicoClienteInativar.nidUsuarioAtualizacao);
+
+                _db.AddInParameter(dbCommand, "@p_TP_ACAO", DbType.String, "I");
+
+                _db.ExecuteNonQuery(dbCommand);
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void InativarTodos(string CD_TECNICO, long nidUsuarioAtualizacao)
+        {
+            try
+            {
+                dbCommand = _db.GetStoredProcCommand("prcTecnicoClienteInativar");
+
+                _db.AddInParameter(dbCommand, "@p_CD_TECNICO", DbType.String, CD_TECNICO);
+
+                if (nidUsuarioAtualizacao > 0)
+                    _db.AddInParameter(dbCommand, "@p_nidUsuarioAtualizacao", DbType.Int64, nidUsuarioAtualizacao);
+
+                _db.AddInParameter(dbCommand, "@p_TP_ACAO", DbType.String, "IT");
+
+                _db.ExecuteNonQuery(dbCommand);
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public DataTable ObterLista(TecnicoClienteEntity tecnicoClienteEntity)
         {
 
@@ -232,6 +282,30 @@ namespace _3M.Comodato.Data
 
                 _db.ExecuteNonQuery(dbCommand);
 
+            }
+            catch (SqlException ex)
+            {
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void ReordenarTodos(string idTecnico, long nidUsuarioAtualizacao)
+        {
+            try
+            {
+                dbCommand = _db.GetStoredProcCommand("prcTecnicoClienteReordenar");
+
+                _db.AddInParameter(dbCommand, "@p_TP_ACAO", DbType.String, "RT");
+                _db.AddInParameter(dbCommand, "@p_CD_CLIENTE", DbType.Int32, 0);
+                _db.AddInParameter(dbCommand, "@p_CD_ORDEM", DbType.Int32, 0);
+                _db.AddInParameter(dbCommand, "@p_CD_TECNICO", DbType.String, idTecnico);
+                _db.AddInParameter(dbCommand, "@p_nidUsuarioAtualizacao", DbType.Int64, nidUsuarioAtualizacao);
+
+                _db.ExecuteNonQuery(dbCommand);
             }
             catch (SqlException ex)
             {

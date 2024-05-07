@@ -75,11 +75,20 @@ namespace _3M.Comodato.API.Controllers
                 if (!string.IsNullOrEmpty(Mensagem))
                     return Request.CreateResponse(HttpStatusCode.OK, new { MENSAGEM = Mensagem });
 
+
+                
+
                 AjustaRegrasVisitaOS(osEntity.visita.ID_VISITA, osEntity.nidUsuarioAtualizacao, ref Mensagem);
 
                 // Caso seja escolhido o status da OS como 'Confirmada' mudar automaticamente para status 'Finalizada'
                 if (osEntity.tpStatusVisitaOS.ST_TP_STATUS_VISITA_OS == Convert.ToInt32(ControlesUtility.Enumeradores.TpStatusOS.Confirmada))
                     osEntity.tpStatusVisitaOS.ST_TP_STATUS_VISITA_OS = Convert.ToInt32(ControlesUtility.Enumeradores.TpStatusOS.Finalizada);
+
+
+                if (osEntity.tpStatusVisitaOS.ST_TP_STATUS_VISITA_OS == Convert.ToInt32(ControlesUtility.Enumeradores.TpStatusOS.Cancelada))
+                {
+                    ObterListaPecaOSToDelete(osEntity);
+                }
 
                 new OSData().Alterar(osEntity);
 
@@ -93,6 +102,85 @@ namespace _3M.Comodato.API.Controllers
 
             return Request.CreateResponse(HttpStatusCode.OK, new { ID_OS = osEntity.ID_OS, MENSAGEM = Mensagem });
         }
+
+        protected void ObterListaPecaOSToDelete(OSEntity osEntity)
+        {
+            PecaOSEntity pecaOSEntity = new PecaOSEntity();
+            PecaOSDetalhamentoEntity pecaOSDetalhamentoEntity = new PecaOSDetalhamentoEntity();
+            try
+            {
+                pecaOSEntity.OS.ID_OS = osEntity.ID_OS;
+
+                DataTableReader dataTableReader = new PecaOSData().ObterLista(pecaOSEntity).CreateDataReader();
+
+                if (dataTableReader.HasRows)
+                {
+                    while (dataTableReader.Read())
+                    {
+                        pecaOSDetalhamentoEntity.ID_PECA_OS = Convert.ToInt64(dataTableReader["ID_PECA_OS"]);
+                        pecaOSDetalhamentoEntity.tecnico.CD_TECNICO = osEntity.tecnico.CD_TECNICO.ToString();
+                        pecaOSDetalhamentoEntity.cliente.CD_CLIENTE = Convert.ToInt64(osEntity.visita.cliente.CD_CLIENTE);
+                        pecaOSDetalhamentoEntity.nidUsuarioAtualizacao = osEntity.nidUsuarioAtualizacao;
+
+                        ExcluirAllPecasOS(pecaOSDetalhamentoEntity);
+                        
+                    }
+                }
+
+                if (dataTableReader != null)
+                {
+                    dataTableReader.Dispose();
+                    dataTableReader = null;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogUtility.LogarErro(ex);
+                throw ex;
+            }
+            
+
+        }
+
+        protected void ExcluirAllPecasOS(PecaOSDetalhamentoEntity pecaOSDetalhamentoEntity)
+        {
+            PecaOSEntity pecaOSEntity = new PecaOSEntity();
+            bool encontrado = false;
+
+            try
+            {
+                pecaOSEntity.ID_PECA_OS = pecaOSDetalhamentoEntity.ID_PECA_OS;
+                DataTableReader dataTableReader = new PecaOSData().ObterLista(pecaOSEntity).CreateDataReader();
+
+                if (dataTableReader.HasRows)
+                {
+                    if (dataTableReader.Read())
+                    {
+                        pecaOSDetalhamentoEntity.OS.ID_OS = Convert.ToInt64(dataTableReader["ID_OS"]);
+                        pecaOSDetalhamentoEntity.peca.CD_PECA = dataTableReader["CD_PECA"].ToString();
+                        pecaOSDetalhamentoEntity.QT_PECA = Convert.ToDecimal(dataTableReader["QT_PECA"]);
+                        pecaOSDetalhamentoEntity.CD_TP_ESTOQUE_CLI_TEC = dataTableReader["CD_TP_ESTOQUE_CLI_TEC"].ToString();
+                        encontrado = true;
+                    }
+                }
+
+                if (dataTableReader != null)
+                {
+                    dataTableReader.Dispose();
+                    dataTableReader = null;
+                }
+
+                if (encontrado)
+                    new PecaOSData().Excluir(pecaOSDetalhamentoEntity);
+            }
+            catch (Exception ex)
+            {
+                LogUtility.LogarErro(ex);
+                //throw ex;
+            }
+            
+        }
+
 
         [HttpPost]
         [Route("ExcluirSemAtivo")]

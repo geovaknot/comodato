@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Net.Mail;
+using System.Threading.Tasks;
 using System.Web.Http;
 using _3M.Comodato.Data;
 using _3M.Comodato.Entity;
@@ -29,6 +32,84 @@ namespace _3M.Comodato.API.Controllers
                     return Ok(planoZero);
                 else
                     return InternalServerError();
+            }
+            catch (Exception ex)
+            {
+                LogUtility.LogarErro(ex);
+                return BadRequest(ex.Message);
+            }
+        }
+
+        //Novo Plano Zero
+        [HttpPost]
+        [AcceptVerbs("GET")]
+        [Route("GerarPlanoZero")]
+        public IHttpActionResult GerarPlanoZeroAsync(Int32 idUsuario)
+        {
+            string status = "";
+            try
+            {
+                PlanoZeroData planozero = new PlanoZeroData();
+
+                bool ponderacao = planozero.VerificaFatorPornderacao();
+
+                if (planozero.VerificarParametro("Plano_Zero_em_Processamento") == "true")
+                {
+                    status = "existe";
+                }
+                else
+                {
+                    if (ponderacao)
+                    {
+                        if (planozero.AlteraStatusPlanoZero(true))
+                        {
+                            EnviarEmailPlanoZero("Inicio", "");
+                            planozero.GerarPlanoZero(idUsuario);
+                        }
+                        
+                    }
+                    else
+                    {
+                        EnviarEmailPlanoZero("Ponderacao", "");
+                        throw new Exception("Revise o Cadastro de Fator de Ponderação, pois existe lacuna de valores não contemplados entre as Faixas Iniciais e Finais de Qtde de Clientes!");
+                    }
+                }
+                return Ok(status);
+            }
+            catch (Exception ex)
+            {
+                LogUtility.LogarErro(ex);
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPost]
+        [AcceptVerbs("GET")]
+        [Route("CancelarPlanoZero")]
+        public IHttpActionResult CancelarPlanoZero(Int32 idUsuario)
+        {
+            string status = "";
+            try
+            {
+                PlanoZeroData data = new PlanoZeroData();
+
+                var existePZ = data.VerificaPlanoZeroExistente();
+                if (existePZ)
+                {
+                    var pzId = data.RetornarPlanoZeroExistente();
+
+                    if (pzId > 0)
+                    {
+                        data.CancelarPedidosPZ(pzId);
+                        data.AtualizarStatusPlanoZero(pzId, idUsuario);
+                    }
+                }
+
+                status = "Plano Zero cancelado com sucesso!";
+                //if (data.Inserir(ref planoZero))
+                return Ok(status);
+                //else
+                //    return InternalServerError();
             }
             catch (Exception ex)
             {
@@ -319,6 +400,64 @@ namespace _3M.Comodato.API.Controllers
             {
                 LogUtility.LogarErro(ex);
                 return BadRequest(ex.Message);
+            }
+        }
+        /// <summary>
+        /// "status: Inicio/Fim/Erro"
+        /// "erro: Msg de Erro"
+        /// </summary>
+ 
+        public void EnviarEmailPlanoZero(string status, string erro)
+        {
+            try
+            {
+                string mailTo = ControlesUtility.Parametro.ObterValorParametro("emailsProcessamentoPlanoZero");
+                string Subject = string.Empty;
+                string Conteudo = string.Empty;
+                Attachment Attachments = null;
+                string mailCopy = null;
+
+                string ambienteParametro = ControlesUtility.Parametro.ObterValorParametro("Ambiente");
+
+                string ambiente = "";
+                if (ambienteParametro != null)
+                    ambiente = ambienteParametro;
+                //ConfigurationManager.AppSettings["Ambiente"] == "H" ? "Homologação" : "Produção";
+                //
+                switch (status)
+                {
+                    case "Inicio":
+                        Subject = $"3M.Comodato - Inicio do Processamento do Plano Zero {ambiente}";
+                        Conteudo = "<p>O processamento do Plano Zero foi iniciado!<br/>"; 
+                        break;
+                    case "Fim":
+                        Subject = $"3M.Comodato - Finalização do Processamento do Plano Zero {ambiente}";
+                        Conteudo = "<p>O processamento do Plano Zero foi finalizado com sucesso!<br/>";
+                        break;
+                    case "Erro":
+                        Subject = $"3M.Comodato - Finalização do Processamento do Plano Zero {ambiente}";
+                        Conteudo = "<p>O processamento do Plano Zero foi finalizado com erros!<br/>";
+                        break;
+                    case "Ponderacao":
+                        Subject = $"3M.Comodato - Erro no Processamento do Plano Zero {ambiente}";
+                        Conteudo = "<p>Revise o Cadastro de Fator de Ponderação, pois existe lacuna de valores não contemplados entre as Faixas Iniciais e Finais de Qtde de Clientes!<br>";
+                        break;
+                    default:
+                        break;
+                }
+                MailSender mailSender = new MailSender();
+
+                var MensagemEmail = mailSender.GetConteudoHTML("EmailCorpo.html").Replace("#Conteudo", Conteudo);
+
+                MensagemEmail.Replace("#Conteudo", Conteudo);
+
+                mailSender.Send(mailTo, Subject, MensagemEmail.ToString(), Attachments, mailCopy);
+
+            }
+            catch (Exception ex)
+            {
+
+
             }
         }
 

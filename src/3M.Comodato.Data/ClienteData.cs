@@ -783,6 +783,52 @@ namespace _3M.Comodato.Data
         }
 
 
+        public DataTable ObterListaComboLocados(Int64? nidUsuario = null)
+        {
+
+            DbConnection connection = null;
+            DataSet dataSet = new DataSet();
+            DataTable dataTable = new DataTable();
+
+            try
+            {
+                dbCommand = _db.GetStoredProcCommand("prcClienteComboSelectLocados");
+
+                if (nidUsuario != null)
+                {
+                    _db.AddInParameter(dbCommand, "@p_nidUsuario", DbType.Int64, nidUsuario);
+                }
+
+
+                connection = _db.CreateConnection();
+                dbCommand.Connection = connection;
+                connection.Open();
+
+                dataSet = _db.ExecuteDataSet(dbCommand);
+                dataTable = dataSet.Tables[0];
+
+            }
+            catch (System.Data.SqlClient.SqlException ex)
+            {
+                throw ex;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                if (connection.State == ConnectionState.Open)
+                {
+                    connection.Close();
+                }
+            }
+            return dataTable;
+        }
+
+        
+
+
         /// <summary>
         /// Obtem lista para o sincronismo Mobile, trazendo apenas a relação de clientes do tecnico
         /// </summary>

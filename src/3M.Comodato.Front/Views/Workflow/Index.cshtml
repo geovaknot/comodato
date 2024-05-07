@@ -43,12 +43,24 @@
                     </div>
                 </div>
 
-                <div class="col-md-4">
+
+
+                @*<div class="col-md-4">
                     <label class="control-label">Solicitante:</label>
                     <div class="form-group">
                         @Html.DropDownListFor(model => model.Solicitante, Model.ListaSolicitante, new { @class = "js-select-basic-single col-md-12" })
                     </div>
+                </div>*@
+
+                <div class="col-md-4">
+                    <label class="control-label">Solicitante:</label>
+                    <div class="form-group">
+                        @Html.ListBoxFor(model => model.Solicitante, Model.ListaSolicitante, new { @class = "js-select-basic-single col-md-12" })
+                    </div>
                 </div>
+
+
+
                 <div class="col-md-2">
                     <label class="control-label">Tipo Pedido:</label>
                     <div class="form-group">
@@ -88,6 +100,7 @@
             var token = "@Convert.ToString(((_3M.Comodato.Entity.UsuarioPerfilEntity)Session["_CurrentUser"]).token)";
             var nidUsuario = @Convert.ToInt64(((_3M.Comodato.Entity.UsuarioPerfilEntity)Session["_CurrentUser"]).usuario.nidUsuario);
             var nidPerfil = @Convert.ToInt64(((_3M.Comodato.Entity.UsuarioPerfilEntity)Session["_CurrentUser"]).perfil.nidPerfil);
+            var ccdPerfil = @Convert.ToInt64(((_3M.Comodato.Entity.UsuarioPerfilEntity)Session["_CurrentUser"]).perfil.ccdPerfil);
             var perfilAdministrador3M = @Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.Perfil.Administrador3M);
             var perfilEquipeMKT = @Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.Perfil.EquipeMKT);
             var perfilEquipeVendas = @Convert.ToInt64(_3M.Comodato.Utility.ControlesUtility.Enumeradores.Perfil.EquipeVendas);

@@ -143,6 +143,65 @@ namespace _3M.Comodato.API.Controllers
         /// <param name="nidUsuario"></param>
         /// <param name="SomenteAtivos"></param>
         /// <returns>List<ClienteEntity> clientes</returns>
+        /// 
+
+        
+
+        [HttpGet]
+        [Route("ObterListaComboPorUsuarioPerfilLocados")]
+        public HttpResponseMessage ObterListaComboPorUsuarioPerfilLocados(Int64 nidUsuario, bool? SomenteAtivos = false, string camposNecessarios = null)
+        {
+            List<ClienteEntity> clientes = new List<ClienteEntity>();
+
+            try
+            {
+                ClienteEntity clienteEntity = new ClienteEntity();
+                DataTableReader dataTableReader = new ClienteData().ObterListaCampoCliente(clienteEntity, nidUsuario).CreateDataReader();
+
+                if (dataTableReader.HasRows)
+                {
+                    while (dataTableReader.Read())
+                    {
+                        if (SomenteAtivos == true)
+                        {
+                            if (dataTableReader["DT_DESATIVACAO"] == DBNull.Value)
+                            {
+                                clienteEntity = new ClienteEntity();
+                                CarregarClienteEntity(dataTableReader, clienteEntity);
+                                clientes.Add(clienteEntity);
+                            }
+                        }
+                        else
+                        {
+                            clienteEntity = new ClienteEntity();
+                            CarregarClienteEntity(dataTableReader, clienteEntity);
+                            clientes.Add(clienteEntity);
+                        }
+                    }
+                }
+
+                if (dataTableReader != null)
+                {
+                    dataTableReader.Dispose();
+                    dataTableReader = null;
+                }
+            }
+            catch (Exception ex)
+            {
+                LogUtility.LogarErro(ex);
+                //throw ex;
+                return Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
+            }
+
+            if (!String.IsNullOrEmpty(camposNecessarios))
+            {
+                var retorno = SerializarJsonRetornoView(clientes, camposNecessarios);
+                return Request.CreateResponse(HttpStatusCode.OK, new { clientes = retorno });
+            }
+
+            return Request.CreateResponse(HttpStatusCode.OK, new { clientes = clientes });
+        }
+
         [HttpGet]
         [Route("ObterListaPorUsuarioPerfil")]
         public HttpResponseMessage ObterListaPorUsuarioPerfil(Int64 nidUsuario, bool? SomenteAtivos = false, string camposNecessarios = null)

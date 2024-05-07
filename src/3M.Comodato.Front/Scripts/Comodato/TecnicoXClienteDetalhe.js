@@ -347,6 +347,57 @@ function Descer(CD_ORDEM) {
 
 }
 
+function InativarConfirmar(ID_ESCALA, CD_ORDEM) {
+    ConfirmarSimNao('Aviso', 'Confirma a exclusão do registro?', 'Inativar(' + ID_ESCALA + ', ' + CD_ORDEM + ')')
+}
+
+function Inativar(ID_ESCALA, CD_ORDEM) {
+    var URL = URLAPI + "TecnicoXClienteAPI/Inativar";
+    var CD_CLIENTE = $("#cliente_CD_CLIENTE").val();
+
+    if (CD_CLIENTE == "" || CD_CLIENTE == "0" || CD_CLIENTE == 0) {
+        AlertaRedirect("Aviso", "Cliente inválido ou não informado!", "window.history.back();");
+        return;
+    }
+    //var token = sessionStorage.getItem("token");
+    var tecnicoClienteEntity = {
+        cliente: {
+            CD_CLIENTE: CD_CLIENTE,
+        },
+        tecnico: {
+            CD_TECNICO: 0,
+        },
+        CD_ORDEM: CD_ORDEM,
+        ID_ESCALA: ID_ESCALA,
+        nidUsuarioAtualizacao: nidUsuario
+    };
+
+    $.ajax({
+        type: 'POST',
+        url: URL,
+        contentType: "application/json",
+        cache: false,
+        //headers: { "Authorization": "Basic " + localStorage.token },
+        data: JSON.stringify(tecnicoClienteEntity),
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+            $("#loader").css("display", "block");
+        },
+        complete: function () {
+            $("#loader").css("display", "none");
+        },
+        success: function (res) {
+            $("#loader").css("display", "none");
+            atualizarPagina();
+        },
+        error: function (res) {
+            $("#loader").css("display", "none");
+            atualizarPagina();
+            Alerta("ERRO", res.responseText);
+        }
+    });
+}
+
 function ExcluirConfirmar(CD_ORDEM) {
     ConfirmarSimNao('Aviso', 'Confirma a exclusão do registro?', 'Excluir(' + CD_ORDEM + ')');
 }

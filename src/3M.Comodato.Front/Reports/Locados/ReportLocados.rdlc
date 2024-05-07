@@ -3041,7 +3041,7 @@
                       <Paragraph>
                         <TextRuns>
                           <TextRun>
-                            <Value>Cliente - Código</Value>
+                            <Value>Cliente</Value>
                             <Style>
                               <FontSize>8pt</FontSize>
                             </Style>
@@ -3092,18 +3092,6 @@
                         <TextRuns>
                           <TextRun>
                             <Value>=Fields!NM_CLIENTE.Value</Value>
-                            <Style>
-                              <FontSize>8pt</FontSize>
-                            </Style>
-                          </TextRun>
-                          <TextRun>
-                            <Value> - </Value>
-                            <Style>
-                              <FontSize>8pt</FontSize>
-                            </Style>
-                          </TextRun>
-                          <TextRun>
-                            <Value>=Fields!CD_CLIENTE.Value</Value>
                             <Style>
                               <FontSize>8pt</FontSize>
                             </Style>
@@ -3172,6 +3160,9 @@
                   </Textbox>
                 </CellContents>
               </TablixHeader>
+              <TablixMembers>
+                <TablixMember />
+              </TablixMembers>
               <KeepWithGroup>Before</KeepWithGroup>
             </TablixMember>
           </TablixMembers>
@@ -3179,7 +3170,7 @@
         <DataSetName>DataSet1</DataSetName>
         <Top>0.03528cm</Top>
         <Height>3cm</Height>
-        <Width>38.98294cm</Width>
+        <Width>38.98293cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -3191,7 +3182,7 @@
     <Height>1.22277in</Height>
     <Style />
   </Body>
-  <Width>15.54553in</Width>
+  <Width>16.33186in</Width>
   <Page>
     <PageHeader>
       <Height>1.89424cm</Height>

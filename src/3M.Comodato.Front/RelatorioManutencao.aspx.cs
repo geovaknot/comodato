@@ -65,6 +65,37 @@ namespace _3M.Comodato.Front
 
             DataSet manutencao = manutencaoData.ObterRelatorio(dataInicial, dataFinal, codigoGrupo, codigoCliente, codigoTecnico, codigoVisita, codigoOS);
 
+            double horasTrabalhadas = 0;
+            double valorManutencao = 0;
+            double quantidadePecas = 0;
+            double valorTotalPecas = 0;
+            string horaTrabConv = "";
+
+            if (ModeloRelatorio == "1")
+            {
+                for (int i = 0; i < manutencao.Tables[0].Rows.Count; i++)
+                {
+                    if (manutencao.Tables[0].Rows[i]["HR_TRAB_CONV"] == DBNull.Value || string.IsNullOrWhiteSpace(manutencao.Tables[0].Rows[i]["HR_TRAB_CONV"].ToString()))
+                        manutencao.Tables[0].Rows[i]["HR_TRAB_CONV"] = "0:00:00";
+                    else
+                        manutencao.Tables[0].Rows[i]["HR_TRAB_CONV"] = manutencao.Tables[0].Rows[i]["HR_TRAB_CONV"] + ":00";
+
+                    if (manutencao.Tables[0].Rows[i]["HR_TRABALHADAS"] != DBNull.Value)
+                        horasTrabalhadas += Convert.ToDouble(manutencao.Tables[0].Rows[i]["HR_TRABALHADAS"]);
+
+                    if (manutencao.Tables[0].Rows[i]["VL_MANUTENCAO"] != DBNull.Value)
+                        valorManutencao += Convert.ToDouble(manutencao.Tables[0].Rows[i]["VL_MANUTENCAO"]);
+
+                    if (manutencao.Tables[0].Rows[i]["QT_PECA"] != DBNull.Value)
+                        quantidadePecas += Convert.ToDouble(manutencao.Tables[0].Rows[i]["QT_PECA"]);
+
+                    if (manutencao.Tables[0].Rows[i]["VL_TOT_PECA"] != DBNull.Value)
+                        valorTotalPecas += Convert.ToDouble(manutencao.Tables[0].Rows[i]["VL_TOT_PECA"]);
+                }
+
+                horaTrabConv = Math.Truncate(horasTrabalhadas).ToString() + ":" + ((horasTrabalhadas % 1) * 60).ToString("00") + ":00";
+            }
+
             var reportDS = new ReportDataSource();
             reportDS.Name = "dsRptManutencao";
             reportDS.Value = manutencao.Tables[0];
@@ -80,6 +111,10 @@ namespace _3M.Comodato.Front
                     reportDS.Name = "DataSet1";
                     ReportViewer1.LocalReport.ReportPath = Request.MapPath(Request.ApplicationPath) + @"\Reports\Manutencao\ManutencaoTab.rdlc";
 
+                    ReportViewer1.LocalReport.SetParameters(new ReportParameter("horaTrabConv", horaTrabConv));
+                    ReportViewer1.LocalReport.SetParameters(new ReportParameter("valorManutencao", valorManutencao.ToString()));
+                    ReportViewer1.LocalReport.SetParameters(new ReportParameter("quantidadePecas", quantidadePecas.ToString("0.##")));
+                    ReportViewer1.LocalReport.SetParameters(new ReportParameter("valorTotalPecas", valorTotalPecas.ToString()));
                 }
                 if (ModeloRelatorio == "2") // Modelo de Tabela Completo
                 {

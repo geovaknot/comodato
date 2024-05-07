@@ -99,7 +99,7 @@ namespace _3M.Comodato.API.Controllers
                     using (PrincipalContext principalContext = new PrincipalContext(contextType: ContextType.Domain, name: ADDomain, userName: ADUser, password: ADPassword))
                     {
                         // Erasmo - GSW - Testes - Para dar  ByPass na Senha , basta tratar ou pular este IF.
-                        if (principalContext.ValidateCredentials(usuarioEntity.cdsLogin, usuarioEntity.cdsSenha) == false)
+                        if (principalContext.ValidateCredentials(usuarioEntity.cdsLogin, usuarioEntity.cdsSenha, ContextOptions.Negotiate) == false)
                         {
                             //return Request.CreateResponse(HttpStatusCode.BadRequest, "Credenciais inválidas!");
                             JO.Add("MENSAGEM", JsonConvert.SerializeObject("{ 'MENSAGEM' : 'Credenciais inválidas!' }", Formatting.None));
@@ -246,7 +246,7 @@ namespace _3M.Comodato.API.Controllers
                     using (PrincipalContext principalContext = new PrincipalContext(contextType: ContextType.Domain, name: ADDomain, userName: ADUser, password: ADPassword))
                     {
                         // Erasmo - GSW - Testes - Para dar  ByPass na Senha , basta tratar ou pular este IF.
-                        if (principalContext.ValidateCredentials(usuarioEntity.cdsLogin, usuarioEntity.cdsSenha) == false)
+                        if (principalContext.ValidateCredentials(usuarioEntity.cdsLogin, usuarioEntity.cdsSenha, ContextOptions.Negotiate) == false)
                         {
                             //return Request.CreateResponse(HttpStatusCode.BadRequest, "Credenciais inválidas!");
                             JO.Add("MENSAGEM", JsonConvert.SerializeObject("{ 'MENSAGEM' : 'Credenciais inválidas!' }", Formatting.None));
