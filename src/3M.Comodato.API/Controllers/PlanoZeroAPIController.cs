@@ -53,7 +53,7 @@ namespace _3M.Comodato.API.Controllers
 
                 bool ponderacao = planozero.VerificaFatorPornderacao();
 
-                if (planozero.VerificarParametro("Plano_Zero_em_Processamento") == "true")
+                if (planozero.VerificaPlanoZeroAtivo())
                 {
                     status = "existe";
                 }

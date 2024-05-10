@@ -20,9 +20,17 @@ namespace _3M.Comodato.Data
             _db = DatabaseFactory.CreateDatabase("ConnectionString");
         }
 
-        public string VerificarParametro(string ccdParam)
+        public bool VerificaPlanoZeroAtivo()
         {
-            string retorno = "";
+            var temPlanoZeroProcessamento = VerificarParametro("Plano_Zero_em_Processamento");
+            var temPlanoZeroAtivo = VerificaPlanoZeroExistente();
+
+            return (temPlanoZeroProcessamento || temPlanoZeroAtivo);
+        }
+
+        private bool VerificarParametro(string ccdParam)
+        {
+            var retorno = false;
 
             try
             {
@@ -38,7 +46,7 @@ namespace _3M.Comodato.Data
 
                         cmd.Connection = conn;
                         conn.Open();
-                        retorno = cmd.ExecuteScalar().ToString();
+                        retorno = cmd.ExecuteScalar().ToString() == "true";
                         conn.Close();
                     }
                 }
@@ -128,7 +136,7 @@ namespace _3M.Comodato.Data
                     using (SqlCommand cmd = new SqlCommand())
                     {
                         cmd.CommandText = @"Select  Count(*)  from tbControlePlanoZero cpz where MONTH(cpz.dtHoraCriacao) = MONTH(GETDATE()) 
-                                          AND YEAR(cpz.dtHoraCriacao) = YEAR(GETDATE()) and (cpz.statusPlanoZero = 'A') and cpz.dtHoraCancelamento is null";
+                                          AND YEAR(cpz.dtHoraCriacao) = YEAR(GETDATE()) and (cpz.statusPlanoZero = 'A' or cpz.statusPlanoZero = 'S') and cpz.dtHoraCancelamento is null";
 
                         cmd.CommandType = CommandType.Text;
 
