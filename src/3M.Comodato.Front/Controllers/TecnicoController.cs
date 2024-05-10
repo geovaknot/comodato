@@ -434,6 +434,7 @@ namespace _3M.Comodato.Front.Controllers
                     if (tecnico.FL_ATIVO == "N")
                     {
                         TecnicoClienteInativar tecnicoClienteEntity = new TecnicoClienteInativar();
+                        new TecnicoClienteData().InativarTodos(tecnico.CD_TECNICO, CurrentUser.usuario.nidUsuario);
                         new TecnicoClienteData().ReordenarTodos(tecnico.CD_TECNICO, CurrentUser.usuario.nidUsuario);
                     }
 

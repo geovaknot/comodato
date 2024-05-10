@@ -27,6 +27,7 @@ namespace _3M.Comodato.API.Controllers
             try
             {
                 new TecnicoClienteData().Inserir(tecnicoClienteEntity);
+                new TecnicoClienteData().Reordenar(tecnicoClienteEntity, "R");
             }
             catch (Exception ex)
             {

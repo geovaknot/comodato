@@ -33,6 +33,7 @@ namespace _3M.Comodato.Data
                 _db.AddInParameter(dbCommand, "@p_CD_CLIENTE", DbType.Int32, tecnicoClienteEntity.cliente.CD_CLIENTE);
                 _db.AddInParameter(dbCommand, "@p_CD_TECNICO", DbType.String, tecnicoClienteEntity.tecnico.CD_TECNICO);
                 _db.AddInParameter(dbCommand, "@p_CD_ORDEM", DbType.Int32, tecnicoClienteEntity.CD_ORDEM);
+                _db.AddInParameter(dbCommand, "@p_FL_ATIVO", DbType.String, "S");
                 _db.AddInParameter(dbCommand, "@p_nidUsuarioAtualizacao", DbType.Int64, tecnicoClienteEntity.nidUsuarioAtualizacao);
 
                 _db.ExecuteNonQuery(dbCommand);
