@@ -20,12 +20,14 @@ namespace _3M.Comodato.Data
             _db = DatabaseFactory.CreateDatabase("ConnectionString");
         }
 
-        public bool VerificaPlanoZeroAtivo()
+        public string RetornaImpeditivoPlanoZero()
         {
             var temPlanoZeroProcessamento = VerificarParametro("Plano_Zero_em_Processamento");
             var temPlanoZeroAtivo = VerificaPlanoZeroExistente();
 
-            return (temPlanoZeroProcessamento || temPlanoZeroAtivo);
+            return temPlanoZeroProcessamento ? "O Plano Zero já está em processamento!" 
+                : temPlanoZeroAtivo ? "O Processamento do Plano Zero não foi executado, pois já existe um Plano Zero ativo para o mês corrente!" 
+                : "";
         }
 
         private bool VerificarParametro(string ccdParam)

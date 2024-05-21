@@ -46,18 +46,15 @@ namespace _3M.Comodato.API.Controllers
         [Route("GerarPlanoZero")]
         public IHttpActionResult GerarPlanoZeroAsync(Int32 idUsuario)
         {
-            string status = "";
             try
             {
-                PlanoZeroData planozero = new PlanoZeroData();
+                var sucesso = false;
+                var planozero = new PlanoZeroData();
+                var impeditivoPlanoZero = planozero.RetornaImpeditivoPlanoZero();
 
                 bool ponderacao = planozero.VerificaFatorPornderacao();
 
-                if (planozero.VerificaPlanoZeroAtivo())
-                {
-                    status = "existe";
-                }
-                else
+                if (string.IsNullOrEmpty(impeditivoPlanoZero))
                 {
                     if (ponderacao)
                     {
@@ -65,8 +62,8 @@ namespace _3M.Comodato.API.Controllers
                         {
                             EnviarEmailPlanoZero("Inicio", "");
                             planozero.GerarPlanoZero(idUsuario);
+                            sucesso = true;
                         }
-                        
                     }
                     else
                     {
@@ -74,7 +71,8 @@ namespace _3M.Comodato.API.Controllers
                         throw new Exception("Revise o Cadastro de Fator de Ponderação, pois existe lacuna de valores não contemplados entre as Faixas Iniciais e Finais de Qtde de Clientes!");
                     }
                 }
-                return Ok(status);
+                
+                return Ok(new {sucesso, impeditivoPlanoZero});
             }
             catch (Exception ex)
             {

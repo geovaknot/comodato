@@ -103,20 +103,17 @@ function btnCancelarPlanoZeroConfirmada() {
         },
         success: function (res) {
             $("#loader").css("display", "none");
-            console.log("res", res);
             if (res == "") {
                 carregarGridMVC();
                 Alerta("Aviso", res.STATUS);
             }
             else {
                 Alerta("Aviso", "Plano Zero cancelado com sucesso!");
-
                 setTimeout(function () {
 
                     location.reload();
                 }, 9000);
             }
-            
         },
         error: function (res) {
             $("#loader").css("display", "none");
