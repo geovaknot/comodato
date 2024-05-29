@@ -179,6 +179,8 @@ namespace _3M.Comodato.Front.Controllers
                     clienteEntity.CD_BCPS = cliente.CD_BCPS;
                     clienteEntity.FL_AtivaPlanoZero = cliente.FL_AtivaPlanoZero;
                     clienteEntity.QTD_PeriodoPlanoZero = cliente.QTD_PeriodoPlanoZero;
+                    clienteEntity.TX_NOMERESPONSAVELPECAS = cliente.TX_NOMERESPONSAVELPECAS;
+                    clienteEntity.TX_TELEFONERESPONSAVELPECAS = cliente.TX_TELEFONERESPONSAVELPECAS;
                     //BEGIN - 14422 - Tela Cliente - Campo Tecnico Regional
                     clienteEntity.UsuarioTecnicoRegional.nidUsuario = cliente.UsuarioTecnicoRegional.nidUsuario;
                     //END - 14422 - Tela Cliente - Campo Tecnico Regional
@@ -189,16 +191,6 @@ namespace _3M.Comodato.Front.Controllers
                     new ClienteData().Inserir(ref clienteEntity);
 
                     cliente.JavaScriptToRun = "MensagemSucesso()";
-                    cliente.grupos = ObterListaGrupo();
-                    cliente.vendedores = ObterListaVendedor();
-                    cliente.executivos = ObterListaExecutivo();
-                    cliente.regioes = ObterListaRegiao();
-                    cliente.usuarios = ObterListaUsuario();
-                    cliente.segmentos = ObterListaSegmento();
-                    cliente.CancelarVerificarCodigo = false;
-                    cliente.usuariosTecnicosRegionais = ObterListaSupervidorTecnico();
-
-                    // return RedirectToAction("Index");
                 }
             }
             catch (Exception ex)
@@ -210,8 +202,10 @@ namespace _3M.Comodato.Front.Controllers
             cliente.grupos = ObterListaGrupo();
             cliente.vendedores = ObterListaVendedor();
             cliente.executivos = ObterListaExecutivo();
+            cliente.regioes = ObterListaRegiao();
             cliente.usuarios = ObterListaUsuario();
             cliente.segmentos = ObterListaSegmento();
+            cliente.usuariosTecnicosRegionais = ObterListaSupervidorTecnico();
             cliente.CancelarVerificarCodigo = false;
             cliente.CLASSIFICACOES_KAT = ControlesUtility.Dicionarios.ClassificacaoKAT();
             cliente.SimNao = ControlesUtility.Dicionarios.SimNao();
@@ -285,6 +279,8 @@ namespace _3M.Comodato.Front.Controllers
                             CancelarVerificarCodigo = true,
                             CLASSIFICACOES_KAT = ControlesUtility.Dicionarios.ClassificacaoKAT(),
                             SimNao = ControlesUtility.Dicionarios.SimNao(),
+                            TX_NOMERESPONSAVELPECAS = dataTableReader["TX_NOMERESPONSAVELPECAS"].ToString(),
+                            TX_TELEFONERESPONSAVELPECAS = dataTableReader["TX_TELEFONERESPONSAVELPECAS"].ToString(),
 
                             //BEGIN - 14422 - Tela Cliente - Campo Tecnico Regional
                             UsuarioTecnicoRegional = new UsuarioEntity
@@ -433,6 +429,8 @@ namespace _3M.Comodato.Front.Controllers
                     clienteEntity.CD_BCPS = cliente.CD_BCPS;
                     clienteEntity.FL_AtivaPlanoZero = cliente.FL_AtivaPlanoZero;
                     clienteEntity.QTD_PeriodoPlanoZero = cliente.QTD_PeriodoPlanoZero;
+                    clienteEntity.TX_NOMERESPONSAVELPECAS = cliente.TX_NOMERESPONSAVELPECAS;
+                    clienteEntity.TX_TELEFONERESPONSAVELPECAS = cliente.TX_TELEFONERESPONSAVELPECAS;
 
                     clienteEntity.EmailsInfo = cliente.EmailsInfo;
                     if (cliente.EmailsInfo != null && cliente.EmailsInfo.Length > 500)
@@ -444,20 +442,6 @@ namespace _3M.Comodato.Front.Controllers
                     new ClienteData().Alterar(clienteEntity);
 
                     cliente.JavaScriptToRun = "MensagemSucesso()";
-                    //cliente.grupos = ObterListaGrupo();
-                    //cliente.vendedores = ObterListaVendedor();
-                    //cliente.executivos = ObterListaExecutivo();
-                    //cliente.regioes = ObterListaRegiao();
-                    //cliente.usuarios = ObterListaUsuario();
-                    //cliente.segmentos = ObterListaSegmento();
-                    //cliente.CancelarVerificarCodigo = true;
-                    //cliente.CLASSIFICACOES_KAT = ControlesUtility.Dicionarios.ClassificacaoKAT();
-
-                    //BEGIN - 14422 - Tela Cliente - Campo Tecnico Regional
-                    cliente.usuariosTecnicosRegionais = ObterListaSupervidorTecnico();
-                    //END - 14422 - Tela Cliente - Campo Tecnico Regional
-
-                    //return RedirectToAction("Index");
                 }
             }
             catch (Exception ex)
@@ -476,6 +460,7 @@ namespace _3M.Comodato.Front.Controllers
             cliente.CancelarVerificarCodigo = true;
             cliente.CLASSIFICACOES_KAT = ControlesUtility.Dicionarios.ClassificacaoKAT();
             cliente.SimNao = ControlesUtility.Dicionarios.SimNao();
+            cliente.usuariosTecnicosRegionais = ObterListaSupervidorTecnico();
 
             return View(cliente); //se não gravar, devolve a própria view para fazer as correções dos campos apresentados com erro
         }

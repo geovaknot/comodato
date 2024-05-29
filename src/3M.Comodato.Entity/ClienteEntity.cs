@@ -53,6 +53,10 @@ namespace _3M.Comodato.Entity
 
         public Int64? QTD_PeriodoPlanoZero { get; set; }
 
+        public string TX_NOMERESPONSAVELPECAS { get; set; }
+
+        public string TX_TELEFONERESPONSAVELPECAS { get; set; }
+
         public GrupoEntity grupo
         {
             get

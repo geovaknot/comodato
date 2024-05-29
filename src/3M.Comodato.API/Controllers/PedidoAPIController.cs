@@ -1826,15 +1826,22 @@ namespace _3M.Comodato.API.Controllers
                 pedidoEntity.statusPedido.DS_STATUS_PEDIDO = dataTableReader["DS_STATUS_PEDIDO"].ToString();
                 pedidoEntity.TP_TIPO_PEDIDO = dataTableReader["TP_TIPO_PEDIDO"].ToString();
                 pedidoEntity.cliente.CD_CLIENTE = Convert.ToInt32("0" + dataTableReader["CD_CLIENTE"]);
+                pedidoEntity.cliente.TX_NOMERESPONSAVELPECAS = dataTableReader["TX_NOMERESPONSAVELPECAS"].ToString();
+                pedidoEntity.cliente.TX_TELEFONERESPONSAVELPECAS = dataTableReader["TX_TELEFONERESPONSAVELPECAS"].ToString();
                 pedidoEntity.CD_PEDIDO = Convert.ToInt64("0" + dataTableReader["CD_PEDIDO"]);
                 if (dataTableReader["Responsavel"] != DBNull.Value)
                 {
                     pedidoEntity.Responsavel = dataTableReader["Responsavel"].ToString();
                 }
+                else if (pedidoEntity.TP_TIPO_PEDIDO == "C" && dataTableReader["TX_NOMERESPONSAVELPECAS"] != DBNull.Value)
+                {
+                    pedidoEntity.Responsavel = dataTableReader["TX_NOMERESPONSAVELPECAS"].ToString();
+                }
                 else
                 {
                     pedidoEntity.Responsavel = "";
                 }
+
                 if (dataTableReader["EnviaBPCS"] != DBNull.Value)
                 {
                     pedidoEntity.EnviaBPCS = dataTableReader["EnviaBPCS"].ToString();
@@ -1843,6 +1850,7 @@ namespace _3M.Comodato.API.Controllers
                 {
                     pedidoEntity.EnviaBPCS = "";
                 }
+
                 if (dataTableReader["Telefone"] != DBNull.Value)
                 {
                     pedidoEntity.Telefone = dataTableReader["Telefone"].ToString();
@@ -1857,10 +1865,16 @@ namespace _3M.Comodato.API.Controllers
                             pedidoEntity.Telefone = tecnico.TX_TELEFONE;
 
                     }
-                    
+                    else if (pedidoEntity.TP_TIPO_PEDIDO == "C" && dataTableReader["TX_TELEFONERESPONSAVELPECAS"] != DBNull.Value)
+                    {
+                        pedidoEntity.Telefone = dataTableReader["TX_TELEFONERESPONSAVELPECAS"].ToString();
+                    }
                     else
+                    {
                         pedidoEntity.Telefone = "";
+                    }
                 }
+
                 if (dataTableReader["DT_Aprovacao"] != DBNull.Value)
                 {
                     pedidoEntity.DT_Aprovacao = Convert.ToDateTime(dataTableReader["DT_Aprovacao"]);
@@ -1939,10 +1953,15 @@ namespace _3M.Comodato.API.Controllers
                 {
                     listaSolicitacaoPecas.Responsavel = dataTableReader["Responsavel"].ToString();
                 }
+                else if (listaSolicitacaoPecas.TP_TIPO_PEDIDO == "C" && dataTableReader["TX_NOMERESPONSAVELPECAS"] != DBNull.Value)
+                {
+                    listaSolicitacaoPecas.Responsavel = dataTableReader["TX_NOMERESPONSAVELPECAS"].ToString();
+                }
                 else
                 {
                     listaSolicitacaoPecas.Responsavel = "";
                 }
+
                 if (dataTableReader["Telefone"] != DBNull.Value)
                 {
                     listaSolicitacaoPecas.Telefone = dataTableReader["Telefone"].ToString();
@@ -1957,10 +1976,16 @@ namespace _3M.Comodato.API.Controllers
                             listaSolicitacaoPecas.Telefone = tecnico.TX_TELEFONE;
 
                     }
-
+                    else if (listaSolicitacaoPecas.TP_TIPO_PEDIDO == "C" && dataTableReader["TX_TELEFONERESPONSAVELPECAS"] != DBNull.Value)
+                    {
+                        listaSolicitacaoPecas.Telefone = dataTableReader["TX_TELEFONERESPONSAVELPECAS"].ToString();
+                    }
                     else
+                    {
                         listaSolicitacaoPecas.Telefone = "";
+                    }
                 }
+
                 if (dataTableReader["EnviaBPCS"] != DBNull.Value)
                 {
                     listaSolicitacaoPecas.EnviaBPCS = dataTableReader["EnviaBPCS"].ToString();

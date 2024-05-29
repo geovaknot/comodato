@@ -346,6 +346,7 @@
     <Compile Include="Models\RRComent.cs" />
     <Compile Include="Models\RRStatus.cs" />
     <Compile Include="Models\TB_PONDERACAO_pz.cs" />
+    <Compile Include="Models\Validations\RequiredIfAnyAttribute.cs" />
     <Compile Include="Models\VisitaPadrao.cs" />
     <Compile Include="Models\VisitaResposta.cs" />
     <Compile Include="Models\WfEquipamentoItemDevolucao.cs" />

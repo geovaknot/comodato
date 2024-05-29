@@ -146,7 +146,7 @@
             </div>
             <div class="form-group col-md-3 col-sm-12">
                 <label class="control-label">Vendedor</label>
-                @Html.DropDownListFor(model => model.vendedor.CD_VENDEDOR, new SelectList(Model.vendedores, "CD_VENDEDOR", "NM_VENDEDOR"), new { @class = "js-example-basic-single", @style = "width: 100%" })
+                @Html.DropDownListFor(model => model.vendedor.CD_VENDEDOR, new SelectList(Model.vendedores, "CD_VENDEDOR", "NM_VENDEDOR"), new { @class = "js-example-basic-single form-control", @style = "width: 100%" })
                 <label id="validaCD_VENDEDOR" class="control-label text-danger" style="display: none;">Conteúdo obrigatório!</label>
             </div>
         </div>
@@ -224,9 +224,30 @@
                         <label class="control-label">Período</label>
                         @Html.DropDownListFor(model => model.QTD_PeriodoPlanoZero, new SelectList(@_3M.Comodato.Utility.ControlesUtility.Dicionarios.PeridoPlanoZero().AsEnumerable(), "value", "key"), new { @class = "valid form-control col-12" })
                         <label id="validaPeriodoPlanoZero" class="control-label text-danger" style="display: none;">Conteúdo obrigatório!</label>
-                        
+
                         @*@Html.EditorFor(model => model.CD_REGIAO, new { htmlAttributes = new { @class = "form-control col-12", @readonly = "readonly" } })
                         @Html.ValidationMessageFor(model => Model.CD_REGIAO, "", new { @class = "text-danger" })*@
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+
+        <div class="card">
+            <h5 class="card-header">
+                RESPONSÁVEL POR RECEBIMENTO DE PEÇAS
+            </h5>
+            <div class="card-body">
+                <div class="form-row">
+                    <div class="form-group col-md-6 col-sm-12">
+                        <label class="control-label">Nome</label>
+                        @Html.EditorFor(model => model.TX_NOMERESPONSAVELPECAS, new { htmlAttributes = new { @class = "form-control col-12" } })
+                        @Html.ValidationMessageFor(model => Model.TX_NOMERESPONSAVELPECAS, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group col-md-3 col-sm-12">
+                        <label class="control-label">Telefone</label>
+                        @Html.EditorFor(model => model.TX_TELEFONERESPONSAVELPECAS, new { htmlAttributes = new { @class = "form-control col-12" } })
+                        @Html.ValidationMessageFor(model => Model.TX_TELEFONERESPONSAVELPECAS, "", new { @class = "text-danger" })
                     </div>
                 </div>
             </div>

@@ -5,8 +5,16 @@
     //$('#TX_TELEFONE').mask('00 00000-0000');
     //$('#TX_FAX').mask('00 00000-0000');
 
-    $('.js-example-basic-single').select2();
+    $('#TX_TELEFONERESPONSAVELPECAS').mask('00 0000-00009', {
+        onKeyPress: function (val, e, field, options) {
+            // Ajusta a máscara se o usuário digitar 9 dígitos no número
+            var mask = val.length > 14 ? '00 00000-0000' : '00 0000-00009';
+            $('#TX_TELEFONERESPONSAVELPECAS').mask(mask, options);
+        }
+    });
 
+    $('.js-example-basic-single').select2();
+    
     if ($("#CD_CLIENTE").val() == 0) {
         $("#CD_CLIENTE").val('');
     }

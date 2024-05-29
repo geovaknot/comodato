@@ -1,4 +1,5 @@
 ﻿using _3M.Comodato.Entity;
+using _3M.Comodato.Front.Models.Validations;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -118,6 +119,14 @@ namespace _3M.Comodato.Front.Models
         public string FL_AtivaPlanoZero { get; set; }
 
         public Int64? QTD_PeriodoPlanoZero { get; set; }
+
+        [RequiredIfAny("TX_TELEFONERESPONSAVELPECAS")]
+        [Display(Name = "Nome")]
+        public string TX_NOMERESPONSAVELPECAS { get; set; }
+
+        [RequiredIfAny("TX_NOMERESPONSAVELPECAS")]
+        [Display(Name = "Telefone")]
+        public string TX_TELEFONERESPONSAVELPECAS { get; set; }
 
         public GrupoEntity grupo
         {
@@ -373,6 +382,14 @@ namespace _3M.Comodato.Front.Models
         public string FL_AtivaPlanoZero { get; set; }
 
         public Int64? QTD_PeriodoPlanoZero { get; set; }
+
+        [RequiredIfAny("TX_TELEFONERESPONSAVELPECAS")]
+        [Display(Name = "Nome")]
+        public string TX_NOMERESPONSAVELPECAS { get; set; }
+
+        [RequiredIfAny("TX_NOMERESPONSAVELPECAS")]
+        [Display(Name = "Telefone")]
+        public string TX_TELEFONERESPONSAVELPECAS { get; set; }
 
         public GrupoEntity grupo
         {

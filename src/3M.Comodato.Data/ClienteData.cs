@@ -60,6 +60,8 @@ namespace _3M.Comodato.Data
                 _db.AddInParameter(dbCommand, "@p_FL_AtivaPlanoZero", DbType.String, Cliente.FL_AtivaPlanoZero);
                 _db.AddInParameter(dbCommand, "@p_QTD_PeriodoPlanoZero", DbType.String, Cliente.QTD_PeriodoPlanoZero);
                 _db.AddInParameter(dbCommand, "@p_EmailsInfo", DbType.String, Cliente.EmailsInfo);
+                _db.AddInParameter(dbCommand, "@p_TX_NOMERESPONSAVELPECAS", DbType.String, Cliente.TX_NOMERESPONSAVELPECAS);
+                _db.AddInParameter(dbCommand, "@p_TX_TELEFONERESPONSAVELPECAS", DbType.String, Cliente.TX_TELEFONERESPONSAVELPECAS);
 
                 //_db.AddOutParameter(dbCommand, "@p_CD_CLIENTE", DbType.Int64, 18);
 
@@ -304,7 +306,8 @@ namespace _3M.Comodato.Data
                     _db.AddInParameter(dbCommand, "@p_QTD_PeriodoPlanoZero", DbType.Int32, Cliente.QTD_PeriodoPlanoZero);
                 }
 
-                
+                _db.AddInParameter(dbCommand, "@p_TX_NOMERESPONSAVELPECAS", DbType.String, Cliente.TX_NOMERESPONSAVELPECAS);
+                _db.AddInParameter(dbCommand, "@p_TX_TELEFONERESPONSAVELPECAS", DbType.String, Cliente.TX_TELEFONERESPONSAVELPECAS);
 
                 _db.ExecuteNonQuery(dbCommand);
 
