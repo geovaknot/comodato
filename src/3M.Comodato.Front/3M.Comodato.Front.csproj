@@ -479,6 +479,13 @@
     <Compile Include="RelatorioMovimPecas.aspx.designer.cs">
       <DependentUpon>RelatorioMovimPecas.aspx</DependentUpon>
     </Compile>
+    <Compile Include="RelatorioPlanoZero.aspx.cs">
+      <DependentUpon>RelatorioPlanoZero.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RelatorioPlanoZero.aspx.designer.cs">
+      <DependentUpon>RelatorioPlanoZero.aspx</DependentUpon>
+    </Compile>
     <Compile Include="RelatorioPecas.aspx.cs">
       <DependentUpon>RelatorioPecas.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -750,6 +757,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>dsRptRelatorioPecasTab.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Reports\PlanoZero\dsRptRelatorioPlanoZero.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dsRptRelatorioPlanoZero.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Reports\Recolhidos\dsReportRecolhidos.Designer.cs" />
     <Compile Include="Reports\Recolhidos\dsReportRecolhidos1.Designer.cs" />
     <Compile Include="Reports\Sumarizados\dsReportSumarizados.Designer.cs" />
@@ -783,6 +795,7 @@
     <Content Include="RelatorioKatTecnico.aspx" />
     <Content Include="RelatorioKatTecnicoVisita.aspx" />
     <Content Include="RelatorioMonitoramentoWF.aspx" />
+    <Content Include="RelatorioPlanoZero.aspx" />
     <Content Include="RelatorioPecas.aspx" />
     <Content Include="RelatorioReclamacaoCompras.aspx" />
     <Content Include="Images\Geral_Export_min.png" />
@@ -876,6 +889,7 @@
     <Content Include="Reports\Pedidos\ReportPedidosSimplificado.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <EmbeddedResource Include="Reports\PlanoZero\ReportPlanoZero.rdlc" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\css\select2.css" />
@@ -1494,6 +1508,17 @@
     </Content>
     <Content Include="Reports\Recolhidos\dsReportRecolhidos.xsc">
       <DependentUpon>dsReportRecolhidos.xsd</DependentUpon>
+    </Content>
+    <Content Include="Reports\PlanoZero\dsRptRelatorioPlanoZero.xsc">
+      <DependentUpon>dsRptRelatorioPlanoZero.xsd</DependentUpon>
+    </Content>
+    <None Include="Reports\PlanoZero\dsRptRelatorioPlanoZero.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dsRptRelatorioPlanoZero.Designer.cs</LastGenOutput>
+    </None>
+    <Content Include="Reports\PlanoZero\dsRptRelatorioPlanoZero.xss">
+      <DependentUpon>dsRptRelatorioPlanoZero.xsd</DependentUpon>
     </Content>
     <None Include="Reports\Recolhidos\dsReportRecolhidos.xsd" />
     <Content Include="Reports\Recolhidos\dsReportRecolhidos.xss">

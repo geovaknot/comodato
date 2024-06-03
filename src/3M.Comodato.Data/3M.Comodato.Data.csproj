@@ -92,6 +92,7 @@
     <Compile Include="FaturamentoData.cs" />
     <Compile Include="PedidoEquipamentoData.cs" />
     <Compile Include="PedidoPecaLogData.cs" />
+    <Compile Include="RelatorioPlanoZero.cs" />
     <Compile Include="RelatorioPecasData.cs" />
     <Compile Include="RelatorioReclamacaoData.cs" />
     <Compile Include="RRComentData.cs" />
