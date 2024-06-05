@@ -563,11 +563,6 @@ function LoadPedidoItem(pedidoPecaModel) {
         objQtdAprov3M1.val(0);
     }
 
-    //CarregarEstoque($('#pedidoPecaTecnico_QTD_ESTOQUE_3M1'), objQtdAprov3M1.data("id"), pedidoPecaModel.peca.CD_PECA);
-    //if ($('#pedidoPecaTecnico_QTD_ESTOQUE_3M1').val() == '') {
-    //    $('#pedidoPecaTecnico_QTD_ESTOQUE_3M1').val(0);
-    //}
-
     objQtdAprov3M2 = $('#txtQtdAprovada3M2');
 
     if (null != pedidoPecaModel.QTD_APROVADA_3M2 && !isNaN(pedidoPecaModel.QTD_APROVADA_3M2)) {
@@ -577,10 +572,7 @@ function LoadPedidoItem(pedidoPecaModel) {
         objQtdAprov3M2.val(0);
     }
 
-    //CarregarEstoque($('#pedidoPecaTecnico_QTD_ESTOQUE_3M2'), objQtdAprov3M2.data("id"), pedidoPecaModel.peca.CD_PECA);
-    //if ($('#pedidoPecaTecnico_QTD_ESTOQUE_3M2').val() == '') {
-    //    $('#pedidoPecaTecnico_QTD_ESTOQUE_3M2').val(0);
-    //}
+    $("#pedidoPecaTecnico_QTD_SUGERIDA_PZ").val(pedidoPecaModel.QTD_SUGERIDA_PZ);
 }
 
 function ExcluirPeca(ID_ITEM_PEDIDO) {

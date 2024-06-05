@@ -797,10 +797,8 @@ function LoadPedidoItemBPCS(pedidoPecaModel) {
 }
 
 function LoadPedidoItem(pedidoPecaModel) {
-    console.log("Item", pedidoPecaModel)
     $('#desc_peca').prop('disabled', true);
     $('#tipopecaSel').prop('disabled', true);
-    console.log("Teste Exibição", pedidoPecaModel.DESCRICAO_PECA)
     $('#desc_peca').val(pedidoPecaModel.DESCRICAO_PECA);
     var descPed = $('#desc_peca').val();
     if (descPed != "" && descPed != undefined && descPed != null) {
@@ -930,9 +928,6 @@ function LoadPedidoItem(pedidoPecaModel) {
         $('#pedidoPecaAvulso_pedidoPeca_DS_OBSERVACAO').prop('disabled', true);
         $('#btnSalvarPedidoPecaAvulsoModal').hide();
     }
-
-    console.log("Pagina: ", tipoOrigemPagina + "//" + "Perfil: ", nidPerfil + "//" + "Perfil Tecnico: ", perfilTecnicoEmpresaTerceira);
-
 }
 
 $("#txtEstoque3M1Avulso").change(function () {

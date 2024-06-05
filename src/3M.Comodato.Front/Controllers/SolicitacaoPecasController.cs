@@ -1146,6 +1146,29 @@ namespace _3M.Comodato.Front.Controllers
                         listaPedidoPecas.estoquePecaCLI.QT_PECA = 0;
                     }
 
+                    if (row["QT_SUGERIDA_PZ"] != DBNull.Value)
+                    {
+                        // Tipo de Pedido para Cliente
+                        listaPedidoPecas.planoZero.qtPecaModelo = Convert.ToDecimal(row["QT_SUGERIDA_PZ"].ToString()).ToString(formatadorDecimais);
+                        listaPedidoPecas.planoZero.ccdCriticidadeAbc = row.FieldOrDefault<string>("CD_CRITICIDADE_ABC");
+
+                        if (String.IsNullOrEmpty(listaPedidoPecas.pedidoPeca.QTD_SOLICITADA) || listaPedidoPecas.pedidoPeca.QTD_SOLICITADA == "0")
+                        {
+                            //listaPedidoPecas.pedidoPeca.QTD_SOLICITADA = Convert.ToDecimal(row["QT_SUGERIDA_PZ"].ToString()).ToString(formatadorDecimais);
+                            int resSolicitado = Convert.ToInt32(listaPedidoPecas.planoZero.qtPecaModelo) - listaPedidoPecas.estoquePeca.QT_PECA;
+                            if (resSolicitado < 1)
+                            {
+                                resSolicitado = 0;
+                            }
+
+                            listaPedidoPecas.pedidoPeca.QTD_SOLICITADA = Convert.ToString(resSolicitado);
+                        }
+                    }
+                    else
+                    {
+                        listaPedidoPecas.planoZero.qtPecaModelo = "0";
+                        listaPedidoPecas.planoZero.ccdCriticidadeAbc = "-";
+                    }
                 }
                 else if (TP_TIPO_PEDIDO == ControlesUtility.Dicionarios.TipoPedido().ToArray()[0].Value)
                 {

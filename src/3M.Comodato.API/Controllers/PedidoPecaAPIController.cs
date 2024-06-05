@@ -616,7 +616,7 @@ namespace _3M.Comodato.API.Controllers
             pedidoPeca.peca.CD_PECA = dataTableReader["CD_PECA"].ToString().ToUpper();
             pedidoPeca.peca.DS_PECA = dataTableReader["DS_PECA"].ToString();
             pedidoPeca.peca.TX_UNIDADE = dataTableReader["TX_UNIDADE"].ToString();
-
+            
             string formatadorDecimais = "N0";
 
             if (dataTableReader["QTD_SOLICITADA"] != DBNull.Value)

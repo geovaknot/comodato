@@ -525,10 +525,8 @@ function EditarPeca(ID_ITEM_PEDIDO) {
 }
 
 function LoadPedidoItem(pedidoPecaModel) {
-    console.log("Item", pedidoPecaModel)
     $('#desc_peca').prop('disabled', true);
     $('#tipopecaSel').prop('disabled', true);
-    console.log("Teste Exibição", pedidoPecaModel.DESCRICAO_PECA)
     $('#desc_peca').val(pedidoPecaModel.DESCRICAO_PECA);
     var descPed = $('#desc_peca').val();
     if (descPed != "" && descPed != undefined && descPed != null) {
@@ -655,6 +653,7 @@ function LoadPedidoItem(pedidoPecaModel) {
     }
     $("#pedidoPecaCliente_DT_ULTIMA_UTILIZACAO").val(pedidoPecaModel.QTD_ESTOQUE_CLIENTE);
 
+    $("#pedidoPecaCliente_QTD_SUGERIDA_PZ").val(pedidoPecaModel.QTD_SUGERIDA_PZ);
 }
 
 $("#txtEstoqueCliente3M1").change(function () {
