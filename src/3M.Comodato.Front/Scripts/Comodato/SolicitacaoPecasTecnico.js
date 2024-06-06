@@ -572,7 +572,6 @@ function LoadPedidoItem(pedidoPecaModel) {
         objQtdAprov3M2.val(0);
     }
 
-    $("#pedidoPecaTecnico_QTD_SUGERIDA_PZ").val(pedidoPecaModel.QTD_SUGERIDA_PZ);
 }
 
 function ExcluirPeca(ID_ITEM_PEDIDO) {

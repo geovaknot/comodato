@@ -621,7 +621,7 @@ function LoadPedidoItem(pedidoPecaModel) {
     $("#pedidoPecaCliente_pedidoPeca_QTD_RECEBIDA").val(pedidoPecaModel.QTD_RECEBIDA);
     $("#pedidoPecaCliente_pedidoPeca_DS_OBSERVACAO").val(pedidoPecaModel.DS_OBSERVACAO);
 
-    CarregarEstoquePeca(CD_TECNICO, pedidoPecaModel.peca.CD_PECA.toUpperCase(), '0');
+    CarregarEstoquePeca(CD_TECNICO, pedidoPecaModel.peca.CD_PECA.toUpperCase(), pedidoPecaModel.QTD_SUGERIDA_PZ);
     HabilitarDesabilitarQtdes();
 
 
@@ -652,8 +652,6 @@ function LoadPedidoItem(pedidoPecaModel) {
         objQtdAprov3M2.val(0);
     }
     $("#pedidoPecaCliente_DT_ULTIMA_UTILIZACAO").val(pedidoPecaModel.QTD_ESTOQUE_CLIENTE);
-
-    $("#pedidoPecaCliente_QTD_SUGERIDA_PZ").val(pedidoPecaModel.QTD_SUGERIDA_PZ);
 }
 
 $("#txtEstoqueCliente3M1").change(function () {
