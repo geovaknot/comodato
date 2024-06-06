@@ -19,7 +19,7 @@ $("#pedidoPecaCliente_peca_CD_PECA").change(function () {
     }
 
     CarregarEstoquePeca(CD_TECNICO, CD_PECA, '0');
-
+    
     if (ValidaPecaDuplicadaPedido(ID_PEDIDO, ID_ITEM_PEDIDO, CD_PECA) == true) {
         ExibirCampo($('#validaPecaDuplicadaPedido_Cliente'));
     }
@@ -621,7 +621,7 @@ function LoadPedidoItem(pedidoPecaModel) {
     $("#pedidoPecaCliente_pedidoPeca_QTD_RECEBIDA").val(pedidoPecaModel.QTD_RECEBIDA);
     $("#pedidoPecaCliente_pedidoPeca_DS_OBSERVACAO").val(pedidoPecaModel.DS_OBSERVACAO);
 
-    CarregarEstoquePeca(CD_TECNICO, pedidoPecaModel.peca.CD_PECA.toUpperCase(), pedidoPecaModel.QTD_SUGERIDA_PZ);
+    CarregarEstoquePeca(CD_TECNICO, pedidoPecaModel.peca.CD_PECA.toUpperCase(), pedidoPecaModel.QT_SUGERIDA_PZ);
     HabilitarDesabilitarQtdes();
 
 
