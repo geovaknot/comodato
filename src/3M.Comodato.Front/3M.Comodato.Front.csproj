@@ -263,6 +263,7 @@
     <Compile Include="Controllers\GrupoModeloController.cs" />
     <Compile Include="Controllers\KATController.cs" />
     <Compile Include="Controllers\RelatorioPecasController.cs" />
+    <Compile Include="Controllers\RelatorioPlanoZeroController.cs" />
     <Compile Include="Controllers\RelatorioReclamacaoController.cs" />
     <Compile Include="Controllers\ConsolidadoVendasController.cs" />
     <Compile Include="Controllers\SegmentoController.cs" />
@@ -342,6 +343,7 @@
     <Compile Include="Models\OsPadrao.cs" />
     <Compile Include="Models\PEDIDO_BPCS_NF.cs" />
     <Compile Include="Models\ReclamacaoOs.cs" />
+    <Compile Include="Models\RelatorioPlanoZero.cs" />
     <Compile Include="Models\RelatorioReclamacaoItem.cs" />
     <Compile Include="Models\RRComent.cs" />
     <Compile Include="Models\RRStatus.cs" />
@@ -889,7 +891,6 @@
     <Content Include="Reports\Pedidos\ReportPedidosSimplificado.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <EmbeddedResource Include="Reports\PlanoZero\ReportPlanoZero.rdlc" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\css\select2.css" />
@@ -984,6 +985,7 @@
     <Content Include="Scripts\Comodato\EnvioPecasBPCS.js">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Scripts\Comodato\RelatorioPlanoZero.js" />
     <Content Include="Scripts\Comodato\UtilCliente.js" />
     <Content Include="Scripts\Comodato\UtilRegiao.js" />
     <Content Include="Scripts\Comodato\UtilSolicitacaoPeca.js" />
@@ -2228,6 +2230,7 @@
     <Content Include="Views\FatorPonderacao\Excluir.cshtml" />
     <Content Include="Views\FatorPonderacao\Incluir.cshtml" />
     <Content Include="Views\FatorPonderacao\Index.cshtml" />
+    <Content Include="Views\RelatorioPlanoZero\Index.cshtml" />
     <None Include="_3M_ComodatoDataSet.xsd">
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>_3M_ComodatoDataSet2.Designer.cs</LastGenOutput>

@@ -400,6 +400,29 @@ namespace _3M.Comodato.API.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+        [HttpGet]
+        [Route("Periodos")]
+        public IHttpActionResult ObterPeriodos()
+        {
+            IList<string> listaPeriodos = new List<string>();
+
+            try
+            {
+                PlanoZeroData planoZeroData = new PlanoZeroData();
+                listaPeriodos = planoZeroData.RetornarPeriodos();
+
+                JObject JO = new JObject();
+                JO.Add("periodos", JArray.FromObject(listaPeriodos));
+
+                return Ok(JO);
+            }
+            catch (Exception ex)
+            {
+                LogUtility.LogarErro(ex);
+                return BadRequest(ex.Message);
+            }
+        }
         /// <summary>
         /// "status: Inicio/Fim/Erro"
         /// "erro: Msg de Erro"

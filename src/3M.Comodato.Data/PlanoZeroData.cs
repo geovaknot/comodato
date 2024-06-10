@@ -190,6 +190,43 @@ namespace _3M.Comodato.Data
             return retorno;
         }
 
+        public List<string> RetornarPeriodos()
+        {
+            List<string> listaPeriodos = new List<string>();
+
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(_db.ConnectionString))
+                {
+                    using (SqlCommand cmd = new SqlCommand())
+                    {
+                        cmd.CommandText = @"select FORMAT(dtHoraCriacao, 'MM/yyyy') from tbControlePlanoZero where statusPlanoZero = 'A'";
+
+                        cmd.CommandType = CommandType.Text;
+
+                        cmd.Parameters.Clear();
+
+                        cmd.Connection = conn;
+                        conn.Open();
+
+                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                listaPeriodos.Add(reader.GetString(0));
+                            }
+                        }
+
+                        return listaPeriodos;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                return listaPeriodos;
+            }
+        }
+
         public void AtualizarStatusPlanoZero(int id, int idusuario)
         {
             var query = $"update tbControlePlanoZero set statusPlanoZero = 'C', dtHoraCancelamento = getdate(), idUsuarioCancelamento = {idusuario} where idPlanoZero = {id} ";

@@ -399,6 +399,11 @@
                                                     @Html.ActionLink("Peças", "Index", "RelatorioPecas", new { area = "" }, new { @class = "dropdown-item" })
                                                 }
 
+                                                @if (_3M.Comodato.Utility.ControlesUtility.Seguranca.VerificarAcesso("menuPlanoZero") == true)
+                                                {
+                                                    @Html.ActionLink("Plano Zero", "Index", "RelatorioPlanoZero", new { area = "" }, new { @class = "dropdown-item" })
+                                                }
+
                                                 <div class="dropdown-divider"></div>
 
                                                 @if (_3M.Comodato.Utility.ControlesUtility.Seguranca.VerificarAcesso("menuEquipamentosDevolvidos") == true)
