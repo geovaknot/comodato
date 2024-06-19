@@ -26,7 +26,7 @@ namespace _3M.Comodato.Data
                 dbCommand = _db.GetStoredProcCommand("prcRptRelatorioPlanoZero");
                 if (Periodo != null)
                 {
-                    _db.AddInParameter(dbCommand, "@p_Periodo", DbType.String, Periodo);
+                    _db.AddInParameter(dbCommand, "@p_PERIODO", DbType.String, Periodo);
                 }
                 
 

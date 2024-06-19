@@ -23,13 +23,13 @@
     {
         <div class="form-horizontal">
             <div class="form-row">
-                <div class="form-group col-md-12">
+                <div class="form-group col-md-2">
                     <label class="control-label">Período</label>
                     @Html.DropDownListFor(model => model.Periodos, new SelectList(Model.Periodos, "dataMesAno", "dataMesAno"), "Selecione...", new { @class = "js-example-basic-single", @style = "width: 100%" })
                 </div>
             </div>
             <div class="form-row">
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-4">
                     <label class="control-label">Outras opções de Exibição</label>
                     @Html.DropDownList("selectModeloRelatorio", (SelectList)ViewBag.SelectModeloRelatorio, "Selecione...", new { @class = "form-control col-md-12", @style = "width: 100%" })
                 </div>

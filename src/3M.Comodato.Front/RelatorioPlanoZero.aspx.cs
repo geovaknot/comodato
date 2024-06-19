@@ -17,15 +17,15 @@ namespace _3M.Comodato.Front
 
             var param = this.idKey.Split('|');
             
-            string ModeloRelatorio = param[0];
-            string PeriodoRelatorio = param[1];
+            string PeriodoRelatorio = parametros[0];
+            string ModeloRelatorio = parametros[1];
 
             RelatorioPlanoZeroData data = new RelatorioPlanoZeroData();
 
             DataSet planoZeroData = data.ObterRelatorio(PeriodoRelatorio);
 
             var reportDS = new ReportDataSource();
-            reportDS.Name = "dsRptRelatorioPlanoZero";
+            reportDS.Name = "DataSet1";
             reportDS.Value = planoZeroData.Tables[0];
 
             if (planoZeroData.Tables[0].Rows.Count == 0)

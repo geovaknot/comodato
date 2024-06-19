@@ -891,6 +891,10 @@
     <Content Include="Reports\Pedidos\ReportPedidosSimplificado.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Reports\PlanoZero\ReportPlanoZero.rdlc">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\css\select2.css" />
@@ -2331,6 +2335,7 @@
     </Content>
     <Content Include="Reports\Pedidos\ReportPedidos.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Reports\Devolvidos\ReportDevolvidos.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
