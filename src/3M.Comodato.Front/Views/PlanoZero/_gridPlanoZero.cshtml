@@ -12,9 +12,9 @@ columns.Add(c => c.nidPlanoZero, true);
 columns.Add(c => c.nSequencia).Titled("ITEM").Sortable(true).Filterable(false);
 columns.Add(c => c.PecaModel.DS_PECA).Titled("DESCRIÇÃO").Sortable(true).Filterable(false);
 columns.Add(c => c.ccdPeca).Titled("CÓDIGO 3M").Sortable(true).Filterable(false);
-columns.Add(c=> c.nqtPecaModelo).Titled("<center>QTDE<br>MAQUINA</center>").Css("itemGrid-style").RenderValueAs(c => string.Format("{0:N0}",c.nqtPecaModelo)).Sortable(true).Filterable(false);
-columns.Add(c => c.nqtEstoqueATec).Titled("<center>QTDE ESTOQUE<br>A.TÉC.</center>").Css("itemGrid-style").Sortable(true).Filterable(false);
-columns.Add(c => c.nqtEstoqueRec).Titled("<center>QTDE ESTOQUE<br>REC</center>").Css("itemGrid-style").Sortable(true).Filterable(false);
+columns.Add(c=> c.nqtPecaModelo).Titled("<center>QTDE.<br>MÁQUINA</center>").Css("itemGrid-style").RenderValueAs(c => string.Format("{0:N0}",c.nqtPecaModelo)).Sortable(true).Filterable(false);
+columns.Add(c => c.nqtEstoqueATec).Titled("<center>QTDE.<br>EST.3M1.</center>").Css("itemGrid-style").Sortable(true).Filterable(false);
+columns.Add(c => c.nqtEstoqueRec).Titled("<center>QTDE.<br>EST.REC.</center>").Css("itemGrid-style").Sortable(true).Filterable(false);
 columns.Add(c => c.ccdCriticidadeAbc).Titled("CRITICIDADE").Sortable(true).Css("itemGrid-style").Filterable(false);
 
 

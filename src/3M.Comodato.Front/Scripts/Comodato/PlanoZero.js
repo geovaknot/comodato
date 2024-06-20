@@ -385,8 +385,10 @@ function fnSalvarPlanoZero() {
 
     var url = URLAPI;
     var nidPlanoZero = $('#hidIdPlanoZero').val();
+    var adicionar = true;
     if (nidPlanoZero > 0) {
         url += "PlanoZeroApi/Alterar";
+        adicionar = false;
     }
     else {
         url += "PlanoZeroApi/Adicionar";
@@ -399,7 +401,7 @@ function fnSalvarPlanoZero() {
         //ccdGrupoModelo: $('#ddlGrupoModelo').val(),
         ccdGrupoModelo: $('#ddlGrupoModelo :selected').text(),
         nqtPecaModelo: $('#txtQtMaquina').val(),
-        nPonderacao: $('#txtPonderacao').maskMoney('unmasked')[0],
+        nPonderacao: 0,
         //nqtEstoqueMinimo: $('#txtQtEstoqueMin').maskMoney('unmasked')[0],
         ccdCriticidadeABC: $('#ddlCriticidade').val(),
         nidPlanoZero: nidPlanoZero,
@@ -429,8 +431,8 @@ function fnSalvarPlanoZero() {
             Alerta("Aviso", MensagemGravacaoSucesso);
             popularCamposCriticidade(ccdGrupoModelo);
             popularGridPlanoZero(ccdGrupoModelo);
-            $("#btnFechar").click();
-        },
+            if(adicionar) limparCamposModal();
+       },
         error: function (res) {
             $("#loader").css("display", "none");
             Alerta("ERRO", JSON.parse(res.responseText).Message);
