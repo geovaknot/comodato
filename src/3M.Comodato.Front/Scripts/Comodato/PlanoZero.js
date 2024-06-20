@@ -431,7 +431,11 @@ function fnSalvarPlanoZero() {
             Alerta("Aviso", MensagemGravacaoSucesso);
             popularCamposCriticidade(ccdGrupoModelo);
             popularGridPlanoZero(ccdGrupoModelo);
-            if(adicionar) limparCamposModal();
+            if (adicionar) {
+                limparCamposModal();
+            } else {
+                $("#btnFechar").click();
+            }
        },
         error: function (res) {
             $("#loader").css("display", "none");
