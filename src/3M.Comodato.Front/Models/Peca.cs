@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace _3M.Comodato.Front.Models
@@ -51,7 +48,8 @@ namespace _3M.Comodato.Front.Models
         public string CD_PECA_RECUPERADA { get; set; }
 
         [StringLength(19, ErrorMessage = "Limite de caracteres ultrapassado!")]
-        public string QTD_PlanoZero { get; set; }
-
+        [Required(ErrorMessage = "Conteúdo obrigatório!")]
+        [RegularExpression(@"^[1-9]*\,?[0-9]+$", ErrorMessage = "Conteúdo obrigatório!")]
+        public string QTD_PlanoZero { get; set; } = "1,000";
     }
 }
