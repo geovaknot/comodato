@@ -220,14 +220,14 @@ $('#btnSalvarPedidoPecaTecnicoModal').click(function () {
 
         if (parseInt("0" + ID_ESTOQUE_3M1) != 0) {
             if (QTD_APROVADA_3M1 > QTD_ESTOQUE_3M1) {
-                ExibirCampo($('#validaIDESTOQUE_Avulso_3M1'));
+                ExibirCampo($('#validaIDESTOQUE_Tecnico_3M1'));
                 return false;
             }
         }
 
         if (parseInt("0" + ID_ESTOQUE_3M2) != 0) {
             if (QTD_APROVADA_3M2 > QTD_ESTOQUE_3M2) {
-                ExibirCampo($('#validaIDESTOQUE_Avulso_3M2'));
+                ExibirCampo($('#validaIDESTOQUE_Tecnico_3M2'));
                 return false;
             }
         }
@@ -540,6 +540,7 @@ function LoadPedidoItem(pedidoPecaModel) {
     $("#pedidoPecaTecnico_pedidoPeca_QTD_APROVADA").val(pedidoPecaModel.QTD_APROVADA);
     $("#pedidoPecaTecnico_pedidoPeca_QTD_RECEBIDA").val(pedidoPecaModel.QTD_RECEBIDA);
     $("#pedidoPecaTecnico_pedidoPeca_DS_OBSERVACAO").val(pedidoPecaModel.DS_OBSERVACAO);
+    $("#pedidoPecaTecnico_QTD_ESTOQUE_CLIENTE").val(pedidoPecaModel.QTD_ESTOQUE_CLIENTE);
 
 
 

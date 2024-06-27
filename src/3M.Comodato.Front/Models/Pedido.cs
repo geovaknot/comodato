@@ -191,6 +191,7 @@ namespace _3M.Comodato.Front.Models
         public string QTD_ESTOQUE_3M { get; set; }
         public string QTD_ESTOQUE_3M1 { get; set; }
         public string QTD_ESTOQUE_3M2 { get; set; }
+        public string QTD_ESTOQUE_CLIENTE { get; set; }
 
         public string QTD_SUGERIDA_PZ { get; set; }
 
