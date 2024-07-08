@@ -718,3 +718,125 @@ $("#cliente_CD_CLIENTE").change(function () {
     OcultarCampo($('#validaCDCLIENTE'));
 });
 
+function InformarDadosBPCS() {
+
+    var pecas = document.querySelectorAll('[name=checkLote]:checked');
+    //var values = [];
+    var lote = "";
+    for (var i = 0; i < pecas.length; i++) {
+        //values.push(pecas[i].value);
+        lote = lote + pecas[i].value + ",";
+    }
+
+    if (lote == "") {
+        Alerta('Aviso', 'Não há itens selecionados!');
+        return;
+    }
+
+    console.log("Lote", lote);
+
+    var tipodePecas = $('#TP_Especial').val();
+    if (tipodePecas == "Especial") {
+        $('#divBruto').show();
+        $('#divLiquido').show();
+    }
+    else {
+        $('#divBruto').hide();
+        $('#divLiquido').hide();
+    }
+    var user = $('#UsuarioAprovador').val();
+
+    $('#ped_AP').val(user);
+
+
+    $('#ReclamacaoModal').modal().show();
+}
+
+$('#btnSalvarDadosPedido').click(function () {
+    var user = $('#ped_AP').val();
+    var vol = $('#ped_VOL').val();
+    var pes_liquido = $('#ped_PESOLQ').val();
+    var pes_bruto = $('#ped_PESOBT').val();
+    var resp_cli = $('#Responsavel').val();
+    var telefone = $('#Telefone').val();
+    var ID_PEDIDO = $("#ID_PEDIDO").val();
+    var ramal = $("#ped_RAMAL").val();
+
+    var pecas = document.querySelectorAll('[name=checkLote]:checked');
+
+    var lote = "";
+    for (var i = 0; i < pecas.length; i++) {
+        //values.push(pecas[i].value);
+        lote = lote + pecas[i].value + ",";
+    }
+
+    if (vol == "" || ramal == "") {
+        if (vol == "") {
+            $("#ped_VOL_Obrigatorio").show()
+        } else {
+            $("#ped_VOL_Obrigatorio").hide()
+        }
+
+        if (ramal == "") {
+            $("#ped_RAMAL_Obrigatorio").show()
+        } else {
+            $("#ped_RAMAL_Obrigatorio").hide()
+        }
+        return;
+    } else {
+        $("#ped_VOL_Obrigatorio").hide()
+        $("#ped_RAMAL_Obrigatorio").hide()
+    }
+    
+
+    if (lote == "") {
+        Alerta('Aviso', 'Não há itens selecionados!');
+        return;
+    }
+
+    var dadosPedidoEntity = {
+        ID_PEDIDO: ID_PEDIDO,
+        VOLUME: vol,
+        RAMAL: ramal,
+        PESOLIQUIDO: pes_liquido,
+        PESOBRUTO: pes_bruto,
+        DS_TELEFONE: telefone,
+        DS_APROVADOR: user,
+        RESP_CLIENTE: resp_cli,
+        pecasLote: lote
+    };
+
+    var URL = URLAPI + "PedidoPecaAPI/InserirInformacoesPedidoPeca";
+    //var token = sessionStorage.getItem("token");
+    //btnSalvarContinuarPedidoPecaAvulsoModal
+    $.ajax({
+        type: 'POST',
+        url: URL,
+        contentType: "application/json",
+        //headers: { "Authorization": "Basic " + localStorage.token },
+        data: JSON.stringify(dadosPedidoEntity),
+        cache: false,
+        async: false,
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+            $("#loader").css("display", "block");
+        },
+        complete: function () {
+            $("#loader").css("display", "none");
+        },
+        success: function (res) {
+            $("#loader").css("display", "none");
+            $('#ped_PESOLQ').val("");
+            $('#ped_PESOBT').val("");
+            $('#ped_VOL').val("");
+            window.location.reload();
+        },
+        error: function (res) {
+            $("#loader").css("display", "none");
+            Alerta("ERRO", res.responseText);
+        }
+    });
+
+})
+
+

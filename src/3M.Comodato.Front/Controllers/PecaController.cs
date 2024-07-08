@@ -646,7 +646,8 @@ namespace _3M.Comodato.Front.Controllers
                             TP_PECA = dataTableReader["TP_PECA"].ToString(),
                             cdsTP_PECA = ControlesUtility.Dicionarios.TipoPeca().Where(x => x.Value == dataTableReader["TP_PECA"].ToString()).ToArray()[0].Key,
                             FL_ATIVO_PECA = dataTableReader["FL_ATIVO_PECA"].ToString(),
-                            cdsFL_ATIVO_PECA = ControlesUtility.Dicionarios.SimNao().Where(x => x.Value == dataTableReader["FL_ATIVO_PECA"].ToString()).ToArray()[0].Key
+                            cdsFL_ATIVO_PECA = ControlesUtility.Dicionarios.SimNao().Where(x => x.Value == dataTableReader["FL_ATIVO_PECA"].ToString()).ToArray()[0].Key,
+                            QTD_PlanoZero = Convert.ToDecimal("0" + dataTableReader["QTD_PlanoZero"]).ToString("N3")
                         };
                     }
                 }
