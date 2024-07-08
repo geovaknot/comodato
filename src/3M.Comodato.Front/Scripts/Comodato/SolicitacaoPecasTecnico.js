@@ -263,25 +263,102 @@ $('#btnSalvarPedidoPecaTecnicoModal').click(function () {
         Alerta("Aviso", "Aprovar somente a quantidade de peças igual ou superior a quantidade solicitada.");
     }
 
+    //Inicio 
     var statusItem = statusItemNovoRascunho;
 
     if (tipoOrigemPagina == "Confirmacao"
         && QTD_SOLICITADA > 0 && QTD_APROVADA > 0 && somaQtdAp > 0
         && (QTD_RECEBIDA < 1 || QTD_RECEBIDA == null || QTD_RECEBIDA == '' || QTD_RECEBIDA == undefined)) {
-        statusItem = statusItemPendente;
+        //statusItem = statusItemPendente;
     }
 
     if (QTD_SOLICITADA == 0 || ((somaQtdAp == 0 || somaQtdAp == null) && (nidPerfil == perfilAdministrador3M || nidPerfil == perfilAssistênciaTecnica3M) && tipoOrigemPagina != "Solicitacao")) {
         statusItem = statusItemCancelado;
     }
 
-    if (QTD_APROVADA > 0 && QTD_RECEBIDA >= QTD_APROVADA) {
-        statusItem = statusItemRecebido; 
+    if (QTD_APROVADA > 0 && QTD_RECEBIDA == QTD_APROVADA) {
+        statusItem = statusItemAprovado; 
     }
 
-    if (QTD_APROVADA > 0 && QTD_RECEBIDA > 0 && QTD_RECEBIDA < QTD_APROVADA) {
-        statusItem = statusItemRecebidoPendencia;
+    if (parseInt(QTD_RECEBIDA) > parseInt(QTD_APROVADA)) {
+        Alerta("Aviso", "Favor alertar a administração sobre as peças 'excedentes'.");
+        return false;
     }
+
+    if (parseInt(QTD_APROVADA) > 0 && parseInt(QTD_APROVADA) > parseInt(QTD_SOLICITADA)) {
+        Alerta("Aviso", "Não é permitido Salvar a quantidade aprovada maior que a quantidade solicitada!</strong>!");
+        return false;
+    }
+
+    if (parseInt(somaQtdAp) > 0 && parseInt(somaQtdAp) > parseInt(QTD_SOLICITADA)) {
+        Alerta("Aviso", "Não é permitido Salvar a quantidade aprovada maior que a quantidade solicitada!</strong>!");
+        return false;
+    }
+
+    if (tipoOrigemPagina == "Confirmacao") {
+        if (QTD_RECEBIDA == "" || QTD_RECEBIDA == null || QTD_RECEBIDA == undefined) {
+            statusItem = statusItemAprovado;
+            Alerta("Aviso", "Por favor preencha a quantidade recebida!</strong>!");
+            return false;
+        }
+
+    }
+
+    if (parseInt($("#qtdRecebimentoParcial").val()) < 0) {
+        Alerta("Aviso", "Quantidade recebida não pode ser menor que 0!</strong>!");
+        return false;
+    }
+
+    if (parseInt(QTD_RECEBIDA) > 0 && parseInt(QTD_SOLICITADA) > 0) {
+        if (parseInt(QTD_RECEBIDA) < parseInt(QTD_APROVADA)) {
+            statusItem = statusItemRecebidoPendencia;
+        }
+        if (parseInt(QTD_RECEBIDA) == parseInt(QTD_APROVADA)) {
+            statusItem = statusItemRecebido;
+        }
+    }
+
+    if (parseInt($("#qtdRecebimentoParcial").val()) > 0 && statusItem == statusItemRecebidoPendencia) {
+        var somaRecebimento = parseInt($("#qtdRecebimentoParcial").val()) + parseInt(QTD_RECEBIDA);
+        if (parseInt(somaRecebimento) > parseInt(QTD_APROVADA)) {
+            Alerta("Aviso", "Quantidade recebida maior que a quantidade aprovada!</strong>!");
+            return false;
+        }
+        else {
+            QTD_RECEBIDA = somaRecebimento;
+
+        }
+    }
+
+    if ($("#qtdRecebimentoParcial").val() == "" || $("#qtdRecebimentoParcial").val() == null) {
+        if (parseInt(QTD_RECEBIDA) > 0) {
+            if (statusItem == statusItemRecebidoPendencia) {
+                $("#qtdRecebimentoParcial").val(QTD_RECEBIDA);
+            }
+        }
+    }
+
+    if (QTD_APROVADA > 0 && QTD_RECEBIDA > 0 && QTD_RECEBIDA < QTD_APROVADA && statusItem != statusItemRecebidoPendencia) {
+        statusItem = statusItemAprovado;
+    }
+
+    if (tipoOrigemPagina == "Aprovacao" && QTD_APROVADA > 0) {
+        statusItem = statusItemAprovado;
+    }
+    if (tipoOrigemPagina == "Aprovacao" && somaQtdAp > 0) {
+        statusItem = statusItemSolicitado;
+    }
+    if (tipoOrigemPagina == "Aprovacao" && isNaN(somaQtdAp)) {
+        statusItem = statusItemCancelado;
+    }
+    if (tipoOrigemPagina == "Solicitacao" && ID_STATUS_PEDIDO == statusSolicitado) {
+        statusItem = statusItemSolicitado;
+    }
+    if (tipoOrigemPagina == "Solicitacao" && ID_STATUS_PEDIDO == statusNovoRascunho) {
+        statusItem = statusItemNovoRascunho;
+    }
+
+    //Final
 
     if (tipoOrigemPagina == "Aprovacao" || tipoOrigemPagina == "Confirmacao") {
         if (QTD_APROVADA_3M1 <= 0) {

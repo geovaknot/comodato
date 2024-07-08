@@ -263,6 +263,8 @@ function SalvarPedidoPecaAvulsoModal() {
     //    Alerta("Aviso", "Favor alertar a administração sobre as peças 'excedentes'.");
     //}
 
+    //Inicio 
+
     var statusItem = statusItemNovoRascunho;
 
     if (tipoOrigemPagina == "Confirmacao"
@@ -347,12 +349,17 @@ function SalvarPedidoPecaAvulsoModal() {
     if (tipoOrigemPagina == "Aprovacao" && somaQtdAp > 0) {
         statusItem = statusItemSolicitado;
     }
+    if (tipoOrigemPagina == "Aprovacao" && isNaN(somaQtdAp)) {
+        statusItem = statusItemCancelado;
+    }
     if (tipoOrigemPagina == "Solicitacao" && ID_STATUS_PEDIDO == statusSolicitado) {
         statusItem = statusItemSolicitado;
     }
     if (tipoOrigemPagina == "Solicitacao" && ID_STATUS_PEDIDO == statusNovoRascunho) {
         statusItem = statusItemNovoRascunho;
     }
+
+    //Final
 
     if (tipoOrigemPagina == "Aprovacao" || tipoOrigemPagina == "Confirmacao") {
         if (QTD_APROVADA_3M1 <= 0) {
