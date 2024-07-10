@@ -372,13 +372,6 @@ $('#btnSalvarPedidoPecaTecnicoModal').click(function () {
             ID_ESTOQUE_3M2 = null;
             QTD_APROVADA_3M2 = null;
         }
-        if (tipoOrigemPagina == "Aprovacao") {
-            if (parseInt(QTD_SOLICITADA) > somaQtdAp) {
-                statusItem = statusItemSolicitado;
-
-            }
-
-        }
     }
 
     var pedidoPecaEntity = {
