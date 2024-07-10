@@ -250,7 +250,9 @@ function SalvarPedidoPecaAvulsoModal() {
         URL = URL + "Alterar";
 
     //Novas verificações para Aprov. Parcial:
-    var somaQtdAp = parseInt(QTD_APROVADA_3M1) + parseInt(QTD_APROVADA_3M2);
+    var qtd3m1 = parseInt(QTD_APROVADA_3M1) || 0;
+    var qtd3m2 = parseInt(QTD_APROVADA_3M2) || 0;
+    var somaQtdAp = qtd3m1 + qtd3m2;
 
     //Chamado SL00033225
     //if (somaQtdAp > parseInt(QTD_SOLICITADA) || parseInt(QTD_APROVADA) > parseInt(QTD_SOLICITADA)) {
@@ -349,7 +351,7 @@ function SalvarPedidoPecaAvulsoModal() {
     if (tipoOrigemPagina == "Aprovacao" && somaQtdAp > 0) {
         statusItem = statusItemSolicitado;
     }
-    if (tipoOrigemPagina == "Aprovacao" && isNaN(somaQtdAp)) {
+    if (tipoOrigemPagina == "Aprovacao" && somaQtdAp == 0) {
         statusItem = statusItemCancelado;
     }
     if (tipoOrigemPagina == "Solicitacao" && ID_STATUS_PEDIDO == statusSolicitado) {

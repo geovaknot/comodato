@@ -248,7 +248,10 @@ $('#btnSalvarPedidoPecaTecnicoModal').click(function () {
         URL = URL + "Alterar";
 
     //Novas verificações para Aprov. Parcial:
-    var somaQtdAp = parseInt(QTD_APROVADA_3M1) + parseInt(QTD_APROVADA_3M2);
+    var qtd3m1 = parseInt(QTD_APROVADA_3M1) || 0;
+    var qtd3m2 = parseInt(QTD_APROVADA_3M2) || 0;
+    var somaQtdAp = qtd3m1 + qtd3m2;
+
     if (somaQtdAp > QTD_SOLICITADA || QTD_APROVADA > QTD_SOLICITADA) {
         //Alerta("Aviso", "Quantidade aprovada é maior do que a solicitada, favor ajustar!");
         //return false;
@@ -348,7 +351,7 @@ $('#btnSalvarPedidoPecaTecnicoModal').click(function () {
     if (tipoOrigemPagina == "Aprovacao" && somaQtdAp > 0) {
         statusItem = statusItemSolicitado;
     }
-    if (tipoOrigemPagina == "Aprovacao" && isNaN(somaQtdAp)) {
+    if (tipoOrigemPagina == "Aprovacao" && somaQtdAp == 0) {
         statusItem = statusItemCancelado;
     }
     if (tipoOrigemPagina == "Solicitacao" && ID_STATUS_PEDIDO == statusSolicitado) {
