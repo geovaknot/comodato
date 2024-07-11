@@ -289,26 +289,26 @@ function SalvarPedidoPecaAvulsoModal() {
     }
 
     if (parseInt(QTD_APROVADA) > 0 && parseInt(QTD_APROVADA) > parseInt(QTD_SOLICITADA)) {
-        Alerta("Aviso", "Não é permitido Salvar a quantidade aprovada maior que a quantidade solicitada!</strong>!");
+        Alerta("Aviso", "Não é permitido Salvar a quantidade aprovada maior que a quantidade solicitada!");
         return false;
     }
 
     if (parseInt(somaQtdAp) > 0 && parseInt(somaQtdAp) > parseInt(QTD_SOLICITADA)) {
-        Alerta("Aviso", "Não é permitido Salvar a quantidade aprovada maior que a quantidade solicitada!</strong>!");
+        Alerta("Aviso", "Não é permitido Salvar a quantidade aprovada maior que a quantidade solicitada!");
         return false;
     }
 
     if (tipoOrigemPagina == "Confirmacao") {
         if (QTD_RECEBIDA == "" || QTD_RECEBIDA == null || QTD_RECEBIDA == undefined) {
             statusItem = statusItemAprovado;
-            Alerta("Aviso", "Por favor preencha a quantidade recebida!</strong>!");
+            Alerta("Aviso", "Por favor preencha a quantidade recebida!");
             return false;
         }
 
     }
 
     if (parseInt($("#qtdRecebimentoParcial").val()) < 0) {
-        Alerta("Aviso", "Quantidade recebida não pode ser menor que 0!</strong>!");
+        Alerta("Aviso", "Quantidade recebida não pode ser menor que 0!");
         return false;
     }
 
@@ -324,7 +324,7 @@ function SalvarPedidoPecaAvulsoModal() {
     if (parseInt($("#qtdRecebimentoParcial").val()) > 0 && statusItem == statusItemRecebidoPendencia) {
         var somaRecebimento = parseInt($("#qtdRecebimentoParcial").val()) + parseInt(QTD_RECEBIDA);
         if (parseInt(somaRecebimento) > parseInt(QTD_APROVADA)) {
-            Alerta("Aviso", "Quantidade recebida maior que a quantidade aprovada!</strong>!");
+            Alerta("Aviso", "Quantidade recebida maior que a quantidade aprovada!");
             return false;
         }
         else {

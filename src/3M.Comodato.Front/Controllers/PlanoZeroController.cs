@@ -161,8 +161,8 @@ namespace _3M.Comodato.Front.Controllers
                     titulos.Add("ITEM");
                     titulos.Add("DESCRIÇÃO");
                     titulos.Add("CÓDIGO 3M");
-                    titulos.Add("QTDE MAQUINA");
-                    titulos.Add("QTDE ESTOQUE A.TÉC.");
+                    titulos.Add("QTDE MÁQUINA");
+                    titulos.Add("QTDE ESTOQUE 3M1");
                     titulos.Add("QTDE ESTOQUE REC");
                     titulos.Add("CRITICIDADE");
 

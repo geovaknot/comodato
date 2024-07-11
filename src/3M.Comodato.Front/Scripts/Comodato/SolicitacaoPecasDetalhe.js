@@ -302,7 +302,7 @@ function btnAcaoConfirmada() {
     }
 
     if (lote == "" && (ID_STATUS_PEDIDO == 3 || ID_STATUS_PEDIDO == 4 || ID_STATUS_PEDIDO == 5 || ID_STATUS_PEDIDO == 6 || ID_STATUS_PEDIDO == 7)) {
-        Alerta('Aviso', '"Não há itens selecionados!');
+        Alerta('Aviso', 'Não há itens selecionados!');
         return;
     }
 
@@ -425,7 +425,7 @@ function btnAcaoConfirmadaBPCS() {
     }
 
     if (lote == "" && (ID_STATUS_PEDIDO == 3 || ID_STATUS_PEDIDO == 4 || ID_STATUS_PEDIDO == 5 || ID_STATUS_PEDIDO == 6 || ID_STATUS_PEDIDO == 7)) {
-        Alerta('Aviso', '"Não há itens selecionados!');
+        Alerta('Aviso', 'Não há itens selecionados!');
         return;
     }
 
