@@ -182,7 +182,7 @@ $('#btnAcaoEnvio').click(function () {
         error: function (res) {
             $("#loader").css("display", "none");
             //atualizarPagina();
-            Alerta("ERRO", res.MENSAGEM);
+            Alerta("ERRO", res.responseJSON.MENSAGEM);
         }
     });
 
