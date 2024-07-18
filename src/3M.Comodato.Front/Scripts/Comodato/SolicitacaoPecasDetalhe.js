@@ -136,11 +136,10 @@ $('#btnAcao').click(function () {
 });
 
 $('#btnAcaoEnvio').click(function () {
-    console.log("Click chamada")
     var URL = URLAPI + "PedidoAPI/AlterarPedidoBPCS";
     var ID_PEDIDO = $("#ID_PEDIDO").val();
     var tipodePecas = $('#TP_Especial').val();
-    console.log("Tipo de peças", tipodePecas);
+    
     var pedidoEntity = {
         ID_PEDIDO: ID_PEDIDO,
         TP_Especial: tipodePecas
@@ -183,7 +182,7 @@ $('#btnAcaoEnvio').click(function () {
         error: function (res) {
             $("#loader").css("display", "none");
             //atualizarPagina();
-            Alerta("ERRO", res.responseText);
+            Alerta("ERRO", res.MENSAGEM);
         }
     });
 

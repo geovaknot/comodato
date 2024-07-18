@@ -188,7 +188,7 @@ namespace _3M.Comodato.API.Controllers
                         var dados = new PedidoPecaData().ObterListaDadosPedido(Convert.ToInt64(peca.ID_ITEM_PEDIDO)).FirstOrDefault();
 
                         if(dados == null)
-                            throw new Exception ($"Realize o cadastro de dados do item: {peca.CD_PECA}!!");
+                            throw new Exception ($"Realize o cadastro de dados do item: {peca.CD_PECA}!");
                             
                     }
 
@@ -203,7 +203,7 @@ namespace _3M.Comodato.API.Controllers
             {
                 transacao.Rollback();
                 LogUtility.LogarErro(ex);
-                return Request.CreateResponse(HttpStatusCode.BadRequest, ex.Message);
+                return Request.CreateResponse(HttpStatusCode.BadRequest, new { MENSAGEM = ex.Message });
             }
             finally
             {
