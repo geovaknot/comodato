@@ -177,19 +177,19 @@
                             <div class="form-horizontal">
                                 @if (@Model.pedidoPecaAvulso.pedidoPeca.Estoque3M1 != null && @Model.pedidoPecaAvulso.peca.CD_PECA != null)
                                 {
-                                    <label id="validaIDESTOQUE_Avulso_3M1" class="control-label text-danger col-12" style="display: none;">O estoque @Model.pedidoPecaAvulso.pedidoPeca.Estoque3M1.CD_ESTOQUE.Trim(), não possui peça suficiente para aprovação: @Model.pedidoPecaAvulso.peca.CD_PECA.Trim()!</label>
+                                    <label id="validaIDESTOQUE_Avulso_3M1" class="control-label text-danger col-12" style="display: none;">O estoque @Model.pedidoPecaAvulso.pedidoPeca.Estoque3M1.CD_ESTOQUE.Trim() não possui peça suficiente para aprovação: @Model.pedidoPecaAvulso.peca.CD_PECA.Trim()!</label>
                                 }
                                 else if (@Model.pedidoPecaAvulso.pedidoPeca.Estoque3M1 != null && @Model.pedidoPecaAvulso.peca.CD_PECA == null)
                                 {
-                                    <label id="validaIDESTOQUE_Avulso_3M1" class="control-label text-danger col-12" style="display: none;">O estoque @Model.pedidoPecaAvulso.pedidoPeca.Estoque3M1.CD_ESTOQUE.Trim(), não possui peça suficiente para aprovação: <span id="Campo3M1"></span>!</label>
+                                    <label id="validaIDESTOQUE_Avulso_3M1" class="control-label text-danger col-12" style="display: none;">O estoque @Model.pedidoPecaAvulso.pedidoPeca.Estoque3M1.CD_ESTOQUE.Trim() não possui peça suficiente para aprovação<span id="Campo3M1"></span>!</label>
                                 }
                                 @if (@Model.pedidoPecaAvulso.pedidoPeca.Estoque3M2 != null && @Model.pedidoPecaAvulso.peca.CD_PECA != null)
                                 {
-                                    <label id="validaIDESTOQUE_Avulso_3M2" class="control-label text-danger col-12" style="display: none;">O estoque @Model.pedidoPecaAvulso.pedidoPeca.Estoque3M2.CD_ESTOQUE.Trim(), não possui peça suficiente para aprovação: @Model.pedidoPecaAvulso.peca.CD_PECA.Trim()!</label>
+                                    <label id="validaIDESTOQUE_Avulso_3M2" class="control-label text-danger col-12" style="display: none;">O estoque @Model.pedidoPecaAvulso.pedidoPeca.Estoque3M2.CD_ESTOQUE.Trim() não possui peça suficiente para aprovação: @Model.pedidoPecaAvulso.peca.CD_PECA.Trim()!</label>
                                 }
                                 else if (@Model.pedidoPecaAvulso.pedidoPeca.Estoque3M2 != null && @Model.pedidoPecaAvulso.peca.CD_PECA == null)
                                 {
-                                    <label id="validaIDESTOQUE_Avulso_3M2" class="control-label text-danger col-12" style="display: none;">O estoque @Model.pedidoPecaAvulso.pedidoPeca.Estoque3M2.CD_ESTOQUE.Trim(), não possui peça suficiente para aprovação: <span id="Campo3M2"></span>!</label>
+                                    <label id="validaIDESTOQUE_Avulso_3M2" class="control-label text-danger col-12" style="display: none;">O estoque @Model.pedidoPecaAvulso.pedidoPeca.Estoque3M2.CD_ESTOQUE.Trim() não possui peça suficiente para aprovação<span id="Campo3M2"></span>!</label>
                                 }
 
                             </div>
