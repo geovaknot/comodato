@@ -96,21 +96,21 @@ $('#btnSalvarPedidoPecaTecnicoModal').click(function () {
 
 
     //if (tipoOrigemPagina == "Aprovacao") {
-        var ID_ESTOQUE_3M1;
-        var ID_ESTOQUE_3M2;
+    var ID_ESTOQUE_3M1;
+    var ID_ESTOQUE_3M2;
 
-        var QTD_APROVADA_3M1;
-        if (casasDecimais > 0)
-            QTD_APROVADA_3M1 = $("#txtQtdAprovada3M1").maskMoney('unmasked')[0];
-        else
-            QTD_APROVADA_3M1 = $("#txtQtdAprovada3M1").val();
+    var QTD_APROVADA_3M1;
+    if (casasDecimais > 0)
+        QTD_APROVADA_3M1 = $("#txtQtdAprovada3M1").maskMoney('unmasked')[0];
+    else
+        QTD_APROVADA_3M1 = $("#txtQtdAprovada3M1").val();
 
 
-        var QTD_APROVADA_3M2;
-        if (casasDecimais > 0)
-            QTD_APROVADA_3M2 = $("#txtQtdAprovada3M2").maskMoney('unmasked')[0];
-        else
-            QTD_APROVADA_3M2 = $("#txtQtdAprovada3M2").val();
+    var QTD_APROVADA_3M2;
+    if (casasDecimais > 0)
+        QTD_APROVADA_3M2 = $("#txtQtdAprovada3M2").maskMoney('unmasked')[0];
+    else
+        QTD_APROVADA_3M2 = $("#txtQtdAprovada3M2").val();
     //}
 
     if (tipoOrigemPagina == "Aprovacao") {
@@ -219,14 +219,14 @@ $('#btnSalvarPedidoPecaTecnicoModal').click(function () {
         var QTD_ESTOQUE_3M2 = parseInt('0' + $("#pedidoPecaTecnico_QTD_ESTOQUE_3M2").val().replace('.', ''));
 
         if (parseInt("0" + ID_ESTOQUE_3M1) != 0) {
-            if (QTD_APROVADA_3M1 > QTD_ESTOQUE_3M1) {
+            if (parseInt(QTD_APROVADA_3M1) > QTD_ESTOQUE_3M1) {
                 ExibirCampo($('#validaIDESTOQUE_Tecnico_3M1'));
                 return false;
             }
         }
 
         if (parseInt("0" + ID_ESTOQUE_3M2) != 0) {
-            if (QTD_APROVADA_3M2 > QTD_ESTOQUE_3M2) {
+            if (parseInt(QTD_APROVADA_3M2) > QTD_ESTOQUE_3M2) {
                 ExibirCampo($('#validaIDESTOQUE_Tecnico_3M2'));
                 return false;
             }
@@ -256,13 +256,13 @@ $('#btnSalvarPedidoPecaTecnicoModal').click(function () {
         //Alerta("Aviso", "Quantidade aprovada é maior do que a solicitada, favor ajustar!");
         //return false;
         //Alerta("Aviso", "Atenção! Aprovando uma quantidade maior do que a solicitada.");
-    } 
+    }
 
-    if (QTD_RECEBIDA > QTD_APROVADA) {
+    if (parseInt(QTD_RECEBIDA) > parseInt(QTD_APROVADA)) {
         Alerta("Aviso", "Favor alertar a administração sobre as peças 'excedentes'.");
     }
 
-    if (QTD_APROVADA > QTD_SOLICITADA) {
+    if (parseInt(QTD_APROVADA) > parseInt(QTD_SOLICITADA)) {
         Alerta("Aviso", "Aprovar somente a quantidade de peças igual ou superior a quantidade solicitada.");
     }
 

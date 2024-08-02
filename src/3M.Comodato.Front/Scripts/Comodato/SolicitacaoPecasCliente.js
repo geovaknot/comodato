@@ -253,7 +253,7 @@ function SalvarPedidoPecaClienteModal() {
             var QTD_ESTOQUE_3M2 = parseInt('0' + $("#pedidoPecaCliente_QTD_ESTOQUE_3M2").val().replace('.', ''));
 
             if (parseInt("0" + ID_ESTOQUE_3M1) != 0) {
-                if (QTD_APROVADA_3M1 > QTD_ESTOQUE_3M1) {
+                if (parseInt(QTD_APROVADA_3M1) > QTD_ESTOQUE_3M1) {
                     ExibirCampo($('#validaIDESTOQUE_Avulso_3M1'));
                     $('#Campo3M1').val(CD_PECA);
                     return false;
@@ -261,7 +261,7 @@ function SalvarPedidoPecaClienteModal() {
             }
 
             if (parseInt("0" + ID_ESTOQUE_3M2) != 0) {
-                if (QTD_APROVADA_3M2 > QTD_ESTOQUE_3M2) {
+                if (parseInt(QTD_APROVADA_3M2) > QTD_ESTOQUE_3M2) {
                     ExibirCampo($('#validaIDESTOQUE_Avulso_3M2'));
                     $('#Campo3M2').val(CD_PECA);
                     return false;
@@ -287,7 +287,10 @@ function SalvarPedidoPecaClienteModal() {
         URL = URL + "Alterar";
 
     //Novas verificações para Aprov. Parcial:
-    var somaQtdAp = parseInt(QTD_APROVADA_3M1) + parseInt(QTD_APROVADA_3M2);
+    var qtd3m1 = parseInt(QTD_APROVADA_3M1) || 0;
+    var qtd3m2 = parseInt(QTD_APROVADA_3M2) || 0;
+    var somaQtdAp = qtd3m1 + qtd3m2;
+
     if (somaQtdAp > QTD_SOLICITADA || QTD_APROVADA > QTD_SOLICITADA) {
         //Alerta("Aviso", "Quantidade aprovada é maior do que a solicitada, favor ajustar!");
         //return false;

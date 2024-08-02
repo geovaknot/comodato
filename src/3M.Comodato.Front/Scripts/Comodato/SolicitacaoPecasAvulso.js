@@ -218,7 +218,7 @@ function SalvarPedidoPecaAvulsoModal() {
             var QTD_ESTOQUE_3M2 = parseInt('0' + $("#pedidoPecaAvulso_QTD_ESTOQUE_3M2").val().replace('.', ''));
 
             if (parseInt("0" + ID_ESTOQUE_3M1) != 0) {
-                if (QTD_APROVADA_3M1 > QTD_ESTOQUE_3M1) {
+                if (parseInt(QTD_APROVADA_3M1) > QTD_ESTOQUE_3M1) {
                     ExibirCampo($('#validaIDESTOQUE_Avulso_3M1'));
                     $('#Campo3M1').val(CD_PECA);
                     return false;
@@ -226,7 +226,7 @@ function SalvarPedidoPecaAvulsoModal() {
             }
 
             if (parseInt("0" + ID_ESTOQUE_3M2) != 0) {
-                if (QTD_APROVADA_3M2 > QTD_ESTOQUE_3M2) {
+                if (parseInt(QTD_APROVADA_3M2) > QTD_ESTOQUE_3M2) {
                     ExibirCampo($('#validaIDESTOQUE_Avulso_3M2'));
                     $('#Campo3M2').val(CD_PECA);
                     return false;
