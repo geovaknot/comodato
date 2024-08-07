@@ -1204,7 +1204,7 @@ function CarregarEstoque(Obj, ID_ESTOQUE, CD_PECA) {
                         //if (QTD_PECAS_FORMATADO == "") {
 
                         if (QTD_PECAS_FORMATADO != "" && QTD_PECAS_FORMATADO != "0") {
-                            if (QTD_PECAS_APROV > parseInt('0' + QTD_PECAS_FORMATADO)) {
+                            if (QTD_PECAS_APROV > parseInt('0' + QTD_PECAS_FORMATADO.replace('.', ''))) {
                                 ExibirCampo($('#validaIDESTOQUE_Avulso' + tipoEstoque));
                             }
                         }
@@ -1214,7 +1214,7 @@ function CarregarEstoque(Obj, ID_ESTOQUE, CD_PECA) {
                         Obj.val(QTD_PECAS_FORMATADO);
                         //if (QTD_PECAS_FORMATADO == "") {
                         if (QTD_PECAS_FORMATADO != "" && QTD_PECAS_FORMATADO != "0") {
-                            if (QTD_PECAS_APROV > parseInt('0' + QTD_PECAS_FORMATADO)) {
+                            if (QTD_PECAS_APROV > parseInt('0' + QTD_PECAS_FORMATADO.replace('.', ''))) {
                                 ExibirCampo($('#validaIDESTOQUE_Cliente' + tipoEstoque));
                             }
                         }
@@ -1223,7 +1223,7 @@ function CarregarEstoque(Obj, ID_ESTOQUE, CD_PECA) {
                         //$("#pedidoPecaTecnico_QTD_ESTOQUE_3M").val(QTD_PECAS_FORMATADO);
                         Obj.val(QTD_PECAS_FORMATADO);
                         if (QTD_PECAS_FORMATADO != "" && QTD_PECAS_FORMATADO != "0") {
-                            if (QTD_PECAS_APROV > parseInt('0' + QTD_PECAS_FORMATADO)) {
+                            if (QTD_PECAS_APROV > parseInt('0' + QTD_PECAS_FORMATADO.replace('.', ''))) {
                                 ExibirCampo($('#validaIDESTOQUE_Tecnico' + tipoEstoque));
                             }
                         }

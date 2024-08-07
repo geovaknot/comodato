@@ -806,6 +806,7 @@
     </Content>
     <Content Include="Reports\Agenda\CarteiraAtendimento2.rdlc">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Reports\EstoqueIntermediario\EstoqueIntermediario.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -814,15 +815,28 @@
       <SubType>Designer</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <EmbeddedResource Include="Reports\ConsolidadoVendas\ConsolidadoVendas.rdlc" />
-    <EmbeddedResource Include="Reports\Inventarios\ReportInventarios.rdlc" />
-    <EmbeddedResource Include="Reports\Inventarios\ReportInventariosTab.rdlc" />
-    <EmbeddedResource Include="Reports\KatTecnicoVisita\RptKatPorTecnicoVisita.rdlc" />
-    <EmbeddedResource Include="Reports\KatTecnico\RptKatPorTecnico.rdlc">
-      <SubType>Designer</SubType>
+    <EmbeddedResource Include="Reports\ConsolidadoVendas\ConsolidadoVendas.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\KAT\KAT.rdlc" />
-    <EmbeddedResource Include="Reports\Locados\ReportLocados.rdlc" />
+    <Content Include="Reports\Inventarios\ReportInventarios.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\Inventarios\ReportInventariosTab.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\KatTecnicoVisita\RptKatPorTecnicoVisita.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\KatTecnico\RptKatPorTecnico.rdlc">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\KAT\KAT.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\Locados\ReportLocados.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <EmbeddedResource Include="Reports\Lotes\dsLote.Designer.cs" />
     <Compile Include="Reports\Manutencao\dsReportGeralManutencao.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -870,10 +884,18 @@
     <Content Include="Reports\Lotes\RptObs.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <EmbeddedResource Include="Reports\Manutencao\ManutencaoTabCompleto.rdlc" />
-    <EmbeddedResource Include="Reports\Manutencao\ManutencaoTab.rdlc" />
-    <EmbeddedResource Include="Reports\Pecas\PecasTab.rdlc" />
-    <EmbeddedResource Include="Reports\Pedidos\ReportPedidosSimplificado.rdlc" />
+    <Content Include="Reports\Manutencao\ManutencaoTabCompleto.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\Manutencao\ManutencaoTab.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\Pecas\PecasTab.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Reports\Pedidos\ReportPedidosSimplificado.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <!--    
     <EmbeddedResource Include="Reports\Manutencao\RptKatPorTecnico.rdlc">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -1265,7 +1287,9 @@
       <DependentUpon>dsRptConsumo.xsd</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Reports\AgendaVisita\CarteiraAtendimentoVisita2.rdlc" />
+    <Content Include="Reports\AgendaVisita\CarteiraAtendimentoVisita2.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="Reports\AnaliseConsumo\dsRptConsumo.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
