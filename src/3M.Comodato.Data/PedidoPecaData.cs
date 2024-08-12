@@ -1110,17 +1110,14 @@ namespace _3M.Comodato.Data
                 }
 
                 dataTable = dataSet.Tables[0];
-                //connection.Close();
             }
             catch (Exception ex)
             {
-                connection.Close();
                 throw ex;
             }
             finally
             {
-                //connection.Close();
-                if (null != connection)
+                if (!(connection is null))
                 {
                     if (connection.State == ConnectionState.Open)
                     {
