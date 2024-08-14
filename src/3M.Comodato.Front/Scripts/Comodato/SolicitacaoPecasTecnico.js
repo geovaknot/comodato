@@ -646,6 +646,10 @@ function LoadPedidoItem(pedidoPecaModel) {
         objQtdAprov3M2.val(0);
     }
 
+    if (tipoOrigemPagina == "Solicitacao" && nidPerfil == perfilTecnicoEmpresaTerceira) {
+        $('#pedidoPecaTecnico_pedidoPeca_DS_OBSERVACAO').prop('disabled', true);
+        $('#btnSalvarPedidoPecaTecnicoModal').hide();
+    }
 }
 
 function ExcluirPeca(ID_ITEM_PEDIDO) {

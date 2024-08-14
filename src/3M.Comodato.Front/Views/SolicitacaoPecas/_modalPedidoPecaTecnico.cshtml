@@ -134,15 +134,7 @@
 
                 <div class="form-horizontal">
                     <label class="control-label">Observações</label>
-                    @if ((_3M.Comodato.Entity.UsuarioPerfilEntity)Session["_CurrentUser"].perfil.nidPerfil == (Int64)_3M.Comodato.Utility.ControlesUtility.Enumeradores.Perfil.TecnicoEmpresaTerceira)
-                    {
-                        @Html.EditorFor(model => model.pedidoPecaTecnico.pedidoPeca.DS_OBSERVACAO, new { htmlAttributes = new { @class = "form-control col-12", @rows = 3, @disabled = "disabled" } })
-                    }
-                    else 
-                    {
                         @Html.EditorFor(model => model.pedidoPecaTecnico.pedidoPeca.DS_OBSERVACAO, new { htmlAttributes = new { @class = "form-control col-12", @rows = 3 } })
-                    }
-                    
                 </div>
                 </div>
             </div>
