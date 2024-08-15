@@ -839,4 +839,33 @@ $('#btnSalvarDadosPedido').click(function () {
 
 })
 
+function CalcularRestante() {
+    var ID_PEDIDO = $("#ID_PEDIDO").val();
+
+    var URL = URLAPI + "PedidoAPI/CalcularValorPedidoEntity?CD_PEDIDO=" + ID_PEDIDO;
+
+    $.ajax({
+        url: URL,
+        processData: true,
+        dataType: "json",
+        cache: false,
+        contentType: "application/json",
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Authorization', 'Bearer ' + token);
+            $("#loader").css("display", "block");
+        },
+        complete: function () {
+            $("#loader").css("display", "none");
+        },
+        success: function (res) {
+            $("#loader").css("display", "none");
+            $("#VL_TOTAL_PECA_Restante").val(res.Valor);
+        },
+        error: function (res) {
+            $("#loader").css("display", "none");
+            Alerta("ERRO", res.responseText);
+        }
+
+    });
+}
 
