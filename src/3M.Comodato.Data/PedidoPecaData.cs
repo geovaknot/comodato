@@ -1106,6 +1106,7 @@ namespace _3M.Comodato.Data
                 }
                 else
                 {
+                    dbCommand.CommandTimeout = 50000;
                     dataSet = _db.ExecuteDataSet(dbCommand, _transaction);
                 }
 
