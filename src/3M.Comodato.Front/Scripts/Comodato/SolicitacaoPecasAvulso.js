@@ -933,7 +933,7 @@ function LoadPedidoItem(pedidoPecaModel) {
         $('#pedidoPecaAvulso_pedidoPeca_QTD_ULTIMO_RECEBIMENTO').prop('disabled', true);
     }
 
-    if (tipoOrigemPagina == "Solicitacao" && nidPerfil == perfilTecnicoEmpresaTerceira) {
+    if (tipoOrigemPagina == "Solicitacao" && nidPerfil == perfilTecnicoEmpresaTerceira && pedidoPecaModel.ST_STATUS_ITEM != '1') {
         $('#pedidoPecaAvulso_pedidoPeca_DS_OBSERVACAO').prop('disabled', true);
         $('#btnSalvarPedidoPecaAvulsoModal').hide();
     }
