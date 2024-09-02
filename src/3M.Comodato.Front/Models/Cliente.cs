@@ -85,6 +85,8 @@ namespace _3M.Comodato.Front.Models
 
 
         public bool? BPCS { get; set; }
+
+        [Required(ErrorMessage = "Conteúdo obrigatório!")]
         public string CD_BCPS { get; set; }
 
         [Range(0, Int32.MaxValue, ErrorMessage = "Limite de caracteres ultrapassado!")]
@@ -369,6 +371,7 @@ namespace _3M.Comodato.Front.Models
 
         public bool FL_KAT_FIXO { get; set; }
 
+        [Required(ErrorMessage = "Conteúdo obrigatório!")]
         public string CD_BCPS { get; set; }
 
         public string DS_CLASSIFICACAO_KAT { get; set; }

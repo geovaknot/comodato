@@ -24,6 +24,7 @@
             <div class="form-group col-2">
                 <label class="control-label">Código BCPS</label>
                 @Html.EditorFor(model => model.CD_BCPS, new { htmlAttributes = new { @class = "form-control col-12" } })
+                @Html.ValidationMessageFor(model => Model.CD_BCPS, "", new { @class = "text-danger" })
 
             </div>
 
@@ -213,7 +214,7 @@
                 <div class="form-row">
                     <div class="form-group col-md-3 col-sm-12">
                         <label class="control-label">Condição(Ativo)</label>
-                        @Html.DropDownListFor(model => model.FL_AtivaPlanoZero, new SelectList(@_3M.Comodato.Utility.ControlesUtility.Dicionarios.SimNao().AsEnumerable(), "value", "key"), new { @class = "valid form-control col-12", @onchange = "callChangefunc(this.value)" })
+                        @Html.DropDownListFor(model => model.FL_AtivaPlanoZero, new SelectList(@_3M.Comodato.Utility.ControlesUtility.Dicionarios.SimNao().AsEnumerable(), "value", "key", "N"), new { @class = "valid form-control col-12", @onchange = "callChangefunc(this.value)" })
                         <label id="validaAtivaPlanoZero" class="control-label text-danger" style="display: none;">Conteúdo obrigatório!</label>
 
 

@@ -18,15 +18,7 @@
     if ($("#CD_CLIENTE").val() == 0) {
         $("#CD_CLIENTE").val('');
     }
-    //if ($("#QT_PERIODO").val() == 0) {
-    //    $("#QT_PERIODO").val('');
-    //}
-    var bpcs = $('#CD_BCPS').val();
-    if (bpcs == null || bpcs == undefined || bpcs == "" || bpcs == 0 || bpcs == "0") {
-        var cli = $("#CD_CLIENTE").val();
-        $('#CD_BCPS').val(cli);
-        console.log("BPCS", $('#CD_BCPS').val());
-    }
+    
     $("#FL_KAT_FIXO_SimNao").trigger('change');
 
     var ValidaAtivaPlanoZero = $("#FL_AtivaPlanoZero").val();
@@ -227,8 +219,6 @@ $("#btnGravar").click(function () {
         OcultarCampo($("#validaPeriodoPlanoZero"));
     }
 
-    console.log(ValidaAtivaPlanoZero);
- 
     return true;
 });
 
