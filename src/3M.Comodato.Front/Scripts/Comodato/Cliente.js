@@ -63,6 +63,7 @@ $("#CD_CLIENTE").blur(function () {
                 }
                 else {
                     $('#CD_CLIENTE').val(res.cliente.CD_CLIENTE);
+                    $('#CD_BCPS').val(res.cliente.CD_CLIENTE);
                     $('#EN_ENDERECO').val(res.cliente.EN_ENDERECO);
                     $('#EN_BAIRRO').val(res.cliente.EN_BAIRRO);
                     $('#EN_CIDADE').val(res.cliente.EN_CIDADE);
