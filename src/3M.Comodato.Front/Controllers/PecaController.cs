@@ -88,7 +88,7 @@ namespace _3M.Comodato.Front.Controllers
                 {
                     PecaEntity pecaEntity = new PecaEntity();
 
-                    pecaEntity.CD_PECA = peca.CD_PECA;
+                    pecaEntity.CD_PECA = peca.CD_PECA.ToUpper();
                     if (peca.TP_PECA == "" || peca.TP_PECA == null)
                         peca.TP_PECA = "A";
                     pecaEntity.TP_PECA = peca.TP_PECA;
@@ -122,7 +122,7 @@ namespace _3M.Comodato.Front.Controllers
                             {
                                 peca = new Models.Peca
                                 {
-                                    CD_PECA = dataTableReader2["CD_PECA"].ToString(),
+                                    CD_PECA = dataTableReader2["CD_PECA"].ToString().ToUpper(),
                                     DS_PECA = dataTableReader2["DS_PECA"].ToString(),
                                     TX_UNIDADE = dataTableReader2["TX_UNIDADE"].ToString(),
                                     QTD_ESTOQUE = Convert.ToDecimal("0" + dataTableReader2["QTD_ESTOQUE"]).ToString("N3"),
@@ -220,7 +220,7 @@ namespace _3M.Comodato.Front.Controllers
                     {
                         peca = new Models.Peca
                         {
-                            CD_PECA = dataTableReader["CD_PECA"].ToString(),
+                            CD_PECA = dataTableReader["CD_PECA"].ToString().ToUpper(),
                             DS_PECA = dataTableReader["DS_PECA"].ToString(),
                             TX_UNIDADE = dataTableReader["TX_UNIDADE"].ToString(),
                             QTD_ESTOQUE = Convert.ToDecimal("0" + dataTableReader["QTD_ESTOQUE"]).ToString("N3"),
@@ -281,7 +281,7 @@ namespace _3M.Comodato.Front.Controllers
                 {
                     PecaEntity pecaEntity = new PecaEntity();
 
-                    pecaEntity.CD_PECA = peca.CD_PECA;
+                    pecaEntity.CD_PECA = peca.CD_PECA.ToUpper();
                     pecaEntity.TP_PECA = peca.TP_PECA;
                     pecaEntity.DS_PECA = peca.DS_PECA;
                     pecaEntity.TX_UNIDADE = peca.TX_UNIDADE;
