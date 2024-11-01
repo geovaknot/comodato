@@ -19,11 +19,13 @@ namespace _3M.Comodato.Front.Models
         public string TX_UNIDADE { get; set; }
 
         [StringLength(19, ErrorMessage = "Limite de caracteres ultrapassado!")]
+        [RegularExpression(@"^(0(?:,[0]{3})*|[1-9][0-9]{0,2}(?:,[0-9]{3})*)$", ErrorMessage = "Valor inválido!")]
         public string QTD_ESTOQUE { get; set; }
 
         public decimal QTD_ESTOQUE_GRID { get; set; }
 
         [StringLength(19, ErrorMessage = "Limite de caracteres ultrapassado!")]
+        [RegularExpression(@"^(0(?:,[0]{3})*|[1-9][0-9]{0,2}(?:,[0-9]{3})*)$", ErrorMessage = "Valor inválido!")]
         public string QTD_MINIMA { get; set; }
 
         [StringLength(17, ErrorMessage = "Limite de caracteres ultrapassado!")]
@@ -49,7 +51,7 @@ namespace _3M.Comodato.Front.Models
 
         [StringLength(19, ErrorMessage = "Limite de caracteres ultrapassado!")]
         [Required(ErrorMessage = "Conteúdo obrigatório!")]
-        [RegularExpression(@"^[1-9]*\,?[0-9]+$", ErrorMessage = "Conteúdo obrigatório!")]
+        [RegularExpression(@"^[1-9][0-9]{0,2}(?:,[0-9]{3})*$", ErrorMessage = "Valor inválido!")]
         public string QTD_PlanoZero { get; set; } = "1,000";
     }
 }

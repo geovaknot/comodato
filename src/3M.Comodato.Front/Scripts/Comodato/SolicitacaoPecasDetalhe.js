@@ -262,12 +262,12 @@ function btnAcaoConfirmada() {
         FL_EMERGENCIA = 'S';
     }
 
-    if (Responsavel == "" || Responsavel == null || Responsavel == undefined) {
+    if (ID_STATUS_PEDIDO === "3" && (Responsavel == "" || Responsavel == null || Responsavel == undefined)) {
         Alerta("Preencha o campo Responsável ou Telefone!", "O campo Responsável ou Telefone devem ser preenchidos");
         return;
     }
 
-    if (Telefone == "" || Telefone == null || Telefone == undefined) {
+    if (ID_STATUS_PEDIDO === "3" && (Telefone == "" || Telefone == null || Telefone == undefined)) {
         Alerta("Preencha o campo Responsável ou Telefone!", "O campo Responsável ou Telefone devem ser preenchidos");
         return;
     }
